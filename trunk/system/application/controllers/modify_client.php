@@ -1,8 +1,8 @@
 <?php 
 
-class New_client extends Controller {
+class Modify_client extends Controller {
 	
-	function New_client (){
+	function Modify_client (){
 		parent :: Controller();	
 		$this->load->helper(array('form'));
 		$this->load->library('validation');
@@ -11,8 +11,10 @@ class New_client extends Controller {
 
     function index()
     { 
-		$data['query'] = NULL;
-		
+		echo ('antes post');
+		$ci_client = $_POST["ci_customer"];
+		echo ($ci_client);
+		echo ('dspues post');
 		$rules['ci_client']	= "required";
 		$rules['nombre']	= "required";
 		$rules['apellido']	= "required";
@@ -25,7 +27,10 @@ class New_client extends Controller {
 		
 		if ($this->validation->run() == FALSE)
 		{
-			$this->load->view('new_client',$data);
+			
+			$this->load->model('client_model');
+			$data['query'] = $this->client_model->find($ci_client);			
+			$this->load->view('modify_client',$data);
 		}
 		else
 		{
