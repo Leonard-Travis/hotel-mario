@@ -1,0 +1,515 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Hoteles.com.ve</title>
+	<link type="text/css" href="themes/redmond/ui.all.css" rel="stylesheet" />
+	<script type="text/javascript" src="jquery-1.3.2.js"></script>
+	<script type="text/javascript" src="ui/ui.core.js"></script>
+	<script type="text/javascript" src="ui/ui.datepicker.js"></script>
+	<script type="text/javascript" src="ui/i18n/ui.datepicker-es.js"></script>
+	<link type="text/css" href="demos.css" rel="stylesheet" />
+	<script type="text/javascript">
+	$(function() {
+		$("#datepicker").datepicker();
+	});
+	</script>
+	<link href="estilos.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="cintillo">
+	<div class="cuerpo">
+		<a href="#" class="logo">Hoteles.com.ve</a>
+		<div class="palito"><img src="imagenes/palito.gif" alt="" /></div>
+		<div class="floati">Gestión de servicios</div>
+		<div class="cintillod">
+			<img src="imagenes/user_orange.png" alt="Usuario" class="valign" />
+			Bienvenido, <a href="#">Miguel Ascanio</a>
+			<img src="imagenes/cog_edit.png" alt="Opciones" class="valign" />
+			<a href="#">Opciones</a>
+			<img src="imagenes/lock.png" alt="Desconectar" class="valign" />
+			<a href="#">Desconectar</a>
+		</div>
+	</div>
+</div>
+<div id="menu">
+	<div class="cuerpo">
+		<ul>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Escritorio</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li id="m1"><a href="#">Escritorio</a></li>
+			<!--
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			-->
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Cuentas</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			<!--
+			<li><a href="#">Cuentas</a></li>			
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			-->
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Clientes</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Clientes</a></li>
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Cotizaciones</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Cotizaciones</a></li>
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Reportes</div>
+				<img src="imagenes/f3.png" alt="" class="floatd" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Reportes</a></li>
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Notificaciones</div>
+				<img src="imagenes/f3.png" alt="" class="floatd" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Notificaciones</a></li>
+		</ul>
+	</div>
+</div>
+<div id="menu2">
+</div>
+<div class="separadorv"></div>
+<div class="cuerpo">
+	<div class="floati">
+		<div id="pfiltro">
+			<div id="pfiltro2">
+				<h1 class="floati">Búnqueda Filtrada</h1>
+				<a href="#" class="floatd" id="filtrar2">Ocultar Filtro</a>
+				<div class="separador"></div>
+				<form id="formBF" name="formBF" method="post" action="">
+				<ul>
+					<li>Usuario:</li>
+					<li class="lesp" id="dt1">
+						<div class="cajat">
+							<input type="text" name="t1" id="t1" readonly="readonly" />
+							<img id="ft1" src="imagenes/fazul.jpg" alt="Desplegar" />
+						</div>
+						<div id="combo1" class="combo">
+							<img src="imagenes/combo1.png" alt="" />
+							<ul>
+								<li>Ejecutivo 1</li>
+								<li>Ejecutivo 2</li>
+								<li>Miguel</li>
+							</ul>
+							<img src="imagenes/combo3.png" alt="" />
+						</div>
+					</li>
+					<li>Tipo:</li>
+					<li class="lesp" id="dt2">
+						<div class="cajat">
+							<input type="text" name="t2" id="t2" readonly="readonly" />
+							<img id="ft2" src="imagenes/fazul.jpg" alt="Desplegar" />
+						</div>
+						<div id="combo2" class="combo">
+							<img src="imagenes/combo1.png" alt="" />
+							<ul>
+								<li>Ejecutivo 1</li>
+								<li>Ejecutivo 2</li>
+								<li>Miguel</li>
+							</ul>
+							<img src="imagenes/combo3.png" alt="" />
+						</div>
+					</li>
+					<li>Tipo:</li>
+					<li class="lesp2" id="dt3">
+						<div class="cajat">
+							<input type="text" name="t3" id="t3" readonly="readonly" />
+							<img id="ft3" src="imagenes/fazul.jpg" alt="Desplegar" />
+						</div>
+						<div id="combo3" class="combo">
+							<img src="imagenes/combo1.png" alt="" />
+							<ul>
+								<li>Tipo 1</li>
+								<li>Tipo 2</li>
+								<li>Tipo 3</li>
+								<li>Tipo 4</li>
+								<li>Tipo 5</li>
+							</ul>
+							<img src="imagenes/combo3.png" alt="" />
+						</div>
+					</li>
+					<li>Acciones:</li>
+					<li class="lesp" id="dt4">
+						<div class="cajat">
+							<input type="text" name="t4" id="t4" readonly="readonly" />
+							<img id="ft4" src="imagenes/fazul.jpg" alt="Desplegar" />
+						</div>
+						<div id="combo4" class="combo">
+							<img src="imagenes/combo1.png" alt="" />
+							<ul>
+								<li>Reservar</li>
+								<li>Rechazar</li>
+								<li>Aprobar</li>
+								<li>Regresar</li>
+							</ul>
+							<img src="imagenes/combo3.png" alt="" />
+						</div>
+					</li>
+					<li>Fecha:</li>
+					<li class="lesp">
+						<div class="cajat"><input type="text" name="t5" id="t51" /></div>
+					</li>
+					<li>Fecha:</li>
+					<li>
+						<div class="cajat"><input type="text" name="t6" id="t6" /></div>
+					</li>
+				</ul>
+				<div class="separadorv"></div>
+				<div class="separadorv"></div>
+				<input type="image" name="buscar" id="buscar" src="imagenes/bbuscar.jpg" class="floatd" />
+				</form>
+			</div>
+		</div>
+		<div id="tablappa1"> <!-- usar id="tablappa2" cuandos e quiera que ocupe toda la ventana y eliminar el <div id="calendario">
+									en todo caso el ancho completo es de 950 px-->
+			<table class="tabla1">
+				<tr>
+					<td><img src="imagenes/tabla1.jpg" alt="" /></td>
+					<td class="tcabecera1" colspan="5">
+						<div class="floati">Lista de Notificaciones</div>
+						<div class="floatd"><a href="#" id="filtrar">Filtrar</a></div>
+					</td>
+					<td><img src="imagenes/tabla3.jpg" alt="" /></td>
+				</tr>
+				<tr class="trgris">
+					<td class="bordeazuli"></td>
+					<td class="iconitos"><img src="imagenes/exclamation.png" alt="" /></td>
+					<td class="hora1">08:15 AM </td>
+					<td><img src="imagenes/palitogris.gif" alt="" /></td>
+					<td><a href="#">Ejecutivo 3</a> solicitó verificación de cobro por Bs. 800,00 del cliente <a href="#">Miguel Ascanio</a> en el <a href="#">Hotel Puerto Madero</a></td>
+					<td class="iconitos"><img src="imagenes/thumb_up.png" alt="" /></td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="bordeazulis"></td>
+					<td colspan="5" class="tseparador"></td>
+					<td class="bordeazulds"></td>
+				</tr>
+				<tr class="trgris">
+					<td class="bordeazuli"></td>
+					<td class="iconitos"><img src="imagenes/exclamation.png" alt="" /></td>
+					<td class="hora1">08:15 AM </td>
+					<td><img src="imagenes/palitogris.gif" alt="" /></td>
+					<td><a href="#">Ejecutivo 3</a> solicitó verificación de cobro por Bs. 800,00 del cliente <a href="#">Miguel Ascanio</a> en el <a href="#">Hotel Puerto Madero</a></td>
+					<td class="iconitos"><img src="imagenes/thumb_up.png" alt="" /></td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="bordeazulis"></td>
+					<td colspan="5" class="tseparador"></td>
+					<td class="bordeazulds"></td>
+				</tr>
+				<tr class="trgris">
+					<td class="bordeazuli"></td>
+					<td class="iconitos"><img src="imagenes/exclamation.png" alt="" /></td>
+					<td class="hora1">08:15 AM </td>
+					<td><img src="imagenes/palitogris.gif" alt="" /></td>
+					<td><a href="#">Ejecutivo 3</a> solicitó verificación de cobro por Bs. 800,00 del cliente <a href="#">Miguel Ascanio</a> en el <a href="#">Hotel Puerto Madero</a></td>
+					<td class="iconitos"><img src="imagenes/thumb_up.png" alt="" /></td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="bordeazulis"></td>
+					<td colspan="5" class="tseparador"></td>
+					<td class="bordeazulds"></td>
+				</tr>
+				<tr>
+					<td class="bordeazuli"></td>
+					<td class="iconitos"></td>
+					<td class="hora2">08:15 AM </td>
+					<td><img src="imagenes/palitogris.gif" alt="" /></td>
+					<td><a href="#">Ejecutivo 3</a> solicitó verificación de cobro por Bs. 800,00 del cliente <a href="#">Miguel Ascanio</a> en el <a href="#">Hotel Puerto Madero</a></td>
+					<td class="iconitos"><img src="imagenes/tick.png" alt="" /></td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="bordeazulis"></td>
+					<td colspan="5" class="tseparador"></td>
+					<td class="bordeazulds"></td>
+				</tr>
+				<tr>
+					<td class="bordeazuli"></td>
+					<td class="iconitos"></td>
+					<td class="hora2">08:15 AM </td>
+					<td><img src="imagenes/palitogris.gif" alt="" /></td>
+					<td><a href="#">Ejecutivo 3</a> solicitó verificación de cobro por Bs. 800,00 del cliente <a href="#">Miguel Ascanio</a> en el <a href="#">Hotel Puerto Madero</a></td>
+					<td class="iconitos"><img src="imagenes/tick.png" alt="" /></td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="bordeazulis"></td>
+					<td colspan="5" class="tseparador"></td>
+					<td class="bordeazulds"></td>
+				</tr>
+				<tr>
+					<td class="bordeazuli"></td>
+					<td class="iconitos"></td>
+					<td class="hora2">08:15 AM </td>
+					<td><img src="imagenes/palitogris.gif" alt="" /></td>
+					<td><a href="#">Ejecutivo 3</a> solicitó verificación de cobro por Bs. 800,00 del cliente <a href="#">Miguel Ascanio</a> en el <a href="#">Hotel Puerto Madero</a></td>
+					<td class="iconitos"><img src="imagenes/tick.png" alt="" /></td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="bordeazulis"></td>
+					<td colspan="5" class="tseparador"></td>
+					<td class="bordeazulds"></td>
+				</tr>
+				<tr>
+					<td class="bordeazuli"></td>
+					<td class="iconitos"></td>
+					<td class="hora2">08:15 AM </td>
+					<td><img src="imagenes/palitogris.gif" alt="" /></td>
+					<td><a href="#">Ejecutivo 3</a> solicitó verificación de cobro por Bs. 800,00 del cliente <a href="#">Miguel Ascanio</a> en el <a href="#">Hotel Puerto Madero</a></td>
+					<td class="iconitos"><img src="imagenes/tick.png" alt="" /></td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="bordeazulis"></td>
+					<td colspan="5" class="tseparador"></td>
+					<td class="bordeazulds"></td>
+				</tr>
+				<tr>
+					<td class="bordeazuli"></td>
+					<td class="iconitos"></td>
+					<td class="hora2">08:15 AM </td>
+					<td><img src="imagenes/palitogris.gif" alt="" /></td>
+					<td><a href="#">Ejecutivo 3</a> solicitó verificación de cobro por Bs. 800,00 del cliente <a href="#">Miguel Ascanio</a> en el <a href="#">Hotel Puerto Madero</a></td>
+					<td class="iconitos"><img src="imagenes/tick.png" alt="" /></td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="bordeazulis"></td>
+					<td colspan="5" class="tseparador"></td>
+					<td class="bordeazulds"></td>
+				</tr>
+				<tr>
+					<td class="bordeazuli"></td>
+					<td class="iconitos"></td>
+					<td class="hora2">08:15 AM </td>
+					<td><img src="imagenes/palitogris.gif" alt="" /></td>
+					<td><a href="#">Ejecutivo 3</a> solicitó verificación de cobro por Bs. 800,00 del cliente <a href="#">Miguel Ascanio</a> en el <a href="#">Hotel Puerto Madero</a></td>
+					<td class="iconitos"><img src="imagenes/tick.png" alt="" /></td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="bordeazulis"></td>
+					<td colspan="5" class="tseparador"></td>
+					<td class="bordeazulds"></td>
+				</tr>
+				<tr>
+					<td class="bordeazuli"></td>
+					<td class="iconitos"></td>
+					<td class="hora2">08:15 AM </td>
+					<td><img src="imagenes/palitogris.gif" alt="" /></td>
+					<td><a href="#">Ejecutivo 3</a> solicitó verificación de cobro por Bs. 800,00 del cliente <a href="#">Miguel Ascanio</a> en el <a href="#">Hotel Puerto Madero</a></td>
+					<td class="iconitos"><img src="imagenes/tick.png" alt="" /></td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="tpie"><img src="imagenes/esq1.gif" alt=" " /></td>
+					<td class="tpiec tpie" colspan="5"></td>
+					<td class="tpie"><img src="imagenes/esq3.gif" alt=" " /></td>
+				</tr>
+			</table>
+			<div class="separadorv"></div>
+			<div id="dintermedio">
+				<div class="floati">Reservaciones Pendientes </div>
+				<div class="floatd"><a href="#">Ver todas</a></div>
+			</div>
+			<div class="separadorv"></div>
+			<table class="tabla2" align="center">
+				<tr class="t2h">
+					<td><img src="imagenes/tn1.gif" alt="" /></td>
+					<td>Cliente</td>
+					<td class="t2sn"></td>
+					<td>Tipo</td>
+					<td class="t2sn"></td>
+					<td>Descripción</td>
+					<td class="t2sn"></td>
+					<td>Monto</td>
+					<td class="t2sn"></td>
+					<td>Status</td>
+					<td class="t2sn"></td>
+					<td>Fecha Servicio</td>
+					<td><img src="imagenes/tn3.gif" alt="" /></td>
+				</tr>
+				<tr>
+					<td class="bordeazuli"></td>
+					<td><a href="#">Fulanito 1</a></td>
+					<td class="t2pa"></td>
+					<td>Hotel</td>
+					<td class="t2pa"></td>
+					<td>Caracas - Argentina - Caracas  </td>
+					<td class="t2pa"></td>
+					<td>Bs. 3.000,00</td>
+					<td class="t2pa"></td>
+					<td>Pendiente</td>
+					<td class="t2pa"></td>
+					<td>12/09/09</td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="bordeazulis2"></td>
+					<td colspan="11" class="tseparador2"></td>
+					<td class="bordeazulds2"></td>
+				</tr>
+				<tr>
+					<td class="bordeazuli"></td>
+					<td><a href="#">Fulanito 1</a></td>
+					<td class="t2pa"></td>
+					<td>Hotel</td>
+					<td class="t2pa"></td>
+					<td>Caracas - Argentina - Caracas  </td>
+					<td class="t2pa"></td>
+					<td>Bs. 3.000,00</td>
+					<td class="t2pa"></td>
+					<td>Pendiente</td>
+					<td class="t2pa"></td>
+					<td>12/09/09</td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="tpie"><img src="imagenes/esq1.gif" alt=" " /></td>
+					<td class="tpiec tpie"></td>
+					<td class="tpiec2 tpie"></td>
+					<td class="tpiec tpie"></td>
+					<td class="tpiec2 tpie"></td>
+					<td class="tpiec tpie"></td>
+					<td class="tpiec2 tpie"></td>
+					<td class="tpiec tpie"></td>
+					<td class="tpiec2 tpie"></td>
+					<td class="tpiec tpie"></td>
+					<td class="tpiec2 tpie"></td>
+					<td class="tpiec tpie"></td>
+					<td class="tpie"><img src="imagenes/esq3.gif" alt=" " /></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div id="sideb">
+		<div id="sideb2">
+			<div id="calendario">
+				<div id="datepicker"></div>
+			</div>
+			<div class="separadorv"></div>
+			<img src="imagenes/zoom.png" alt="" class="valign" />Buscador de Cliente<br />
+			<div class="separadorv"></div>
+			<form id="form_buscar" name="form_buscar" method="post" action="">
+				<div class="cajat"><input type="text" name="text1" id="text1" /></div>
+				<input type="image" name="Aceptar" id="Aceptar" src="imagenes/bir.jpg" class="floati" />
+			</form>
+			<div class="separadorv"></div>
+			<ul>
+				<li><img src="imagenes/add.png" alt="" class="valign" /><a href="#">Agregar Cliente</a></li>
+				<li><img src="imagenes/add.png" alt="" class="valign" /><a href="#">Agregar Cotización</a></li>
+				<li><img src="imagenes/add.png" alt="" class="valign" /><a href="#">Agregar Pago</a></li>
+			</ul>
+		</div>
+		<img src="imagenes/sb3.jpg" alt="" />
+	</div>
+</div>
+<script type="text/javascript">
+<!--
+	$(document).ready(function (){
+		$("#filtrar").click(function (evento){
+			$("#pfiltro").stop(true).animate({ height: 210 }, 300 );
+			evento.preventDefault();
+		});
+		$("#filtrar2").click(function (evento){
+			$("#pfiltro").stop(true).animate({ height: 0 }, 300 );
+			evento.preventDefault();
+		});
+		$("#ft1").click(function (){$("#combo1").show(300);});
+		$("#dt1").mouseleave(function (){$("#combo1").hide(300);});
+		$("#dt1 li").click(function (){$("#t1").val((this).innerHTML);$("#combo1").hide(300);});
+
+		$("#ft2").click(function (){$("#combo2").show(300);});
+		$("#dt2").mouseleave(function (){$("#combo2").hide(300);});
+		$("#dt2 li").click(function (){$("#t2").val((this).innerHTML);$("#combo2").hide(300);});
+
+		$("#ft3").click(function (){$("#combo3").show(300);});
+		$("#dt3").mouseleave(function (){$("#combo3").hide(300);});
+		$("#dt3 li").click(function (){$("#t3").val((this).innerHTML);$("#combo3").hide(300);});
+
+		$("#ft4").click(function (){$("#combo4").show(300);});
+		$("#dt4").mouseleave(function (){$("#combo4").hide(300);});
+		$("#dt4 li").click(function (){$("#t4").val((this).innerHTML);$("#combo4").hide(300);});
+	});
+-->
+</script>
+
+
+
+</body>
+</html>
