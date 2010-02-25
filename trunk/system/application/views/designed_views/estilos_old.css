@@ -1,0 +1,199 @@
+body,td,p, input, select {
+	font-family: Trebuchet MS;
+	font-size: 12px;
+	color: #999999;
+}
+body {
+	margin:0;
+	padding:0;
+}
+ul{list-style:none; margin:0; padding:0;}
+a img{border:none}
+a{text-decoration:none}
+a:hover{text-decoration:underline}
+h1{font-size:18px; color:#006699; margin:0; padding:0}
+.cuerpo{margin:0 auto 0 auto; width:950px;}
+
+#cintillo{
+	background-color:#02679B;
+	background-image:url(imagenes/fondo1.jpg);
+	background-repeat:no-repeat;
+	background-position:top center;
+	height:75px;
+	line-height:75px;
+	font-size:16px;
+	color:#FFFFFF;
+}
+#cintillo .logo{font-size:34px; color:#FFFFFF; font-weight:bold; float:left;}
+#cintillo .palito{margin:21px 15px 0 15px; float:left;}
+#cintillo .cintillod{float:right; font-size:12px}
+#cintillo .cintillod a{color:#FFFFFF; text-decoration:underline;}
+#cintillo .cintillod a:hover{text-decoration:none;}
+
+#menu{height:30px; background-image:url(imagenes/naranja.gif);position:relative; }
+#menu ul{position:absolute; top:-10px;}
+#menu li{float:left; line-height:30px; font-size:14px; color:#006699; text-align:center;padding:0 10px 0 10px; margin-top:10px}
+#menu li:hover{background-image:url(imagenes/naranja2.gif); background-position:10px;}
+#menu .palito{padding:0px;}
+#menu .palito:hover{background:none}
+#menu a{color:#FFFFFF}
+#menu .mf_texto{background-image:url(imagenes/f2.png);float:left; height:30px; padding:10px 9px 0 9px;}
+#menu .mfocus{margin-top:0;left:0px; padding:0}
+#menu .mfocus:hover{background:none}
+
+#menu .submenu{line-height:35px; position:absolute; padding-left:10px; top:30px;}
+#menu .submenu li{padding:2px;}
+#menu .submenu li:hover{background:none;}
+#menu .submenu a{color:#006699}
+
+#menu2{height:35px; background:#D4E6F2;}
+
+#tablappa1{width:716px;}
+#tablappa2{width:950px;}
+.tabla1{width:100%; border-collapse:collapse;}
+.tabla1 td{padding:0; height:40px; font-family:Arial;}
+.tabla1 a{text-decoration:underline; color:#999999;} .tabla1 a:hover{text-decoration:none;}
+
+.bordeazuli{background-image:url(imagenes/pv.gif); background-repeat:repeat-y; width:9px;}
+.bordeazuld{background-image:url(imagenes/pv.gif); background-repeat:repeat-y; background-position:right; width:9px;}
+.bordeazulis{background-image:url(imagenes/tabla_separadori.gif); height:2px!important;}
+.bordeazulds{background-image:url(imagenes/tabla_separadord.gif); height:2px!important;}
+.trgris{background-color:#F2F2F2}
+.tseparador{background-image:url(imagenes/tabla_separador.gif); height:2px!important; padding:0;}
+.tcabecera1{background-image:url(imagenes/tabla2.jpg); font-size:18px; color:#FFFFFF;}
+.tcabecera1 a{color:#FFFFFF;}
+.iconitos{width:20px}
+.hora1{color:#006699; min-width:50px}
+.hora2{color:#666666; min-width:50px}
+.tpie{height:5px!important;}
+.tpiec{background-image:url(imagenes/esq2.gif);}
+
+#dintermedio{font-size:18px; color:#006699}
+#dintermedio a{color:#006699; text-decoration:underline} #dintermedio a:hover{text-decoration:none}
+
+.tabla2{ border-collapse:collapse;}
+.tabla2 td{padding:0; height:40px; font-family:Arial;}
+.t2h{background-image:url(imagenes/tn2.gif);}
+.t2h td{height:30px!important; color:#FFFFFF; font-weight:bold}
+.t2sn{width:17px; background-image:url(imagenes/palito_n.gif);}
+.t2pa{background-image:url(imagenes/pazu.gif)}
+.tabla2 a{text-decoration:underline; color:#999999;} .tabla2 a:hover{text-decoration:none;}
+.tseparador2{background:#C0D7E7; height:1px!important; padding:0;}
+.bordeazulis2{background-image:url(imagenes/tabla_separadori2.gif); height:1px!important;}
+.bordeazulds2{background-image:url(imagenes/tabla_separadord2.gif); height:1px!important;}
+.tpiec2{background-image:url(imagenes/esq4.gif);}
+
+#sideb{width:221px; float:right; background-image:url(imagenes/sb1.gif);}
+#sideb2{background-image:url(imagenes/sb2.jpg); background-repeat:no-repeat; padding:14px; min-height:501px; font-size:14px; color:#666666;}
+#sideb2 li{line-height:32px;}
+#sideb2 form{margin:0;padding:0;}
+#sideb2 .cajat{width:167px; height:23px; position:relative; background-image:url(imagenes/texto1.png); float:left}
+#sideb2 .cajat input{border:none; height:21px; width:155px; margin-left:5px; background:none; line-height:21px;}
+#sideb2 a{color:#666666;}
+
+#pfiltro{width:716px; height:0px; overflow:hidden;} /*height:0px*/
+#pfiltro2{width:676px; height:157px; background-image:url(imagenes/pfiltro.jpg); padding:20px;}
+#pfiltro2 form{margin:0;padding:0;}
+#pfiltro2 .cajat{width:132px; height:22px; background-image:url(imagenes/texto2.png); float:left}
+#pfiltro2 .cajat input{border:none; height:20px; width:100px; margin-left:5px; background:none; line-height:20px;}
+#pfiltro2 li{float:left; margin-top:20px; width:70px; font-weight:bold;}
+#pfiltro2 .lesp{width:167px;position:relative;}
+#pfiltro2 .lesp2{position:relative;}
+#pfiltro2 img{vertical-align:middle; cursor:pointer;}
+#pfiltro2 .combo{width:132px; background-image:url(imagenes/combo2.png); position:absolute; left:0; top:21px; z-index:20; display:none}
+#pfiltro2 .combo li{line-height:16px; padding:0 5px 0 5px; margin:0; cursor:pointer;}
+#filtrar2{font-size:18px; color:#006699; text-decoration:underline;} #filtrar2:hover{text-decoration:none}
+
+.combo2{position:absolute; left:0; top:21px; z-index:20; display:none; font-size:12px}
+.combo2 table{border-collapse:collapse;margin-top:1px; background:#FFFFFF}
+.combo2 .arriba{background-image:url(imagenes/combo2.gif); height:5px}
+.combo2 .abajo{background-image:url(imagenes/combo6.gif); height:5px}
+.combo2 td{padding:0}
+.combo2 .bi{background-image:url(imagenes/combo8.gif);}
+.combo2 .bd{background-image:url(imagenes/combo4.gif);}
+.combo2 .opcion{line-height:16px; white-space:nowrap; cursor:pointer;color: #999999;}
+.combo2 .opcion:hover{text-decoration:none}
+
+#asociar{background-image:url(imagenes/tabla2.jpg); font-size:14px; color:#FFFFFF; line-height:41px; text-align:center}
+#asociar a{color:#FFFFFF;}
+#asociar2{border-left: 1px solid #C0D7E7; border-right: 1px solid #C0D7E7;}
+#asociar2 .alertar{background:#F3D5D5; height:45px; border-bottom: 1px solid #E6A9AE; line-height:45px; color:#CF0211; text-align:center;}
+#asociar2 .alertar2{background:#FBEB89; height:45px; border-bottom: 1px solid #DFD58D; border-top: 1px solid #DFD58D; line-height:45px; color:#006699; text-align:center;}
+#asociar2 h1{margin:0 0 30px 10px}
+#asociar_c{margin-left:118px; font-size:14px; color:#666666;}
+#asociar_c .ul_tit_2{width:350px}
+#asociar_c li{float:left}
+#asociar_c .li_tit_1{width:177px}
+#asociar_c .li_tit_2{width:77px; padding-left:100px; font-size:12px; height:34px;}
+#asociar_c .li_tit_3{width:347px; font-size:12px; height:34px; text-align:right;}
+#asociar_c .cajat{width:170px; height:21px; background-image:url(imagenes/texto3.gif); float:left}
+#asociar_c .cajat input{border:none; height:20px; width:160px; margin-left:5px; background:none; line-height:20px;}
+#asociar_c .cajat2{width:170px; height:21px; background-image:url(imagenes/texto3.gif); float:left}
+#asociar_c .cajat2 input{border:none; height:20px; width:136px; margin:0 5px 0 5px; background:none; line-height:20px;}
+#combo_tipo table{width:170px}
+.cajat_img img{vertical-align:middle; }
+.p_relative{position:relative;}
+
+#boletos{margin-left:56px; color:#666666;}
+.link_naranja{color:#EE542E; text-decoration:underline; }
+.link_naranja:hover{text-decoration:none;}
+#boletos .p_relative{margin-top:10px}
+#boletos li{float:left;}
+#boletos .liseparador{width:19px; height:5px;}
+
+#boletos .c_tipo_vuelo{width:107px; height:21px; background-image:url(imagenes/texto4.gif); float:left}
+#boletos .c_tipo_vuelo input{border:none; height:20px; width:73px; margin:0 5px 0 5px; background:none; line-height:20px;}
+#boletos #combo_tipo_vuelo table{width:107px;}
+
+#boletos .c_tipo_2{width:81px; height:21px; background-image:url(imagenes/texto5.gif); float:left}
+#boletos .c_tipo_2 input{border:none; height:20px; width:47px; margin:0 5px 0 5px; background:none; line-height:20px;}
+#boletos #combo_tipo_2 table{width:81px;}
+
+#boletos .t_origen{width:91px; height:21px; position:relative; background-image:url(imagenes/texto6.gif); margin-top:10px;}
+#boletos .t_origen input{border:none; height:20px; width:81px; margin-left:5px; background:none; line-height:20px;}
+
+#boletos .c_npersonas{width:53px; height:21px; background-image:url(imagenes/texto7.gif); float:left}
+#boletos .c_npersonas input{border:none; height:20px; width:19px; margin:0 5px 0 5px; background:none; line-height:20px;}
+#boletos #combo_npersonas table{width:53px;}
+
+#boletos .t_descripcion{width:297px; height:21px; position:relative; background-image:url(imagenes/texto8.gif); margin-top:10px;}
+#boletos .t_descripcion input{border:none; height:20px; width:287px; margin-left:5px; background:none; line-height:20px;}
+
+#boletos .c_cantidad{width:53px; height:21px; background-image:url(imagenes/texto7.gif); float:left}
+#boletos .c_cantidad input{border:none; height:20px; width:19px; margin:0 5px 0 5px; background:none; line-height:20px;}
+#boletos #combo_cantidad table{width:53px;}
+
+#boletos .total1{margin-top:29px; width:143px; text-align:right;}
+#boletos .agregar{margin:10px 0 0 560px}
+
+#boletos2{ margin-left:25px; margin-right:25px;}
+#boletos2 .separadorv_gris{margin:10px 0 10px 0}
+#boletos2 ul{float:right}
+#boletos2 li{float:left; min-width:100px; margin-right:20px; text-align:right}
+#resumen{width:95%}
+#resumen thead td{font-weight:bold}
+#resumen td{border-bottom: 1px dotted #E3E3E3;}
+#resumen .numerico{text-align:right}
+
+#boletos2 .c_descuento{width:53px; height:21px; background-image:url(imagenes/texto7.gif); float:left}
+#boletos2 .c_descuento input{border:none; height:20px; width:19px; margin:0 5px 0 5px; background:none; line-height:20px;}
+#boletos2 #combo_descuento table{width:53px;}
+.ntd{text-align:left}
+
+#generico table td{width:190px;color:#006699;border-bottom: 1px dotted #E3E3E3;}
+
+
+.rojo{color:#EF182A; font-size:14px;}
+.naranja{color:#EE542E; font-size:16px;}
+
+
+/*para combos -34px*/
+
+.floati{float:left;}
+.floatd{float:right;}
+.valign{vertical-align:middle;}
+.separador{clear:both;height:0px!important}
+.separadorv{clear:both; height:12px;}
+.separadorv_gris{clear:both; height:1px; background:#E3E3E3; margin:30px 0 30px 0;}
+.separadorh{clear:both;width:1px; height:12px; float:left}
+.separadorh1{width:10px!important; float:left;height:10px}

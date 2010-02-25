@@ -1,0 +1,464 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Hoteles.com.ve</title>
+	<link type="text/css" href="themes/redmond/ui.all.css" rel="stylesheet" />
+	<script type="text/javascript" src="jquery-1.3.2.js"></script>
+	<script type="text/javascript" src="ui/ui.core.js"></script>
+	<script type="text/javascript" src="ui/ui.datepicker.js"></script>
+	<script type="text/javascript" src="ui/i18n/ui.datepicker-es.js"></script>
+	<link type="text/css" href="demos.css" rel="stylesheet" />
+	<script type="text/javascript">
+	$(function() {
+		$("#datepicker").datepicker();
+	});
+	</script>
+	<link href="estilos.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="cintillo">
+	<div class="cuerpo">
+		<a href="#" class="logo">Hoteles.com.ve</a>
+		<div class="palito"><img src="imagenes/palito.gif" alt="" /></div>
+		<div class="floati">Gestión de servicios</div>
+		<div class="cintillod">
+			<img src="imagenes/user_orange.png" alt="Usuario" class="valign" />
+			Bienvenido, <a href="#">Miguel Ascanio</a>
+			<img src="imagenes/cog_edit.png" alt="Opciones" class="valign" />
+			<a href="#">Opciones</a>
+			<img src="imagenes/lock.png" alt="Desconectar" class="valign" />
+			<a href="#">Desconectar</a>
+		</div>
+	</div>
+</div>
+<div id="menu">
+	<div class="cuerpo">
+		<ul>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Escritorio</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li id="m1"><a href="#">Escritorio</a></li>
+			<!--
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			-->
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Cuentas</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			<!--
+			<li><a href="#">Cuentas</a></li>			
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			-->
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Clientes</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Clientes</a></li>
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Cotizaciones</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Cotizaciones</a></li>
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Reportes</div>
+				<img src="imagenes/f3.png" alt="" class="floatd" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Reportes</a></li>
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Notificaciones</div>
+				<img src="imagenes/f3.png" alt="" class="floatd" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Notificaciones</a></li>
+		</ul>
+	</div>
+</div>
+<div id="menu2">
+</div>
+<div class="separadorv"></div>
+<div class="cuerpo">
+	<div class="floati">
+		<div id="tablappa1"> <!-- usar id="tablappa2" cuandos e quiera que ocupe toda la ventana y eliminar el <div id="calendario">
+									en todo caso el ancho completo es de 950 px-->
+			<div id="t_filtro">
+				<table class="tabla1"> <!-- se conservó el uso de tabla en este caso para reusar estilos y no redundar-->
+					<tr>
+						<td><img src="imagenes/tabla1.jpg" alt="" /></td>
+						<td class="tcabecera1">
+							<div class="floati">Transacciones Bancarias</div>
+							<div class="floatd"><a href="#" id="filtrar">Ocultar</a></div>
+						</td>
+						<td><img src="imagenes/tabla3.jpg" alt="" /></td>
+					</tr>
+					<tr>
+						<td class="bordeazuli"></td>
+						<td>
+						<div id="transacciones">
+							<img src="imagenes/zoom.png" alt="Filtrar" class="floati valign" /><h1 class="floati">Filtrar</h1>
+							<div class="separadorv"></div>
+							<form id="form_filtrar" name="form_buscar" method="post" action="">
+							<ul>
+								<li><strong>Subgrupo:</strong></li>
+								<li>
+									<div class="p_relative">
+										<div class="cajat2">
+											<input type="text" name="subgrupo" id="subgrupo" readonly="readonly" /><input name="subgrupo_h" id="subgrupo_h" type="hidden" value="" />
+											<a rel="subgrupo,subgrupo_h,combo_subgrupo" href="#" class="cajat_img"><img src="imagenes/fazul.jpg" alt="Desplegar" /></a>										</div>
+										<div id="combo_subgrupo" class="combo2">
+											<table>
+												<tr>
+													<td width="5"><img src="imagenes/combo1.gif" alt="" /></td>
+													<td class="arriba"></td>
+													<td width="5"><img src="imagenes/combo3.gif" alt="" /></td>
+												</tr>
+												<tr>
+													<td class="bi"></td>
+													<td><a href="#" class="opcion" rel="valor1">Todo incluido</a></td><!-- en el rel se coloca el value -->
+													<td class="bd"></td>
+												</tr>
+												<tr>
+													<td class="bi"></td>
+													<td><a href="#" class="opcion" rel="valor2">Solo Hospedaje</a></td>
+													<td class="bd"></td>
+												</tr>
+												<tr>
+													<td class="bi"></td>
+													<td><a href="#" class="opcion" rel="valor3">aaaa</a></td>
+													<td class="bd"></td>
+												</tr>
+												<tr>
+													<td><img src="imagenes/combo7.gif" alt="" /></td>
+													<td class="abajo"></td>
+													<td><img src="imagenes/combo5.gif" alt="" /></td>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</li>
+								<li><strong>Cuenta:</strong></li>
+								<li>
+									<div class="p_relative">
+										<div class="cajat2">
+											<input type="text" name="cuenta" id="cuenta" readonly="readonly" /><input name="cuenta_h" id="cuenta_h" type="hidden" value="" />
+											<a rel="cuenta,cuenta_h,combo_cuenta" href="#" class="cajat_img"><img src="imagenes/fazul.jpg" alt="Desplegar" /></a>										</div>
+										<div id="combo_cuenta" class="combo2">
+											<table>
+												<tr>
+													<td width="5"><img src="imagenes/combo1.gif" alt="" /></td>
+													<td class="arriba"></td>
+													<td width="5"><img src="imagenes/combo3.gif" alt="" /></td>
+												</tr>
+												<tr>
+													<td class="bi"></td>
+													<td><a href="#" class="opcion" rel="valor1">Todo incluido</a></td><!-- en el rel se coloca el value -->
+													<td class="bd"></td>
+												</tr>
+												<tr>
+													<td class="bi"></td>
+													<td><a href="#" class="opcion" rel="valor2">Solo Hospedaje</a></td>
+													<td class="bd"></td>
+												</tr>
+												<tr>
+													<td class="bi"></td>
+													<td><a href="#" class="opcion" rel="valor3">aaaa</a></td>
+													<td class="bd"></td>
+												</tr>
+												<tr>
+													<td><img src="imagenes/combo7.gif" alt="" /></td>
+													<td class="abajo"></td>
+													<td><img src="imagenes/combo5.gif" alt="" /></td>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</li>
+								<li><strong>Fuente:</strong></li>
+								<li>
+									<div class="p_relative">
+										<div class="cajat2">
+											<input type="text" name="fuente" id="fuente" readonly="readonly" /><input name="fuente_h" id="fuente_h" type="hidden" value="" />
+											<a rel="fuente,fuente_h,combo_fuente" href="#" class="cajat_img"><img src="imagenes/fazul.jpg" alt="Desplegar" /></a>										</div>
+										<div id="combo_fuente" class="combo2">
+											<table>
+												<tr>
+													<td width="5"><img src="imagenes/combo1.gif" alt="" /></td>
+													<td class="arriba"></td>
+													<td width="5"><img src="imagenes/combo3.gif" alt="" /></td>
+												</tr>
+												<tr>
+													<td class="bi"></td>
+													<td><a href="#" class="opcion" rel="valor1">Todo incluido</a></td><!-- en el rel se coloca el value -->
+													<td class="bd"></td>
+												</tr>
+												<tr>
+													<td class="bi"></td>
+													<td><a href="#" class="opcion" rel="valor2">Solo Hospedaje</a></td>
+													<td class="bd"></td>
+												</tr>
+												<tr>
+													<td class="bi"></td>
+													<td><a href="#" class="opcion" rel="valor3">aaaa</a></td>
+													<td class="bd"></td>
+												</tr>
+												<tr>
+													<td><img src="imagenes/combo7.gif" alt="" /></td>
+													<td class="abajo"></td>
+													<td><img src="imagenes/combo5.gif" alt="" /></td>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</li>
+								<li><strong>Beneficiario:</strong></li>
+								<li><div class="cajat1"><input type="text" name="beneficiario" /></div></li>
+								<li><strong>Fecha:</strong></li>
+								<li><div class="cajat1"><input type="text" name="fecha" /></div><a href="#">&nbsp;&nbsp;<img src="imagenes/cal2.jpg" alt="" class="valign" /></a></li>
+								<li></li>
+								<li>
+									<input type="image" name="filtrar" id="filtrar2" src="imagenes/bfiltrar.jpg" />
+								</li>
+							</ul>
+							</form>
+						</div>
+						<div class="separador"></div>
+						</td>
+						<td class="bordeazuld"></td>
+					</tr>
+					<tr>
+						<td class="tpie"><img src="imagenes/esq1.gif" alt=" " /></td>
+						<td class="tpiec tpie"></td>
+						<td class="tpie"><img src="imagenes/esq3.gif" alt=" " /></td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="separadorv"></div>
+			<div id="dintermedio">
+				<img src="imagenes/add.png" alt="Agregar Nuevo" class="valign" />Agregar Nuevo
+			</div>
+			<div class="separadorv"></div>
+			<table class="tabla2" align="center">
+				<tr class="t2h">
+					<td><img src="imagenes/tn1.gif" alt="" /></td>
+					<td>Cuenta</td>
+					<td class="t2sn"></td>
+					<td>Fuente</td>
+					<td class="t2sn"></td>
+					<td>Beneficiario</td>
+					<td class="t2sn"></td>
+					<td>Fecha</td>
+					<td class="t2sn"></td>
+					<td>Monto</td>
+					<td><img src="imagenes/tn3.gif" alt="" /></td>
+				</tr>
+				<tr>
+					<td class="bordeazuli"></td>
+					<td><a href="#">01340015690153085678</a></td>
+					<td class="t2pa"></td>
+					<td>Banco de Venezuela</td>
+					<td class="t2pa"></td>
+					<td>Miguel Ascanio</td>
+					<td class="t2pa"></td>
+					<td>Martes 09/09/2009</td>
+					<td class="t2pa"></td>
+					<td class="numerico">BsF 359,00</td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="bordeazulis2"></td>
+					<td colspan="11" class="tseparador2"></td>
+					<td class="bordeazulds2"></td>
+				</tr>
+				<tr>
+					<td class="bordeazuli"></td>
+					<td><a href="#">01340015690153085678</a></td>
+					<td class="t2pa"></td>
+					<td>Banco de Venezuela</td>
+					<td class="t2pa"></td>
+					<td>Miguel Ascanio</td>
+					<td class="t2pa"></td>
+					<td>Martes 09/09/2009</td>
+					<td class="t2pa"></td>
+					<td class="numerico">BsF 359,00</td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="bordeazulis2"></td>
+					<td colspan="11" class="tseparador2"></td>
+					<td class="bordeazulds2"></td>
+				</tr>
+				<tr>
+					<td class="bordeazuli"></td>
+					<td><a href="#">01340015690153085678</a></td>
+					<td class="t2pa"></td>
+					<td>Banco de Venezuela</td>
+					<td class="t2pa"></td>
+					<td>Miguel Ascanio</td>
+					<td class="t2pa"></td>
+					<td>Martes 09/09/2009</td>
+					<td class="t2pa"></td>
+					<td class="numerico">BsF 359,00</td>
+					<td class="bordeazuld"></td>
+				</tr>
+				<tr>
+					<td class="tpie"><img src="imagenes/esq1.gif" alt=" " /></td>
+					<td class="tpiec tpie"></td>
+					<td class="tpiec2 tpie"></td>
+					<td class="tpiec tpie"></td>
+					<td class="tpiec2 tpie"></td>
+					<td class="tpiec tpie"></td>
+					<td class="tpiec2 tpie"></td>
+					<td class="tpiec tpie"></td>
+					<td class="tpiec2 tpie"></td>
+					<td class="tpiec tpie"></td>
+					<td class="tpie"><img src="imagenes/esq3.gif" alt=" " /></td>
+				</tr>
+			</table>
+			<div class="separadorv"></div>
+			<div id="paginacion">
+				<ul>
+					<li><a href="#" class="apu">Primera</a></li>
+					<li><a href="#"><img src="imagenes/fizq.gif" alt="Primera" /></a></li>
+					<li><div class="pag_a">1</div></li>
+					<li><a href="#" class="pag_n">2</a></li>
+					<li><a href="#" class="pag_n">3</a></li>
+					<li><a href="#" class="pag_n">4</a></li>
+					<li><a href="#" class="pag_n">5</a></li>
+					<li>...</li>
+					<li><a href="#" class="pag_n">21</a></li>
+					<li><a href="#" class="pag_n">22</a></li>
+					<li><a href="#" class="pag_n">23</a></li>
+					<li><a href="#"><img src="imagenes/fder.gif" alt="Ultima" /></a></li>
+					<li><a href="#" class="apu">Última</a></li>
+				</ul>
+				<div class="separador"></div>
+			</div>
+		</div>
+	</div>
+	<div id="sideb">
+		<div id="sideb2">
+			<div id="calendario">
+				<div id="datepicker"></div>
+			</div>
+			<div class="separadorv"></div>
+			<img src="imagenes/zoom.png" alt="" class="valign" />Buscador de Cliente<br />
+			<div class="separadorv"></div>
+			<form id="form_buscar" name="form_buscar" method="post" action="">
+				<div class="cajat"><input type="text" name="text1" id="text1" /></div>
+				<input type="image" name="Aceptar" id="Aceptar" src="imagenes/bir.jpg" class="floati" />
+			</form>
+			<div class="separadorv"></div>
+			<ul>
+				<li><img src="imagenes/add.png" alt="" class="valign" /><a href="#">Agregar Cliente</a></li>
+				<li><img src="imagenes/add.png" alt="" class="valign" /><a href="#">Agregar Cotización</a></li>
+				<li><img src="imagenes/add.png" alt="" class="valign" /><a href="#">Agregar Pago</a></li>
+			</ul>
+		</div>
+		<img src="imagenes/sb3.jpg" alt="" />
+	</div>
+</div>
+<script type="text/javascript">
+<!--
+	$(document).ready(function (){
+		$("#filtrar2").click(function (evento){
+			$("#t_filtro").stop(true).animate({ height: 210 }, 300 );
+			evento.preventDefault();
+		});
+		$("#filtrar").click(function (evento){
+			$("#t_filtro").stop(true).animate({ height: 0 }, 300 );
+			evento.preventDefault();
+		});
+		var cajat, cajath, elcombo='';
+		$(".cajat_img").click(function (evento){
+			m=((this).rel).split(",");
+			cajat=m[0];
+			cajath=m[1];
+			elcombo=m[2];
+			$("#" + elcombo).show(200);
+			$("#" + elcombo).focus();
+			evento.preventDefault();
+		});
+		$(".p_relative").mouseleave(function (){
+			if(elcombo!=''){
+				$("#" + elcombo).hide(200);
+				elcombo='';
+			}
+		});
+		$(".opcion").click(function (evento){
+			$("#" + cajat).val((this).innerHTML);
+			$("#" + cajath).val((this).rel);
+			$("#" + elcombo).hide(200);
+			elcombo='';
+			evento.preventDefault();
+		});
+	});
+-->
+</script>
+
+
+
+</body>
+</html>

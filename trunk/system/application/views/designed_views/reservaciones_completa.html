@@ -1,0 +1,704 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Hoteles.com.ve</title>
+	<link type="text/css" href="themes/redmond/ui.all.css" rel="stylesheet" />
+	<script type="text/javascript" src="jquery-1.3.2.js"></script>
+	<script type="text/javascript" src="ui/ui.core.js"></script>
+	<script type="text/javascript" src="ui/ui.datepicker.js"></script>
+	<script type="text/javascript" src="ui/i18n/ui.datepicker-es.js"></script>
+	<link type="text/css" href="demos.css" rel="stylesheet" />
+	<script type="text/javascript">
+	$(function() {
+		$("#datepicker").datepicker();
+	});
+	</script>
+	<link href="estilos.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="cintillo">
+	<div class="cuerpo">
+		<a href="#" class="logo">Hoteles.com.ve</a>
+		<div class="palito"><img src="imagenes/palito.gif" alt="" /></div>
+		<div class="floati">Gestión de servicios</div>
+		<div class="cintillod">
+			<img src="imagenes/user_orange.png" alt="Usuario" class="valign" />
+			Bienvenido, <a href="#">Miguel Ascanio</a>
+			<img src="imagenes/cog_edit.png" alt="Opciones" class="valign" />
+			<a href="#">Opciones</a>
+			<img src="imagenes/lock.png" alt="Desconectar" class="valign" />
+			<a href="#">Desconectar</a>
+		</div>
+	</div>
+</div>
+<div id="menu">
+	<div class="cuerpo">
+		<ul>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Escritorio</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li id="m1"><a href="#">Escritorio</a></li>
+			<!--
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			-->
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Cuentas</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			<!--
+			<li><a href="#">Cuentas</a></li>			
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			-->
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Clientes</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Clientes</a></li>
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Cotizaciones</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Cotizaciones</a></li>
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Reportes</div>
+				<img src="imagenes/f3.png" alt="" class="floatd" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Reportes</a></li>
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Notificaciones</div>
+				<img src="imagenes/f3.png" alt="" class="floatd" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Notificaciones</a></li>
+		</ul>
+	</div>
+</div>
+<div id="menu2">
+</div>
+<div class="separadorv"></div>
+<div class="cuerpo">
+	<div class="floati">
+		<div id="tablappa1"> <!-- usar id="tablappa2" cuandos e quiera que ocupe toda la ventana y eliminar el <div id="calendario">
+									en todo caso el ancho completo es de 950 px-->
+			<div id="matriz">
+				<img src="imagenes/tabla1.jpg" alt="" class="floati valign" />
+				Acciones | Status
+				<img src="imagenes/tabla3.jpg" alt=""  class="floatd valign"/>
+			</div>
+			<div class="separador"></div>
+			<div id="reservaciones">
+				<div id="pannel1" class="pannel"><!-- ojo con el id -->
+					<ul>
+						<li><img src="imagenes/f0.gif" alt="" class="valign" /></li>
+						<li><a href="#" class="titulos">Relación con el cliente</a></li>
+					</ul>
+					<div class="separadorv"></div>
+					<form id="form_pannel_1" name="form_pannel_1" method="post" action=""><!-- ojo con el id del formulario y los radiobutton -->
+					<ul>
+						<li><img src="imagenes/f3.gif" alt="" class="valign" /></li>
+						<li><input type="radio" name="radio_pannel_1" value="1" /></li>
+						<li>Enviar cotización</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_pannel_1" value="1" /></li>
+						<li>Enviar confirmación de reserva</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_pannel_1" value="1" /></li>
+						<li>Solicitar confirmación de reserva al cliente</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_pannel_1" value="1" /></li>
+						<li>Solicitar pago al cliente</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_pannel_1" value="1" /></li>
+						<li>Rechazar reservación&nbsp;&nbsp;</li>
+						<li>
+							<div class="p_relative">
+								<div class="cajat2">
+									<input type="text" name="rechazo1" id="rechazo1" readonly="readonly" /><input name="rechazo1_h" id="rechazo1_h" type="hidden" value="" />
+									<a rel="rechazo1,rechazo1_h,combo_reservaciones_1" href="#" class="cajat_img"><img src="imagenes/fazul.jpg" alt="Desplegar" /></a>								</div>
+								<div id="combo_reservaciones_1" class="combo2 combo_opciones"> <!-- ojo con el id en el combo y en el enlace previo (no pueden repetirse) -->
+									<table>
+										<tr>
+											<td width="5"><img src="imagenes/combo1.gif" alt="" /></td>
+											<td class="arriba"></td>
+											<td width="5"><img src="imagenes/combo3.gif" alt="" /></td>
+										</tr>
+										<tr>
+											<td class="bi"></td>
+											<td><a href="#" class="opcion" rel="valor1">Todo incluido</a></td><!-- en el rel se coloca el value -->
+											<td class="bd"></td>
+										</tr>
+										<tr>
+											<td class="bi"></td>
+											<td><a href="#" class="opcion" rel="valor2">Solo Hospedaje</a></td>
+											<td class="bd"></td>
+										</tr>
+										<tr>
+											<td class="bi"></td>
+											<td><a href="#" class="opcion" rel="valor3">Opción 3</a></td>
+											<td class="bd"></td>
+										</tr>
+										<tr>
+											<td><img src="imagenes/combo7.gif" alt="" /></td>
+											<td class="abajo"></td>
+											<td><img src="imagenes/combo5.gif" alt="" /></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</li>
+						<li class="separador">&nbsp;</li>
+						<li>&nbsp;</li>
+						<li class="separador">&nbsp;</li>
+						<li>&nbsp;</li>
+						<li>
+							<input type="image" name="ejecutar" src="imagenes/bejecutar.jpg" />
+						</li>
+					</ul>
+					<div class="separador"></div>
+					</form>
+				</div>
+
+				<div id="pannel2" class="pannel"><!-- ojo con el id -->
+					<ul>
+						<li><img src="imagenes/f0.gif" alt="" class="valign" /></li>
+						<li><a href="#" class="titulos">Relación con el cliente</a></li>
+					</ul>
+					<div class="separadorv"></div>
+					<form id="form_panne_2" name="form_panne_2" method="post" action=""><!-- ojo con el id del formulario y los radiobutton -->
+					<ul>
+						<li><img src="imagenes/f3.gif" alt="" class="valign" /></li>
+						<li><input type="radio" name="radio_panne_2" value="1" /></li>
+						<li>Enviar cotización</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_panne_2" value="1" /></li>
+						<li>Enviar confirmación de reserva</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_panne_2" value="1" /></li>
+						<li>Solicitar confirmación de reserva al cliente</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_panne_2" value="1" /></li>
+						<li>Solicitar pago al cliente</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_panne_2" value="1" /></li>
+						<li>Rechazar reservación&nbsp;&nbsp;</li>
+						<li>
+							<div class="p_relative">
+								<div class="cajat2">
+									<input type="text" name="rechazo2" id="rechazo2" readonly="readonly" /><input name="rechazo2_h" id="rechazo2_h" type="hidden" value="" />
+									<a rel="rechazo2,rechazo2_h,combo_reservaciones_2" href="#" class="cajat_img"><img src="imagenes/fazul.jpg" alt="Desplegar" /></a>								</div>
+								<div id="combo_reservaciones_2" class="combo2 combo_opciones"> <!-- ojo con el id en el combo y en el enlace previo (no pueden repetirse) -->
+									<table>
+										<tr>
+											<td width="5"><img src="imagenes/combo1.gif" alt="" /></td>
+											<td class="arriba"></td>
+											<td width="5"><img src="imagenes/combo3.gif" alt="" /></td>
+										</tr>
+										<tr>
+											<td class="bi"></td>
+											<td><a href="#" class="opcion" rel="valor1">Todo incluido</a></td><!-- en el rel se coloca el value -->
+											<td class="bd"></td>
+										</tr>
+										<tr>
+											<td class="bi"></td>
+											<td><a href="#" class="opcion" rel="valor2">Solo Hospedaje</a></td>
+											<td class="bd"></td>
+										</tr>
+										<tr>
+											<td class="bi"></td>
+											<td><a href="#" class="opcion" rel="valor3">Opción 3</a></td>
+											<td class="bd"></td>
+										</tr>
+										<tr>
+											<td><img src="imagenes/combo7.gif" alt="" /></td>
+											<td class="abajo"></td>
+											<td><img src="imagenes/combo5.gif" alt="" /></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</li>
+						<li class="separador">&nbsp;</li>
+						<li>&nbsp;</li>
+						<li class="separador">&nbsp;</li>
+						<li>&nbsp;</li>
+						<li>
+							<input type="image" name="ejecutar" src="imagenes/bejecutar.jpg" />
+						</li>
+					</ul>
+					<div class="separador"></div>
+					</form>
+				</div>
+				<div class="separadorv"></div>
+				<div class="separadorv"></div>
+
+				<div id="pannel3" class="pannel"><!-- ojo con el id -->
+					<ul>
+						<li><img src="imagenes/f1.gif" alt="" class="valign" /></li> <!-- en el formulario está el display none para verlo o quitarlo -->
+						<li><a href="#" class="titulos">Relación con el cliente</a></li>
+					</ul>
+					<div class="separadorv"></div>
+					<form id="form_pannel_3" name="form_pannel_3" method="post" action="" style="display:none"><!-- ojo con el id del formulario y los radiobutton -->
+					<ul>
+						<li><img src="imagenes/f3.gif" alt="" class="valign" /></li>
+						<li><input type="radio" name="radio_pannel_3" value="1" /></li>
+						<li>Enviar cotización</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_pannel_3" value="1" /></li>
+						<li>Enviar confirmación de reserva</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_pannel_3" value="1" /></li>
+						<li>Solicitar confirmación de reserva al cliente</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_pannel_3" value="1" /></li>
+						<li>Solicitar pago al cliente</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_pannel_3" value="1" /></li>
+						<li>Rechazar reservación&nbsp;&nbsp;</li>
+						<li>
+							<div class="p_relative">
+								<div class="cajat2">
+									<input type="text" name="rechazo3" id="rechazo3" readonly="readonly" /><input name="rechazo3_h" id="rechazo3_h" type="hidden" value="" />
+									<a rel="rechazo3,rechazo3_h,combo_reservaciones_3" href="#" class="cajat_img"><img src="imagenes/fazul.jpg" alt="Desplegar" /></a>								</div>
+								<div id="combo_reservaciones_3" class="combo2 combo_opciones"> <!-- ojo con el id en el combo y en el enlace previo (no pueden repetirse) -->
+									<table>
+										<tr>
+											<td width="5"><img src="imagenes/combo1.gif" alt="" /></td>
+											<td class="arriba"></td>
+											<td width="5"><img src="imagenes/combo3.gif" alt="" /></td>
+										</tr>
+										<tr>
+											<td class="bi"></td>
+											<td><a href="#" class="opcion" rel="valor1">Todo incluido</a></td><!-- en el rel se coloca el value -->
+											<td class="bd"></td>
+										</tr>
+										<tr>
+											<td class="bi"></td>
+											<td><a href="#" class="opcion" rel="valor2">Solo Hospedaje</a></td>
+											<td class="bd"></td>
+										</tr>
+										<tr>
+											<td class="bi"></td>
+											<td><a href="#" class="opcion" rel="valor3">Opción 3</a></td>
+											<td class="bd"></td>
+										</tr>
+										<tr>
+											<td><img src="imagenes/combo7.gif" alt="" /></td>
+											<td class="abajo"></td>
+											<td><img src="imagenes/combo5.gif" alt="" /></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</li>
+						<li class="separador">&nbsp;</li>
+						<li>&nbsp;</li>
+						<li class="separador">&nbsp;</li>
+						<li>&nbsp;</li>
+						<li>
+							<input type="image" name="ejecutar" src="imagenes/bejecutar.jpg" />
+						</li>
+					</ul>
+					<div class="separador"></div>
+					</form>
+				</div>
+
+				<div id="pannel4" class="pannel"><!-- ojo con el id -->
+					<ul>
+						<li><img src="imagenes/f1.gif" alt="" class="valign" /></li>
+						<li><a href="#" class="titulos">Relación con el cliente</a></li>
+					</ul>
+					<div class="separadorv"></div>
+					<form id="form_panne_4" name="form_panne_4" method="post" action="" style="display:none"><!-- ojo con el id del formulario y los radiobutton -->
+					<ul>
+						<li><img src="imagenes/f3.gif" alt="" class="valign" /></li>
+						<li><input type="radio" name="radio_panne_4" value="1" /></li>
+						<li>Enviar cotización</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_panne_4" value="1" /></li>
+						<li>Enviar confirmación de reserva</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_panne_4" value="1" /></li>
+						<li>Solicitar confirmación de reserva al cliente</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_panne_4" value="1" /></li>
+						<li>Solicitar pago al cliente</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_panne_4" value="1" /></li>
+						<li>Rechazar reservación&nbsp;&nbsp;</li>
+						<li>
+							<div class="p_relative">
+								<div class="cajat2">
+									<input type="text" name="rechazo4" id="rechazo4" readonly="readonly" /><input name="rechazo4_h" id="rechazo4_h" type="hidden" value="" />
+									<a rel="rechazo4,rechazo4_h,combo_reservaciones_4" href="#" class="cajat_img"><img src="imagenes/fazul.jpg" alt="Desplegar" /></a>								</div>
+								<div id="combo_reservaciones_4" class="combo2 combo_opciones"> <!-- ojo con el id en el combo y en el enlace previo (no pueden repetirse) -->
+									<table>
+										<tr>
+											<td width="5"><img src="imagenes/combo1.gif" alt="" /></td>
+											<td class="arriba"></td>
+											<td width="5"><img src="imagenes/combo3.gif" alt="" /></td>
+										</tr>
+										<tr>
+											<td class="bi"></td>
+											<td><a href="#" class="opcion" rel="valor1">Todo incluido</a></td><!-- en el rel se coloca el value -->
+											<td class="bd"></td>
+										</tr>
+										<tr>
+											<td class="bi"></td>
+											<td><a href="#" class="opcion" rel="valor2">Solo Hospedaje</a></td>
+											<td class="bd"></td>
+										</tr>
+										<tr>
+											<td class="bi"></td>
+											<td><a href="#" class="opcion" rel="valor3">Opción 3</a></td>
+											<td class="bd"></td>
+										</tr>
+										<tr>
+											<td><img src="imagenes/combo7.gif" alt="" /></td>
+											<td class="abajo"></td>
+											<td><img src="imagenes/combo5.gif" alt="" /></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</li>
+						<li class="separador">&nbsp;</li>
+						<li>&nbsp;</li>
+						<li class="separador">&nbsp;</li>
+						<li>&nbsp;</li>
+						<li>
+							<input type="image" name="ejecutar" src="imagenes/bejecutar.jpg" />
+						</li>
+					</ul>
+					<div class="separador"></div>
+					</form>
+				</div>
+				
+				<div class="separador"></div>
+			</div>
+			
+			<div class="separador"></div>
+			<div class="tpiec"><img src="imagenes/esq1.gif" alt="" /><img src="imagenes/esq3.gif" alt="" class="floatd" /></div>
+			<div class="separadorv"></div>
+<!-- segundo cuadro -->
+			<div class="tpiecs"><img src="imagenes/esq1s.gif" alt="" /><img src="imagenes/esq3s.gif" alt="" class="floatd" /></div>
+			<div id="reservaciones">
+				<div class="pannel">
+					<ul>
+						<li><img src="imagenes/f0.gif" alt="" class="valign" /></li>
+						<li><a href="#" class="titulos">Relación:</a></li>
+						<li class="naranja">Sin iniciar</li>
+					</ul>
+					<div class="separadorv"></div>
+					<form id="form_pannel_i_1" name="form_pannel_i_1" method="post" action="">
+					<ul>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_pannel_i_1" value="1" /></li>
+						<li>Sin iniciar</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_pannel_i_1" value="1" /></li>
+						<li>Comenzó</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_pannel_i_1" value="1" /></li>
+						<li>Esperando depósito</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_pannel_i_1" value="1" /></li>
+						<li>Depósito aprobado</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li><input type="radio" name="radio_pannel_i_1" value="1" /></li>
+						<li>Depósito bancario mal realizado</li>
+						<li class="separador"></li>
+						<li>&nbsp;</li>
+						<li class="separador">&nbsp;</li>
+						<li>&nbsp;</li>
+						<li>
+							<input type="image" name="ejecutar" src="imagenes/bactualizar.jpg" />
+						</li>
+					</ul>
+					</form>
+				</div>
+				<div class="pannel">
+					<ul>
+						<li><img src="imagenes/f1.gif" alt="" class="valign" /></li>
+						<li><a href="#" class="titulos">Cobro:</a></li>
+						<li class="naranja">Sin iniciar</li>
+					</ul>
+				</div>
+				<div class="pannel">
+					<ul>
+						<li><img src="imagenes/f1.gif" alt="" class="valign" /></li>
+						<li><a href="#" class="titulos">Pago:</a></li>
+						<li class="naranja">Sin iniciar</li>
+					</ul>
+				</div>
+				<div class="separadorv"></div>
+				<div class="separadorv"></div>
+				<div class="pannel">
+					<ul>
+						<li><img src="imagenes/f1.gif" alt="" class="valign" /></li>
+						<li><a href="#" class="titulos">Facturación:</a></li>
+						<li class="naranja">Sin iniciar</li>
+					</ul>
+				</div>
+				
+				<div class="separador"></div>
+			</div>
+			<div class="separador"></div>
+			<div class="tpiec"><img src="imagenes/esq1.gif" alt="" /><img src="imagenes/esq3.gif" alt="" class="floatd" /></div>
+			<div class="separadorv"></div>
+<!-- tercer cuadro -->
+			<div id="matriz">
+				<img src="imagenes/tabla1.jpg" alt="" class="floati valign" />
+				Acciones | Status
+				<img src="imagenes/tabla3.jpg" alt=""  class="floatd valign"/>
+			</div>
+			<div id="reservaciones">
+				<ul>
+					<li class="titulos">Datos del cliente:</li>
+					<li><img src="imagenes/lapiz.gif" alt=" " width="34" height="14" /></li>
+					<li><a href="#" class="naranja">editar</a></li>
+				</ul>
+				<div class="separadorv"></div>
+				<ul class="ul_re">
+					<li class="li_re">Nombre:</li>
+					<li>Miguel Ascanio</li>
+					<li class="separador"></li>
+					<li class="li_re">Cédula:</li>
+					<li>15.662.203</li>
+					<li class="separador"></li>
+					<li class="li_re">E-mail:</li>
+					<li>ascaniomiguel@gmail.com</li>
+					<li class="separador"></li>
+					<li class="li_re">Tipo de reservación:</li>
+					<li>Hotel</li>
+					<li class="separador"></li>
+					<li class="li_re">Fecha llegada:</li>
+					<li>30/09/09</li>
+					<li class="separador"></li>
+					<li class="li_re">Fecha salida:</li>
+					<li>30/10/09</li>
+					<li class="separador"></li>
+					<li class="li_re">Plan:</li>
+					<li>Todo incluido</li>
+					<li class="separador"></li>
+				</ul>
+				<div class="separadorv"></div>
+				<ul>
+					<li class="titulos">Detalle de la reserva:</li>
+					<li><img src="imagenes/lapiz.gif" alt=" " width="34" height="14" /></li>
+					<li><a href="#" class="naranja">editar</a></li>
+				</ul>
+				<div class="separadorv"></div>
+				<table class="resumen">
+					<thead>
+						<tr>
+							<td>Tipo de Habitación</td>
+							<td>Adultos</td>
+							<td>Cantidad</td>
+							<td class="numerico">Precio unitario</td>
+							<td class="numerico">Sub Total</td>
+						</tr>
+					</thead>
+					<tr>
+						<td>Matrimonial</td>
+						<td>22</td>
+						<td>3</td>
+						<td class="numerico">BsF 359,00</td>
+						<td class="numerico">BsF 124,00</td>
+					</tr>
+					<tr>
+						<td>Matrimonial</td>
+						<td>22</td>
+						<td>3</td>
+						<td class="numerico">BsF 359,00</td>
+						<td class="numerico">BsF 124,00</td>
+					</tr>
+					<tr>
+						<td>Matrimonial</td>
+						<td>22</td>
+						<td>3</td>
+						<td class="numerico">BsF 359,00</td>
+						<td class="numerico">BsF 124,00</td>
+					</tr>
+				</table>
+				<div class="separadorv"></div>
+			</div>
+			<div id="reservaciones2"><div class="separadorv_gris"></div></div>
+			
+			<div id="reservaciones">
+				<ul>
+					<li class="titulos">Observaciones</li>
+				</ul>
+				<div class="separadorv"></div>
+				<div class="tpiecs"><img src="imagenes/esq1s.gif" alt="" /><img src="imagenes/esq3s.gif" alt="" class="floatd" /></div>
+				<div id="reservaciones">
+					<em>En caso de No Show, cambio de fechas en estadías o cancelación de reservación una vez que su pago haya sido confirmado, se aplicará la penalidad establecida por el Hotel, Operador Turístico o Línea Aérea, y adicionalmente el 15% por gastos administrativos de Hoteles.com.ve</em>
+					<div class="separadorv"></div>
+				</div>
+				<div class="tpiec"><img src="imagenes/esq1.gif" alt="" /><img src="imagenes/esq3.gif" alt="" class="floatd" /></div>
+				<div class="separadorv"></div>
+			</div>
+
+			<div id="reservaciones2"><div class="separadorv_gris"></div></div>
+			
+			<div id="reservaciones">
+				<ul>
+					<li class="titulos">Historial</li>
+				</ul>
+				<div class="separadorv"></div>
+				<div class="historia">
+					<strong>Ayer</strong> | <a href="#">Ejecutivo 1</a> envió la notificación al cliente <a href="#">Miguel Ascanio</a> confirmó cobro por BsF 3.591,00&nbsp;&nbsp;<img src="imagenes/f3.gif" alt=" " />
+				</div>
+				<div class="separadorv"></div>
+			</div>
+			<div class="separador"></div>
+			<div class="tpiec"><img src="imagenes/esq1.gif" alt="" /><img src="imagenes/esq3.gif" alt="" class="floatd" /></div>
+			<div class="separadorv"></div>
+		</div>
+	</div>
+	<div id="sideb">
+		<div id="sideb2">
+			<div id="calendario">
+				<div id="datepicker"></div>
+			</div>
+			<div class="separadorv"></div>
+			<img src="imagenes/zoom.png" alt="" class="valign" />Buscador de Cliente<br />
+			<div class="separadorv"></div>
+			<form id="form_buscar" name="form_buscar" method="post" action="">
+				<div class="cajat"><input type="text" name="text1" id="text1" /></div>
+				<input type="image" name="Aceptar" id="Aceptar" src="imagenes/bir.jpg" class="floati" />
+			</form>
+			<div class="separadorv"></div>
+			<ul>
+				<li><img src="imagenes/add.png" alt="" class="valign" /><a href="#">Agregar Cliente</a></li>
+				<li><img src="imagenes/add.png" alt="" class="valign" /><a href="#">Agregar Cotización</a></li>
+				<li><img src="imagenes/add.png" alt="" class="valign" /><a href="#">Agregar Pago</a></li>
+			</ul>
+		</div>
+		<img src="imagenes/sb3.jpg" alt="" />
+	</div>
+</div>
+<script type="text/javascript">
+<!--
+	$(document).ready(function (){
+		$("#filtrar2").click(function (evento){
+			$("#t_filtro").stop(true).animate({ height: 210 }, 300 );
+			evento.preventDefault();
+		});
+		$("#filtrar").click(function (evento){
+			$("#t_filtro").stop(true).animate({ height: 0 }, 300 );
+			evento.preventDefault();
+		});
+		var cajat, cajath, elcombo='';
+		$(".cajat_img").click(function (evento){
+			m=((this).rel).split(",");
+			cajat=m[0];
+			cajath=m[1];
+			elcombo=m[2];
+			$("#" + elcombo).show(200);
+			$("#" + elcombo).focus();
+			evento.preventDefault();
+		});
+		$(".p_relative").mouseleave(function (){
+			if(elcombo!=''){
+				$("#" + elcombo).hide(200);
+				elcombo='';
+			}
+		});
+		$(".opcion").click(function (evento){
+			$("#" + cajat).val((this).innerHTML);
+			$("#" + cajath).val((this).rel);
+			$("#" + elcombo).hide(200);
+			elcombo='';
+			evento.preventDefault();
+		});
+	});
+-->
+</script>
+
+
+
+</body>
+</html>
