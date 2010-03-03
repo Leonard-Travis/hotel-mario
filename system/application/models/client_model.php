@@ -12,7 +12,13 @@ class Client_model extends Model {
 		return $query->result_array();
 	}
 	
-	function add($new)
+	function delete($ci)
+	{
+		$this->db->where('customer_ci_id', $ci);
+		$this->db->delete('_admin_customers'); 
+	}
+	
+	function add_new($new)
 	{
 		$data = array(
                'customer_ci_id' => $new['ci_client'] ,
@@ -26,6 +32,23 @@ class Client_model extends Model {
             );
 
 		$this->db->insert('_admin_customers', $data); 
+	}
+	
+	function update_info($info)
+	{
+		$data = array(
+               'customer_ci_id' => $info['ci_client'] ,
+               'name' => $info['name'] ,
+               'lastname' => $info['lastname'],
+			   'phone' => $info['phone'] ,
+			   'email' => $info['email'] ,
+			   'address' => $info['address'] ,
+			   'sex' => $info['sex'] ,
+			   'birth_date' => $info['birth_date']
+            );
+
+		$this->db->where('customer_ci_id', $info['ci_client']);
+		$this->db->update('_admin_customers', $data);  
 	}
 }
 ?>

@@ -1,8 +1,8 @@
 <?php 
 
-class New_client extends Controller {
+class New_client_ci extends Controller {
 	
-	function New_client (){
+	function New_client_ci (){
 		parent :: Controller();	
 		$this->load->helper(array('form'));
 		$this->load->library('validation');
@@ -10,9 +10,7 @@ class New_client extends Controller {
 	}
 
     function index()
-    { 
-		$data['query'] = NULL;
-		
+    { 		
 		$rules['ci_client']	= "required";
 		$rules['nombre']	= "required";
 		$rules['apellido']	= "required";
@@ -25,7 +23,8 @@ class New_client extends Controller {
 		
 		if ($this->validation->run() == FALSE)
 		{
-			$this->load->view('new_client',$data);
+			$data['ci_customer']=$_POST['ci_customer'];
+			$this->load->view('new_client_ci',$data);
 		}
 		else
 		{
@@ -40,17 +39,9 @@ class New_client extends Controller {
 			$data ['sex'] = $_POST["sexo"];
 			
 			$this->load->model('client_model');
-			$data['exist'] = $this->client_model->find($data ['ci_client']); 
-			if ($data['exist']){
-				$message_index['message_index']= 'exist';
-				$this->load->view('several_messages',$message_index);
-			}
-			else {
 				$data['query'] = $this->client_model->add_new($data);
 				$message_index['message_index']= 'success';
 				$this->load->view('several_messages',$message_index);
-			}
-			
 		}
 	}
 }

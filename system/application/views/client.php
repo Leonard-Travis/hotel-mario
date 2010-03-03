@@ -2,9 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <title>Cliente</title>
 </head>
 <body>
+<table border="1" align="center" width="100%"> <tr>
+    <td colspan="2" align="center"><strong>HOTELES.COM.VE</strong></td> </tr>
+    <tr>
+	<td align="center"> <a href="form_controller"><strong>Clientes</strong></a> </td>
+    <td align="center"> <a href="management"><strong>Gestion</strong></a> </td> 
+</tr> </table>
+
 	<?php echo validation_errors(); ?>
 	<?php echo form_open('form_controller'); ?>
     <div id="buscador">
@@ -13,21 +21,19 @@
     <td><strong>Buscador de Cliente</strong></td> 
     <td> <input type="text" name="ci_client" id="ci_client" value="" size="50" /></td>
     <td> <input name="enviar" type="submit" value="Selecccionar" /> </td>   
-    </tr>
-    </table>
     </div>
 	</form>
     
     <div id="nuevo">
-    <a href="new_client">Agregar Nuevo Cliente</a>
+    <td> <a href="new_client">Agregar Nuevo Cliente</a> </td>
     </div>
+    </tr>
     
-    <?php $ci_aux=0;
+    <?php $ci_aux=11111;
 		if ($query != NULL){ ?>
 
 	 <?php foreach ($query as $client) { ?>
      <div id="datos">
-    <table>
     <tr>
     <td>Cedula:</td> <td><input type="text" name="nombre" readonly="readonly" value="<?php echo($client['customer_ci_id']); ?>"/></td>
     </tr>
@@ -59,18 +65,25 @@
         <input name="sexo" type="radio" value="f" checked="checked" disabled="disabled" />F 
         <input name="sexo" type="radio" value="m" disabled="disabled"  />M
      <?php } ?></td></tr>
-     </table>
-	 <?php $ci_aux = $client['customer_ci_id']; ?> 
+     
+     <?php $ci_aux = $client['customer_ci_id'];?>
      <?php 	}?> <!--End for each-->
      
-     <?php echo validation_errors(); ?>
-     <?php echo form_open('modify_client'); ?>
-     <input type="hidden" name="ci_customer" id="ci_customer" value="<?php $ci_aux ?>"  />
-     <input name="send" type="submit" value="Modificar Informacion" />
-    </form>
+     
+	 <?php echo form_open('modify_client'); ?>
+     <input type="hidden" name="ci_customer" id="ci_customer" value="<?php echo ($ci_aux) ?>"  />
+     <tr> <td> <input name="modify_button" id="modify_button" type="submit" value="Modificar Informacion" /> </td>
+     </form>
+     
+	 <?php echo form_open('delete_client'); ?>
+     <input type="hidden" name="ci_customer" id="ci_customer" value="<?php echo ($ci_aux) ?>"  />
+     <td> <input name="modify_button" id="modify_button" type="submit" value="Eliminar Cliente" /> </td> </tr>
+     </form>
+     
+     </table>
      <?php 	}?> <!--End $query-->
      </div> <!--End div id="datos"-->
-
+	 <div id="test" ></div>
      
      
 </body>
