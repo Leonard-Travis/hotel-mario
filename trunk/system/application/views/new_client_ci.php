@@ -6,13 +6,13 @@
 </head>
 
 <body>
-
 <table border="1" align="center" width="100%"> <tr>
     <td colspan="2" align="center"><strong>HOTELES.COM.VE</strong></td> </tr>
     <tr>
 	<td align="center"> <a href="form_controller"><strong>Clientes</strong></a> </td>
     <td align="center"> <a href="management"><strong>Gestion</strong></a> </td> 
 </tr> </table>
+
 	<?php echo validation_errors(); ?>
 	<?php echo form_open('form_controller'); ?>
     <div id="buscador">
@@ -27,12 +27,12 @@
 	</form>
 	
     <?php echo validation_errors(); ?>
-	<?php echo form_open('new_client'); ?>
+	<?php echo form_open('new_client_ci'); ?>
      <div id="datos">
     <table>
     <tr> <td colspan="2" align="center"><strong>Cliente Nuevo</strong></td></tr>
     <tr>
-    <td>Cedula:</td> <td><input type="text" name="ci_client" /></td>
+     <td>Cedula:</td> <td><input type="text" name="ci_client" readonly="readonly" value="<?php echo($ci_customer); ?>"/></td>
     </tr>
     <tr> 
     <td>Nombre: </td> <td><input type="text" name="nombre" /></td> 

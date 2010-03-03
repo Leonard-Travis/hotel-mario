@@ -8,15 +8,31 @@
 <body>
 <table>
 <?php if ($message_index == 'success'){ ?>
-<tr> <td> <strong> El cliente fe agregado exitosamente! <strong> </td> </tr>
+<tr> <td> <strong> Agregado exitosamente! <strong> </td> </tr>
 <?php } 
 
 	  else if ($message_index == 'unknown') {?>
-<tr> <td> <strong>El cliente no existe en la base de datos! <strong> </td> </tr>
-<tr> <td> <a href="new_client">Click para agregarlo</a> </td> </tr>
+	<?php echo validation_errors(); ?>
+    <?php echo form_open('new_client_ci'); ?>
+    <tr> <td> <strong>El cliente no existe en la base de datos! <strong> </td> </tr>
+     <input type="hidden" name="ci_customer" id="ci_customer" value="<?php echo ($new_ci) ?>"  />
+     <tr> <td> <input type="submit" value="Agregar Cliente" /> </td> </tr>
+     </form>
+<?php }
+
+	  else if ($message_index == 'update') {?>
+<tr> <td> <strong>Los Datos han sido actuaizados exitosamente! <strong> </td> </tr>
+<?php } 
+
+	  else if ($message_index == 'exist') {?>
+<tr> <td> <strong>Ya existe un cliente con ese numero de cedula en la base de datos! <strong> </td> </tr>
+<?php }
+
+	  else if ($message_index == 'deleted') {?>
+<tr> <td> <strong>El cliente fue borrado exitosamente <strong> </td> </tr>
 <?php } ?>
 
-<tr> <td> <a href="form_controller">Volver a Pagina Principal</a> </td> </tr>
+<tr> <td> <a href="home">Volver a Pagina Principal</a> </td> </tr>
 </table>
 </body>
 </html>

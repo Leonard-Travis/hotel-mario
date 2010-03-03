@@ -11,10 +11,7 @@ class Modify_client extends Controller {
 
     function index()
     { 
-		echo ('antes post');
-		$ci_client = $_POST["ci_customer"];
-		echo ($ci_client);
-		echo ('dspues post');
+		
 		$rules['ci_client']	= "required";
 		$rules['nombre']	= "required";
 		$rules['apellido']	= "required";
@@ -27,7 +24,7 @@ class Modify_client extends Controller {
 		
 		if ($this->validation->run() == FALSE)
 		{
-			
+			$ci_client=$_POST['ci_customer'];
 			$this->load->model('client_model');
 			$data['query'] = $this->client_model->find($ci_client);			
 			$this->load->view('modify_client',$data);
@@ -44,8 +41,8 @@ class Modify_client extends Controller {
 			$data ['sex'] = $_POST["sexo"];
 			
 			$this->load->model('client_model');
-			$data['query'] = $this->client_model->add($data);
-			$message_index['message_index']= 'success';
+			$data['query'] = $this->client_model->update_info($data);
+			$message_index['message_index']= 'update';
 			$this->load->view('several_messages',$message_index);
 			
 		}

@@ -5,12 +5,27 @@
 <title>Cliente</title>
 </head>
 <body>
-    <div id="nuevo">
-    <a href="form_controller">Buscar Cliente</a>
+
+<table border="1" align="center" width="100%"> <tr>
+    <td colspan="2" align="center"><strong>HOTELES.COM.VE</strong></td> </tr>
+    <tr>
+	<td align="center"> <a href="form_controller"><strong>Clientes</strong></a> </td>
+    <td align="center"> <a href="management"><strong>Gestion</strong></a> </td> 
+</tr> </table>
+
+	<?php echo validation_errors(); ?>
+	<?php echo form_open('form_controller'); ?>
+    <div id="buscador">
+    <table>
+    <tr>
+    <td><strong>Buscador de Cliente</strong></td> 
+    <td> <input type="text" name="ci_client" id="ci_client" value="" size="50" /></td>
+    <td> <input name="enviar" type="submit" value="Selecccionar" /> </td>   
+    </tr>
+    </table>
     </div>
+	</form>
 	
-    
-    
     <?php if ($query != NULL){ ?>
 	
 	<?php echo validation_errors(); ?>
@@ -21,7 +36,10 @@
      <div id="datos">
     <table>
     <tr>
-    <td>Cedula:</td> <td><input type="text" name="nombre" value="<?php echo($client['customer_ci_id']); ?>"/></td>
+    <td colspan="2" align="center"><strong>Modificar Datos de Cliente</strong></td>
+    </tr>
+    <tr>
+    <td>Cedula:</td> <td><input type="text" name="ci_client" readonly="readonly" value="<?php echo($client['customer_ci_id']); ?>"/></td>
     </tr>
     <tr> 
     <td>Nombre: </td> <td><input type="text" name="nombre" value="<?php echo ($client['name']); ?>" /></td> 
@@ -53,8 +71,10 @@
      <?php } ?></td></tr>
      
      <?php 	}	}?>
+    
+     </table>
+     </div> 
      <input name="send" type="submit" value="Aceptar" />
-     </div>
     </form>
      
      

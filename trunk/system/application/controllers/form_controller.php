@@ -11,8 +11,7 @@ class Form_controller extends Controller {
 
     function index()
     { 
-		$data['query'] = NULL;
-		
+		$data['query'] = NULL;		
 		
 		$rules['ci_client']	= "required";
 		$this->validation->set_rules($rules);
@@ -30,7 +29,7 @@ class Form_controller extends Controller {
 			if ($data['query'])
 				$this->load->view('client',$data);
 			else {
-				$message_index['query'] = $ci_client;
+				$message_index['new_ci'] = $ci_client;
 				$message_index['message_index']= 'unknown';
 				$this->load->view('several_messages',$message_index);
 			}
