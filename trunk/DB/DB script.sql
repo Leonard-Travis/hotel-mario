@@ -1,12 +1,22 @@
--- Base de datos: `hoteles.com.ve`
+-- phpMyAdmin SQL Dump
+-- version 3.2.0.1
+-- http://www.phpmyadmin.net
 --
-CREATE DATABASE `hoteles.com.ve` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `hoteles.com.ve`;
+-- Host: localhost
+-- Generation Time: Mar 04, 2010 at 04:16 PM
+-- Server version: 5.1.36
+-- PHP Version: 5.3.0
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `hoteles.com.ve`
+--
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_airlines`
+-- Table structure for table `_admin_airlines`
 --
 
 DROP TABLE IF EXISTS `_admin_airlines`;
@@ -15,17 +25,20 @@ CREATE TABLE IF NOT EXISTS `_admin_airlines` (
   `name` varchar(45) NOT NULL,
   `code` varchar(45) NOT NULL,
   PRIMARY KEY (`airline_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_airlines`
+-- Dumping data for table `_admin_airlines`
 --
 
+INSERT INTO `_admin_airlines` (`airline_id`, `name`, `code`) VALUES
+(1, 'American Airline', 'AA'),
+(2, 'Rutaca', 'Rt');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_customers`
+-- Table structure for table `_admin_customers`
 --
 
 DROP TABLE IF EXISTS `_admin_customers`;
@@ -39,17 +52,23 @@ CREATE TABLE IF NOT EXISTS `_admin_customers` (
   `sex` enum('m','f') NOT NULL,
   `birth_date` date NOT NULL,
   PRIMARY KEY (`customer_ci_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18277058 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_customers`
+-- Dumping data for table `_admin_customers`
 --
 
+INSERT INTO `_admin_customers` (`customer_ci_id`, `name`, `lastname`, `phone`, `email`, `address`, `sex`, `birth_date`) VALUES
+(13, 'Anita', 'Munera', 412, 'ana@hotmail.com', 'maracay', 'f', '2010-02-27'),
+(99, 'jose', 'marques', 999999, 'lololo', 'la guaira', 'f', '2010-02-18'),
+(8989, 'lolo', 'mianda', 90909, 'plopopo', 'ссссс', 'm', '2010-02-18'),
+(18277057, 'marco', 'marcon', 999999, 'oooooo', 'kokoko', 'f', '2010-02-18'),
+(18277056, 'Mario', 'Munera', 111, '1111', '1111', 'm', '0000-00-00');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_employees`
+-- Table structure for table `_admin_employees`
 --
 
 DROP TABLE IF EXISTS `_admin_employees`;
@@ -59,14 +78,14 @@ CREATE TABLE IF NOT EXISTS `_admin_employees` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_employees`
+-- Dumping data for table `_admin_employees`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_flights`
+-- Table structure for table `_admin_flights`
 --
 
 DROP TABLE IF EXISTS `_admin_flights`;
@@ -86,14 +105,14 @@ CREATE TABLE IF NOT EXISTS `_admin_flights` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_flights`
+-- Dumping data for table `_admin_flights`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_flights_city`
+-- Table structure for table `_admin_flights_city`
 --
 
 DROP TABLE IF EXISTS `_admin_flights_city`;
@@ -106,14 +125,14 @@ CREATE TABLE IF NOT EXISTS `_admin_flights_city` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_flights_city`
+-- Dumping data for table `_admin_flights_city`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_flights_country`
+-- Table structure for table `_admin_flights_country`
 --
 
 DROP TABLE IF EXISTS `_admin_flights_country`;
@@ -124,14 +143,14 @@ CREATE TABLE IF NOT EXISTS `_admin_flights_country` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_flights_country`
+-- Dumping data for table `_admin_flights_country`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_flights_per_quote`
+-- Table structure for table `_admin_flights_per_quote`
 --
 
 DROP TABLE IF EXISTS `_admin_flights_per_quote`;
@@ -145,14 +164,14 @@ CREATE TABLE IF NOT EXISTS `_admin_flights_per_quote` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `_admin_flights_per_quote`
+-- Dumping data for table `_admin_flights_per_quote`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_hotels`
+-- Table structure for table `_admin_hotels`
 --
 
 DROP TABLE IF EXISTS `_admin_hotels`;
@@ -160,22 +179,30 @@ CREATE TABLE IF NOT EXISTS `_admin_hotels` (
   `hotel_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `percent_commission` varchar(45) NOT NULL,
   `collect_type` tinyint(1) DEFAULT NULL,
+  `name` varchar(50) NOT NULL,
+  `location` varchar(45) NOT NULL,
   PRIMARY KEY (`hotel_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_hotels`
+-- Dumping data for table `_admin_hotels`
 --
 
+INSERT INTO `_admin_hotels` (`hotel_id`, `percent_commission`, `collect_type`, `name`, `location`) VALUES
+(1, '10', NULL, 'Hilton', 'Margarita'),
+(2, '', NULL, 'Marriot', 'Caracas'),
+(5, '', NULL, 'Laguna Mar', 'Maragarita'),
+(6, '', NULL, 'El Gran Balcon', 'Merida'),
+(7, '', NULL, 'Hotel Dunes', 'Maracaibo');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_hotels_has_plans`
+-- Table structure for table `_admin_hotels_plans`
 --
 
-DROP TABLE IF EXISTS `_admin_hotels_has_plans`;
-CREATE TABLE IF NOT EXISTS `_admin_hotels_has_plans` (
+DROP TABLE IF EXISTS `_admin_hotels_plans`;
+CREATE TABLE IF NOT EXISTS `_admin_hotels_plans` (
   `HOTELS_hotel_id` int(10) unsigned NOT NULL,
   `PLANS_plan_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`HOTELS_hotel_id`,`PLANS_plan_id`),
@@ -184,14 +211,38 @@ CREATE TABLE IF NOT EXISTS `_admin_hotels_has_plans` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `_admin_hotels_has_plans`
+-- Dumping data for table `_admin_hotels_plans`
+--
+
+INSERT INTO `_admin_hotels_plans` (`HOTELS_hotel_id`, `PLANS_plan_id`) VALUES
+(1, 4),
+(1, 6),
+(2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_admin_hotels_season`
+--
+
+DROP TABLE IF EXISTS `_admin_hotels_season`;
+CREATE TABLE IF NOT EXISTS `_admin_hotels_season` (
+  `HOTELS_hotel_id` int(11) NOT NULL,
+  `SEASON_season_id` int(11) NOT NULL,
+  PRIMARY KEY (`HOTELS_hotel_id`,`SEASON_season_id`),
+  KEY `fk_HOTELS_has_SEASON_HOTELS` (`HOTELS_hotel_id`),
+  KEY `fk_HOTELS_has_SEASON_SEASON` (`SEASON_season_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `_admin_hotels_season`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_plans`
+-- Table structure for table `_admin_plans`
 --
 
 DROP TABLE IF EXISTS `_admin_plans`;
@@ -200,39 +251,54 @@ CREATE TABLE IF NOT EXISTS `_admin_plans` (
   `name` varchar(45) NOT NULL,
   `description` varchar(45) NOT NULL,
   PRIMARY KEY (`plan_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_plans`
+-- Dumping data for table `_admin_plans`
 --
 
+INSERT INTO `_admin_plans` (`plan_id`, `name`, `description`) VALUES
+(1, 'Weekends', 'fines de semana economicos'),
+(2, 'Only room', 'Only room'),
+(9, 'Room with dinner', 'Room with dinner'),
+(4, 'All included', 'All included'),
+(5, 'Full day', 'Full day'),
+(6, 'Room dinner and breakfast', 'Room dinner and breakfast'),
+(7, 'Full pension', 'Full pension');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_price`
+-- Table structure for table `_admin_price`
 --
 
 DROP TABLE IF EXISTS `_admin_price`;
 CREATE TABLE IF NOT EXISTS `_admin_price` (
   `price_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `SEASON_season_id` int(10) unsigned NOT NULL,
-  `ROOMS_HOTELS_id_rooms_hotels_plans` int(10) unsigned NOT NULL,
+  `ROOMS_HOTELS_rooms_hotels_id` int(10) unsigned NOT NULL,
   `price_per_night` float NOT NULL,
   PRIMARY KEY (`price_id`),
-  KEY `PRICE_FKIndex1` (`ROOMS_HOTELS_id_rooms_hotels_plans`),
+  KEY `PRICE_FKIndex1` (`ROOMS_HOTELS_rooms_hotels_id`),
   KEY `PRICE_FKIndex2` (`SEASON_season_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_price`
+-- Dumping data for table `_admin_price`
 --
 
+INSERT INTO `_admin_price` (`price_id`, `SEASON_season_id`, `ROOMS_HOTELS_rooms_hotels_id`, `price_per_night`) VALUES
+(1, 1, 20, 150),
+(2, 2, 19, 100),
+(3, 2, 7, 120),
+(4, 2, 4, 120),
+(5, 3, 4, 100),
+(6, 4, 4, 100);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_quotations`
+-- Table structure for table `_admin_quotations`
 --
 
 DROP TABLE IF EXISTS `_admin_quotations`;
@@ -253,14 +319,14 @@ CREATE TABLE IF NOT EXISTS `_admin_quotations` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_quotations`
+-- Dumping data for table `_admin_quotations`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_quotations_flights`
+-- Table structure for table `_admin_quotations_flights`
 --
 
 DROP TABLE IF EXISTS `_admin_quotations_flights`;
@@ -272,14 +338,14 @@ CREATE TABLE IF NOT EXISTS `_admin_quotations_flights` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_quotations_flights`
+-- Dumping data for table `_admin_quotations_flights`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_quotations_generic`
+-- Table structure for table `_admin_quotations_generic`
 --
 
 DROP TABLE IF EXISTS `_admin_quotations_generic`;
@@ -293,14 +359,14 @@ CREATE TABLE IF NOT EXISTS `_admin_quotations_generic` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_quotations_generic`
+-- Dumping data for table `_admin_quotations_generic`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_quotations_hotels`
+-- Table structure for table `_admin_quotations_hotels`
 --
 
 DROP TABLE IF EXISTS `_admin_quotations_hotels`;
@@ -317,14 +383,14 @@ CREATE TABLE IF NOT EXISTS `_admin_quotations_hotels` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_quotations_hotels`
+-- Dumping data for table `_admin_quotations_hotels`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_rooms`
+-- Table structure for table `_admin_rooms`
 --
 
 DROP TABLE IF EXISTS `_admin_rooms`;
@@ -335,83 +401,109 @@ CREATE TABLE IF NOT EXISTS `_admin_rooms` (
   `capacity` int(10) unsigned NOT NULL,
   `description` varchar(45) NOT NULL,
   PRIMARY KEY (`room_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_rooms`
+-- Dumping data for table `_admin_rooms`
 --
 
+INSERT INTO `_admin_rooms` (`room_id`, `name`, `special`, `capacity`, `description`) VALUES
+(1, 'Individual', 0, 1, 'cama sola'),
+(4, 'Doble', 0, 2, 'Dos camas'),
+(5, 'Senior', 1, 0, 'senior'),
+(6, 'Suite', 0, 4, 'es una suite'),
+(9, 'Matrimonial', 0, 2, 'Cama Matrimonial'),
+(7, 'escolar', 1, 0, 'solo para colegiales'),
+(11, 'Triple', 0, 3, '3 Camas Individuales');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_rooms_hotels`
+-- Table structure for table `_admin_rooms_hotels`
 --
 
 DROP TABLE IF EXISTS `_admin_rooms_hotels`;
 CREATE TABLE IF NOT EXISTS `_admin_rooms_hotels` (
-  `id_rooms_hotels_plans` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rooms_hotels_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ROOMS_room_id` int(10) unsigned NOT NULL,
   `HOTELS_hotel_id` int(10) unsigned NOT NULL,
   `commissionable` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_rooms_hotels_plans`),
+  PRIMARY KEY (`rooms_hotels_id`),
   KEY `ROOMS_HOTELS_FKIndex3` (`HOTELS_hotel_id`),
   KEY `ROOMS_HOTELS_FKIndex4` (`ROOMS_room_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_rooms_hotels`
+-- Dumping data for table `_admin_rooms_hotels`
 --
 
+INSERT INTO `_admin_rooms_hotels` (`rooms_hotels_id`, `ROOMS_room_id`, `HOTELS_hotel_id`, `commissionable`) VALUES
+(20, 9, 1, 1),
+(19, 1, 1, 1),
+(22, 7, 1, 1),
+(7, 4, 2, 1),
+(8, 4, 6, 1),
+(2, 1, 1, 1),
+(11, 6, 5, 1),
+(12, 6, 2, 1),
+(13, 5, 7, 1),
+(14, 5, 5, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_rooms_per_quote`
+-- Table structure for table `_admin_rooms_per_quote`
 --
 
 DROP TABLE IF EXISTS `_admin_rooms_per_quote`;
 CREATE TABLE IF NOT EXISTS `_admin_rooms_per_quote` (
-  `ROOMS_HOTELS_id_rooms_hotels_plans` int(10) unsigned NOT NULL,
+  `ROOMS_HOTELS_id_rooms_hotels` int(10) unsigned NOT NULL,
   `QUOTATIONS_HOTELS_quote_hotel_id` int(10) unsigned NOT NULL,
   `quantity_of_rooms` int(10) unsigned NOT NULL,
   `number_of_guests` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`ROOMS_HOTELS_id_rooms_hotels_plans`,`QUOTATIONS_HOTELS_quote_hotel_id`),
-  KEY `ROOMS_HOTELS_has_QUOTATIONS_HOTELS_FKIndex1` (`ROOMS_HOTELS_id_rooms_hotels_plans`),
+  PRIMARY KEY (`ROOMS_HOTELS_id_rooms_hotels`,`QUOTATIONS_HOTELS_quote_hotel_id`),
+  KEY `ROOMS_HOTELS_has_QUOTATIONS_HOTELS_FKIndex1` (`ROOMS_HOTELS_id_rooms_hotels`),
   KEY `ROOMS_HOTELS_has_QUOTATIONS_HOTELS_FKIndex2` (`QUOTATIONS_HOTELS_quote_hotel_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `_admin_rooms_per_quote`
+-- Dumping data for table `_admin_rooms_per_quote`
 --
 
+INSERT INTO `_admin_rooms_per_quote` (`ROOMS_HOTELS_id_rooms_hotels`, `QUOTATIONS_HOTELS_quote_hotel_id`, `quantity_of_rooms`, `number_of_guests`) VALUES
+(2, 1, 2, 4),
+(19, 1, 1, 2);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_season`
+-- Table structure for table `_admin_season`
 --
 
 DROP TABLE IF EXISTS `_admin_season`;
 CREATE TABLE IF NOT EXISTS `_admin_season` (
   `season_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `HOTELS_hotel_id` int(10) unsigned NOT NULL,
   `date_start` date NOT NULL,
   `date_end` date NOT NULL,
   `has_weekdays` tinyint(1) NOT NULL,
-  PRIMARY KEY (`season_id`),
-  KEY `SEASON_FKIndex1` (`HOTELS_hotel_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`season_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_season`
+-- Dumping data for table `_admin_season`
 --
 
+INSERT INTO `_admin_season` (`season_id`, `date_start`, `date_end`, `has_weekdays`) VALUES
+(1, '2010-01-01', '2010-01-31', 0),
+(2, '2010-02-01', '2010-03-15', 1),
+(3, '2010-03-16', '2010-04-01', 0),
+(4, '2010-04-05', '2010-04-30', 1),
+(5, '2010-05-01', '2010-06-01', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_travelers`
+-- Table structure for table `_admin_travelers`
 --
 
 DROP TABLE IF EXISTS `_admin_travelers`;
@@ -426,14 +518,14 @@ CREATE TABLE IF NOT EXISTS `_admin_travelers` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_travelers`
+-- Dumping data for table `_admin_travelers`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_travelers_per_flight`
+-- Table structure for table `_admin_travelers_per_flight`
 --
 
 DROP TABLE IF EXISTS `_admin_travelers_per_flight`;
@@ -446,14 +538,14 @@ CREATE TABLE IF NOT EXISTS `_admin_travelers_per_flight` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `_admin_travelers_per_flight`
+-- Dumping data for table `_admin_travelers_per_flight`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `_admin_weekdays`
+-- Table structure for table `_admin_weekdays`
 --
 
 DROP TABLE IF EXISTS `_admin_weekdays`;
@@ -469,10 +561,13 @@ CREATE TABLE IF NOT EXISTS `_admin_weekdays` (
   `sunday_price` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`weekdays_id`),
   KEY `WEEKDAYS_FKIndex1` (`SEASON_season_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Volcar la base de datos para la tabla `_admin_weekdays`
+-- Dumping data for table `_admin_weekdays`
 --
 
-
+INSERT INTO `_admin_weekdays` (`weekdays_id`, `SEASON_season_id`, `monday_price`, `tuesday_price`, `wednesday_price`, `thursday_price`, `friday_price`, `saturday_price`, `sunday_price`) VALUES
+(1, 2, 100, 100, 100, 100, 100, 150, 150),
+(2, 4, 100, 100, 100, 100, 200, 200, 250),
+(3, 5, 100, 100, 100, 100, 100, 200, 300);
