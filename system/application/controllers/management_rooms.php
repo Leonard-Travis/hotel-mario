@@ -12,6 +12,8 @@ class Management_rooms extends Controller {
 
     function index()
     { 
+		//the management_rooms shows the three options (add, delete, modify) and simultaneously samples all rooms
+		
 		$data['query'] = $this->rooms->all_types();
 		$this->load->view('management_rooms', $data);
 	}

@@ -24,22 +24,21 @@
     <a href="delete_room">Eliminar</a>
     <a href="new_room">Agregar</a>
     
-    <table align="center" width="40%">
+<table align="center" width="40%">
     <tr>
     <td> <strong>Elige el tipo de cuarto a Eliminar </strong> </td> 
     <td align="center">
-    
     <?php echo form_open('delete_room'); ?>
-	 <select name="rooms" id="rooms">
-	 <?php foreach ($query as $room) { ?>
-       
-       <option value="<?php echo ($room['room_id']);?>"><?php echo ($room['name']);?></option> 
-      
-     <?php }?>
-	 </select>
-     </td> <td> <input name="send" type="submit" value="Aceptar" /> </td> </tr>
-     </form>
-     </table>
+        <select name="rooms" id="rooms">
+        <?php foreach ($query as $room) { ?>
+        
+        <option value="<?php echo ($room['room_id']);?>"><?php echo ($room['name']);?></option> 
+        
+        <?php }?>
+        </select>
+        </td> <td> <input name="send" type="submit" value="Aceptar" /> </td> </tr>
+    </form>
+</table>
      
 </body>
 </html>

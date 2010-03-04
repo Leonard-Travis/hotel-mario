@@ -34,7 +34,8 @@ class Associate_plan extends Controller {
 			}
 			$all_plans = array_values($all_plans);
 			if (count($all_plans) == 0){
-				echo ('esta vacio');
+				$message_index['message_index']= 'no_plans_left';
+				$this->load->view('several_messages',$message_index);
 			}
 			else {
 				$data['query'] = $this->hotels->find($hotel_selected_id);

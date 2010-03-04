@@ -8,6 +8,8 @@ class New_client_ci extends Controller {
 		$this->load->library('validation');
 		$this->load->library(array('form_validation'));
 	}
+	
+	//the difference between new_client and new_cient_ci is that new_cient_ci displays the information with the new customer CI already place on the form
 
     function index()
     { 		

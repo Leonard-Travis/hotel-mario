@@ -41,6 +41,8 @@ class New_client extends Controller {
 			
 			$this->load->model('client_model');
 			$data['exist'] = $this->client_model->find($data ['ci_client']); 
+			
+		//it search the id (ci) in the database, if there is, it displayed an error message	
 			if ($data['exist']){
 				$message_index['message_index']= 'exist';
 				$this->load->view('several_messages',$message_index);

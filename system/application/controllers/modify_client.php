@@ -11,6 +11,7 @@ class Modify_client extends Controller {
 
     function index()
     { 
+		//Displays all the information of the costumer in the modify_client view but this time it is editable
 		
 		$rules['ci_client']	= "required";
 		$rules['nombre']	= "required";

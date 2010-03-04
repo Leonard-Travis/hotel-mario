@@ -19,32 +19,32 @@
     <td align="center"> <a href="management_rooms"><strong>Habitaciones</strong></a> </td>
     <td align="center"> <a href="management_plans"><strong>Planes</strong></a> </td> 
 </tr> </table>
-	
-    
-    <a href="modify_plan">Modificar</a>
-    <a href="delete_plan">Eliminar</a>
-    <a href="new_plan">Agregar</a> 
-    
-    <table width="40%" align="center">
-        <tr>
-        	<td align="center"><strong>Nombre</strong></td> 
-            <td align="center"><strong>Descripcion</strong></td> 
+
+<a href="modify_plan">Modificar</a>
+<a href="delete_plan">Eliminar</a>
+<a href="new_plan">Agregar</a> 
+
+<table width="40%" align="center">
+    <tr>
+    <td align="center"><strong>Nombre</strong></td> 
+    <td align="center"><strong>Descripcion</strong></td> 
+    </tr>
+    <?php $gray_row = TRUE;?>
+    <?php foreach ($query as $room) { ?>
+		<?php if ($gray_row){?>
+        		 <tr bgcolor="#CCCCCC">
+        		 <?php $gray_row = false;
+        	  }
+              else{  ?>
+        		 <tr>
+        		 <?php $gray_row = true;
+        	  }?>
+        
+        <td align="center"><?php echo ($room['name']);?></td>
+        <td align="center"><?php echo ($room['description']);?></td>
         </tr>
-        <?php $filaGris = TRUE;?>
-		<?php foreach ($query as $room) { ?>
-			<?php if ($filaGris){?>
-                    <tr bgcolor="#CCCCCC">
-                    <?php $filaGris = false;
-                  }
-                  else{  ?>
-                    <tr>
-                    <?php $filaGris = true;
-                  }?>
-                  
-                  <td align="center"><?php echo ($room['name']);?></td>
-                  <td align="center"><?php echo ($room['description']);?></td>
-                   </tr>
-		<?php }?>
-	 </table>
+    <?php }?>
+</table>
+
 </body>
 </html>

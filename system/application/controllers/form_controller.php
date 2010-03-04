@@ -11,6 +11,8 @@ class Form_controller extends Controller {
 
     function index()
     { 
+		//Here it load the search form in the client view. After the search is made, the view receives a parameter called $client which contains all costumer information to be displayed as read only in the client view. 
+		
 		$data['query'] = NULL;		
 		
 		$rules['ci_client']	= "required";
@@ -25,6 +27,8 @@ class Form_controller extends Controller {
 			$ci_client = $_POST["ci_client"];
 			$this->load->model('client_model');
 			$data['query'] = $this->client_model->find($ci_client);
+			
+		// If the C.I. does not exist in database is displayed an error message and gives the opportunity to add the new costumer	
 			
 			if ($data['query'])
 				$this->load->view('client',$data);

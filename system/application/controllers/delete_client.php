@@ -11,6 +11,8 @@ class Delete_client extends Controller {
 
     function index()
     {
+		//By now I'm working only with basic information of the client, later it will modify and delete all data related to that customer quotes.
+		
 		$ci_client=$_POST['ci_customer'];
 		$this->load->model('client_model');
 		$data['query'] = $this->client_model->delete($ci_client);	

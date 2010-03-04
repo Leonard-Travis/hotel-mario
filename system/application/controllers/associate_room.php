@@ -23,6 +23,7 @@ class Associate_room extends Controller {
 			$hotel_selected_id = $_POST["hotel_id_aux"];
 			
 			//Get the rooms that belong to the hotel and all room types, then I see those that are not in common and put them in all_rooms array, wich is the one that receives the view
+			
 			$all_rooms = $this->rooms->all_types();
 			$hotel_rooms = $this->hotels->all_rooms($hotel_selected_id);
 			
@@ -35,7 +36,8 @@ class Associate_room extends Controller {
 			}
 			$all_rooms = array_values($all_rooms);
 			if (count($all_rooms) == 0){
-				echo ('esta vacio');
+				$message_index['message_index']= 'no_rooms_left';
+				$this->load->view('several_messages',$message_index);
 			}
 			else {
 				$data['query'] = $this->hotels->find($hotel_selected_id);
