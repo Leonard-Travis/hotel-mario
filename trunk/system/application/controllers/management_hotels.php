@@ -10,6 +10,7 @@ class Management_hotels extends Controller {
 		$this->load->model('hotels');
 	}
 	
+	//First of all the user must choose a hotel and then it will be displayed all the attributes of this (including all the rooms and plans related with the hotel)
     function index()
     { 
 		$rules['hotels']	= "required";

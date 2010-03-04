@@ -21,39 +21,39 @@
 </tr> </table>
 	
     
-    <a href="modify_room">Modificar</a>
-    <a href="delete_room">Eliminar</a>
-    <a href="new_room">Agregar</a> 
+<a href="modify_room">Modificar</a>
+<a href="delete_room">Eliminar</a>
+<a href="new_room">Agregar</a> 
     
-    <table width="40%" align="center">
-        <tr>
-        	<td align="center"><strong>Nombre</strong></td> 
-            <td align="center"><strong>Descripcion</strong></td> 
-            <td align="center"><strong>Capacidad</strong></td> 
-            <td align="center"><strong>Especial</strong></td>
+<table width="40%" align="center">
+    <tr>
+    <td align="center"><strong>Nombre</strong></td> 
+    <td align="center"><strong>Descripcion</strong></td> 
+    <td align="center"><strong>Capacidad</strong></td> 
+    <td align="center"><strong>Especial</strong></td>
+    </tr>
+    <?php $gray_row = TRUE;?>
+    <?php foreach ($query as $room) { ?>
+		<?php if ($gray_row){?>
+        		<tr bgcolor="#CCCCCC">
+        		<?php $gray_row = false;
+        	  }
+        	  else{  ?>
+        		<tr>
+       		    <?php $gray_row = true;
+        	  }?>
+        
+        <td align="center"><?php echo ($room['name']);?></td>
+        <td align="center"><?php echo ($room['description']);?></td>
+        <td align="center"><?php echo ($room['capacity']);?></td>
+        <?php if ($room['special'] == 1) {?>
+        		<td align="center">TRUE</td>
+        <?php }
+        	  else {?>
+        		<td align="center">FALSE</td>
+        <?php }?>
         </tr>
-        <?php $filaGris = TRUE;?>
-		<?php foreach ($query as $room) { ?>
-			<?php if ($filaGris){?>
-                    <tr bgcolor="#CCCCCC">
-                    <?php $filaGris = false;
-                  }
-                  else{  ?>
-                    <tr>
-                    <?php $filaGris = true;
-                  }?>
-                  
-                  <td align="center"><?php echo ($room['name']);?></td>
-                  <td align="center"><?php echo ($room['description']);?></td>
-                  <td align="center"><?php echo ($room['capacity']);?></td>
-                  <?php if ($room['special'] == 1) {?>
-                        		<td align="center">TRUE</td>
-                        <?php }
-                        else {?>
-                        		<td align="center">FALSE</td>
-                        <?php }?>
-                   </tr>
-		<?php }?>
-	 </table>
+    <?php }?>
+</table>
 </body>
 </html>

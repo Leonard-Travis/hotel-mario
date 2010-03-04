@@ -33,9 +33,27 @@ class Rooms extends Model {
 	
 	function delete($id)
 	{
+		$this->db->where('ROOMS_room_id', $id);
+		$this->db->delete('_admin_rooms_hotels');
+		
 		$this->db->where('room_id', $id);
 		$this->db->delete('_admin_rooms'); 
 	}
+	
+	function room_in_quote($room_id)
+	{
+		//search if the room specified is in a quotation
+		
+		$this->db->select(' QUOTATIONS_HOTELS_quote_hotel_id FROM _admin_rooms_hotels, _admin_rooms_per_quote WHERE ROOMS_HOTELS_id_rooms_hotels = rooms_hotels_id
+							AND ROOMS_room_id ='.$room_id);
+		/* $this->db->from('_admin_rooms_hotels');
+		$this->db->from('_admin_rooms_per_quote');
+		$this->db->where('ROOMS_HOTELS_id_rooms_hotels','rooms_hotels_id');
+		$this->db->where('ROOMS_room_id', $room_id); */
+		$query =  $this->db->get();
+		return $query->result_array();
+	}
+	
 	
 	function add_new($new)
 	{

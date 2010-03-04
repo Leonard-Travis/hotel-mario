@@ -31,6 +31,9 @@ class Hotels extends Model {
 	
 	function all_rooms($hotel_id)
 	{
+		//it search for all the rooms related to the hotel specified
+		
+		
 		/*$this->db->select('_admin_rooms.room_id, _admin_rooms.name');
 		$this->db->where('_admin_rooms.room_id','_admin_rooms_hotels.ROOMS_room_id');
 		$this->db->where('HOTELS_hotel_id', $hotel_id);
@@ -47,6 +50,8 @@ class Hotels extends Model {
 	
 	function all_plans($hotel_id)
 	{
+		//it search for all the planss related to the hotel specified
+		
 		$this->db->select('p.plan_id, p.name, p.description 
 						   FROM _admin_plans p, _admin_hotels_plans hp
 						   WHERE hp.PLANS_plan_id = p.plan_id

@@ -30,6 +30,22 @@
 
 	  else if ($message_index == 'deleted') {?>
 <tr> <td> <strong>El cliente fue borrado exitosamente <strong> </td> </tr>
+<?php }
+
+	  else if ($message_index == 'no_rooms_left') {?>
+<tr> <td> <strong>El Hotel tiene todos los tipos de Habitaciones existentes asociados a el<strong> </td> </tr>
+<?php }
+
+	  else if ($message_index == 'no_plans_left') {?>
+<tr> <td> <strong>El Hotel tiene todos los Planes existentes asociados a el<strong> </td> </tr>
+<?php }
+
+	  else if ($message_index == 'cant_delet') {?>
+<tr> <td> <strong>No se puede eliminar la habitacion porque pertenece a la(s) cotizaciones siguiente(s): <strong> </td> 
+	 <td> <?php foreach ($quote_id as $value){
+     		echo ($value['QUOTATIONS_HOTELS_quote_hotel_id']."<br>");
+        } ?>
+     </td></tr>
 <?php } ?>
 
 <tr> <td> <a href="home">Volver a Pagina Principal</a> </td> </tr>

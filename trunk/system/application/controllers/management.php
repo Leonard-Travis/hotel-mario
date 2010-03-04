@@ -11,6 +11,8 @@ class Management extends Controller {
 
     function index()
     {
+		//This is the management area where the user will be able to manage (add,modify and delete) rooms, plans, hotels (hotels can not be eliminated) etc.
+		
 		$this->load->view('management');
 		
 	}

@@ -24,22 +24,22 @@
     <a href="delete_plan">Eliminar</a>
     <a href="new_plan">Agregar</a> 
     
-    <table align="center" width="40%">
+<table align="center" width="40%">
     <tr>
     <td> <strong>Elige el Plan a Eliminar </strong> </td> 
     <td align="center">
-    
     <?php echo form_open('delete_plan'); ?>
-	 <select name="plans" id="plans">
-	 <?php foreach ($query as $plan) { ?>
-       
-       <option value="<?php echo ($plan['plan_id']);?>"><?php echo ($plan['name']);?></option> 
-      
-     <?php }?>
-	 </select>
-     </td> <td> <input name="send" type="submit" value="Aceptar" /> </td> </tr>
-     </form>
-     </table>
+        <select name="plans" id="plans">
+        <?php foreach ($query as $plan) { ?>
+        
+        <option value="<?php echo ($plan['plan_id']);?>"><?php echo ($plan['name']);?></option> 
+        
+        <?php }?>
+        </select>
+        </td> 
+        <td> <input name="send" type="submit" value="Aceptar" /> </td> </tr>
+    </form>
+</table>
      
 </body>
 </html>
