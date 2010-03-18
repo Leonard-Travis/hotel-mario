@@ -44,6 +44,7 @@
         <td>
         <?php if (count ($plans) == 0){?>
                 <strong>No hay planes relacionados</strong> </td> </tr>
+                <input type="hidden" name="plan" id="plan" value="no_plan"  />
         <?php }
               else { ?>
                 <select name="plan" id="plan" >
@@ -59,7 +60,7 @@
         <td>Hasta:</td> <td><input type="text" name="date_end" id="date_end" /></td>
         </tr>
         <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo ($hotel_selected['hotel_id']);?>"  />
-        <?php }?>
+        <?php }?> <!-- end of foreach $hotel_selected -->
         <tr> <td><input type="submit" value="Buscar"  /></td>
     </form> <!-- end of form price_matrix_data -->
     </table>
