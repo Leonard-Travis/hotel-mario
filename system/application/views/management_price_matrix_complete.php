@@ -13,7 +13,14 @@
     <td width="33%" align="center"> <a href="management"><strong>Gestion</strong></a> </td>
     <td width="33%" align="center"> <a href="price_matrix"><strong>Matriz de Precios</strong></a> </td> 
 </tr> </table>
-
+<table border="1" align="center" width="100%"> <tr>
+    <td colspan="4" align="center"><strong>GESTION</strong></td> </tr>
+    <tr>
+	<td width="25%" align="center"> <a href="management_hotels"><strong>Hoteles</strong></a> </td>
+    <td width="25%" align="center"> <a href="management_rooms"><strong>Habitaciones</strong></a> </td>
+    <td width="25%" align="center"> <a href="management_plans"><strong>Planes</strong></a> </td> 
+    <td width="25%" align="center"> <a href="management_price_matrix"><strong>Matriz de Precios</strong></a> </td> 
+</tr> </table>
 
 
 <?php if ($query) {?>
@@ -21,7 +28,7 @@
 		<tr>
 			<td> <strong>Seleccione un Hotel</strong> </td> 
 		<td align="center">
-		<?php echo form_open('price_matrix'); ?>
+		<?php echo form_open('management_price_matrix'); ?>
 			<select name="hotels" id="hotels">
 			<?php foreach ($query as $hotel) { ?>
 				<option value="<?php echo ($hotel['hotel_id']);?>"><?php echo ($hotel['name']);?></option> 
@@ -34,7 +41,7 @@
 
 
 <?php if ($hotel_selected) {?>
-    <?php echo form_open('price_matrix_data'); ?>
+    <?php echo form_open('management_price_matrix_data'); ?>
         <br  />
         <table width="40%">
         <?php foreach ($hotel_selected as $hotel_selected) { ?>
@@ -145,9 +152,12 @@ else {
 				}?>
 				</tr>             
 			<?php } ?>
-		</table>
+		
 	  <?php } ?>
-	  <?php echo form_open('price_matrix_data'); ?>
+      <table width="20%">
+      <tr>
+      <td>
+	  <?php echo form_open('management_price_matrix_data'); ?>
 		<input type="hidden" name="weekdays" id="weekdays" value="<?php echo($weekdays); ?>"  />
 		<input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo ($hotel_selected['hotel_id']);?>"  />
 		<input type="hidden" name="date_ini" id="date_ini" value="<?php echo($date_ini);?>"  />
@@ -155,6 +165,15 @@ else {
 		<input type="hidden" name="plan" id="plan" value="<?php echo ($plan_selected['plan_id']);?>"  />
 		<input type="submit" value="Detalles por dias de semana"  />
 	</form>
+    </td>
+    <td>
+    <?php echo form_open('add_price_matrix'); ?>
+        <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo ($hotel_selected['hotel_id']);?>"  />
+        <input type="submit" value="Agregar"  />
+    </form>
+    </td>
+    </tr>
+    </table>
 <?php } ?> <!-- end of else $prices != 11 -->
 
 </body>
