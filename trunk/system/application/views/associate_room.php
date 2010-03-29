@@ -14,11 +14,12 @@
     <td width="33%" align="center"> <a href="price_matrix"><strong>Matriz de Precios</strong></a> </td> 
 </tr> </table>
 <table border="1" align="center" width="100%"> <tr>
-    <td colspan="3" align="center"><strong>GESTION</strong></td> </tr>
+    <td colspan="4" align="center"><strong>GESTION</strong></td> </tr>
     <tr>
-	<td align="center"> <a href="management_hotels"><strong>Hoteles</strong></a> </td>
-    <td align="center"> <a href="management_rooms"><strong>Habitaciones</strong></a> </td>
-    <td align="center"> <a href="management_plans"><strong>Planes</strong></a> </td> 
+	<td width="25%" align="center"> <a href="management_hotels"><strong>Hoteles</strong></a> </td>
+    <td width="25%" align="center"> <a href="management_rooms"><strong>Habitaciones</strong></a> </td>
+    <td width="25%" align="center"> <a href="management_plans"><strong>Planes</strong></a> </td> 
+    <td width="25%" align="center"> <a href="management_price_matrix"><strong>Matriz de Precios</strong></a> </td> 
 </tr> </table>
 	
 <?php if ($query) {?>
@@ -42,7 +43,7 @@
                 </tr>
                 <tr>
                 <td>¿Es comisionable para el hotel?</td>
-                <td> <input type="radio" name="commissionable" id="commissionable" value="1" />SI
+                <td> <input type="radio" name="commissionable" id="commissionable" value="1" checked="checked" />SI
                 	 <input type="radio" name="commissionable" id="commissionable" value="0" />NO </td>
                 </tr>
                 <tr>
