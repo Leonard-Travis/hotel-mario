@@ -1,7 +1,7 @@
 <?php
-class Rooms extends Model {
+class Rooms_model extends Model {
 
-   	function Rooms(){
+   	function Rooms_model(){
 		parent :: Model();
    	}
 	
@@ -24,8 +24,7 @@ class Rooms extends Model {
                'room_id' => $info['room_id'] ,
                'name' => $info['name'] ,
                'special' => $info['special'],
-			   'capacity' => $info['capacity'] ,
-			   'description' => $info['description'] );
+			   'capacity' => $info['capacity']);
 
 		$this->db->where('room_id', $info['room_id']);
 		$this->db->update('_admin_rooms', $data);  
@@ -33,7 +32,7 @@ class Rooms extends Model {
 	
 	function delete($id)
 	{
-		$this->db->where('ROOMS_room_id', $id);
+		$this->db->where('ROOMS_id', $id);
 		$this->db->delete('_admin_rooms_hotels');
 		
 		$this->db->where('room_id', $id);
@@ -44,8 +43,10 @@ class Rooms extends Model {
 	{
 		//search if the room specified is in a quotation
 		
-		$this->db->select(' QUOTATIONS_HOTELS_quote_hotel_id FROM _admin_rooms_hotels, _admin_rooms_per_quote WHERE ROOMS_HOTELS_id_rooms_hotels = rooms_hotels_id
-							AND ROOMS_room_id ='.$room_id);
+		$this->db->select(' rp.QUOTATIONS_HOTELS_id 
+						    FROM _admin_rooms_hotels rh, _admin_rooms_per_quote rp
+							WHERE rp.ROOMS_HOTELS_id = rh.rooms_hotels_id
+							AND rh.ROOMS_id ='.$room_id);
 		/* $this->db->from('_admin_rooms_hotels');
 		$this->db->from('_admin_rooms_per_quote');
 		$this->db->where('ROOMS_HOTELS_id_rooms_hotels','rooms_hotels_id');
@@ -60,7 +61,6 @@ class Rooms extends Model {
 		$data = array(
                'room_id' => "" ,
                'name' => $new['name'] ,
-               'description' => $new['description'],
 			   'capacity' => $new['capacity'] ,
 			   'special' => $new['special'] 
             );

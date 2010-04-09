@@ -1,7 +1,7 @@
 <?php
-class Price_matrix extends Model {
+class Price_matrix_model extends Model {
 
-   	function Price_matrix(){
+   	function Price_matrix_model(){
 		parent :: Model();
    	}
 	
@@ -19,10 +19,10 @@ class Price_matrix extends Model {
 		 $this->db->select('p.*, r.name 
 							FROM _admin_price p, _admin_rooms_hotels h, _admin_rooms r
 							WHERE p.ROOMS_HOTELS_id = h.rooms_hotels_id
-							AND h.HOTELS_hotel_id ='.$hotel_id.'
+							AND h.HOTELS_id ='.$hotel_id.'
 							AND p.PLAN_id ='.$plan_id.'
 							AND p.SEASON_id ='.$season_id.'
-							AND h.ROOMS_room_id = r.room_id');		
+							AND h.ROOMS_id = r.room_id');		
 		$query = $this->db->get();
 		return $query->result_array();
 	}
@@ -31,9 +31,9 @@ class Price_matrix extends Model {
 		 $this->db->select('p.*, r.name 
 							FROM _admin_price p, _admin_rooms_hotels h, _admin_rooms r
 							WHERE p.ROOMS_HOTELS_id = h.rooms_hotels_id
-							AND h.HOTELS_hotel_id ='.$hotel_id.'
+							AND h.HOTELS_id ='.$hotel_id.'
 							AND p.SEASON_id ='.$season_id.'
-							AND h.ROOMS_room_id = r.room_id');		
+							AND h.ROOMS_id = r.room_id');		
 		$query = $this->db->get();
 		return $query->result_array();
 	}

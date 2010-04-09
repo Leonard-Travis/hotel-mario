@@ -9,13 +9,13 @@
 <table border="1" align="center" width="100%"> <tr>
     <td colspan="3" align="center"><strong>HOTELES.COM.VE</strong></td> </tr>
     <tr>
-	<td width="33%" align="center"> <a href="form_controller"><strong>Clientes</strong></a> </td>
-    <td width="33%" align="center"> <a href="management"><strong>Gestion</strong></a> </td>
-    <td width="33%" align="center"> <a href="price_matrix"><strong>Matriz de Precios</strong></a> </td> 
+	<td width="33%" align="center"> <a href="<?php echo base_url(); ?>customer/search_form"><strong>Clientes</strong></a> </td>
+    <td width="33%" align="center"> <a href="<?php echo base_url(); ?>home/management"><strong>Gestion</strong></a> </td>
+    <td width="33%" align="center"> <a href="<?php echo base_url(); ?>price_matrix/index/0"><strong>Matriz de Precios</strong></a> </td> 
 </tr> </table>
 
 <?php echo validation_errors(); ?>
-<?php echo form_open('form_controller'); ?>
+<form method="post" action="<?php echo base_url(); ?>customer/search_form">
     <div id="buscador">
     <table>
         <tr>
@@ -34,8 +34,8 @@
     <?php $ci_aux=11111; 
     if ($query != NULL){ ?>
     
-    <?php foreach ($query as $client) { ?>
-        <div id="datos">
+<div id="datos">    
+    <?php foreach ($query as $client) { ?>       
         <tr>
         <td>Cedula:</td> <td><input type="text" name="nombre" readonly="readonly" value="<?php echo($client['customer_ci_id']); ?>"/></td>
         </tr>
@@ -72,12 +72,12 @@
     <?php 	}?> <!--End for each-->
     
     
-    <?php echo form_open('modify_client'); ?>
+    <form method="post" action="<?php echo base_url(); ?>customer/modify_client">
         <input type="hidden" name="ci_customer" id="ci_customer" value="<?php echo ($ci_aux) ?>"  />
         <tr> <td> <input name="modify_button" id="modify_button" type="submit" value="Modificar Informacion" /> </td>
     </form>
     
-    <?php echo form_open('delete_client'); ?>
+    <form method="post" action="<?php echo base_url(); ?>customer/delete_client">
         <input type="hidden" name="ci_customer" id="ci_customer" value="<?php echo ($ci_aux) ?>"  />
         <td> <input name="modify_button" id="modify_button" type="submit" value="Eliminar Cliente" /> </td> </tr>
     </table>
