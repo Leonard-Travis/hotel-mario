@@ -9,17 +9,17 @@
 <table border="1" align="center" width="100%"> <tr>
     <td colspan="3" align="center"><strong>HOTELES.COM.VE</strong></td> </tr>
     <tr>
-	<td width="33%" align="center"> <a href="form_controller"><strong>Clientes</strong></a> </td>
-    <td width="33%" align="center"> <a href="management"><strong>Gestion</strong></a> </td>
-    <td width="33%" align="center"> <a href="price_matrix"><strong>Matriz de Precios</strong></a> </td> 
+	<td width="33%" align="center"> <a href="<?php echo base_url(); ?>customer/search_form"><strong>Clientes</strong></a> </td>
+    <td width="33%" align="center"> <a href="<?php echo base_url(); ?>home/management"><strong>Gestion</strong></a> </td>
+    <td width="33%" align="center"> <a href="<?php echo base_url(); ?>price_matrix/index/0"><strong>Matriz de Precios</strong></a> </td> 
 </tr> </table>
 <table border="1" align="center" width="100%"> <tr>
     <td colspan="4" align="center"><strong>GESTION</strong></td> </tr>
     <tr>
-	<td width="25%" align="center"> <a href="management_hotels"><strong>Hoteles</strong></a> </td>
-    <td width="25%" align="center"> <a href="management_rooms"><strong>Habitaciones</strong></a> </td>
-    <td width="25%" align="center"> <a href="management_plans"><strong>Planes</strong></a> </td> 
-    <td width="25%" align="center"> <a href="management_price_matrix"><strong>Matriz de Precios</strong></a> </td> 
+	<td width="25%" align="center"> <a href="<?php echo base_url(); ?>hotels"><strong>Hoteles</strong></a> </td>
+    <td width="25%" align="center"> <a href="<?php echo base_url(); ?>rooms"><strong>Habitaciones</strong></a> </td>
+    <td width="25%" align="center"> <a href="<?php echo base_url(); ?>plans"><strong>Planes</strong></a> </td> 
+    <td width="25%" align="center"> <a href="<?php echo base_url(); ?>price_matrix/index/1"><strong>Matriz de Precios</strong></a> </td> 
 </tr> </table>
 	
 <?php if ($query) {?>
@@ -27,7 +27,7 @@
 		<tr>
 			<td> <strong>Seleccione un Hotel</strong> </td> 
 		<td align="center">
-		<?php echo form_open('management_hotels'); ?>
+		<form method="post" action="<?php echo base_url(); ?>hotels">
 			<select name="hotels" id="hotels">
 			<?php foreach ($query as $hotel) { ?>
 				<option value="<?php echo ($hotel['hotel_id']);?>"><?php echo ($hotel['name']);?></option> 
@@ -42,16 +42,15 @@
     
 <?php if ($hotel_selected) {?>
 	<?php $hotel_id_aux = 111;?>
-    <?php echo form_open('modify_hotel'); ?>
         <br  />
-        <table align="center" width="40%">
+        <table  align="center" width="60%">
         <?php foreach ($hotel_selected as $hotel_selected) { ?>
         <tr> <td colspan="2" align="center"><strong>Datos del Hotel</strong></td> </tr>
         <tr>
-        <td>Nombre</td> <td><input type="text" name="name" id="name" readonly="readonly" value="<?php echo ($hotel_selected['name']);?>" /></td>
+        <td>Nombre</td> <td><input width="100%" type="text" name="name" id="name" readonly="readonly" value="<?php echo ($hotel_selected['name']);?>" /></td>
         </tr> 
         <tr>
-        <td>Ubicacion</td> <td><input type="text" name="location" id="location" readonly="readonly" value="<?php echo ($hotel_selected['location']);?>" /></td>
+        <td>Ubicacion</td> <td><input width="100%" type="text" name="location" id="location" readonly="readonly" value="<?php echo ($hotel_selected['location']);?>" /></td>
         </tr> 
         <tr>
         <td>Habitaciones</td>
@@ -60,12 +59,13 @@
                 <strong>No hay habitaciones relacionadas</strong> </td> </tr>
         <?php }
               else { ?>
-                <table>
+                <table width="100%">
                     <?php $gray_row = true;?>   
                     <tr> 
                     <td align="center"><strong>Nombre</strong></td> 
                     <td align="center"><strong>Descripcion</strong></td> 
                     <td align="center"><strong>Comisionabale</strong></td>
+                    <td align="center" width="17px"><strong></strong></td>
                     </tr>
                     <?php foreach ($rooms as $room) { ?>
                         <?php if ($gray_row){?>
@@ -84,6 +84,7 @@
                               else {?>
                                 <td align="center">FALSE</td>
                         <?php }?>
+                        <td align="center"> <a href="<?php echo base_url(); ?>hotels/disassociate_room/<?php echo ($room['room_id']);?>/<?php echo ($hotel_selected['hotel_id']);?>">del</a></td>
                         </tr>
                     <?php }?> <!-- end of foreach $room -->
                 </table> 
@@ -98,11 +99,12 @@
                 <strong>No hay planes relacionados</strong> </td> </tr>
         <?php }
               else { ?>
-                <table>
+                <table width="100%">
                 <?php $gray_row = true;?>   
                 <tr> 
                 <td align="center"><strong>Nombre</strong></td> 
                 <td align="center"><strong>Descripcion</strong></td> 
+                <td align="center" width="17px"><strong></strong></td>
                 </tr>
                 <?php foreach ($plans as $plan) { ?>
                     <?php if ($gray_row){?>
@@ -115,24 +117,22 @@
                           }?>
                     <td align="center"> <?php echo ($plan['name']);?> </td>
                     <td align="center"> <?php echo ($plan['description']);?> </td>
+                    <td align="center"> <a href="<?php echo base_url(); ?>hotels/disassociate_plan/<?php echo ($plan['plan_id']);?>/<?php echo ($hotel_selected['hotel_id']);?>">del</a></td>
                     </tr>
                 <?php }?> <!-- end of foreach $plans -->
                 </table> 
         <?php }?> <!-- end of else -->
         </td>
         </tr>
-        
-        <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo ($hotel_selected['hotel_id']);?>"  />
         <?php $hotel_id_aux = $hotel_selected['hotel_id'];?>
         <?php }?>
-        <tr> <td><input type="submit" value="Modificar Informacion"  /></td>
-    </form> <!-- end of form modify_hotel -->
+        <tr> <td><a href="<?php echo base_url(); ?>hotels/modify_hotel/<?php echo ($hotel_selected['hotel_id']);?>" ><strong>Modificar Hotel</strong></a></td>
     
-    <?php echo form_open('associate_room'); ?>
+    <form method="post" action="<?php echo base_url(); ?>hotels/associate_room">
         <input type="hidden" name="hotel_id_aux" id="hotel_id_aux" value="<?php echo ($hotel_id_aux);?>"  />
         <td align="center"><input type="submit" value="Asociar nuevo tipo de Habitacion al Hotel" /></td> </tr>
     </form> <!-- end of form associate_room -->
-    <?php echo form_open('associate_plan'); ?>
+    <form method="post" action="<?php echo base_url(); ?>hotels/associate_plan">
         <input type="hidden" name="hotel_id_aux" id="hotel_id_aux" value="<?php echo ($hotel_id_aux);?>"  />
         <tr> <td></td><td align="center"><input type="submit" value="Asociar nuevo Plan al Hotel" /></td> </tr>
     </form> <!-- end of form associate_plan -->

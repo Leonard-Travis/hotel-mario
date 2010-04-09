@@ -9,18 +9,18 @@
 <table border="1" align="center" width="100%"> <tr>
     <td colspan="3" align="center"><strong>HOTELES.COM.VE</strong></td> </tr>
     <tr>
-	<td width="33%" align="center"> <a href="form_controller"><strong>Clientes</strong></a> </td>
-    <td width="33%" align="center"> <a href="management"><strong>Gestion</strong></a> </td>
-    <td width="33%" align="center"> <a href="price_matrix"><strong>Matriz de Precios</strong></a> </td> 
+	<td width="33%" align="center"> <a href="<?php echo base_url(); ?>customer/search_form"><strong>Clientes</strong></a> </td>
+    <td width="33%" align="center"> <a href="<?php echo base_url(); ?>home/management"><strong>Gestion</strong></a> </td>
+    <td width="33%" align="center"> <a href="<?php echo base_url(); ?>price_matrix/index/0"><strong>Matriz de Precios</strong></a> </td> 
 </tr> </table>
 
 <table border="1" align="center" width="100%"> <tr>
     <td colspan="4" align="center"><strong>GESTION</strong></td> </tr>
     <tr>
-	<td width="25%" align="center"> <a href="management_hotels"><strong>Hoteles</strong></a> </td>
-    <td width="25%" align="center"> <a href="management_rooms"><strong>Habitaciones</strong></a> </td>
-    <td width="25%" align="center"> <a href="management_plans"><strong>Planes</strong></a> </td> 
-    <td width="25%" align="center"> <a href="management_price_matrix"><strong>Matriz de Precios</strong></a> </td> 
+	<td width="25%" align="center"> <a href="<?php echo base_url(); ?>hotels"><strong>Hoteles</strong></a> </td>
+    <td width="25%" align="center"> <a href="<?php echo base_url(); ?>rooms"><strong>Habitaciones</strong></a> </td>
+    <td width="25%" align="center"> <a href="<?php echo base_url(); ?>plans"><strong>Planes</strong></a> </td> 
+    <td width="25%" align="center"> <a href="<?php echo base_url(); ?>price_matrix/index/1"><strong>Matriz de Precios</strong></a> </td> 
 </tr> </table>
 
 <?php if ($query) {?>
@@ -28,7 +28,7 @@
 		<tr>
 			<td> <strong>Seleccione un Hotel</strong> </td> 
 		<td align="center">
-		<?php echo form_open('management_price_matrix'); ?>
+		<form method="post" action="<?php echo base_url(); ?>price_matrix/index/1">
 			<select name="hotels" id="hotels">
 			<?php foreach ($query as $hotel) { ?>
 				<option value="<?php echo ($hotel['hotel_id']);?>"><?php echo ($hotel['name']);?></option> 
@@ -41,7 +41,7 @@
 
 
 <?php if ($hotel_selected) {?>
-    <?php echo form_open('management_price_matrix_data'); ?>
+    <form method="post" action="<?php echo base_url(); ?>price_matrix/price_matrix_data/1">
         <br  />
         <table width="40%">
         <?php foreach ($hotel_selected as $hotel_selected) { ?>

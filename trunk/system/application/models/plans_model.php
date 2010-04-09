@@ -1,7 +1,7 @@
 <?php
-class Plans extends Model {
+class Plans_model extends Model {
 
-   	function Plans(){
+   	function Plans_model(){
 		parent :: Model();
    	}
 	
@@ -22,8 +22,7 @@ class Plans extends Model {
 	{
 		$data = array(
                'plan_id' => $info['plan_id'] ,
-               'name' => $info['name'] ,
-               'description' => $info['description'] );
+               'name' => $info['name']);
 
 		$this->db->where('plan_id', $info['plan_id']);
 		$this->db->update('_admin_plans', $data);  
@@ -31,6 +30,9 @@ class Plans extends Model {
 	
 	function delete($id)
 	{
+		$this->db->where('PLANS_id', $id);
+		$this->db->delete('_admin_hotels_plans');
+		
 		$this->db->where('plan_id', $id);
 		$this->db->delete('_admin_plans'); 
 	}
@@ -39,9 +41,17 @@ class Plans extends Model {
 	{
 		$data = array(
                'plan_id' => "" ,
-               'name' => $new['name'] ,
-               'description' => $new['description']);
+               'name' => $new['name']);
 
 		$this->db->insert('_admin_plans', $data); 
+	}
+	
+	function plan_in_quote($plan_id)
+	{
+		//search if the plan specified is in a quotation
+		
+		$this->db->where('PLAN_id', $plan_id);
+		$query =  $this->db->get('_admin_quotations_hotels');
+		return $query->result_array();
 	}
 }

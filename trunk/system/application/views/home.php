@@ -9,9 +9,9 @@
 <table border="1" align="center" width="100%"> <tr>
     <td colspan="3" align="center"><strong>HOTELES.COM.VE</strong></td> </tr>
     <tr>
-	<td width="33%" align="center"> <a href="form_controller"><strong>Clientes</strong></a> </td>
-    <td width="33%" align="center"> <a href="management"><strong>Gestion</strong></a> </td>
-    <td width="33%" align="center"> <a href="price_matrix"><strong>Matriz de Precios</strong></a> </td> 
+	<td width="33%" align="center"> <a href="<?php echo base_url(); ?>customer/search_form"><strong>Clientes</strong></a> </td>
+    <td width="33%" align="center"> <a href="<?php echo base_url(); ?>home/management"><strong>Gestion</strong></a> </td>
+    <td width="33%" align="center"> <a href="<?php echo base_url(); ?>price_matrix/index/0"><strong>Matriz de Precios</strong></a> </td> 
 </tr> </table>
 </body>
 </html>
