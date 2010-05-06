@@ -40,7 +40,15 @@ class Rooms extends Controller {
 			$data ['capacity'] = $_POST["capacity"];
 			$data ['special'] = $_POST["special"];
 			
-			$data['query'] = $this->rooms_model->add_new($data);
+			$room_inactive = $this->rooms_model->find_room_inactive($data ['name']);
+			if ($room_inactive){
+				foreach ($room_inactive as $room_inactive)
+					$this->rooms_model->active_room($room_inactive['room_id']);	
+			}
+			else{
+				$data['query'] = $this->rooms_model->add_new($data);
+			}
+			
 			$data['query'] = $this->rooms_model->all_types();
 			$this->load->view('management_rooms', $data);
 		}
@@ -48,21 +56,10 @@ class Rooms extends Controller {
 	
 	 function delete_room($room_id)
     {
-		//First looks if that room is in a quotation, and if it is, it cant be eliminated
-		
-		$rooms_in_quote = $this->rooms_model->room_in_quote($room_id);
-		
-		if ($rooms_in_quote){	
-			$message_index['quote_id']= $rooms_in_quote;
-			$message_index['message_index']= 'cant_delet_room';
-			$this->load->view('several_messages',$message_index);
-		}
-		else {
-			$data['query'] = $this->rooms_model->delete($room_id);	
-			$data['query'] = $this->rooms_model->all_types();
-			$this->load->view('management_rooms', $data);
-
-		}		
+		//set 'inactive' status in rooms table and in rooms_hotels table in every record that belongs to the room
+		$data['query'] = $this->rooms_model->delete($room_id);	
+		$data['query'] = $this->rooms_model->all_types();
+		$this->load->view('management_rooms', $data);		
 	}
 	
 	function save_modified_room()

@@ -9,6 +9,45 @@ class Price_matrix extends Controller {
 		$this->load->library(array('form_validation'));
 		$this->load->model(array('hotels_model','plans_model','price_matrix_model'));
 	}
+	
+	function matrices($query)
+	{
+		$m = 0;
+		$all_matrice = array();
+		$matrix = array();
+		$room_price = array();
+		
+		for ($i=0; $i<count($query); $i++){
+			if ($query[$i]['SEASON_id'] != 0){
+				$j=0; $k=0;
+				
+				$matrix[$j] = $query[$i]['plan_name']; $j = $j+1;
+				$matrix[$j] = $query[$i]['date_start']; $j = $j+1;
+				$matrix[$j] = $query[$i]['date_end']; $j = $j+1;
+				
+				$room_price[$k] = $query[$i]['room_name'];
+				$room_price[$k+1] = $query[$i]['price_per_night'];
+				
+				$matrix[$j] = $room_price; $j = $j+1;
+				
+				$query[$i]['SEASON_id'] = 0;
+				
+				for($h=0; $h<count($query); $h++){
+					if (($query[$h]['plan_name'] == $query[$i]['plan_name'])&&($query[$h]['SEASON_id'] == $query[$i]['SEASON_id'])){
+						
+						$room_price[$k] = $query[$i]['room_name'];
+						$room_price[$k+1] = $query[$i]['price_per_night'];
+						
+						$matrix[$j] = $room_price;
+						$query[$i]['SEASON_id'] = 0;
+					}
+				}
+				$all_matrices[$m] = $matrix; 
+				$m = $m + 1;
+			}
+		}
+		return ($all_matrices);
+	}
 
     function index($management_flag)
     {
@@ -19,6 +58,7 @@ class Price_matrix extends Controller {
 		if ($this->validation->run() == FALSE)
 		{
 			$data['query'] = $this->hotels_model->all_hotels();
+			$data['all_matrices'] = NULL;
 			if ($management_flag == 1)
 				$this->load->view('management_price_matrix',$data);
 			else
@@ -30,14 +70,61 @@ class Price_matrix extends Controller {
 			$data['query'] = $this->hotels_model->all_hotels();
 			$data['plans'] = $this->hotels_model->all_plans($hotel_selected_id);
 			$data['hotel_selected'] = $this->hotels_model->find($hotel_selected_id);
-			if ($management_flag == 1)
+			if ($management_flag == 1){
+				$query = $this->price_matrix_model->all_matrices ($hotel_selected_id);
+				//$all_matrices = matrices($query);
+				
+				$m = 0;
+				$all_matrices = array();
+				
+				if($query){
+					for ($i=0; $i<count($query); $i++){
+						if ($query[$i]['SEASON_id'] != "0"){
+							$j=0; $k=0; $room_price = array();
+							$matrix = array();
+							$plan = $query[$i]['plan_name']; 
+							$season = $query[$i]['SEASON_id'];
+							
+							$matrix['plan_name'] = $query[$i]['plan_name']; 
+							$matrix['date_start'] = $query[$i]['date_start']; 
+							$matrix['date_end'] = $query[$i]['date_end']; 
+							
+							$room_price[$k]['room_name'] = $query[$i]['room_name'];
+							$room_price[$k]['price_per_night'] = $query[$i]['price_per_night'];
+							$k = $k + 1;
+							
+							$query[$i]['SEASON_id'] = "0";
+							
+							for($h=0; $h<count($query); $h++){
+								if (($query[$h]['plan_name'] == $plan)&&($query[$h]['SEASON_id'] == $season)){
+									$room_price[$k]['room_name'] = $query[$h]['room_name'];
+									$room_price[$k]['price_per_night'] = $query[$h]['price_per_night'];
+									$k = $k + 1;
+									$query[$h]['SEASON_id'] = "0";
+								}
+							}
+							$matrix['prices'] = $room_price;
+							$all_matrices[$m] = $matrix; 
+							$m = $m + 1;
+						}
+					}
+					$data['all_matrices'] = $all_matrices;
+				}
+				else{
+					$data['all_matrices'] = 'empty';
+				}
+				/*echo('<pre>');
+				var_dump($all_matrices);
+				echo('</pre>');*/
+				
 				$this->load->view('management_price_matrix',$data);	
+			}
 			else
 			$this->load->view('price_matrix',$data);			
 			
 		}
 	}
-	
+		
 	function price_matrix_data($management_flag)
     {
 		$hotel_selected_id = $_POST["hotel_id"];
