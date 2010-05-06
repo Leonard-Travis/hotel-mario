@@ -18,19 +18,10 @@ class Plans extends Controller {
 	}
 	
 	function delete_plan($plan_id)
-    {	
-		$plan_in_quote = $this->plans_model->plan_in_quote($plan_id);
-		
-		if ($plan_in_quote){	
-			$message_index['quote_id']= $plan_in_quote;
-			$message_index['message_index']= 'cant_delet_plan';
-			$this->load->view('several_messages',$message_index);
-		}
-		else {
-			$data['query'] = $this->plans_model->delete($plan_id);	
-			$data['query'] = $this->plans_model->all();
-			$this->load->view('management_plans', $data);
-		}
+    {
+		$data['query'] = $this->plans_model->delete($plan_id);	
+		$data['query'] = $this->plans_model->all();
+		$this->load->view('management_plans', $data);
 	}
 	
 	function modify_plan($plan_id)
@@ -52,7 +43,15 @@ class Plans extends Controller {
 		{
 			$data ['name'] = $_POST["name"];
 			
-			$data['query'] = $this->plans_model->add_new($data);
+			$plan_inactive = $this->plans_model->find_plan_inactive($data ['name']);
+			if ($plan_inactive){
+				foreach ($plan_inactive as $plan_inactive)
+					$this->plans_model->active_plan($plan_inactive['plan_id']);	
+			}
+			else{
+				$data['query'] = $this->plans_model->add_new($data);
+			}
+			
 			$data['query'] = $this->plans_model->all();
 			$this->load->view('management_plans', $data);
 		}

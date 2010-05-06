@@ -7,6 +7,7 @@ class Rooms_model extends Model {
 	
 	function all_types()
 	{
+		$this->db->where('status', 'active');
 		$query =  $this->db->get('_admin_rooms');
 		return $query->result_array();
 	}
@@ -30,15 +31,19 @@ class Rooms_model extends Model {
 		$this->db->update('_admin_rooms', $data);  
 	}
 	
-	function delete($id)
+	function delete($room_id)
 	{
-		$this->db->where('ROOMS_id', $id);
-		$this->db->delete('_admin_rooms_hotels');
+		$data = array('status' => 'inactive' );
+		$this->db->where('ROOMS_id', $room_id);
+		$this->db->update('_admin_rooms_hotels', $data);
 		
-		$this->db->where('room_id', $id);
-		$this->db->delete('_admin_rooms'); 
+		$data2 = array('status' => 'inactive' );
+		$this->db->where('room_id', $room_id);
+		$this->db->update('_admin_rooms', $data2);
 	}
 	
+	
+//-----------------------------SIN USAR---------------------------------------		
 	function room_in_quote($room_id)
 	{
 		//search if the room specified is in a quotation
@@ -54,7 +59,7 @@ class Rooms_model extends Model {
 		$query =  $this->db->get();
 		return $query->result_array();
 	}
-	
+//----------------------------------------------------------------------------
 	
 	function add_new($new)
 	{
@@ -62,10 +67,23 @@ class Rooms_model extends Model {
                'room_id' => "" ,
                'name' => $new['name'] ,
 			   'capacity' => $new['capacity'] ,
-			   'special' => $new['special'] 
-            );
+			   'special' => $new['special'],
+			   'status' => 'active');
 
 		$this->db->insert('_admin_rooms', $data); 
+	}
+	
+	function find_room_inactive($room_name){
+		$this->db->where('name', $room_name);
+		$this->db->where('status', 'inactive');
+		$query =  $this->db->get('_admin_rooms');
+		return $query->result_array();
+	}
+	
+	function active_room ($room_id){
+		$data = array('status' => 'active' );
+		$this->db->where('room_id', $room_id);
+		$this->db->update('_admin_rooms', $data);
 	}
 }
 ?>

@@ -47,5 +47,17 @@ class Price_matrix_model extends Model {
 		return $query->result_array();
 	}
 	
+	function all_matrices ($hotel_id){
+		$this->db->select(' p.price_per_night, p.SEASON_id, pl.name AS plan_name, s.date_start, s.date_end, r.name AS room_name
+							FROM _admin_price p, _admin_plans pl, _admin_season s, _admin_rooms_hotels rh, _admin_rooms r
+							WHERE rh.HOTELS_id ='.$hotel_id.'
+							AND rh.ROOMS_id = r.room_id
+							AND rh.rooms_hotels_id = p.ROOMS_HOTELS_id
+							AND p.SEASON_id = s.season_id
+							AND P.PLAN_id = pl.plan_id
+							ORDER BY  `pl`.`name` ASC ');	
+ 		$query = $this->db->get();
+		return $query->result_array();
+	}
 }
 ?>
