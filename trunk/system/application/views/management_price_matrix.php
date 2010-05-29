@@ -74,38 +74,46 @@
     </form> <!-- end of form price_matrix_data -->
     </table>
        
-       	<?php if ($all_matrices != 'empty') { 
-				  foreach ($all_matrices as $value) { ?>
-				  <table width="40%">
-				  <br /><br />
-					<tr> <td><strong>Plan:</strong></td> <td><?php echo($value['plan_name']); ?></td> </tr>
-					<tr> <td><strong>Desde:</strong></td> <td> <?php echo($value['date_start']); ?></td> 
-						 <td><strong>Hasta:</strong></td> <td> <?php echo($value['date_end']); ?></td> </tr>
-					<?php $gray_row = TRUE; ?>
-					<table border="1" width="100%">
-						<tr> 
-						<td width="14.7%" align="center"><strong>Habitacion</strong></td>
-						<td align="center"><strong>Precio</strong></td>
-						</tr>
-						<?php foreach ($value['prices'] as $price)  { ?>
-							<?php if ($gray_row){?>
-								 <tr bgcolor="#CCCCCC">
-								 <?php $gray_row = false;
-							  }
-							  else{  ?>
-								 <tr>
-								 <?php $gray_row = true;
-							  }?>
-							<td width="14.7%" align="center"><?php echo ($price['room_name']); ?></td>
-							<td align="center"><?php echo ($price['price_per_night']); ?></td> 
-							</tr> 
-						<?php } ?>
-					</table>                
-        	<?php } ?> <!-- end of foreach ($all_matrices as $value) -->
-		<?php }  // end of if ($all_matrices != 'empty')
-        else { ?>
-        	El hotel <strong><?php echo ($hotel_selected['name']);?></strong> no tiene precios de habitaciones disponibles.
-        <?php } ?>
+	<?php if ($all_matrices != 'empty') { 
+              foreach ($all_matrices as $value) { ?>
+			  	<?php $prices_id = "";?>
+              	<table width="40%">
+                <br /><br />
+                <tr> <td><strong>Plan:</strong></td> <td><?php echo($value['plan_name']); ?></td> </tr>
+                <tr> <td><strong>Desde:</strong></td> <td> <?php echo($value['date_start']); ?></td> 
+                     <td><strong>Hasta:</strong></td> <td> <?php echo($value['date_end']); ?></td> </tr>
+                <?php $gray_row = TRUE; ?>
+                <table border="1" width="100%">
+                    <tr> 
+                    <td width="14.7%" align="center"><strong>Habitacion</strong></td>
+                    <td align="center"><strong>Precio</strong></td>
+                    </tr>
+                    <?php foreach ($value['prices'] as $price)  { ?>                    	
+                        <?php if ($gray_row){?>
+                             <tr bgcolor="#CCCCCC">
+                             <?php $gray_row = false;
+                          }
+                          else{  ?>
+                             <tr>
+                             <?php $gray_row = true;
+                          }?>
+                        <td width="14.7%" align="center"><?php echo ($price['room_name']); ?></td>
+                        <td align="center"><?php echo ($price['price_per_night']); ?></td> 
+                        </tr>    
+						<?php $prices_id = $prices_id.'|'.$price['price_id']?> 
+                    <?php } ?>	
+                    	<?php  var_dump($prices_id); ?>				
+                </table> 
+        <form method="post" action="<?php echo base_url(); ?>price_matrix/delete_matrix">
+        <input type="hidden" name="prices_id" id="prices_id" value="<?php echo($prices_id); ?>"  />
+        <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo($hotel_selected['hotel_id']);?>"/>
+        <input type="submit" value="Eliminar"  />
+        </form>               
+        <?php } ?> <!-- end of foreach ($all_matrices as $value) -->
+    <?php }  // end of if ($all_matrices != 'empty')
+    else { ?>
+        El hotel <strong><?php echo ($hotel_selected['name']);?></strong> no tiene precios de habitaciones disponibles.
+    <?php } ?>
 <?php }?>
 
 

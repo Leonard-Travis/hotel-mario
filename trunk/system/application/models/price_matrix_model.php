@@ -10,7 +10,9 @@ class Price_matrix_model extends Model {
 		$date_ini = "'".$date_ini."'";
 		$this->db->select('* FROM _admin_season 
 						   WHERE date_start BETWEEN '.$date_ini.' AND '.$date_end.'
-						   OR date_end BETWEEN '.$date_ini.' AND '.$date_end);		
+						   OR date_end BETWEEN '.$date_ini.' AND '.$date_end.'
+						   OR '.$date_ini.' BETWEEN date_start AND date_end
+						   OR '.$date_end.' BETWEEN date_start AND date_end');		
 		$query = $this->db->get();
 		return $query->result_array();	
 	}
@@ -48,7 +50,7 @@ class Price_matrix_model extends Model {
 	}
 	
 	function all_matrices ($hotel_id){
-		$this->db->select(' p.price_per_night, p.SEASON_id, pl.name AS plan_name, s.date_start, s.date_end, r.name AS room_name
+		$this->db->select(' p.price_per_night, p.price_id, p.SEASON_id, pl.name AS plan_name, s.date_start, s.date_end, r.name AS room_name
 							FROM _admin_price p, _admin_plans pl, _admin_season s, _admin_rooms_hotels rh, _admin_rooms r
 							WHERE rh.HOTELS_id ='.$hotel_id.'
 							AND rh.ROOMS_id = r.room_id
@@ -58,6 +60,14 @@ class Price_matrix_model extends Model {
 							ORDER BY  `pl`.`name` ASC ');	
  		$query = $this->db->get();
 		return $query->result_array();
+	}
+	
+	function delete_matrix($prices_id)
+	{
+		foreach ($prices_id as $price_id){
+			$this->db->where('price_id',$price_id);
+			$this->db->delete('_admin_price');
+		}
 	}
 }
 ?>
