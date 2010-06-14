@@ -44,7 +44,7 @@ class Customer extends Controller {
     {
 		//By now I'm working only with basic information of the client, later it will modify and delete all data related to that customer quotes.
 		
-		$ci_client=$_POST['ci_customer'];
+		$ci_client=$_POST['ci_client'];
 		$this->load->model('client_model');
 		$data['query'] = $this->client_model->delete($ci_client);	
 		$message_index['message_index']= 'deleted';
@@ -68,7 +68,7 @@ class Customer extends Controller {
 		
 		if ($this->validation->run() == FALSE)
 		{
-			$ci_client=$_POST['ci_customer'];
+			$ci_client=$_POST['ci_client'];
 			$this->load->model('client_model');
 			$data['query'] = $this->client_model->find($ci_client);			
 			$this->load->view('modify_client',$data);
@@ -86,8 +86,9 @@ class Customer extends Controller {
 			
 			$this->load->model('client_model');
 			$data['query'] = $this->client_model->update_info($data);
-			$message_index['message_index']= 'update';
-			$this->load->view('several_messages',$message_index);
+			$this->search_form();
+			//$message_index['message_index']= 'update';
+			//$this->load->view('several_messages',$message_index);
 			
 		}
 	}

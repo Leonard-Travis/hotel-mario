@@ -1,78 +1,135 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Cliente</title>
-</head>
-<body>
+<?php
+$this->load->view('global/header');
+?>
 
-<table border="1" align="center" width="100%"> <tr>
-    <td colspan="3" align="center"><strong>HOTELES.COM.VE</strong></td> </tr>
-    <tr>
-	<td width="33%" align="center"> <a href="<?php echo base_url(); ?>customer/search_form"><strong>Clientes</strong></a> </td>
-    <td width="33%" align="center"> <a href="<?php echo base_url(); ?>home/management"><strong>Gestion</strong></a> </td>
-    <td width="33%" align="center"> <a href="<?php echo base_url(); ?>price_matrix/index/0"><strong>Matriz de Precios</strong></a> </td> 
-</tr> </table>
+<script>
+
+function validarEmail(valor) {
+re=/^[^@\s]+@[^@\.\s]+(\.[^@\.\s]+)+$/
+
+    if(!re.exec(valor))    {
+        alert("La dirección de email es incorrecta.");
+		return false;
+    }else{
+		return true;
+    }
+}
+
+function validarNum(valor) {
+re=/^([0-9])*$/
+
+    if(!re.exec(valor))    {
+        alert("Debe introducir la cedula completamente numerica");
+		return false;
+    }else{
+		return true;
+    }
+}
+
+function vacio(q) {  
+        for ( i = 0; i < q.length; i++ ) {  
+                if ( q.charAt(i) != " " ) {  
+                        return true  
+                }  
+        }  
+        return false  
+}  
+   
+function valida(F) {	
+    	if( (vacio(F.nombre.value) == false) || (vacio(F.ci_client.value) == false) || (vacio(F.apellido.value) == false) || (vacio(F.tlf.value) == false) || (vacio(F.email.value) == false) || (vacio(F.direccion.value) == false) || (vacio(F.fecha.value) == false) ){  
+                alert("Ha dejado uno o mas de los campos OBLIGATORIOS vacios.")  
+                return false  
+        } else {
+				if ((validarEmail(F.email.value) == true) && (validarNum(F.ci_client.value) == true))
+                	return true
+				else return false;
+        }  
+          
+}
+</script>
+
+<div id="menu">
+	<div class="cuerpo">
+		<ul>
+        	<li class="mfocus">
+				<img src="http://localhost/hotel-mario/designed_views/imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Clientes</div>
+				<img src="http://localhost/hotel-mario/designed_views/imagenes/f3.png" alt="" class="floati" />
+            </li>
+
+			<li><a href="<?php echo base_url(); ?>home/management">Gestion</a></li>
+			<li class="palito"><img src="http://localhost/hotel-mario/designed_views/imagenes/naranja3.gif" alt="" /></li>
+			<li><a href="<?php echo base_url(); ?>price_matrix/index/0">Matriz de Precios</a></li>
+		</ul>
+	</div>
+</div>
+<div id="menu2">
+</div>
+<div class="separadorv"></div>
+</body>
+</html>
+
 
 <?php echo validation_errors(); ?>
-<form method="post" action="<?php echo base_url(); ?>customer/search_form">
-    <div id="buscador">
-    <table>
-        <tr>
-            <td><strong>Buscador de Cliente</strong></td> 
-            <td> <input type="text" name="ci_client" id="ci_client" value="" size="50" /></td>
-            <td> <input name="enviar" type="submit" value="Selecccionar" /> </td>   
-        </tr>
-    </table>
-    </div>
+<div class="separadorv"></div><div class="separadorv"></div>
+<form name="searchForm" method="post" action="<?php echo base_url(); ?>customer/search_form" onsubmit="return validarNum(this.ci_client.value);">
+<div id="asociar_c">
+    <ul>
+        <li class="li_tit_1"><img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Buscador de Cliente</li> 
+        <li><div class="cajat">  <input type="text" name="ci_client" id="ci_client" size="50" value="Ejem: 18888888" onclick="document.searchForm.ci_client.value ='';" maxlength="10"/></div>
+             <input name="enviar" type="submit" value="Seleccionar" /> </li> 
+        <li class="li_tit_1"> &nbsp;&nbsp;<a href="new_client"><img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar" class="valign" />Agregar Cliente Nuevo</a>    </li>
+     </ul>  
+</div>
 </form>
 
-<?php if ($query != NULL){ ?>
+   <?php if ($query != NULL){ ?>
+    <div class="separador"></div>
+    <div class="separadorv_gris"></div>
 	<?php echo validation_errors(); ?>
-    <form method="post" action="<?php echo base_url(); ?>customer/modify_client">
-    <div id="datos">
-    <table>       
-		<?php foreach ($query as $client) { ?> 
-            <tr>
-            <td colspan="2" align="center"><strong>Modificar Datos de Cliente</strong></td>
-            </tr>
-            <tr>
-            <td>Cedula:</td> <td><input type="text" name="ci_client" readonly="readonly" value="<?php echo($client['customer_ci_id']); ?>"/></td>
-            </tr>
-            <tr> 
-            <td>Nombre: </td> <td><input type="text" name="nombre" value="<?php echo ($client['name']); ?>" /></td> 
-            </tr>
-            <tr>
-            <td>Apellido:</td> <td><input type="text" name="apellido" value="<?php echo ($client['lastname']); ?>" /></td> 
-            </tr>
-            <tr>
-            <td>TelÃ©fono:</td> <td><input type="text" name="tlf" value="<?php echo ($client['phone']); ?>" /> </td>
-            </tr>
-            <tr>
-            <td>e-mail:</td> <td><input type="text" name="email" value="<?php echo ($client['email']); ?>" /> </td>
-            </tr>
-            <tr>
-            <td>Direccion:</td> <td><input type="text" name="direccion" value="<?php echo ($client['address']); ?>" /></td>
-            </tr>
-            <tr>
-            <td>Fecha de Nacimiento:</td> <td><input type="text" name="fecha" value="<?php echo ($client['birth_date']); ?>" /></td>
-            </tr>
-            <tr>
-            <td>Sexo:  </td> <td>
+<form method="post" action="<?php echo base_url(); ?>customer/modify_client" onSubmit="return valida(this);">
+    <?php foreach ($query as $client) { ?>  
+    <div id="asociar2">
+        <div class="alertar">
+            <img src="http://localhost/hotel-mario/designed_views/imagenes/alerta.gif" alt="Alerta" class="valign" /><strong>Todos los campos son OBLIGATORIOS</strong>
+        </div>
+        <!-- fin alerta de arriba -->
+        <div class="separadorv"></div><div class="separadorv"></div>
+        
+        <div id="asociar_c">
+        <ul class="ul_tit_2">   
+            <li class="li_tit_2">Cedula:</li>
+            <li><div class="cajat"><input type="text" name="ci_client" maxlength="9"  readonly="readonly" value="<?php echo($client['customer_ci_id']); ?>"/></div></li>
+            <li class="li_tit_2">Nombre:</li> 
+            <li><div class="cajat"><input type="text" name="nombre" maxlength="15" value="<?php echo ($client['name']); ?>" /></div></li>
+            <li class="li_tit_2">Apellido:</li>
+            <li><div class="cajat"><input type="text" name="apellido" maxlength="15" value="<?php echo ($client['lastname']); ?>" /></div></li>
+            <li class="li_tit_2">Telefono:</li>
+            <li><div class="cajat"><input type="text" name="tlf" maxlength="20" value="<?php echo ($client['phone']); ?>" /> </div></li>
+            <li class="li_tit_2">e-mail:</li>
+            <li><div class="cajat"><input type="text" name="email" maxlength="40" value="<?php echo ($client['email']); ?>" /> </div></li>
+            <li class="li_tit_2">Direccion:</li>
+            <li><textarea name="direccion" cols="18" rows=""  maxlength="50"><?php echo ($client['address']); ?></textarea></li>
+            <li class="li_tit_2">Fecha de Nacimiento:</li>
+            <li><div class="cajat"><input type="text" name="fecha" value="<?php echo ($client['birth_date']); ?>" /></div></li>
+            
+            <li class="li_tit_2">Sexo:</li>
+            <li>
             <?php if ($client['sex'] == 'm') { ?>
-                    <input name="sexo" type="radio" value="m" checked="checked" />M 
-                    <input name="sexo" type="radio" value="f" />F 
+                <input name="sexo" type="radio" value="m" checked="checked" />M 
+                <input name="sexo" type="radio" value="f"  />F 
             <?php } 
-                  else { ?>
-                    <input name="sexo" type="radio" value="f" checked="checked" />F 
-                    <input name="sexo" type="radio" value="m" />M
-            <?php } ?>
-            </td>
-            </tr>
-        <?php 	}  ?> <!--end of foreach -->
-    </table>
+            else { ?>
+                <input name="sexo" type="radio" value="f" checked="checked" />F 
+                <input name="sexo" type="radio" value="m"/>M
+            <?php } ?></li>
+        <?php 	}?> <!--End for each-->
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;
+            <li class="li_tit_2"><input name="enviar" type="submit" value="Aceptar" /></li><li></li> 
+        </ul>
+        </div>
     </div>
-    <input name="send" type="submit" value="Aceptar" />
     </form>
 <?php 	}  ?> <!--end of if($query) -->
   

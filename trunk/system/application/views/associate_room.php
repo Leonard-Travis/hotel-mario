@@ -1,62 +1,98 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Gestion</title>
-</head>
+<?php
+$this->load->view('global/header');
+?>
 
-<body>
-<table border="1" align="center" width="100%"> <tr>
-    <td colspan="3" align="center"><strong>HOTELES.COM.VE</strong></td> </tr>
-    <tr>
-	<td width="33%" align="center"> <a href="<?php echo base_url(); ?>customer/search_form"><strong>Clientes</strong></a> </td>
-    <td width="33%" align="center"> <a href="<?php echo base_url(); ?>home/management"><strong>Gestion</strong></a> </td>
-    <td width="33%" align="center"> <a href="<?php echo base_url(); ?>price_matrix/index/0"><strong>Matriz de Precios</strong></a> </td> 
-</tr> </table>
-<table border="1" align="center" width="100%"> <tr>
-    <td colspan="4" align="center"><strong>GESTION</strong></td> </tr>
-    <tr>
-	<td width="25%" align="center"> <a href="<?php echo base_url(); ?>hotels"><strong>Hoteles</strong></a> </td>
-    <td width="25%" align="center"> <a href="<?php echo base_url(); ?>rooms"><strong>Habitaciones</strong></a> </td>
-    <td width="25%" align="center"> <a href="<?php echo base_url(); ?>plans"><strong>Planes</strong></a> </td> 
-    <td width="25%" align="center"> <a href="<?php echo base_url(); ?>price_matrix/index/1"><strong>Matriz de Precios</strong></a> </td> 
-</tr> </table>
+<script>
+function vacio(q) {  
+        for ( i = 0; i < q.length; i++ ) {  
+                if ( q.charAt(i) != " " ) {  
+                        return true  
+                }  
+        }  
+        return false  
+}  
+  
+//valida que el campo no este vacio y no tenga solo espacios en blanco  
+function valida(F) {
+	
+    	if (vacio(F.description.value) == false) {  
+                alert("Debe introducir la descripcion de la habitacion")  
+                return false  
+        } else {
+				if (validarEmail(F.email.value) == true)
+                	return true
+				else return false;
+        }  
+          
+}
+</script>
+
+<div id="menu">
+	<div class="cuerpo">
+		<ul>
+			<li><a href="<?php echo base_url(); ?>customer/search_form">Clientes</a></li>
+			<li class="mfocus">
+				<img src="http://localhost/hotel-mario/designed_views/imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Gestion</div>
+				<img src="http://localhost/hotel-mario/designed_views/imagenes/f3.png" alt="" class="floati" />
+            </li>
+			<li><a href="<?php echo base_url(); ?>price_matrix/index/0">Matriz de Precios</a></li>
+		</ul>
+	</div>
+</div>
+<div id="menu2">
+</div>
+<div class="separadorv"></div>
+
+<?php
+$this->load->view('global/management_bar');
+?>
 	
 <?php if ($query) {?>
-	<?php foreach ($query as $hotel) { ?>
-        <table align="center" width="40%">
-            <tr> <td colspan="2"><strong>Asociacion Hotel con tipo de Habitacion</strong></td></tr>
-            <tr>
-                <td>Nombre</td>
-                <td><input type="text" name="name" readonly="readonly" value="<?php echo($hotel['name']); ?>"  /></td>
-            </tr>
-            <tr>
-                <td>Habitaciones (seleccione la que desea asociar al hotel)</td> 
-                <td>		
-            <form method="post" action="<?php echo base_url(); ?>hotels/associate_room">
-                <select name="rooms" id="rooms">
-                <?php foreach ($rooms as $room) { ?>
-                    <option value="<?php echo ($room['room_id']);?>"><?php echo ($room['name']);?></option> 
-                <?php }?>
-                </select>
-                </td> 
-                </tr>
-                <tr>
-                <td>Descripcion de la Habitacion</td> 
-                <td><input type="text" name="description" id="description" /></td>
-                </tr>
-                <tr>
-                <td>¿Es comisionable para el hotel?</td>
-                <td> <input type="radio" name="commissionable" id="commissionable" value="1" checked="checked" />SI
-                	 <input type="radio" name="commissionable" id="commissionable" value="0" />NO </td>
-                </tr>
-                <tr>
-                <td> <input name="send" type="submit" value="Aceptar" /> </td> </tr>
-                <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo($hotel['hotel_id']); ?>"  />
-            </form>
-        </table>
+<div id="asociar2">
+	<div class="separadorv"></div><div class="separadorv"></div>
+	<h1><strong>Asociacion Hotel con Habitacion</strong></h1>
+    
+
+<?php foreach ($query as $hotel) { ?>
+    <table>
+        <tr>
+            <td>Nombre:</td>
+            <td><input type="text" name="name" readonly="readonly" size="40" value="<?php echo($hotel['name']); ?>"/></td>
+        </tr>
+        <tr>  
+            <td>Habitaciones (seleccione la que desea asociar al hotel):</td>
+     <form method="post" action="<?php echo base_url(); ?>hotels/associate_room" onSubmit="return valida(this);">
+            <td><select name="rooms" id="rooms">
+            <?php foreach ($rooms as $room) { ?>
+            <option value="<?php echo ($room['room_id']);?>"><?php echo ($room['name']);?></option> 
+            <?php }?>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Descripcion de la Habitacion</td> 
+            <td><textarea name="description" cols="24" rows=""  maxlength="50" ></textarea></td>
+            <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td>
+        </tr>
+        <tr>
+        <td>Es comisionable para el hotel?</td>        
+        <td> <input type="radio" name="commissionable" id="commissionable" value="1" checked="checked" />SI 
+        	 <input type="radio" name="commissionable" id="commissionable" value="0" />NO</td>
+        </tr>
+        <tr> 
+        <td><input name="send" type="submit" value="Aceptar" /></td>
+        </tr> 
+        <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo($hotel['hotel_id']); ?>"  />
+    </table>
+    </form>
     <?php }?>
+</div>
 <?php }?>
+
+<?php
+$this->load->view('global/management_close');
+?>
+   
 
 </body>
 </html>

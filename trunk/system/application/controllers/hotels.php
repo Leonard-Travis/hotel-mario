@@ -38,11 +38,12 @@ class Hotels extends Controller {
     { 
 		$rules['plans']	= "required";
 		$rules['hotel_id']	= "required";
+		$rules['description']	= "required";
 		$this->validation->set_rules($rules);
 
 		if ($this->validation->run() == FALSE)
 		{
-			$hotel_selected_id = $_POST["hotel_id_aux"];
+			$hotel_selected_id = $_POST["hotel_id"];
 			
 			//Get the plans that belong to the hotel and all plan types, then I see those that are not in common and put them in all_plans array, wich is the one that receives the view
 			$all_plans = $this->plans_model->all();
@@ -92,7 +93,7 @@ class Hotels extends Controller {
 
 		if ($this->validation->run() == FALSE)
 		{
-			$hotel_selected_id = $_POST["hotel_id_aux"];
+			$hotel_selected_id = $_POST["hotel_id"];
 			
 			//Get the rooms that belong to the hotel and all room types, then I see those that are not in common and put them in all_rooms array, wich is the one that receives the view
 			

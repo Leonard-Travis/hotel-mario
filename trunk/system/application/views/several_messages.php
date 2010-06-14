@@ -1,9 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Mensaje</title>
-</head>
+<?php
+$this->load->view('home');
+?>
 
 <body>
 <table>
@@ -13,7 +10,7 @@
 
 	  else if ($message_index == 'unknown') {?>
 	<?php echo validation_errors(); ?>
-    <form method="post" action="<?php echo base_url(); ?>new_client_ci">
+    <form method="post" action="<?php echo base_url(); ?>customer/new_client_ci">
     <tr> <td> <strong>El cliente no existe en la base de datos! <strong> </td> </tr>
      <input type="hidden" name="ci_customer" id="ci_customer" value="<?php echo ($new_ci) ?>"  />
      <tr> <td> <input type="submit" value="Agregar Cliente" /> </td> </tr>
@@ -77,7 +74,6 @@
      </tr>
      <tr> <td> <a href="<?php echo base_url(); ?>hotels">Volver a Gestion de Hoteles</a> </td> </tr>
 <?php }?>
-<tr> <td> <a href="<?php echo base_url(); ?>home">Volver a Pagina Principal</a> </td> </tr>
 </table>
 </body>
 </html>

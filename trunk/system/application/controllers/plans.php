@@ -59,11 +59,21 @@ class Plans extends Controller {
 	
 	function save_modified_plan()
     { 
-		$data ['name'] = $_POST["name"];
-		$data ['plan_id'] = $_POST["plan_id"];
-		$data['query'] = $this->plans_model->update_info($data);
-		$data['query'] = $this->plans_model->all();
-		$this->load->view('management_plans', $data);
+		$plan_id = $_POST["plan_id"];
+		$rules['name']	= "required";
+		$this->validation->set_rules($rules);
+		
+		if ($this->validation->run() == FALSE)
+		{
+			$this->modify_plan($plan_id);
+		}
+		else{		
+			$data ['name'] = $_POST["name"];
+			$data ['plan_id'] = $plan_id;
+			$data['query'] = $this->plans_model->update_info($data);
+			$data['query'] = $this->plans_model->all();
+			$this->load->view('management_plans', $data);
+		}
 	}
 }
 
