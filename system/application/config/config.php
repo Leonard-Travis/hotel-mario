@@ -11,6 +11,7 @@
 |	http://example.com/
 |
 */
+
 $config['base_url']	= "http://localhost/hotel-mario/index.php/";
 
 /*

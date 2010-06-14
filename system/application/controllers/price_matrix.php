@@ -7,6 +7,7 @@ class Price_matrix extends Controller {
 		$this->load->helper(array('form'));
 		$this->load->library('validation');
 		$this->load->library(array('form_validation'));
+		$this->load->library('calendar');
 		$this->load->model(array('hotels_model','plans_model','price_matrix_model'));
 	}
 	
