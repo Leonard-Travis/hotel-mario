@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title><?php echo $client['customer_ci_id']; ?></title>
+<title>Hoteles.com.ve</title>
 	<link type="text/css" href="themes/redmond/ui.all.css" rel="stylesheet" />
 	<script type="text/javascript" src="jquery-1.3.2.js"></script>
 	<script type="text/javascript" src="ui/ui.core.js"></script>
@@ -162,11 +162,7 @@
 				<div id="asociar_c">
 					<ul>
 						<li class="li_tit_1"><img src="imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Buscador de Cliente</li>
-                       
-                        <?php foreach ($query as $client)
-							 { 
-						?>
-						<li><div class="cajat"> <input type="text" name="buscar" value="<?php echo set_value($client['customer_ci_id']); ?>" /> </div> <a href="hoteles.html"><img src="imagenes/bseleccionar.jpg" alt="seleccionar" /></li>
+						<li><div class="cajat"><input type="text" name="buscar" /></div> <img src="imagenes/bseleccionar.jpg" alt="seleccionar" /></li>
 					</ul>
 				</div>
 				<div class="separador"></div>
@@ -183,16 +179,8 @@
 						<li><div class="cajat"><input type="text" name="telefono" /></div></li>
 						<li class="li_tit_2">e-mail:</li>
 						<li><div class="cajat"><input type="text" name="email" /></div></li>
-                        <li class="li_tit_2">Direccion:</li>
-						<li><div class="cajat"><input type="text" name="direccion" /></div></li>
-                        <li class="li_tit_2">Sexo:</li>
-						<li><input name="sexo" type="radio" value="m" />M 
-                            <input name="sexo" type="radio" value="f" />F </li>
 						<li class="li_tit_2">Tipo:</li>
 						<li class="p_relative">
-                        <?php 
-						}  
-						?>
 							<div class="cajat2">
 								<input type="text" name="tipo" id="tipo" readonly="readonly" /><input name="tipo_h" id="tipo_h" type="hidden" value="" />
 								<a rel="tipo,tipo_h,combo_tipo" href="#" class="cajat_img"><img src="imagenes/fazul.jpg" alt="Desplegar" /></a>
