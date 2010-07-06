@@ -26,8 +26,8 @@ class Rooms extends Controller {
 	function new_room()
     { 
 		$rules['name']	= "required";
+		$rules['name_english']	= "required";
 		$rules['special']	= "required";
-		$rules['capacity']	= "required";
 		$this->validation->set_rules($rules);
 		
 		if ($this->validation->run() == FALSE)
@@ -36,11 +36,11 @@ class Rooms extends Controller {
 		}
 		else
 		{
-			$data ['name'] = $_POST["name"];
-			$data ['capacity'] = $_POST["capacity"];
+			$data ['name_spanish'] = $_POST["name"];
+			$data ['name_english'] = $_POST["name_english"];
 			$data ['special'] = $_POST["special"];
 			
-			$room_inactive = $this->rooms_model->find_room_inactive($data ['name']);
+			$room_inactive = $this->rooms_model->find_room_inactive($data['name_english'], $data['name_spanish']);
 			if ($room_inactive){
 				foreach ($room_inactive as $room_inactive)
 					$this->rooms_model->active_room($room_inactive['room_id']);	
@@ -64,8 +64,8 @@ class Rooms extends Controller {
 	
 	function save_modified_room()
     { 
-		$data ['name'] = $_POST["name"];
-		$data ['capacity'] = $_POST["capacity"];
+		$data ['name_spanish'] = $_POST["name"];
+		$data ['name_english'] = $_POST["name_english"];
 		$data ['room_id'] = $_POST["room_id"];
 		$data ['special'] = $_POST["special"];
 		

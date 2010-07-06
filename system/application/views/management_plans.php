@@ -42,9 +42,10 @@ $this->load->view('global/management_bar');
 <tr>
 </table>
 
-<table width="40%" align="center">
+<table width="80%" align="center">
     <tr>
-    <td align="center"><strong>Nombre</strong></td>
+    <td align="center"><strong>Nombre Español</strong></td>
+    <td align="center"><strong>English Name</strong></td>
     <td align="center" width="17px"></td>
     <td align="center" width="17px"></td> 
     </tr>
@@ -59,7 +60,8 @@ $this->load->view('global/management_bar');
         		 <?php $gray_row = true;
         	  }?>
         
-        <td align="center"><?php echo ($plan['name']);?></td>
+        <td align="center"><?php echo ($plan['name_spanish']);?></td>
+        <td align="center"><?php echo ($plan['name_english']);?></td>
         <td align="center"> <a href="<?php echo base_url(); ?>plans/modify_plan/<?php echo ($plan['plan_id']);?>"><img src="http://localhost/hotel-mario/system/application/views/img/modificar.png" /></a></td>
         <td align="center"> <a href="<?php echo base_url(); ?>plans/delete_plan/<?php echo ($plan['plan_id']);?>"><img src="http://localhost/hotel-mario/system/application/views/img/eliminar.png" onclick="return confirmar();" /></a></td>
         </tr>

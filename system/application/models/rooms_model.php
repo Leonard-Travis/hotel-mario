@@ -23,9 +23,9 @@ class Rooms_model extends Model {
 	{
 		$data = array(
                'room_id' => $info['room_id'] ,
-               'name' => $info['name'] ,
+               'name_spanish' => $info['name_spanish'] ,
                'special' => $info['special'],
-			   'capacity' => $info['capacity']);
+			   'name_english' => $info['name_english']);
 
 		$this->db->where('room_id', $info['room_id']);
 		$this->db->update('_admin_rooms', $data);  
@@ -65,16 +65,17 @@ class Rooms_model extends Model {
 	{
 		$data = array(
                'room_id' => "" ,
-               'name' => $new['name'] ,
-			   'capacity' => $new['capacity'] ,
+			   'name_spanish' => $new['name_spanish'],
+			   'name_english' => $new['name_english'],
 			   'special' => $new['special'],
 			   'status' => 'active');
 
 		$this->db->insert('_admin_rooms', $data); 
 	}
 	
-	function find_room_inactive($room_name){
-		$this->db->where('name', $room_name);
+	function find_room_inactive($name_english, $name_spanish){
+		$this->db->like('name_english', $name_english);
+		$this->db->like('name_spanish', $name_spanish);
 		$this->db->where('status', 'inactive');
 		$query =  $this->db->get('_admin_rooms');
 		return $query->result_array();

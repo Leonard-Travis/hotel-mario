@@ -42,10 +42,10 @@ $this->load->view('global/management_bar');
 <tr>
 </table> 
     
-<table width="40%" align="center">
+<table width="80%" align="center">
     <tr>
-    <td align="center"><strong>Nombre</strong></td>  
-    <td align="center"><strong>Capacidad</strong></td> 
+    <td align="center"><strong>Nombre Español</strong></td> 
+    <td align="center"><strong>English Name</strong></td> 
     <td align="center"><strong>Especial</strong></td>
     <td align="center" width="17px"></td>
     <td align="center" width="17px"></td>
@@ -61,8 +61,8 @@ $this->load->view('global/management_bar');
        		    <?php $gray_row = true;
         	  }?>
         
-        <td align="center"><?php echo ($room['name']);?></td>
-        <td align="center"><?php echo ($room['capacity']);?></td>
+        <td align="center"><?php echo ($room['name_spanish']);?></td>
+        <td align="center"><?php echo ($room['name_english']);?></td>
         <?php if ($room['special'] == 1) {?>
         		<td align="center">TRUE</td>
         <?php }

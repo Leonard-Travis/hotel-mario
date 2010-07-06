@@ -24,7 +24,7 @@ function vacio(q) {
 }  
    
 function valida(F) {	
-    	if ((vacio(F.name.value) == false) || (vacio(F.capacity.value) == false)){  
+    	if ((vacio(F.name.value) == false) || (vacio(F.name_english.value) == false)){  
                 alert("Ha dejado uno o mas de los campos OBLIGATORIOS vacios.")  
                 return false  
         } else {
@@ -69,15 +69,15 @@ $this->load->view('global/management_bar');
 
 <?php if ($room_to_change) {?>
     <form method="post" action="<?php echo base_url(); ?>rooms/save_modified_room" onsubmit="return valida(this)">
-        <table align="center" width="20%">
+        <table align="center" width="50%">
         <?php foreach ($room_to_change as $room_to_change) { ?>
-            <tr> <td colspan="2" align="center"><strong>Datos del tipo de Habitacion</strong></td> </tr>
+            <tr> <td colspan="3" align="center"><strong>Datos del tipo de Habitacion</strong></td> </tr>
             <tr>
-            <td>Nombre</td> <td><input type="text" name="name" id="name" value="<?php echo ($room_to_change['name']);?>" maxlength="30" size="40" /></td>
+            <td>Nombre Español</td> <td><input type="text" name="name" id="name" value="<?php echo ($room_to_change['name_spanish']);?>" maxlength="30" size="40" /></td>
     <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td>
             </tr> 
             <tr>
-            <td>Capacidad</td> <td><input type="text" name="capacity" id="capacity" value="<?php echo ($room_to_change['capacity']);?>" maxlength="2" size="2" /></td>
+            <td>English Name</td> <td><input type="text" name="name_english" id="name_english" value="<?php echo ($room_to_change['name_english']);?>" maxlength="30" size="40" /></td>
     <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td>
             </tr>
             <tr>

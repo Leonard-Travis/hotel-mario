@@ -33,6 +33,7 @@ class Plans extends Controller {
 	function new_plan()
     { 
 		$rules['name']	= "required";
+		$rules['name_english']	= "required";
 		$this->validation->set_rules($rules);
 		
 		if ($this->validation->run() == FALSE)
@@ -41,9 +42,10 @@ class Plans extends Controller {
 		}
 		else
 		{
-			$data ['name'] = $_POST["name"];
+			$data ['name_spanish'] = $_POST["name"];
+			$data ['name_english'] = $_POST["name_english"];
 			
-			$plan_inactive = $this->plans_model->find_plan_inactive($data ['name']);
+			$plan_inactive= $this->plans_model->find_plan_inactive($data ['name_english'], $data ['name_spanish']);
 			if ($plan_inactive){
 				foreach ($plan_inactive as $plan_inactive)
 					$this->plans_model->active_plan($plan_inactive['plan_id']);	
@@ -61,6 +63,7 @@ class Plans extends Controller {
     { 
 		$plan_id = $_POST["plan_id"];
 		$rules['name']	= "required";
+		$rules['name_english']	= "required";
 		$this->validation->set_rules($rules);
 		
 		if ($this->validation->run() == FALSE)
@@ -68,7 +71,8 @@ class Plans extends Controller {
 			$this->modify_plan($plan_id);
 		}
 		else{		
-			$data ['name'] = $_POST["name"];
+			$data ['name_spanish'] = $_POST["name"];
+			$data ['name_english'] = $_POST["name_english"];
 			$data ['plan_id'] = $plan_id;
 			$data['query'] = $this->plans_model->update_info($data);
 			$data['query'] = $this->plans_model->all();

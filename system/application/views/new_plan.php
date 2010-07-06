@@ -13,7 +13,7 @@ function vacio(q) {
 }  
    
 function valida(F) {	
-    	if (vacio(F.name.value) == false){  
+    	if ((vacio(F.name.value) == false) || (vacio(F.name_english.value) == false)){  
                 alert("Ha dejado uno o mas de los campos OBLIGATORIOS vacios.")  
                 return false  
         } else {
@@ -57,9 +57,14 @@ $this->load->view('global/management_bar');
     <?php echo validation_errors(); ?>
 	<form method="post" action="<?php echo base_url(); ?>plans/new_plan" onsubmit="return valida (this);">
          <div id="datos">
-        <table align="center" width="30%">
-        <tr> <td colspan="2" align="center"><strong>Plan Nuevo</strong></td></tr> 
-        <td>Nombre:</td> <td><input type="text" name="name" maxlength="30" size="40" /></td>
+        <table align="center" width="50%">
+        <tr> <td colspan="3" align="center"><strong>Plan Nuevo</strong></td></tr>
+        <tr> 
+        <td>Nombre Español:</td> <td><input type="text" name="name" maxlength="30" size="40" /></td>
+    <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td> 
+        </tr>
+        <tr> 
+        <td>English Name:</td> <td><input type="text" name="name_english" maxlength="30" size="40" /></td>
     <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td> 
         </tr>
         <td> <input name="enviar" type="submit" value="Agregar Plan" /> </td>

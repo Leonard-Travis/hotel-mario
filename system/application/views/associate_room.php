@@ -3,6 +3,17 @@ $this->load->view('global/header');
 ?>
 
 <script>
+function validarNum(valor) {
+re=/^([0-9])*$/
+
+    if(!re.exec(valor))    {
+        alert("Debe introducir la capacidad completamente numerica");
+		return false;
+    }else{
+		return true;
+    }
+}
+
 function vacio(q) {  
         for ( i = 0; i < q.length; i++ ) {  
                 if ( q.charAt(i) != " " ) {  
@@ -15,11 +26,11 @@ function vacio(q) {
 //valida que el campo no este vacio y no tenga solo espacios en blanco  
 function valida(F) {
 	
-    	if (vacio(F.description.value) == false) {  
-                alert("Debe introducir la descripcion de la habitacion")  
+    	if ((vacio(F.description.value) == false) || (vacio(F.capacity.value) == false)) {  
+                alert("Ha dejado uno o mas campos obligatorios vacios")  
                 return false  
         } else {
-				if (validarEmail(F.email.value) == true)
+				if (validarNum(F.capacity.value) == true)
                 	return true
 				else return false;
         }  
@@ -57,21 +68,26 @@ $this->load->view('global/management_bar');
 <?php foreach ($query as $hotel) { ?>
     <table>
         <tr>
-            <td>Nombre:</td>
+            <td>Nombre</td>
             <td><input type="text" name="name" readonly="readonly" size="40" value="<?php echo($hotel['name']); ?>"/></td>
         </tr>
         <tr>  
-            <td>Habitaciones (seleccione la que desea asociar al hotel):</td>
+            <td>Habitaciones (seleccione la que desea asociar al hotel)</td>
      <form method="post" action="<?php echo base_url(); ?>hotels/associate_room" onSubmit="return valida(this);">
             <td><select name="rooms" id="rooms">
             <?php foreach ($rooms as $room) { ?>
-            <option value="<?php echo ($room['room_id']);?>"><?php echo ($room['name']);?></option> 
+            <option value="<?php echo ($room['room_id']);?>"><?php echo ($room['name_spanish']);?></option> 
             <?php }?>
             </select></td>
         </tr>
         <tr>
             <td>Descripcion de la Habitacion</td> 
             <td><textarea name="description" cols="24" rows=""  maxlength="50" ></textarea></td>
+            <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td>
+        </tr>
+        <tr>
+            <td>Capacidad de la Habitacion</td> 
+            <td><input type="text" name="capacity" maxlength="2" size="3"/></td>
             <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td>
         </tr>
         <tr>

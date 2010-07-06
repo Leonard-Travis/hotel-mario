@@ -13,7 +13,7 @@ function vacio(q) {
 }  
    
 function valida(F) {	
-    	if (vacio(F.name.value) == false){  
+    	if ((vacio(F.name.value) == false) || (vacio(F.name_english.value) == false)){  
                 alert("Ha dejado uno o mas de los campos OBLIGATORIOS vacios.")  
                 return false  
         } else {
@@ -56,13 +56,17 @@ $this->load->view('global/management_bar');
 <?php if ($plan_to_change) {?>
      <form method="post" action="<?php echo base_url(); ?>plans/save_modified_plan" onsubmit="return valida (this);">
      
-     <table align="center" width="20%">
+     <table align="center" width="50%">
      <?php foreach ($plan_to_change as $plan_to_change) { ?>
-     	<tr> <td colspan="2" align="center"><strong>Datos del Plan</strong></td> </tr>
+     	<tr> <td colspan="3" align="center"><strong>Datos del Plan</strong></td> </tr>
         <tr>
-        <td>Nombre</td> <td><input type="text" name="name" id="name" value="<?php echo ($plan_to_change['name']);?>" maxlength="30" size="40" /></td>
+        <td>Nombre Español</td> <td><input type="text" name="name" id="name" value="<?php echo ($plan_to_change['name_spanish']);?>" maxlength="30" size="40" /></td>
     <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td> 
-        </tr>          
+        </tr> 
+        <tr>
+        <td>English Name</td> <td><input type="text" name="name_english" id="name_english" value="<?php echo ($plan_to_change['name_english']);?>" maxlength="30" size="40" /></td>
+    <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td> 
+        </tr>         
       <input type="hidden" name="plan_id" id="plan_id" value="<?php echo ($plan_to_change['plan_id']);?>"  />
      <?php }?>
      <tr> <td><input type="submit" value="Procesar"  /></td> </tr>
