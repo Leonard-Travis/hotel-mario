@@ -1,6 +1,6 @@
 <div class="cuerpo">
 	<div class="floati">
-		<div id="tablappa1"> 
+		<div id="tablappa2"> 
 			<div id="asociar">
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/tabla1.jpg" alt="" class="floati valign" />
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/cog_edit.png" alt="Agregar Hoteles" class="valign" /><a href="<?php echo base_url(); ?>hotels">Hoteles</a>

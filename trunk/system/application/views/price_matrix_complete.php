@@ -68,11 +68,11 @@ $this->load->view('global/header');
               else { ?>
                 <select name="plan" id="plan" >
                 <?php foreach ($plan_selected as $plan_selected) { ?>
-                        <option value="<?php echo ($plan_selected['plan_id']); ?>"> <?php echo ($plan_selected['name']); ?> </option>
+                        <option value="<?php echo ($plan_selected['plan_id']); ?>"> <?php echo ($plan_selected['name_spanish']); ?> </option>
                 <?php } ?>
                 <?php foreach ($plans as $plan) { ?>
                    <?php if ($plan_selected['plan_id'] != $plan['plan_id']){?>
-                    <option value="<?php echo ($plan['plan_id']); ?>"> <?php echo ($plan['name']); ?> </option>
+                    <option value="<?php echo ($plan['plan_id']); ?>"> <?php echo ($plan['name_spanish']); ?> </option>
                    <?php }?>
                 <?php }?> <!-- end of foreach $plans --> 
                 </select>
@@ -102,8 +102,7 @@ else { ?>
     <table width="100%">
     <tr> 
     <td width="14.7%" align="center" class="primera"><strong>Habitacion</strong></td>
-    <td align="center"><strong>Precio</strong></td>
-    
+    <td align="center"><strong>Precio</strong></td>    
 	<?php if ($weekdays == 0){
 		 $gray_row = TRUE; ?>
 				</tr>
@@ -117,7 +116,7 @@ else { ?>
 						 <tr>
 						 <?php $gray_row = true;
 					  }?>
-					<td width="14.7%" align="center"><?php echo ($price['name']); ?></td>
+					<td width="14.7%" align="center"><?php echo ($price['name_spanish']); ?></td>
 					<td align="center"><?php echo ($price['price_per_night']); ?></td> 
 					</tr>             
 				<?php } ?>

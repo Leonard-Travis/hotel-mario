@@ -14,6 +14,13 @@ re=/^([0-9])*$/
 		return true;
     }
 }
+
+function confirmar(){
+	if (confirm('¿Seguro desea eliminar el Cliente?')){
+		return true;
+	}
+	else return false;
+}
 </script>
 
 <div id="menu">
@@ -61,7 +68,7 @@ re=/^([0-9])*$/
     <div id="asociar_c">
     <ul class="ul_tit_2">    
         <li class="li_tit_2">Cedula:</li>
-        <li><div class="cajat"><input type="text" name="ci_client" readonly="readonly" value="<?php echo($client['customer_ci_id']); ?>"/></div></li>
+        <li><div class="cajat"><input type="text" name="ci_client2" id="ci_client2" readonly="readonly" value="<?php echo($client['customer_ci_id']); ?>"/></div></li>
         <li class="li_tit_2">Nombre:</li> 
         <li><div class="cajat"><input type="text" name="nombre" readonly="readonly" value="<?php echo ($client['name']); ?>" /></div></li>
         <li class="li_tit_2">Apellido:</li>
@@ -100,17 +107,22 @@ re=/^([0-9])*$/
     </form>
     </td>
     <td>
-    <form method="post" action="<?php echo base_url(); ?>customer/delete_client">
+    <form method="post" action="<?php echo base_url(); ?>customer/delete_client" onsubmit="return confirmar();">
         <input type="hidden" name="ci_client" id="ci_client" value="<?php echo ($ci_aux) ?>"  />
         <input name="modify_button" id="modify_button" type="submit" value="Eliminar Cliente" /> 
     </form>
     </td>
     </tr>
-    </table>
-
+    
+    <tr> <td> <img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="" class="valign" /><a href="<?php echo base_url(); ?>quotation/new_quote/<?php echo ($ci_aux) ?>"><strong>Agregar Cotizacion</strong></a> </td>
+    <td><img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="" class="valign" /><a href="#"><strong>Cotizacion Existente</strong></a></td>
+    </tr>
+	</table>
+    
+    
 <?php 	}?> <!--End $query-->
 </div> <!--End div id="datos"-->
-<div id="test" ></div>
+<div id="cot" name="cot"></div>
      
      
 </body>

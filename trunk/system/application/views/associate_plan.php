@@ -67,7 +67,7 @@ $this->load->view('global/management_bar');
             <form method="post" action="<?php echo base_url(); ?>hotels/associate_plan" onSubmit="return valida(this);">
                 <select name="plans" id="plans">
                 <?php foreach ($plans as $plan) { ?>
-                    <option value="<?php echo ($plan['plan_id']);?>"><?php echo ($plan['name']);?></option> 
+                    <option value="<?php echo ($plan['plan_id']);?>"><?php echo ($plan['name_spanish']);?></option> 
                 <?php }?>
                 </select>
                 </td> 

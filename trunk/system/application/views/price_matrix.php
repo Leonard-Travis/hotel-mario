@@ -67,7 +67,7 @@ $this->load->view('global/header');
               else { ?>
                 <select name="plan" id="plan" >
                 <?php foreach ($plans as $plan) { ?>
-					<option value="<?php echo ($plan['plan_id']); ?>"> <?php echo ($plan['name']); ?> </option>
+					<option value="<?php echo ($plan['plan_id']); ?>"> <?php echo ($plan['name_spanish']); ?> </option>
                 <?php }?> <!-- end of foreach $plans --> 
                 </select>
         <?php }?> <!-- end of else -->

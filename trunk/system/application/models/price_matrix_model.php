@@ -18,7 +18,7 @@ class Price_matrix_model extends Model {
 	}
 	
 	function get_prices ($hotel_id, $season_id, $plan_id){		
-		 $this->db->select('p.*, r.name 
+		 $this->db->select('p.*, r.*
 							FROM _admin_price p, _admin_rooms_hotels h, _admin_rooms r
 							WHERE p.ROOMS_HOTELS_id = h.rooms_hotels_id
 							AND h.HOTELS_id ='.$hotel_id.'
@@ -30,7 +30,7 @@ class Price_matrix_model extends Model {
 	}
 	
 	function get_prices_without_plan ($hotel_id, $season_id){		
-		 $this->db->select('p.*, r.name 
+		 $this->db->select('p.*, r.* 
 							FROM _admin_price p, _admin_rooms_hotels h, _admin_rooms r
 							WHERE p.ROOMS_HOTELS_id = h.rooms_hotels_id
 							AND h.HOTELS_id ='.$hotel_id.'
@@ -50,14 +50,14 @@ class Price_matrix_model extends Model {
 	}
 	
 	function all_matrices ($hotel_id){
-		$this->db->select(' p.price_per_night, p.price_id, p.SEASON_id, pl.name AS plan_name, s.date_start, s.date_end, r.name AS room_name
+		$this->db->select(' p.price_per_night, p.price_id, p.SEASON_id, pl.name_spanish AS plan_name, s.date_start, s.date_end, r.name_spanish AS room_name
 							FROM _admin_price p, _admin_plans pl, _admin_season s, _admin_rooms_hotels rh, _admin_rooms r
 							WHERE rh.HOTELS_id ='.$hotel_id.'
 							AND rh.ROOMS_id = r.room_id
 							AND rh.rooms_hotels_id = p.ROOMS_HOTELS_id
 							AND p.SEASON_id = s.season_id
 							AND P.PLAN_id = pl.plan_id
-							ORDER BY  `pl`.`name` ASC ');	
+							ORDER BY  `pl`.`name_spanish` ASC ');	
  		$query = $this->db->get();
 		return $query->result_array();
 	}

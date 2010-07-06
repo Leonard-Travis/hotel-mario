@@ -98,11 +98,12 @@ class Price_matrix extends Controller {
 		$prices = array();
 		
 		foreach ($seasons as $value){
-			if ($plan_selected != 'no_plan')
+			if ($plan_selected != 'no_plan'){
 				$prices[$i] = $this->price_matrix_model->get_prices($hotel_selected_id, $value['season_id'], $plan_selected);
-			else
+			}
+			else{
 				$prices[$i] = $this->price_matrix_model->get_prices_without_plan($hotel_selected_id, $value['season_id']);
-				
+			}
 			if (empty($prices[$i]))	unset($prices[$i]); 
 			else	$i = ($i + 1);
 		}		
@@ -141,7 +142,7 @@ class Price_matrix extends Controller {
 				foreach($prices as $price){
 					$weekdays = $this->price_matrix_model->weekdays($price['SEASON_id']);
 					if (empty ($weekdays)) $weekdays = 0;
-					$price_aux = array ('name' => $price['name'] , 'price_per_night' => $price['price_per_night'] , 'weekdays' => $weekdays);
+					$price_aux = array ('name' => $price['name_spanish'] , 'price_per_night' => $price['price_per_night'] , 'weekdays' => $weekdays);
 					$price_with_weekdays[$j] = $price_aux;
 					$j = ($j + 1);
 				}

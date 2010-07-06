@@ -23,7 +23,8 @@ class Plans_model extends Model {
 	{
 		$data = array(
                'plan_id' => $info['plan_id'] ,
-               'name' => $info['name']);
+               'name_spanish' => $info['name_spanish'],
+			   'name_english' => $info['name_english']);
 
 		$this->db->where('plan_id', $info['plan_id']);
 		$this->db->update('_admin_plans', $data);  
@@ -44,14 +45,16 @@ class Plans_model extends Model {
 	{
 		$data = array(
                'plan_id' => "" ,
-               'name' => $new['name'],
+               'name_spanish' => $new['name_spanish'],
+			   'name_english' => $new['name_english'],
 			   'status' => 'active');
 
 		$this->db->insert('_admin_plans', $data); 
 	}
 	
-	function find_plan_inactive($plan_name){
-		$this->db->where('name', $plan_name);
+	function find_plan_inactive($name_english, $name_spanish){
+		$this->db->like('name_english', $name_english);
+		$this->db->like('name_spanish', $name_spanish);
 		$this->db->where('status', 'inactive');
 		$query =  $this->db->get('_admin_plans');
 		return $query->result_array();

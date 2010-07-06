@@ -40,7 +40,7 @@ class Hotels_model extends Model {
 		$this->db->from('_admin_rooms_hotels');
 		$this->db->from('_admin_rooms');*/
 		
-		$this->db->select('r.room_id, r.name, rh.description, r.capacity, rh.commissionable 
+		$this->db->select('r.room_id, r.name_spanish, r.name_english, rh.description, rh.capacity, rh.commissionable 
 						   FROM _admin_rooms_hotels rh , _admin_rooms r 
 						   WHERE r.room_id = rh.ROOMS_id 
 						   AND rh.status = "active"
@@ -53,7 +53,7 @@ class Hotels_model extends Model {
 	{
 		//it search for all the planss related to the hotel specified
 		
-		$this->db->select('p.plan_id, p.name, hp.description 
+		$this->db->select('p.plan_id, p.name_spanish, p.name_english, hp.description 
 						   FROM _admin_plans p, _admin_hotels_plans hp
 						   WHERE hp.PLANS_id = p.plan_id
 						   AND hp.status = "active"

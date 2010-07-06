@@ -13,7 +13,7 @@ function vacio(q) {
 }  
    
 function valida(F) {	
-    	if ((vacio(F.name.value) == false) || (vacio(F.direccion.value) == false)){  
+    	if ((vacio(F.name.value) == false) || (vacio(F.location.value) == false)){  
                 alert("Ha dejado uno o mas de los campos OBLIGATORIOS vacios.")  
                 return false  
         } else {
