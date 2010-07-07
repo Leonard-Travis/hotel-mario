@@ -60,11 +60,48 @@ function start_quote(){
 	
 }
 
+function setting_PU(){
+	var room = $F('rooms');
+	var date_start = $F('date_start');
+	var date_end = $F('date_end');
+	var plan = $F('plan');
+	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/setting_PU',{
+      method: 'post',
+      parameters: {room : room,
+	  			   date_start : date_start,
+				   date_end : date_end,
+				   plan : plan
+		  			},
+	  asynchronous: true,
+      onSuccess: function(consultadoA){
+		  $('price_per_night').update(consultadoA.responseText);
+      }
+      }
+   );
+}
 
-
-
-
-
+function setting_subtotal(){
+	var quantity = $F('quantity');
+	var room = $F('rooms');
+	var date_start = $F('date_start');
+	var date_end = $F('date_end');
+	var plan = $F('plan');
+	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/setting_subtotal',{
+      method: 'post',
+      parameters: {room : room,
+	  			   date_start : date_start,
+				   date_end : date_end,
+				   plan : plan,
+				   quantity : quantity
+		  			},
+	  asynchronous: true,
+      onSuccess: function(consultadoA){
+		  //quote_data.quantity.value = consultadoA.responseText;
+		  $('subtotal').update(consultadoA.responseText);
+      }
+      }
+   );
+}
 
 
 
