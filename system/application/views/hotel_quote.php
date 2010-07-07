@@ -58,11 +58,14 @@
                 </td>
             </tr>
             <tr> <td></td> <td></td> 
-            <input type="button" value="xxx" onclick="start_quote();"/>
             <td><img src="http://localhost/hotel-mario/designed_views/imagenes/bseleccionar.jpg" alt="seleccionar"  onclick="start_quote();"/></td>
             </tr>
         </table>
-        <div id="start_quote" name="start_quote" ></div>
+    </div>
+    <div class="separadorv"></div>
+	<div id="hoteles">
+        <div id="start_quote" name="start_quote" >
+        </div>
     </div>
 <?php } 
 }?>
