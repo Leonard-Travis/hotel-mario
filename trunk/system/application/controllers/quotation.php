@@ -117,9 +117,9 @@ class Quotation extends Controller {
 		$dFecIni = str_replace("/","",$dFecIni);
 		$dFecFin = str_replace("-","",$dFecFin);
 		$dFecFin = str_replace("/","",$dFecFin);
-	
-		ereg( "([0-9]{1,2})([0-9]{1,2})([0-9]{2,4})", $dFecIni, $aFecIni);
-		ereg( "([0-9]{1,2})([0-9]{1,2})([0-9]{2,4})", $dFecFin, $aFecFin);
+		
+		preg_match("/([0-9]{1,2})([0-9]{1,2})([0-9]{2,4})/", $dFecIni, $aFecIni);
+		preg_match("/([0-9]{1,2})([0-9]{1,2})([0-9]{2,4})/", $dFecFin, $aFecFin);
 	
 		$date1 = mktime(0,0,0,$aFecIni[2], $aFecIni[1], $aFecIni[3]);
 		$date2 = mktime(0,0,0,$aFecFin[2], $aFecFin[1], $aFecFin[3]);
@@ -150,23 +150,24 @@ class Quotation extends Controller {
 			if (!empty($prices)){
 				foreach($prices as $price){
 					$subtract_season_dates = ($this->restaFechas($this->cambiarFormatoFecha($price['date_start']), $this->cambiarFormatoFecha($price['date_end'])));
-				
+					
 					if (($this->check_in_range($date_start, $date_end, $price['date_start'])) && ($this->check_in_range($date_start, $date_end, $price['date_end']))){
 						$subtotal = $subtotal + ($subtract_season_dates*$price['price_per_night']);																													  					}
 						
 					elseif ($this->check_in_range($date_start, $date_end, $price['date_start'])){
-						$subtract_aux = ($this->restarFechas($this->cambiarFormatoFecha($date_end), $this->cambiarFormatoFecha($price['date_end'])));
+						$subtract_aux = ($this->restaFechas($this->cambiarFormatoFecha($date_end), $this->cambiarFormatoFecha($price['date_end'])));
 						
 						$subtotal = $subtotal+(($subtract_season_dates-$subtract_aux)*$price['price_per_night']);																 
 					}
 					elseif (check_in_range($date_start, $date_end, $price['date_end'])){
-						$subtract_aux = ($this->restarFechas($this->cambiarFormatoFecha($price['date_start']), $this->cambiarFormatoFecha($date_start)));
+						$subtract_aux = ($this->restaFechas($this->cambiarFormatoFecha($price['date_start']), $this->cambiarFormatoFecha($date_start)));
 						
 						$subtotal = $subtotal+(($subtract_season_dates-$subtract_aux)*$price['price_per_night']);																 
 					}
 				}
 			}
 		}
+		
 		$data['subtotal'] = $subtotal * $quantity;
 		$this->load->view('subtotal', $data);
 	}
