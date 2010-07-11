@@ -73,6 +73,7 @@ $this->load->view('global/management_bar');
         </tr>
         <tr>  
             <td>Habitaciones (seleccione la que desea asociar al hotel)</td>
+            
      <form method="post" action="<?php echo base_url(); ?>hotels/associate_room" onSubmit="return valida(this);">
             <td><select name="rooms" id="rooms">
             <?php foreach ($rooms as $room) { ?>
