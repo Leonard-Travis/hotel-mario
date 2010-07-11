@@ -89,6 +89,7 @@ class Hotels extends Controller {
 		$rules['hotel_id']	= "required";
 		$rules['commissionable']	= "required";
 		$rules['description']	= "required";
+		$rules['capacity']	= "required";
 		$this->validation->set_rules($rules);
 
 		if ($this->validation->run() == FALSE)
@@ -125,6 +126,7 @@ class Hotels extends Controller {
 			$data2['hotel_id'] = $_POST["hotel_id"];
 			$data2['description'] = $_POST["description"];
 			$data2['commissionable'] = $_POST["commissionable"];
+			$data2['capacity'] = $_POST["capacity"];
 			
 			$this->hotels_model->associate_room($data2);
 			$data['hotel_selected'] = $this->hotels_model->find($data2['hotel_id']);

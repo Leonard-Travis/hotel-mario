@@ -29,11 +29,11 @@
                 <td><strong>Hotel:</strong></td>
                 <td class="tdazul"><?php echo($hotel_selected['name']); ?></td>
                 <td><img src="http://localhost/hotel-mario/designed_views/imagenes/cal1.jpg" alt="" /> 
-                <a href="#" class="link_naranja">Var mariz de precios</a></td>
+                <a href="<?php echo base_url(); ?>price_matrix/index/0" class="link_naranja" target="_blank">Var mariz de precios</a></td>
             </tr>
             <tr>
                 <td><strong>Fecha In:</strong></td>
-                <td><input type="text" name="date_ini" id="date_ini"/></td>
+                <td><input type="text" name="date_start" id="date_start"/></td>
             </tr>
             <tr>
                 <td><strong>Fecha Out:</strong></td>
@@ -54,7 +54,7 @@
                 <?php }?> <!-- end of foreach $plans --> 
                 </select>
         		<?php }?> <!-- end of else -->
-        <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo($hotel_selected['hotel_id']); ?>"  />
+        <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo($hotel_selected['hotel_id']); ?>" />
                 </td>
             </tr>
             <tr> <td></td> <td></td> 
@@ -64,8 +64,8 @@
     </div>
     <div class="separadorv"></div>
 	<div id="hoteles">
-        <div id="start_quote" name="start_quote" >
-        </div>
+    	<div id="quote_details_form" name="quote_details_form" ></div>
+        
     </div>
 <?php } 
 }?>

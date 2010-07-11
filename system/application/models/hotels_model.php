@@ -149,13 +149,15 @@ class Hotels_model extends Model {
 				   'HOTELS_id' => $new['hotel_id'],
 				   'commissionable' => $new['commissionable'],
 				   'description' => $new['description'],
+				   'capacity' => $new['capacity'],
 				   'status' => 'active');
 	
 			$this->db->insert('_admin_rooms_hotels', $data); 
 		}
 		else {
 			$data = array('status' => 'active',
-						  'description' => $new['description']);
+						  'description' => $new['description'],
+						  'capacity' => $new['capacity']);
 
 			$this->db->where('HOTELS_id	', $new['hotel_id']);
 			$this->db->where('ROOMS_id	', $new['room_id']);
