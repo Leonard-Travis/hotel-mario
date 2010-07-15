@@ -1,12 +1,14 @@
+<?php if ($prices != 11) {?>
+
 <td align="center">
 
     <input type="hidden" id="date_start" name="date_start" value="<?php echo($date_start_quote);?>"  />
     <input type="hidden" id="date_end" name="date_end" value="<?php echo($date_end_quote);?>"  />
     <input type="hidden" id="plan" name="plan" value="<?php echo($plan_selected);?>"  />
     <input type="hidden" id="hotel_id" name="hotel_id" value="<?php echo($hotel_selected_id);?>"  />
-    <input type="hidden" id="contador" name="contador" value="<?php echo($contador);?>"  />
+    <input type="hidden" id="counter" name="counter" value="<?php echo($counter);?>"  />
     
-    <select name="rooms<?php echo($contador);?>" id="rooms<?php echo($contador);?>" onchange="setting_PU();">
+    <select name="rooms<?php echo($counter);?>" id="rooms<?php echo($counter);?>" onchange="setting_PU(<?php echo($counter);?>, this.form);" >
     <option value="-">-----------</option>
     <?php $room_aux = ''; 
     foreach($prices as $price) { 
@@ -18,11 +20,22 @@
     </select>     
 </td>
 <td align="center">
-	<input type="text" name="quantity<?php echo($contador);?>" id="quantity<?php echo($contador);?>" maxlength="2" size="3" value="00" onblur="setting_subtotal()" onclick="document.quote_data.quantity<?php echo($contador);?>.value ='';"/>
+	<input type="text" name="quantity<?php echo($counter);?>" id="quantity<?php echo($counter);?>" maxlength="2" size="3" value="00" onblur="setting_subtotal(<?php echo($counter);?>)" onclick="document.quote_data.quantity<?php echo($counter);?>.value ='';"/>
 </td>
  <td align="center">
-    <div id="price_per_night<?php echo($contador);?>" name="price_per_night<?php echo($contador);?>"></div>
+    <div id="price_per_night<?php echo($counter);?>" name="price_per_night<?php echo($counter);?>"></div>
 </td>
 <td align="center">
-    <div id="subtotal<?php echo($contador);?>" name="subtotal<?php echo($contador);?>"></div>
+    <div id="subtotal<?php echo($counter);?>" name="subtotal<?php echo($counter);?>"></div>
+    <span class="rojo">
+        <div id="total<?php echo($counter);?>" name="total<?php echo($counter);?>"></div>
+    </span>
+    <br /><br  />
+    <div id="button"></div>
 </td>
+</tr>
+</table>
+
+
+<?php } 
+else echo('No rooms left');?>

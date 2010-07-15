@@ -55,6 +55,7 @@
                 </select>
         		<?php }?> <!-- end of else -->
         <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo($hotel_selected['hotel_id']); ?>" />
+        <input type="hidden" name="rooms" id="rooms" value="0" />
                 </td>
             </tr>
             <tr> <td></td> <td></td> 
@@ -65,7 +66,7 @@
     <div class="separadorv"></div>
 	<div id="hoteles">
     	<div id="quote_details_form" name="quote_details_form" ></div>
-        
     </div>
+    
 <?php } 
 }?>
