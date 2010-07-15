@@ -1,5 +1,9 @@
 // JavaScript Document
+var counter = 0;
+var subtotal = 0;
+var sub_array = new Array();
 var customer_id;
+var rooms_selected = new Array();
 
 function test(){
 	if (confirm('amame!')){
@@ -38,30 +42,35 @@ function hotel_info(){
 }
 
 function start_quote(){
+	var clean_array = new Array();
+	subtotal = 0;
+	rooms_selected = clean_array;
+	sub_array = clean_array;
 	var plan_id = $F('plan');
-	var date_ini = $F('date_ini');
+	var date_ini = $F('date_start');
 	var date_end = $F('date_end');
 	var hotel_id = $F('hotel_id');
 	
-	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/start_quote',{
+	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/start_quote/0',{
       method: 'post',
       parameters: {hotel_id : hotel_id,
 	  			   plan_id : plan_id,
 				   date_ini : date_ini,
-				   date_end : date_end
+				   date_end : date_end,
+				   counter : 0
 		  			},
 	  asynchronous: true,
       onSuccess: function(consultadoA){
-		 $('start_quote').update(consultadoA.responseText);
+		  counter = 0;
+		 $('quote_details_form').update(consultadoA.responseText);
       }
       }
-   );
-	
-	
+   );	
 }
 
-function setting_PU(){
-	var room = $F('rooms');
+function setting_PU(countaux, form){
+	var room = $F('rooms'+countaux);
+	rooms_selected[countaux] = room;
 	var date_start = $F('date_start');
 	var date_end = $F('date_end');
 	var plan = $F('plan');
@@ -74,15 +83,25 @@ function setting_PU(){
 		  			},
 	  asynchronous: true,
       onSuccess: function(consultadoA){
-		  $('price_per_night').update(consultadoA.responseText);
+		  $('price_per_night'+countaux).update(consultadoA.responseText);
+		  $('subtotal'+countaux).update('');
       }
       }
    );
 }
 
-function setting_subtotal(){
-	var quantity = $F('quantity');
-	var room = $F('rooms');
+function calculate_sub(){
+	subtotal = 0;
+	for (i=0; i < sub_array.length; i++){
+		if (sub_array[i]){
+			subtotal = subtotal + sub_array[i];
+		}
+	}
+}
+
+function setting_subtotal(countaux){
+	var quantity = $F('quantity'+countaux);
+	var room = $F('rooms'+countaux);
 	var date_start = $F('date_start');
 	var date_end = $F('date_end');
 	var plan = $F('plan');
@@ -96,13 +115,53 @@ function setting_subtotal(){
 		  			},
 	  asynchronous: true,
       onSuccess: function(consultadoA){
-		  //quote_data.quantity.value = consultadoA.responseText;
-		  $('subtotal').update(consultadoA.responseText);
-      }
+		  sub_array[countaux] = parseFloat(consultadoA.responseText);
+		  calculate_sub();
+		  $('subtotal'+countaux).update('BsF. '+consultadoA.responseText);
+		  $('total'+counter).update('---------------- <br />BsF.'+subtotal);		  
+	  }
       }
    );
 }
 
+function add_room(){ 
+	var plan_id = $F('plan');
+	var date_ini = $F('date_start');
+	var date_end = $F('date_end');
+	var hotel_id = $F('hotel_id');
+	
+	$('total'+counter).update('');
+	counter = counter + 1;
+	
+	var imploded = 0;
+	if (rooms_selected[0]){
+		for (i=0; i<rooms_selected.length; i++) {
+			imploded += '|' + rooms_selected[i];
+		}
+	}
+		
+	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/start_quote/1',{
+      method: 'post',
+      parameters: {hotel_id : hotel_id,
+	  			   plan_id : plan_id,
+				   date_ini : date_ini,
+				   date_end : date_end,
+				   counter : counter,
+				   rooms_selected : imploded
+		  			},
+	  asynchronous: true,
+      onSuccess: function(consultadoA){		  
+		var tr = document.createElement("tr"); //create object <TR> 
+		tr.innerHTML = consultadoA.responseText; 
+		obj1 = document.getElementById("quote_hotel_table"); 
+		obj1.lastChild.appendChild(tr);	
+		
+		$('total'+counter).update('---------------- <br />BsF. '+subtotal);
+      }
+      }
+   );
+
+}
 
 
 

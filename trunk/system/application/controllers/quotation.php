@@ -39,8 +39,7 @@ class Quotation extends Controller {
 		$date_end = $_POST["date_end"];
 		$date_ini = $_POST["date_ini"];
 		$plan_selected = $_POST["plan_id"];
-		$contador = $_POST["contador"];
-		
+		$counter = $_POST["counter"];	
 		
 		$seasons = $this->price_matrix_model->get_seasons($date_ini, $date_end);
 		$i = 0;
@@ -65,28 +64,42 @@ class Quotation extends Controller {
 			}
 		}
 		
-		
 		/*echo('<pre>');
 		var_dump($prices);
-		echo('</pre>');*/
+		echo('</pre>');*/		
+		
+		$data['date_start_quote'] = $date_ini;
+		$data['date_end_quote'] = $date_end;
+		$data['plan_selected'] = $plan_selected;
+		$data['hotel_selected_id'] = $hotel_selected_id;
+		$data['counter'] = $counter;
+
+		if (($flag == 1) && (!empty($prices)) ){			
+			$rooms_selected = explode('|',$_POST["rooms_selected"]);
+			$pos = array();
+			for($i=0; $i < count($prices); $i++){
+				for ($j=0; $j < count($rooms_selected); $j++){
+					if ($prices[$i]['rooms_hotels_id'] == $rooms_selected[$j]) {
+						$pos[count($pos)] = $i;
+						$j = count($rooms_selected) + 1;
+					}
+				}
+			}
+			
+			foreach($pos as $pos){
+				unset($prices[$pos]);
+			}
+		}
 		
 		if (empty($prices)) $data['prices'] = 11;
 		else				{
 			sort($prices);
 			$data['prices'] = $prices; 
 		}
-		$data['date_start_quote'] = $date_ini;
-		$data['date_end_quote'] = $date_end;
-		$data['plan_selected'] = $plan_selected;
-		$data['hotel_selected_id'] = $hotel_selected_id;
-		$data['contador'] = $contador;
 		
-		if ($flag == 0){
-			$this->load->view('start_quote',$data);
-		}
-		else {
-			$this->load->view('quote_details_form',$data);
-		}
+		if ($flag == 0)	$this->load->view('start_quote',$data);
+		
+		$this->load->view('quote_details_form',$data);
 	}
 	
 	function setting_PU(){
