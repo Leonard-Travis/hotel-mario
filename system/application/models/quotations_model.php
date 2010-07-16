@@ -30,5 +30,31 @@ class Quotations_model extends Model {
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+	
+	function find_room_hotel_name ($rooms_hotels_id){
+		$this->db->select ('r.name_spanish');
+		$this->db->from ('_admin_rooms_hotels rh, _admin_rooms r');
+		$this->db->where('rh.rooms_hotels_id ='.$rooms_hotels_id.' AND rh.ROOMS_id = r.room_id');
+		$query =  $this->db->get();
+		return $query->result_array();
+	}
+	
+	function insert_quote($new_quote){
+		$data = array(
+               'quote_hotel_id' => '' ,
+			   'date_check_in' => $new_quote['date_start'],
+			   'date_check_out' => $new_quote['date_end'],
+			   'PLAN_id' => $new_quote['plan_id'],
+			   'total' => $new_quote['subtotal'],
+			   'reservation_status' => 'x',
+			   'collect_status' => 'x',
+			   'payment_status' => 'x',
+			   'billing_status' => 'x');
+		
+		$this->db->insert('_admin_quotations_hotel', $data);
+		
+		//$this->db->select ('quote_hotel_id FROM _admin_quotations_hotel ORDER BY quote_hotel_id DESC LIMIT 1');
+		//$query =  $this->db->get();
+	}
 }
 ?>
