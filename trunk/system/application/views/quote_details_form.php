@@ -8,7 +8,7 @@
     <input type="hidden" id="hotel_id" name="hotel_id" value="<?php echo($hotel_selected_id);?>"  />
     <input type="hidden" id="counter" name="counter" value="<?php echo($counter);?>"  />
     
-    <select name="rooms<?php echo($counter);?>" id="rooms<?php echo($counter);?>" onchange="setting_PU(<?php echo($counter);?>, this.form);" >
+    <select name="rooms<?php echo($counter);?>" id="rooms<?php echo($counter);?>" onchange="setting_PU(<?php echo($counter);?>);" >
     <option value="-">-----------</option>
     <?php $room_aux = ''; 
     foreach($prices as $price) { 
@@ -31,11 +31,20 @@
         <div id="total<?php echo($counter);?>" name="total<?php echo($counter);?>"></div>
     </span>
     <br /><br  />
-    <div id="button"></div>
+    <div id="process_button<?php echo($counter);?>"></div>
 </td>
 </tr>
-</table>
-
 
 <?php } 
-else echo('No rooms left');?>
+else {
+	echo('<strong>No rooms left</strong>');?>
+
+<td></td> <td></td> 
+<td align="center">
+	<span class="rojo">
+        <div id="total<?php echo($counter);?>" name="total<?php echo($counter);?>"></div>
+    </span>
+</td>
+<?php } ?>
+
+</table>

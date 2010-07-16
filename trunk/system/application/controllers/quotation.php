@@ -193,6 +193,57 @@ class Quotation extends Controller {
 		$data['subtotal'] = $subtotal * $quantity;
 		$this->load->view('subtotal', $data);
 	}
+	
+	function str_to_array ($rooms_selected){
+		$quote_rooms = array();		
+		$cont = 0; $pos = 0;
+		$room = array('rooms_hotels_id' => '','quantity' => '' ,'PU' => '' ,'subtotal' => '');
+		
+		for ($i=0; $i< strlen($rooms_selected); $i++){
+			if (($rooms_selected[$i] != '|') && ($rooms_selected[$i] != '||') && ($cont == 0)){
+				$room['rooms_hotels_id'] = $room['rooms_hotels_id'].$rooms_selected[$i];
+			}
+			elseif (($rooms_selected[$i] != '|') && ($rooms_selected[$i] != '||') && ($cont == 1)){
+				$room['quantity'] = $room['quantity'].$rooms_selected[$i];
+			}
+			elseif (($rooms_selected[$i] != '|') && ($rooms_selected[$i] != '||') && ($cont == 2)){
+				$room['PU'] = $room['PU'].$rooms_selected[$i];
+			}
+			elseif (($rooms_selected[$i] != '|') && ($rooms_selected[$i] != '||') && ($cont == 3)){
+				$room['subtotal'] = $room['subtotal'].$rooms_selected[$i];
+			}
+			elseif (($rooms_selected[$i] == '|') && ($cont < 4 )){
+				$cont = $cont +1;
+			}
+			elseif ($cont == 4){
+				$aux = $this->quotations_model->find_room_hotel_name($room['rooms_hotels_id']);
+				foreach ($aux as $aux){
+					$room['name_spanish'] = $aux['name_spanish'];
+				}
+				$quote_rooms[$pos] = $room;
+				$cont = 0;
+				$pos = $pos + 1;
+				$room = array('rooms_hotels_id' => '','quantity' => '' ,'PU' => '' ,'subtotal' => '');
+			}
+		}
+		return ($quote_rooms);
+	}
+	
+	function hotel_summary(){
+		$data['subtotal'] = $_POST["subtotal"];
+		$data['quote_rooms'] = $this->str_to_array($_POST["rooms_selected"]);
+		$this->load->view('hotel_summary', $data);
+	}
+	
+	function save_quote(){
+		$data['plan_id'] = $_POST["plan_id"];
+		$data['date_start'] = $_POST["date_start"];
+		$data['date_end'] = $_POST["date_end"];
+		$data['subtotal'] = $_POST["subtotal"];
+		$data['quote_rooms'] = $this->str_to_array($_POST["rooms_selected"]);
+		$this->quotations_model->insert_quote($data);
+		
+	}
 
 }
 
