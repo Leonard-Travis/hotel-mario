@@ -58,6 +58,7 @@ class Quotation extends Controller {
 					$prices[$i]['capacity'] = $aux['capacity'];
 					$prices[$i]['date_start'] = $aux['date_start'];
 					$prices[$i]['date_end'] = $aux['date_end'];
+					$prices[$i]['capacity'] = $aux['capacity'];
 					$i = $i + 1;
 				}
 				
@@ -241,7 +242,7 @@ class Quotation extends Controller {
 		$data['date_end'] = $_POST["date_end"];
 		$data['subtotal'] = $_POST["subtotal"];
 		$data['quote_rooms'] = $this->str_to_array($_POST["rooms_selected"]);
-		$this->quotations_model->insert_quote($data);
+		var_dump($this->quotations_model->insert_quote($data));
 		
 	}
 

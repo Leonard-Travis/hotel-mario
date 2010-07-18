@@ -13,7 +13,7 @@
     <?php $room_aux = ''; 
     foreach($prices as $price) { 
         if ($price['rooms_hotels_id'] != $room_aux) { ?>
-            <option value="<?php echo ($price['rooms_hotels_id']); ?>"> <?php echo ($price['name_spanish']); ?> </option> 
+            <option value="<?php echo ($price['rooms_hotels_id'].'|'.$price['capacity']); ?>"> <?php echo ($price['name_spanish']); ?> </option> 
             <?php $room_aux = $price['rooms_hotels_id']; 
         }
     }?>
