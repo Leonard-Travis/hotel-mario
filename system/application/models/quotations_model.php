@@ -6,7 +6,7 @@ class Quotations_model extends Model {
    	}
 
 	function get_prices ($hotel_id, $season_id, $plan_id){		 
-		 $this->db->select('p.price_per_night, r.name_spanish, s.date_start, s.date_end, rh.capacity, rh.rooms_hotels_id');
+		 $this->db->select('p.price_per_night, r.name_spanish, s.date_start, s.date_end, rh.capacity, rh.rooms_hotels_id, h.capacity');
 		 $this->db->from('_admin_price p, _admin_rooms_hotels h, _admin_rooms r, _admin_season s, _admin_rooms_hotels rh');
 		 $this->db->where("p.ROOMS_HOTELS_id = h.rooms_hotels_id
 							AND h.HOTELS_id ='".$hotel_id."'
@@ -14,7 +14,8 @@ class Quotations_model extends Model {
 							AND p.SEASON_id ='".$season_id."'
 							AND h.ROOMS_id = r.room_id
 							AND s.season_id = p.SEASON_id
-							AND rh.rooms_hotels_id = p.ROOMS_HOTELS_id");
+							AND rh.rooms_hotels_id = p.ROOMS_HOTELS_id
+							AND h.status = 'active' ");
 		 
 		$query = $this->db->get();
 		return $query->result_array();
@@ -51,10 +52,11 @@ class Quotations_model extends Model {
 			   'payment_status' => 'x',
 			   'billing_status' => 'x');
 		
-		$this->db->insert('_admin_quotations_hotel', $data);
+		//$this->db->insert('_admin_quotations_hotel', $data);
 		
 		//$this->db->select ('quote_hotel_id FROM _admin_quotations_hotel ORDER BY quote_hotel_id DESC LIMIT 1');
 		//$query =  $this->db->get();
+		return ('holaaaaaaaaaaaaaaaaa'); //$query->result_array();
 	}
 }
 ?>

@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Hoteles.com.ve</title>
+	<link type="text/css" href="themes/redmond/ui.all.css" rel="stylesheet" />
+	<script type="text/javascript" src="jquery-1.3.2.js"></script>
+	<script type="text/javascript" src="ui/ui.core.js"></script>
+	<script type="text/javascript" src="ui/ui.datepicker.js"></script>
+	<script type="text/javascript" src="ui/i18n/ui.datepicker-es.js"></script>
+	<link type="text/css" href="demos.css" rel="stylesheet" />
+	<script type="text/javascript">
+	$(function() {
+		$("#datepicker").datepicker();
+	});
+	</script>
+	<link href="estilos.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="cintillo">
+	<div class="cuerpo">
+		<a href="#" class="logo">Hoteles.com.ve</a>
+		<div class="palito"><img src="imagenes/palito.gif" alt="" /></div>
+		<div class="floati">Gestión de servicios</div>
+		<div class="cintillod">
+			<img src="imagenes/user_orange.png" alt="Usuario" class="valign" />
+			Bienvenido, <a href="#">Miguel Ascanio</a>
+			<img src="imagenes/cog_edit.png" alt="Opciones" class="valign" />
+			<a href="#">Opciones</a>
+			<img src="imagenes/lock.png" alt="Desconectar" class="valign" />
+			<a href="#">Desconectar</a>
+		</div>
+	</div>
+</div>
+<div id="menu">
+	<div class="cuerpo">
+		<ul>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Escritorio</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li id="m1"><a href="#">Escritorio</a></li>
+			<!--
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			-->
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Cuentas</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			<!--
+			<li><a href="#">Cuentas</a></li>			
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			-->
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Clientes</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Clientes</a></li>
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Cotizaciones</div>
+				<img src="imagenes/f3.png" alt="" class="floati" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Cotizaciones</a></li>
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Reportes</div>
+				<img src="imagenes/f3.png" alt="" class="floatd" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Reportes</a></li>
+			<li class="palito"><img src="imagenes/naranja3.gif" alt="" /></li>
+			<!--
+			<li class="mfocus">
+				<img src="imagenes/f1.png" alt="" class="floati" />
+				<div class="mf_texto">Notificaciones</div>
+				<img src="imagenes/f3.png" alt="" class="floatd" />
+				<ul class="submenu">
+					<li><a href="#">Agregar Nuevo</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Editar</a></li>
+					<li><img src="imagenes/bullet_orange.png" alt="" class="valign" /></li>
+					<li><a href="#">Borrar</a></li>
+				</ul>
+			</li>
+			-->
+			<li><a href="#">Notificaciones</a></li>
+		</ul>
+	</div>
+</div>
+<div id="menu2">
+</div>
+<div class="separadorv"></div>
+<div class="cuerpo">
+	<div class="floati">
+		<div id="tablappa1"> <!-- usar id="tablappa2" cuandos e quiera que ocupe toda la ventana y eliminar el <div id="calendario">
+									en todo caso el ancho completo es de 950 px-->
+			<div id="matriz">
+				<img src="imagenes/tabla1.jpg" alt="" class="floati valign" />
+				Matriz de Precios - Agregar | Modificar
+				<img src="imagenes/tabla3.jpg" alt=""  class="floatd valign"/>
+			</div>
+			<div class="separador"></div>
+			<div id="matriz2">
+				<form id="f_buscar" name="f_buscar" method="post" action="">
+					<div class="tit1"><img src="imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Buscar Hotel</div>
+					<div class="cajat"><input type="text" name="buscar" /></div>
+					<input type="image" name="bseleccionar" id="bseleccionar" src="imagenes/bseleccionar.jpg" class="floati" />
+				</form>
+				<form id="f_matriz" name="f_buscar" method="post" action="">
+				<div class="separador"></div>
+				<div class="separadorv_gris"></div>
+				<div class="tit2">Hotel:</div>Hotel Puerto Madero - Argentina.
+				<div class="separador"></div>
+				<div class="tit2">Plan:</div>
+				<div class="p_relative floati">
+					<div class="c_plan">
+						<input type="text" name="plan" id="plan" readonly="readonly" /><input name="plan_h" id="plan_h" type="hidden" value="" />
+						<a rel="plan,plan_h,combo_plan" href="#" class="cajat_img"><img src="imagenes/fazul.jpg" alt="Desplegar" /></a>
+					</div>
+					<div id="combo_plan" class="combo2">
+						<table>
+							<tr>
+								<td width="5"><img src="imagenes/combo1.gif" alt="" /></td>
+								<td class="arriba"></td>
+								<td width="5"><img src="imagenes/combo3.gif" alt="" /></td>
+							</tr>
+							<tr>
+								<td class="bi"></td>
+								<td><a href="#" class="opcion" rel="valor1">Todo incluido</a></td><!-- en el rel se coloca el value -->
+								<td class="bd"></td>
+							</tr>
+							<tr>
+								<td class="bi"></td>
+								<td><a href="#" class="opcion" rel="valor2">Solo Hospedaje</a></td>
+								<td class="bd"></td>
+							</tr>
+							<tr>
+								<td class="bi"></td>
+								<td><a href="#" class="opcion" rel="valor3">aaaa</a></td>
+								<td class="bd"></td>
+							</tr>
+							<tr>
+								<td><img src="imagenes/combo7.gif" alt="" /></td>
+								<td class="abajo"></td>
+								<td><img src="imagenes/combo5.gif" alt="" /></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+				<div class="separador"></div>
+				<div class="tit2">Desde:</div>28/09/09&nbsp;
+				<a href="#"><img src="imagenes/cal2.jpg" alt="Fecha desde" /></a>&nbsp;
+				<strong>Hasta:</strong>&nbsp;
+				30/09/09&nbsp;
+				<a href="#"><img src="imagenes/cal2.jpg" alt="Fecha hasta" /></a>
+				<div class="separador"></div>
+				<div class="tit2">Moneda:</div>
+				<div class="p_relative floati">
+					<div class="c_moneda">
+						<input type="text" name="moneda" id="moneda" readonly="readonly" /><input name="moneda_h" id="moneda_h" type="hidden" value="" />
+						<a rel="moneda,moneda_h,combo_moneda" href="#" class="cajat_img"><img src="imagenes/fazul.jpg" alt="Desplegar" /></a>
+					</div>
+					<div id="combo_moneda" class="combo2">
+						<table>
+							<tr>
+								<td width="5"><img src="imagenes/combo1.gif" alt="" /></td>
+								<td class="arriba"></td>
+								<td width="5"><img src="imagenes/combo3.gif" alt="" /></td>
+							</tr>
+							<tr>
+								<td class="bi"></td>
+								<td><a href="#" rel="1" class="opcion">Bsf</a></td>
+								<td class="bd"></td>
+							</tr>
+							<tr>
+								<td class="bi"></td>
+								<td><a href="#" rel="2" class="opcion">BDP</a></td>
+								<td class="bd"></td>
+							</tr>
+							<tr>
+								<td class="bi"></td>
+								<td><a href="#" rel="3" class="opcion">EU</a></td>
+								<td class="bd"></td>
+							</tr>
+							<tr>
+								<td><img src="imagenes/combo7.gif" alt="" /></td>
+								<td class="abajo"></td>
+								<td><img src="imagenes/combo5.gif" alt="" /></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="separador"></div>
+				<table class="tmatriz">
+					<thead>
+						<tr>
+							<td class="primera">Habitación</td>
+							<td>Precio</td>
+							<td>Lunes</td>
+							<td>Martes</td>
+							<td>Miércoles</td>
+							<td>Jueves</td>
+							<td>Viernes</td>
+							<td>Sábado</td>
+							<td>Domingo</td>
+							<td>Dos Noches</td>
+						</tr>
+					</thead>
+					<tr>
+						<td class="primera">Matrimonial</td>
+						<td><div class="cantidades"><input type="text" name="cant1_1" value="300,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant1_2" value="300,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant1_3" value="300,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant1_4" value="300,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant1_5" value="300,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant1_6" value="300,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant1_7" value="300,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant1_8" value="300,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant1_9" value="300,00" /></div></td>
+					</tr>
+					<tr>
+						<td class="primera">Triple</td>
+						<td><div class="cantidades"><input type="text" name="cant2_1" value="900,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant2_2" value="900,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant2_3" value="900,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant2_4" value="900,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant2_5" value="900,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant2_6" value="900,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant2_7" value="900,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant2_8" value="900,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant2_9" value="900,00" /></div></td>
+					</tr>
+					<tr>
+						<td class="primera">Cuadrúple</td>
+						<td><div class="cantidades"><input type="text" name="cant3_1" value="1.200,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant3_2" value="1.200,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant3_3" value="1.200,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant3_4" value="1.200,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant3_5" value="1.200,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant3_6" value="1.200,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant3_7" value="1.200,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant3_8" value="1.200,00" /></div></td>
+						<td><div class="cantidades"><input type="text" name="cant3_9" value="1.200,00" /></div></td>
+					</tr>
+				</table>
+				<div class="separadorv"></div>
+				<div class="tit2">
+					<a href="#"><img src="imagenes/chk1.gif" alt="" /></a>Detalles por días de semana
+					&nbsp;&nbsp;
+					<a href="#"><img src="imagenes/chk2.gif" alt="" /></a>Precio por dos noches
+				</div>
+				<div class="separadorv"></div>
+				<div class="tit2">
+					<input type="image" name="Agregar" id="Agregar" src="imagenes/bagregar.jpg" />
+				</div>
+				<div class="separador"></div>
+				</form>
+				<div class="separadorv_gris"></div>
+				<div class="naranja">
+					<div class="tit2">Plan:</div>Todo incluido
+					<div class="separador"></div>
+					<div class="tit2">Desde:</div>28 /09/09&nbsp;&nbsp;<strong>Hasta:</strong>&nbsp;30 /09/09
+				</div>
+				<div class="separador"></div>
+				<table class="tmatriz">
+					<thead>
+						<tr>
+							<td class="primera">Habitación</td>
+							<td>Precio</td>
+							<td>Lunes</td>
+							<td>Martes</td>
+							<td>Miércoles</td>
+							<td>Jueves</td>
+							<td>Viernes</td>
+							<td>Sábado</td>
+							<td>Domingo</td>
+							<td>Dos Noches</td>
+						</tr>
+					</thead>
+					<tr>
+						<td class="primera">Matrimonial</td>
+						<td>300,00</td>
+						<td>300,00</td>
+						<td>300,00</td>
+						<td>300,00</td>
+						<td>300,00</td>
+						<td>300,00</td>
+						<td>300,00</td>
+						<td>300,00</td>
+						<td>300,00</td>
+					</tr>
+					<tr>
+						<td class="primera">Triple</td>
+						<td>900,00</td>
+						<td>900,00</td>
+						<td>900,00</td>
+						<td>900,00</td>
+						<td>900,00</td>
+						<td>900,00</td>
+						<td>900,00</td>
+						<td>900,00</td>
+						<td>900,00</td>
+					</tr>
+					<tr>
+						<td class="primera">Cuadrúple</td>
+						<td>1.200,00</td>
+						<td>1.200,00</td>
+						<td>1.200,00</td>
+						<td>1.200,00</td>
+						<td>1.200,00</td>
+						<td>1.200,00</td>
+						<td>1.200,00</td>
+						<td>1.200,00</td>
+						<td>1.200,00</td>
+					</tr>
+				</table>
+				<div class="separadorv"></div>
+				<div class="tit2"><a href="#"><img src="imagenes/bmodificar.jpg" alt="Modificar" width="69" height="22" /></a></div>
+				<div class="separadorv"></div>
+			</div>
+			<div class="separador"></div>
+			<div class="tpiec"><img src="imagenes/esq1.gif" alt="" /><img src="imagenes/esq3.gif" alt="" class="floatd" /></div>
+			<div class="separadorv"></div>
+		</div>
+	</div>
+	<div id="sideb">
+		<div id="sideb2">
+			<div id="calendario">
+				<div id="datepicker"></div>
+			</div>
+			<div class="separadorv"></div>
+			<img src="imagenes/zoom.png" alt="" class="valign" />Buscador de Cliente<br />
+			<div class="separadorv"></div>
+			<form id="form_buscar" name="form_buscar" method="post" action="">
+				<div class="cajat"><input type="text" name="text1" id="text1" /></div>
+				<input type="image" name="Aceptar" id="Aceptar" src="imagenes/bir.jpg" class="floati" />
+			</form>
+			<div class="separadorv"></div>
+			<ul>
+				<li><img src="imagenes/add.png" alt="" class="valign" /><a href="#">Agregar Cliente</a></li>
+				<li><img src="imagenes/add.png" alt="" class="valign" /><a href="#">Agregar Cotización</a></li>
+				<li><img src="imagenes/add.png" alt="" class="valign" /><a href="#">Agregar Pago</a></li>
+			</ul>
+		</div>
+		<img src="imagenes/sb3.jpg" alt="" />
+	</div>
+</div>
+<script type="text/javascript">
+<!--
+	$(document).ready(function (){
+		var cajat, cajath, elcombo='';
+		$(".cajat_img").click(function (evento){
+			m=((this).rel).split(",");
+			cajat=m[0];
+			cajath=m[1];
+			elcombo=m[2];
+			$("#" + elcombo).show(200);
+			$("#" + elcombo).focus();
+			evento.preventDefault();
+		});
+		$(".p_relative").mouseleave(function (){
+			if(elcombo!=''){
+				$("#" + elcombo).hide(200);
+				elcombo='';
+			}
+		});
+		$(".opcion").click(function (evento){
+			$("#" + cajat).val((this).innerHTML);
+			$("#" + cajath).val((this).rel);
+			$("#" + elcombo).hide(200);
+			elcombo='';
+			evento.preventDefault();
+		});
+	});
+-->
+</script>
+
+
+
+</body>
+</html>

@@ -1,13 +1,14 @@
 // JavaScript Document
 var counter = 0;
 var subtotal = 0;
-var sub_array = new Array();
+var capacity_total = 0;
 var customer_id;
 var rooms_selected = new Array();
 var hotel_id = '';
 var date_start = '';
 var date_end = '';
 var plan_id = '';
+var persons = '';
 
 function test(){
 	if (confirm('amame!')){
@@ -47,15 +48,15 @@ function hotel_info(){
 
 function start_quote(){
 	var clean_array = new Array();
-	var clean_array2 = new Array();
-	rooms_selected = clean_array2;
-	sub_array = clean_array;
+	rooms_selected = clean_array;
 	subtotal = 0;
+	capacity_total = 0;
 	counter = 0;
 	plan_id = $F('plan');
 	date_start = $F('date_start');
 	date_end = $F('date_end');
 	hotel_id = $F('hotel_id');
+	persons = $F('persons');
 	
 	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/start_quote/0',{
       method: 'post',
@@ -77,10 +78,23 @@ function start_quote(){
 function setting_PU(countaux){
 	rooms_selected[countaux] = new Array();
 	var room = $F('rooms'+countaux);
-	rooms_selected[countaux]['room'] = room;
+	var flag_room = true;
+	rooms_selected[countaux]['room'] = '';
+	rooms_selected[countaux]['capacity'] = '';
+	
+	for (i=0; i < room.length; i++){
+		if ((flag_room == true) && (room[i] != '|'))
+			rooms_selected[countaux]['room'] += room[i];
+		else if ((flag_room == false) && (room[i] != '|'))
+			rooms_selected[countaux]['capacity'] += room[i];
+		else if (room[i] == '|')
+			flag_room = false;
+	}
+	rooms_selected[countaux]['capacity'] = parseInt(rooms_selected[countaux]['capacity']);
+	
 	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/setting_PU',{
       method: 'post',
-      parameters: {room : room,
+      parameters: {room : rooms_selected[countaux]['room'],
 	  			   date_start : date_start,
 				   date_end : date_end,
 				   plan : plan_id
@@ -97,31 +111,30 @@ function setting_PU(countaux){
 
 function calculate_sub(){
 	subtotal = 0;
-	for (i=0; i < sub_array.length; i++){
-		if (sub_array[i]){
-			subtotal = subtotal + sub_array[i];
+	capacity_total = 0;
+	for (i=0; i < rooms_selected.length; i++){
+		if (rooms_selected[i]){
+			subtotal += rooms_selected[i]['subtotal'];
+			capacity_total += ((rooms_selected[i]['capacity']*rooms_selected[i]['quantity']));
 		}
 	}
 }
 
 function setting_subtotal(countaux){
-	var quantity = $F('quantity'+countaux);
-	var room = $F('rooms'+countaux);
-	rooms_selected[countaux]['quantity'] = quantity;
+	rooms_selected[countaux]['quantity'] = parseInt($F('quantity'+countaux));
 	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/setting_subtotal',{
       method: 'post',
-      parameters: {room : room,
+      parameters: {room : rooms_selected[countaux]['room'],
 	  			   date_start : date_start,
 				   date_end : date_end,
 				   plan : plan_id,
-				   quantity : quantity
+				   quantity : rooms_selected[countaux]['quantity']
 		  			},
 	  asynchronous: true,
       onSuccess: function(consultadoA){
-		  sub_array[countaux] = parseFloat(consultadoA.responseText);
+		  rooms_selected[countaux]['subtotal'] = parseFloat(consultadoA.responseText);
 		  calculate_sub();
 		  $('subtotal'+countaux).update('BsF. '+consultadoA.responseText);
-		  rooms_selected[countaux]['subtotal'] = consultadoA.responseText;
 		  $('total'+counter).update('---------------- <br />BsF.'+subtotal);
 	  }
       }
@@ -162,25 +175,33 @@ function add_room(){
 }
 
 function process_quote_hotel(){	
-	var imploded = '';
-	if (rooms_selected[0]){
-		for (i=0; i<rooms_selected.length; i++) {
-			imploded += rooms_selected[i]['room'] + '|' + rooms_selected[i]['quantity']+ '|' + rooms_selected[i]['PU']+ '|' + rooms_selected[i]['subtotal'] + '||';
-		}
-	}
+	calculate_sub();
 	
-	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/hotel_summary',{
-      method: 'post',
-      parameters: {rooms_selected : imploded,
-	  			   subtotal : subtotal
-		  			},
-	  asynchronous: true,
-      onSuccess: function(consultadoA){	
-	  		$('quote_details_form').update(consultadoA.responseText);
-			$('add_quote_button').update('<td class="ntd"> <input type="image" name="procesar" id="procesar" src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="save_quote()"/>	</td>');
-      }
-      }
-   );
+	if (capacity_total >= persons){
+		var imploded = '';
+		if (rooms_selected[0]){
+			for (i=0; i<rooms_selected.length; i++) {
+				imploded += rooms_selected[i]['room'] + '|' + rooms_selected[i]['quantity']+ '|' + rooms_selected[i]['PU']+ '|' + rooms_selected[i]['subtotal'] + '||';
+			}
+		}
+		
+		new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/hotel_summary',{
+		  method: 'post',
+		  parameters: {rooms_selected : imploded,
+					   subtotal : subtotal
+						},
+		  asynchronous: true,
+		  onSuccess: function(consultadoA){	
+				$('quote_details_form').update(consultadoA.responseText);
+				$('add_quote_button').update('<td class="ntd"> <input type="image" name="procesar" id="procesar" src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="save_quote()"/>	</td>');
+		  }
+		  }
+	   );
+	
+	}
+	else {
+		alert('La capacidad total de las habitaciones ('+capacity_total+') debe ser igual o mayor a las cantidad de adultos ('+persons+') a ospedarse');
+	}
 
 }
 
@@ -208,6 +229,21 @@ function save_quote(){
       }
       }
    );
+}
+
+function drop_element_from_quote(rooms_hotels_id){
+	if (confirm('¿Desea eliminar el elemento de la cotizacion?')){
+		for (i=0; i<rooms_selected.length; i++) {
+				if(rooms_selected[i]['room'] == rooms_hotels_id){
+					rooms_selected.splice(rooms_selected[i],1);
+				}
+				
+			}
+			
+		if (rooms_selected.length > 0)	process_quote_hotel();
+		else start_quote();
+	}
+	else return false;
 }
 
 
