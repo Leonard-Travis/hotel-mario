@@ -40,15 +40,6 @@ class Price_matrix_model extends Model {
 		return $query->result_array();
 	}
 	
-	function weekdays ($season_id){
-		$this->db->select('w.* 
-						   FROM _admin_season s, _admin_weekdays w
-						   WHERE s.season_id = w.SEASON_id
-						   AND s.season_id ='.$season_id);	
- 		$query = $this->db->get();
-		return $query->result_array();
-	}
-	
 	function all_matrices ($hotel_id){
 		$this->db->select(' p.price_per_night, p.price_id, p.SEASON_id, pl.name_spanish AS plan_name, s.date_start, s.date_end, r.name_spanish AS room_name
 							FROM _admin_price p, _admin_plans pl, _admin_season s, _admin_rooms_hotels rh, _admin_rooms r
@@ -68,6 +59,33 @@ class Price_matrix_model extends Model {
 			$this->db->where('price_id',$price_id);
 			$this->db->delete('_admin_price');
 		}
+	}
+	
+	function find_season($date_start, $date_end) {
+		$this->db->where('date_start', $date_start);
+		$this->db->where('date_end', $date_end);
+		$query = $this->db->get('_admin_season');
+		return $query->result_array();
+	}
+	
+	function new_season ($date_start, $date_end){
+		$data = array(
+				   'season_id' => '',
+				   'date_start' => $date_start,
+				   'date_end' => $date_end);
+		$this->db->insert('_admin_season', $data);
+		
+		$this->db->select_max('season_id');
+		$query = $this->db->get('_admin_season');
+		return $query->result_array();
+	}
+	
+	function add_hotel_season($hotel_id, $season_id, $season_name){
+		$data = array(
+				   'SEASON_id' => $season_id,
+				   'HOTEL_id' => $hotel_id,
+				   'season_name' => $season_name);
+		$this->db->insert('_admin_seasons_per_hotel', $data);
 	}
 }
 ?>

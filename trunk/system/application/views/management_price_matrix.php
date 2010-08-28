@@ -47,42 +47,25 @@ $this->load->view('global/management_bar');
 		</form>
 <?php }?>
 
+<?php $hotel_id; 
+	  if ($hotel_selected) {?>
+      	<?php foreach ($hotel_selected as $hotel_selected) { 
+        			$hotel_id = $hotel_selected['hotel_id'];?>
+        <?php } ?>
 
-<?php if ($hotel_selected) {?>
 	<div class="separador"></div>
 	<div class="separadorv_gris"></div>
-    <form name="form1" method="post" action="<?php echo base_url(); ?>price_matrix/price_matrix_data/1">
-        <br  />
-        <table width="40%">
-        <?php foreach ($hotel_selected as $hotel_selected) { ?>
-        <tr>
-        <td>Hotel:</td> <td><input type="text" name="name" id="name" size="40" readonly="readonly" value="<?php echo ($hotel_selected['name']);?>" /></td>
-        </tr>        
-        <tr>
-        <td>Plan:</td>
-        <td>
-        <?php if (count ($plans) == 0){?>
-                <strong>No hay planes relacionados</strong> </td> </tr>
-                <input type="hidden" name="plan" id="plan" value="no_plan"  />
-        <?php }
-              else { ?>
-                <select name="plan" id="plan" >
-                <?php foreach ($plans as $plan) { ?>
-					<option value="<?php echo ($plan['plan_id']); ?>"> <?php echo ($plan['name_spanish']); ?> </option>
-                <?php }?> <!-- end of foreach $plans --> 
-                </select>
-        <?php }?> <!-- end of else -->
-        </td>
-        </tr>
-        <tr> 
-        <td>Desde:</td> <td><input type="text" name="date_ini" id="date_ini" onclick="popUpCalendar(this, form1.date_ini, 'yyyy-mm-dd')" readonly="readonly" /></td>
-        <td>Hasta:</td> <td><input type="text" name="date_end" id="date_end" onclick="popUpCalendar(this, form1.date_end, 'yyyy-mm-dd')" readonly="readonly" /></td>
-        </tr>
-        <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo ($hotel_selected['hotel_id']);?>"  />
-        <?php }?> <!-- end of foreach $hotel_selected -->
-        <tr> <td><input type="submit" value="Buscar"  /></td></tr>
-    </form> <!-- end of form price_matrix_data -->
+    
+<div id="new_matrix" name="new_matrix">
+    <table width="100%">
+    <tr> <td align="center"><img src="http://localhost/hotel-mario/designed_views/imagenes/bagregar.jpg" onclick="new_matrix(<?php echo($hotel_id);?>)"/></td>
+         <td align="center"><img src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg"/></td>
+    </tr>
     </table>
+</div>
+
+	<div class="separador"></div>
+	<div class="separadorv_gris"></div>
        
 	<?php if ($all_matrices != 'empty') { 
               foreach ($all_matrices as $value) { ?>
@@ -115,7 +98,7 @@ $this->load->view('global/management_bar');
                 </table> 
         <form method="post" action="<?php echo base_url(); ?>price_matrix/delete_matrix">
         <input type="hidden" name="prices_id" id="prices_id" value="<?php echo($prices_id); ?>"  />
-        <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo($hotel_selected['hotel_id']);?>"/>
+        <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo($hotel_id);?>"/>
         <input type="submit" value="Eliminar"  onclick="return confirmar();"/>
         </form>               
         <?php } ?> <!-- end of foreach ($all_matrices as $value) -->
@@ -123,7 +106,7 @@ $this->load->view('global/management_bar');
     else { ?>
         El hotel <strong><?php echo ($hotel_selected['name']);?></strong> no tiene precios de habitaciones disponibles.
     <?php } ?>
-<?php }?>
+<?php } ?>
 <?php
 $this->load->view('global/management_close');
 ?>

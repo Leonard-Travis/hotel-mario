@@ -52,16 +52,20 @@ $this->load->view('global/header');
 									en todo caso el ancho completo es de 950 px-->
 			<div id="asociar">
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/tabla1.jpg" alt="" class="floati valign" />
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Hoteles" class="valign" /><a href="#" onclick=" quote(<?php echo($customer_aux); ?>) ">Agregar Hoteles</a>
+				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Hoteles" class="valign" /><a href="#" onclick="quote(<?php echo($customer_aux); ?>, 'hotel_quote') ">Agregar Hoteles</a>
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/nada.gif" alt="" width="20" />
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Boletos" class="valign" /><a href="#">Agregar Boletos</a>
+				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Boletos" class="valign" /><a href="#" onclick="quote(<?php echo($customer_aux); ?>, 'flight_quote') ">Agregar Boletos</a>
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/nada.gif" alt="" width="20" />
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Genérica" class="valign" /><a href="#">Agregar Genérica</a>
+				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Genérica" class="valign" /><a href="#" onclick="quote(<?php echo($customer_aux); ?>, 'generic_quote') ">Agregar Genérica</a>
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/tabla3.jpg" alt=""  class="floatd valign"/>
             </div>
 <div id="asociar2" >
 
 	<div id="hotel_quote">
+    </div>
+    <div id="flight_quote">
+    </div>
+    <div id="generic_quote">
     </div>
 
 </div>

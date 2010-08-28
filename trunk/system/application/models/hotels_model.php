@@ -40,7 +40,7 @@ class Hotels_model extends Model {
 		$this->db->from('_admin_rooms_hotels');
 		$this->db->from('_admin_rooms');*/
 		
-		$this->db->select('r.room_id, r.name_spanish, r.name_english, rh.description, rh.capacity, rh.commissionable 
+		$this->db->select('r.room_id, r.name_spanish, r.name_english, rh.description, rh.capacity, rh.commissionable, rh.rooms_hotels_id 
 						   FROM _admin_rooms_hotels rh , _admin_rooms r 
 						   WHERE r.room_id = rh.ROOMS_id 
 						   AND rh.status = "active"
@@ -189,6 +189,15 @@ class Hotels_model extends Model {
 			$this->db->where('PLANS_id	', $new['plan_id']);
 			$this->db->update('_admin_hotels_plans', $data);  
 		}
+	}
+	
+	function all_seasons_hotel($hotel_id){
+		$this->db->select(' sh.season_name, s.* 
+							FROM _admin_seasons_per_hotel sh, _admin_season s
+							WHERE sh.HOTEL_id = '.$hotel_id.'
+							AND sh.SEASON_id = s.season_id');
+		$query =  $this->db->get();
+		return $query->result_array();
 	}
 }
 ?>
