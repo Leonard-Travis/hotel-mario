@@ -16,12 +16,18 @@ class Quotation extends Controller {
 	}
 	
 	function hotel_quote (){
-		$ci_client = $_POST['customer_id'];
-		$data['customer'] = $this->client_model->find($ci_client);
 		$data['hotels'] = $this->hotels_model->all_hotels();
 		$data['hotel_selected'] = NULL;
 		$this->load->view('hotel_quote',$data);
 
+	}
+	
+	function flight_quote(){
+		$this->load->view('flight_quote');
+	}
+	
+	function generic_quote(){
+		echo('generic_quote');
 	}
 	
 	function hotel_selected_quote(){
@@ -242,7 +248,7 @@ class Quotation extends Controller {
 		$data['date_end'] = $_POST["date_end"];
 		$data['subtotal'] = $_POST["subtotal"];
 		$data['quote_rooms'] = $this->str_to_array($_POST["rooms_selected"]);
-		var_dump($this->quotations_model->insert_quote($data));
+		$this->quotations_model->insert_quote($data);
 		
 	}
 

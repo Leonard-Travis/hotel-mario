@@ -123,7 +123,9 @@ else { ?>
 			<td align="center"><strong>Sabado</strong></td>
 			<td align="center"><strong>Domingo</strong></td>
 			</tr>
-			<?php foreach ($prices as $price)  { ?>
+			<?php foreach ($prices as $prices)  { 
+				  foreach ($prices as $price) {?>
+            
 				<?php if ($gray_row){?>
 					 <tr bgcolor="#CCCCCC">
 					 <?php $gray_row = false;
@@ -132,26 +134,24 @@ else { ?>
 					 <tr>
 					 <?php $gray_row = true;
 				  }?>
-				<td align="center"><?php echo ($price['name']); ?></td>
+				<td align="center"><?php echo ($price['name_spanish']); ?></td>
 				<td align="center"><?php echo ($price['price_per_night']); ?></td> 
                 <?php
-				if ($price['weekdays'] == 0){ ?>
+				if ($price['has_weekdays'] == 0){ ?>
 					<td align="center">-</td> <td align="center">-</td> <td align="center">-</td> 
                     <td align="center">-</td> <td align="center">-</td> <td align="center">-</td> <td align="center">-</td> 
-				<?php }
-				else {
-					foreach ($price['weekdays'] as $day){?>
-						<td align="center"><?php echo ($day['monday_price']); ?></td> 
-						<td align="center"><?php echo ($day['tuesday_price']); ?></td> 
-						<td align="center"><?php echo ($day['wednesday_price']); ?></td> 
-						<td align="center"><?php echo ($day['thursday_price']); ?></td> 
-						<td align="center"><?php echo ($day['friday_price']); ?></td> 
-						<td align="center"><?php echo ($day['saturday_price']); ?></td> 
-						<td align="center"><?php echo ($day['sunday_price']); ?></td> 
-					<?php } 
-				}?>
+				<?php } 
+				else {?>
+					<td align="center"><?php echo ($price['monday_price']); ?></td> 
+					<td align="center"><?php echo ($price['tuesday_price']); ?></td> 
+					<td align="center"><?php echo ($price['wednesday_price']); ?></td> 
+					<td align="center"><?php echo ($price['thursday_price']); ?></td> 
+					<td align="center"><?php echo ($price['friday_price']); ?></td> 
+					<td align="center"><?php echo ($price['saturday_price']); ?></td> 
+					<td align="center"><?php echo ($price['sunday_price']); ?></td> 
+				<?php } ?>
 				</tr>             
-			<?php } ?>
+			<?php } } //end of foreach prices ?>
 		
 	  <?php } ?>
       <table width="20%">

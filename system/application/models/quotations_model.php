@@ -41,6 +41,7 @@ class Quotations_model extends Model {
 	}
 	
 	function insert_quote($new_quote){
+		$quote_hotel_id = 0;
 		$data = array(
                'quote_hotel_id' => '' ,
 			   'date_check_in' => $new_quote['date_start'],
@@ -51,12 +52,25 @@ class Quotations_model extends Model {
 			   'collect_status' => 'x',
 			   'payment_status' => 'x',
 			   'billing_status' => 'x');
+
+		$this->db->insert('_admin_quotations_hotels', $data);
 		
-		//$this->db->insert('_admin_quotations_hotel', $data);
+		$this->db->select_max('quote_hotel_id');
+		$query = $this->db->get('_admin_quotations_hotels');
 		
-		//$this->db->select ('quote_hotel_id FROM _admin_quotations_hotel ORDER BY quote_hotel_id DESC LIMIT 1');
-		//$query =  $this->db->get();
-		return ('holaaaaaaaaaaaaaaaaa'); //$query->result_array();
+		foreach ($query->result_array() as $value)
+			foreach ($value as $value)
+				$quote_hotel_id = $value;
+		
+		foreach ($new_quote['quote_rooms'] as $quote_room){
+			$data = array(
+					'QUOTATIONS_HOTELS_id' => $quote_hotel_id,
+					'ROOMS_HOTELS_id' => $quote_room['rooms_hotels_id'],
+					'quantity_of_rooms' => $quote_room['quantity'],
+					'subtotal' => $quote_room['subtotal'],
+					'unit_price' => $quote_room['PU']);
+			$this->db->insert('_admin_rooms_per_quote', $data);
+		}
 	}
 }
 ?>
