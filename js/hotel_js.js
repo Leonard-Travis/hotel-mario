@@ -9,6 +9,7 @@ var date_start = '';
 var date_end = '';
 var plan_id = '';
 var persons = '';
+var season_name = '';
 
 function test(){
 	if (confirm('amame!')){
@@ -265,22 +266,21 @@ function validate_dates(){
 	date_start = $F('date_ini');
 	date_end = $F('date_end');
 	plan_id = $F('plan');
-	var season_name = $F('season_name');
+	season_name = $F('season_name');
 	counter = 0;
 	
 	new Ajax.Request('http://localhost/hotel-mario/index.php/price_matrix/validate_dates',{
       method: 'post',
       parameters: {hotel_id : hotel_id,
-	  			   plan_id : plan_id,
 				   date_ini : date_start,
-				   date_end : date_end,
-				   season_name : season_name},
+				   date_end : date_end},
 	  asynchronous: true,
       onSuccess: function(consultadoA){	
 	  		if (consultadoA.responseText == '')	alert('Las fechas dadas se solapan con seasons existentes');
 			else{
 				$('validate_check').update('<img src="http://localhost/hotel-mario/designed_views/imagenes/tick.png"/>');
 	  			$('new_matrix_data').update(consultadoA.responseText);
+				
 				new_matrix_add_room();
 				
 				$('process_new_matrix_button').update('<div class="separadorv"></div> <div class="tit2"> <input type="image" name="Agregar" id="Agregar" src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg"  onclick="process_new_matrix();"/> </div> <div class="separador"></div>');
@@ -309,23 +309,34 @@ function new_matrix_add_room(){
 }
 
 function process_new_matrix(){
-	var counter_aux = 1;
-	var new_matrix = hotel_id+'|'+date_start+'|'+date_end+'|'+plan_id+'||';	
+	var new_matrix = '';	
 	for (i=1; i <= counter; i++){
 		if ($F('price'+i) != ''){
-			new_matrix += $F('rooms'+i)+'|'+$F('price'+i);
+			new_matrix += $F('rooms'+i)+'|'+$F('price'+i)+'|';
 			if ($F('monday_price'+i) != ''){
-				new_matrix['room_'+counter_aux]['monday_price'] = $F('monday_price'+i);
-				new_matrix['room_'+counter_aux]['tuesday_price'] = $F('tuesday_price'+i);
-				new_matrix['room_'+counter_aux]['wednesday_price'] = $F('wednesday_price'+i);
-				new_matrix['room_'+counter_aux]['thrusday_price'] = $F('thrusday_price'+i);
-				new_matrix['room_'+counter_aux]['friday_price'] = $F('friday_price'+i);
-				new_matrix['room_'+counter_aux]['saturday_price'] = $F('saturday_price'+i);
-				new_matrix['room_'+counter_aux]['sunday_price'] = $F('sunday_price'+i);
+				new_matrix += '1|'+$F('monday_price'+i)+'|'+$F('tuesday_price'+i)+'|'+$F('wednesday_price'+i)+'|'+$F('thrusday_price'+i)+'|'+$F('friday_price'+i)+'|'+$F('saturday_price'+i)+'|'+$F('sunday_price'+i)+'||';
 			}
-			counter_aux = counter_aux + 1;
+			else new_matrix += '0||';
 		}
 	}
+	
+	alert(new_matrix);
+	
+	new Ajax.Request('http://localhost/hotel-mario/index.php/price_matrix/process_new_matrix',{
+      method: 'post',
+      parameters: {hotel_id : hotel_id,
+	  			   plan_id : plan_id,
+				   date_start : date_start,
+				   date_end : date_end,
+				   season_name : season_name,
+				   new_matrix : new_matrix},
+	  asynchronous: true,
+      onSuccess: function(consultadoA){	
+	  		$('new_matrix_data').update(consultadoA.responseText);
+	  		alert('Matriz agregada con exito!');
+      }
+      }
+   );
 }
 
 function add_matrix_to_season(){

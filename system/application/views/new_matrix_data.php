@@ -1,8 +1,6 @@
 
     <td class="primera">
-    <?php echo($counter); ?>
     <select name="rooms<?php echo($counter);?>" id="rooms<?php echo($counter);?>">
-    <option value="-">-----------</option>
     <?php foreach($rooms as $room) { ?>
             <option value="<?php echo($room['rooms_hotels_id']);?>"><?php echo($room['name_spanish']); ?></option> 
     <?php }?>
