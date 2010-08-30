@@ -175,14 +175,9 @@ class Price_matrix extends Controller {
 		$hotel_selected_id = $_POST["hotel_id"];
 		$date_end = $_POST["date_end"];
 		$date_ini = $_POST["date_ini"];
-		$plan_selected = $_POST["plan_id"];
-		$season_name = $_POST["season_name"];
 		$overlapping_dates = false;
 		
 		$hotel_seasons = $this->hotels_model->all_seasons_hotel($hotel_selected_id);
-		
-		$date_ini_aux = $date_ini;
-		$date_end_aux = $date_end;
 		
 		$date_ini=strtotime($date_ini);
 		$date_end=strtotime($date_end);
@@ -209,21 +204,8 @@ class Price_matrix extends Controller {
 			}
 		}
 		
-		if ($overlapping_dates == true){
-			echo('');
-		}
-		else{
-			/*$possible_season = $this->price_matrix_model->find_season($date_ini_aux, $date_end_aux);
-
-			if (empty($possible_season)){
-				$possible_season = $this->price_matrix_model->new_season($date_ini_aux, $date_end_aux);
-			}
-			foreach($possible_season as $possible_season)
-				$this->price_matrix_model->add_hotel_season($hotel_selected_id, $possible_season['season_id'], $season_name);
-			
-			*/
-			$this->load->view('new_matrix_frame');
-		}
+		if ($overlapping_dates == true)		echo('');
+		else	$this->load->view('new_matrix_frame');
 	}
 	
 	function new_matrix_add_room(){
@@ -232,6 +214,90 @@ class Price_matrix extends Controller {
 		$data['rooms'] = $this->hotels_model->all_rooms($hotel_selected_id);
 		$data['hotel_id'] = $hotel_selected_id;
 		$this->load->view('new_matrix_data', $data);
+	}
+	
+	function process_new_matrix(){
+		$hotel_id = $_POST['hotel_id'];
+		$plan_id = $_POST['plan_id'];
+		$date_start = $_POST['date_start'];
+		$date_end = $_POST['date_end'];
+		$season_name = $_POST['season_name'];
+		$new_matrix_str = $_POST['new_matrix'];
+		
+		/*$possible_season = $this->price_matrix_model->find_season($date_start, $date_end);
+		if (empty($possible_season)){
+			$possible_season = $this->price_matrix_model->new_season($date_start, $date_end);
+		}
+		foreach($possible_season as $possible_season)
+			$this->price_matrix_model->add_hotel_season($hotel_selected_id, $possible_season['season_id'], $season_name);*/
+			
+		$new_matrix = array();
+		$new_matrix = $this->new_matrix_str_to_array($new_matrix_str);
+		
+	}
+	
+	function new_matrix_str_to_array($new_matrix_str){		
+		$count = 0; $pointer = 0;
+		$new_matrix = array('ROOMS_HOTELS_id' => '', 'price_per_night' => '', 'has_weekdays' => '', 'monday_price' => '', 'tuesday_price' => '', 'wednesday_price' => '', 'thrusday_price' => '', 'friday_price' => '', 'saturday_price' => '', 'sunday_price' => '');
+		$new_matrices = array();
+		
+		for ($i=0; $i<strlen($new_matrix_str); $i++){
+			if (($new_matrix_str[$i] != '|') && ($count==0)){
+				$new_matrix['ROOMS_HOTELS_id'] .= $new_matrix_str[$i];
+			}
+			elseif (($new_matrix_str[$i] != '|') && ($count==1)){
+				$new_matrix['price_per_night'] .= $new_matrix_str[$i];
+			}
+			elseif (($new_matrix_str[$i] != '|') && ($count==2)){
+				
+				if ($new_matrix_str[$i] == 0){
+					$new_matrix['has_weekdays'] = $new_matrix['monday_price'] = $new_matrix['tuesday_price'] = $new_matrix['wednesday_price'] = $new_matrix['thrusday_price'] = $new_matrix['friday_price'] = $new_matrix['saturday_price'] = $new_matrix['sunday_price'] = '0';
+					$count = 0; $i = $i +2;
+					$new_matrices[$pointer] = $new_matrix;
+					
+					$new_matrix = array('ROOMS_HOTELS_id' => '', 'price_per_night' => '', 'has_weekdays' => '', 'monday_price' => '', 'tuesday_price' => '', 'wednesday_price' => '', 'thrusday_price' => '', 'friday_price' => '', 'saturday_price' => '', 'sunday_price' => '');
+					
+					$pointer++;
+				}
+				else	
+					$new_matrix['has_weekdays'] .= $new_matrix_str[$i];
+			}
+			elseif (($new_matrix_str[$i] != '|') && ($count==3)){
+				$new_matrix['monday_price'] .= $new_matrix_str[$i];
+			}
+			elseif (($new_matrix_str[$i] != '|') && ($count==4)){
+				$new_matrix['tuesday_price'] .= $new_matrix_str[$i];
+			}
+			elseif (($new_matrix_str[$i] != '|') && ($count==5)){
+				$new_matrix['wednesday_price'] .= $new_matrix_str[$i];
+			}
+			elseif (($new_matrix_str[$i] != '|') && ($count==6)){
+				$new_matrix['thrusday_price'] .= $new_matrix_str[$i];
+			}
+			elseif (($new_matrix_str[$i] != '|') && ($count==7)){
+				$new_matrix['friday_price'] .= $new_matrix_str[$i];
+			}
+			elseif (($new_matrix_str[$i] != '|') && ($count==8)){
+				$new_matrix['saturday_price'] .= $new_matrix_str[$i];
+			}
+			elseif (($new_matrix_str[$i] != '|') && ($count==9)){
+				$new_matrix['sunday_price'] .= $new_matrix_str[$i];
+			}
+			elseif (($new_matrix_str[$i] == '|') && ($count==9)){
+				$count = 0; $i++;
+				$new_matrices[$pointer] = $new_matrix; 
+				
+				$new_matrix = array('ROOMS_HOTELS_id' => '', 'price_per_night' => '', 'has_weekdays' => '', 'monday_price' => '', 'tuesday_price' => '', 'wednesday_price' => '', 'thrusday_price' => '', 'friday_price' => '', 'saturday_price' => '', 'sunday_price' => '');
+				
+				$pointer++;
+			}
+			elseif (($new_matrix_str[$i] == '|') && ($count < 9)){
+				$count++;
+			}
+		}
+		echo('<pre>');
+		var_dump($new_matrices);
+		echo('</pre>');
 	}
 }
 
