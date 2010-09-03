@@ -1,3 +1,4 @@
+<div id="management_price_matrix">
 <?php
 $this->load->view('global/header');
 ?>
@@ -47,19 +48,26 @@ $this->load->view('global/management_bar');
 		</form>
 <?php }?>
 
-<?php $hotel_id; 
+<?php $hotel_id; $hotel_name;
 	  if ($hotel_selected) {?>
       	<?php foreach ($hotel_selected as $hotel_selected) { 
-        			$hotel_id = $hotel_selected['hotel_id'];?>
+        			$hotel_id = $hotel_selected['hotel_id'];
+                    $hotel_name = $hotel_selected['name']; ?>
         <?php } ?>
 
 	<div class="separador"></div>
 	<div class="separadorv_gris"></div>
     
+    <table width="100%">
+	<tr>
+    <td colspan="2" align="center"><strong><?php echo($hotel_name); ?></strong></td>
+    </tr>
+    </table>
+    
 <div id="new_matrix" name="new_matrix">
     <table width="100%">
-    <tr> <td align="center"><img src="http://localhost/hotel-mario/designed_views/imagenes/bagregar.jpg" onclick="new_matrix(<?php echo($hotel_id);?>)"/></td>
-         <td align="center"><img src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg"/></td>
+    <tr> <td align="center"><input type="image" src="http://localhost/hotel-mario/designed_views/imagenes/bagregar.jpg" onclick="new_matrix_season(<?php echo($hotel_id);?>)"/></td>
+         <td align="center"><input type="image" src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="price_matrix_management_search(<?php echo($hotel_id);?>)"/></td>
     </tr>
     </table>
 </div>
@@ -98,6 +106,7 @@ $this->load->view('global/management_bar');
                 </table> 
         <form method="post" action="<?php echo base_url(); ?>price_matrix/delete_matrix">
         <input type="hidden" name="prices_id" id="prices_id" value="<?php echo($prices_id); ?>"  />
+        <input type="hidden" name="season_id" id="season_id" value="<?php echo($value['season_id']); ?>"  />
         <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo($hotel_id);?>"/>
         <input type="submit" value="Eliminar"  onclick="return confirmar();"/>
         </form>               
@@ -113,3 +122,4 @@ $this->load->view('global/management_close');
 
 </body>
 </html>
+</div>

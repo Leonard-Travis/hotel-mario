@@ -11,6 +11,20 @@ var plan_id = '';
 var persons = '';
 var season_name = '';
 
+var flight_origin='';
+var flight_destination='';
+var go_date='';
+var go_time='';
+var back_date='';
+var back_time='';
+var flight_number='';
+var airline='';
+var flight_class='';
+var cant_adults='';
+var cant_kids='';
+var price_per_adult='';
+var price_per_kid='';
+
 function test(){
 	if (confirm('amame!')){
 		return true;
@@ -245,12 +259,8 @@ function drop_element_from_quote(rooms_hotels_id){
 	else return false;
 }
 
-function new_matrix(hotel_selected_id){
+function new_matrix_season(hotel_selected_id){
 	hotel_id = hotel_selected_id;
-	$('new_matrix').update('<table width="100%"> <tr> <td align="center"><input type="button" value="Agregar nueva Season" onclick="new_matrix_season();"></td> <td align="center"><input type="button" value="Agregar a Season existente" onclick="add_matrix_to_season();"></td> </table>');
-}
-
-function new_matrix_season(){
 	new Ajax.Request('http://localhost/hotel-mario/index.php/price_matrix/new_matrix_season',{
       method: 'post',
       parameters: {hotel_selected_id : hotel_id },
@@ -320,8 +330,6 @@ function process_new_matrix(){
 		}
 	}
 	
-	alert(new_matrix);
-	
 	new Ajax.Request('http://localhost/hotel-mario/index.php/price_matrix/process_new_matrix',{
       method: 'post',
       parameters: {hotel_id : hotel_id,
@@ -332,16 +340,35 @@ function process_new_matrix(){
 				   new_matrix : new_matrix},
 	  asynchronous: true,
       onSuccess: function(consultadoA){	
-	  		$('new_matrix_data').update(consultadoA.responseText);
 	  		alert('Matriz agregada con exito!');
+				new Ajax.Request('http://localhost/hotel-mario/index.php/price_matrix/index/1',{
+				  method: 'post',
+				  parameters: {hotels : hotel_id},
+				  asynchronous: true,
+				  onSuccess: function(consultadoA){	
+						$('management_price_matrix').update(consultadoA.responseText);
+				  }
+				  }
+			   );
       }
       }
    );
 }
 
 function add_matrix_to_season(){
-	alert('add_matrix_to_season');
+	new Ajax.Request('http://localhost/hotel-mario/index.php/price_matrix/existing_season_data',{
+	  method: 'post',
+	  parameters: {hotel_id : hotel_id},
+	  asynchronous: true,
+	  onSuccess: function(consultadoA){	
+			$('travelers_info').update(consultadoA.responseText);
+	  }
+	  }
+	);
 }
+
+
+
 
 
 
