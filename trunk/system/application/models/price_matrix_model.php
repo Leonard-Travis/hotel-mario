@@ -53,12 +53,16 @@ class Price_matrix_model extends Model {
 		return $query->result_array();
 	}
 	
-	function delete_matrix($prices_id)
+	function delete_matrix($prices_id, $hotel_id, $season_id)
 	{
 		foreach ($prices_id as $price_id){
 			$this->db->where('price_id',$price_id);
 			$this->db->delete('_admin_price');
 		}
+		
+		$this->db->where('SEASON_id', $season_id);
+		$this->db->where('HOTEL_id', $hotel_id);
+		$this->db->delete('_admin_seasons_per_hotel');
 	}
 	
 	function find_season($date_start, $date_end) {
@@ -87,5 +91,12 @@ class Price_matrix_model extends Model {
 				   'season_name' => $season_name);
 		$this->db->insert('_admin_seasons_per_hotel', $data);
 	}
+	
+	function new_matrix($new_matrix){
+		foreach($new_matrix as $new_matrix){
+			$this->db->insert('_admin_price', $new_matrix);
+		}
+	}
+	
 }
 ?>

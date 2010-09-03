@@ -28,6 +28,7 @@ class Price_matrix extends Controller {
 					$matrix['plan_name'] = $query[$i]['plan_name']; 
 					$matrix['date_start'] = $query[$i]['date_start']; 
 					$matrix['date_end'] = $query[$i]['date_end']; 
+					$matrix['season_id'] = $query[$i]['SEASON_id'];
 					
 					$room_price[$k]['room_name'] = $query[$i]['room_name'];
 					$room_price[$k]['price_per_night'] = $query[$i]['price_per_night'];
@@ -146,16 +147,10 @@ class Price_matrix extends Controller {
 	{
 		$prices_id = $_POST["prices_id"];
 		$hotel_selected_id = $_POST["hotel_id"];
-		$aux = array(); $k=0;
-		for ($i=0; $i < strlen($prices_id); $i++)
-		{
-			if($prices_id[$i] != '|'){
-				$aux[$k] = $prices_id[$i];
-				$k++;
-			}
-		}
-		$prices_id = $aux;
-		$this->price_matrix_model->delete_matrix($prices_id);
+		$season_id = $_POST["season_id"];
+		
+		$prices_id = explode('|', $prices_id);
+		$this->price_matrix_model->delete_matrix($prices_id, $hotel_selected_id, $season_id);
 		
 		$data['query'] = $this->hotels_model->all_hotels();
 		$data['plans'] = $this->hotels_model->all_plans($hotel_selected_id);
@@ -223,25 +218,28 @@ class Price_matrix extends Controller {
 		$date_end = $_POST['date_end'];
 		$season_name = $_POST['season_name'];
 		$new_matrix_str = $_POST['new_matrix'];
+		$new_matrix = array();
 		
-		/*$possible_season = $this->price_matrix_model->find_season($date_start, $date_end);
+		$possible_season = $this->price_matrix_model->find_season($date_start, $date_end);
 		if (empty($possible_season)){
 			$possible_season = $this->price_matrix_model->new_season($date_start, $date_end);
 		}
-		foreach($possible_season as $possible_season)
-			$this->price_matrix_model->add_hotel_season($hotel_selected_id, $possible_season['season_id'], $season_name);*/
-			
-		$new_matrix = array();
-		$new_matrix = $this->new_matrix_str_to_array($new_matrix_str);
-		
+		foreach($possible_season as $possible_season){
+			$this->price_matrix_model->add_hotel_season($hotel_id, $possible_season['season_id'], $season_name);
+			$new_matrix = $this->new_matrix_str_to_array($new_matrix_str, $plan_id, $possible_season['season_id']);
+		}
+		$this->price_matrix_model->new_matrix($new_matrix);
 	}
 	
-	function new_matrix_str_to_array($new_matrix_str){		
+	function new_matrix_str_to_array($new_matrix_str, $plan_id, $season_id){		
 		$count = 0; $pointer = 0;
-		$new_matrix = array('ROOMS_HOTELS_id' => '', 'price_per_night' => '', 'has_weekdays' => '', 'monday_price' => '', 'tuesday_price' => '', 'wednesday_price' => '', 'thrusday_price' => '', 'friday_price' => '', 'saturday_price' => '', 'sunday_price' => '');
+		$new_matrix = array('SEASON_id' => '', 'PLAN_id' => '', 'ROOMS_HOTELS_id' => '', 'price_per_night' => '', 'has_weekdays' => '', 'monday_price' => '', 'tuesday_price' => '', 'wednesday_price' => '', 'thursday_price' => '', 'friday_price' => '', 'saturday_price' => '', 'sunday_price' => '');
 		$new_matrices = array();
 		
 		for ($i=0; $i<strlen($new_matrix_str); $i++){
+			$new_matrix['SEASON_id'] = $season_id;
+			$new_matrix['PLAN_id'] = $plan_id;
+			
 			if (($new_matrix_str[$i] != '|') && ($count==0)){
 				$new_matrix['ROOMS_HOTELS_id'] .= $new_matrix_str[$i];
 			}
@@ -251,11 +249,12 @@ class Price_matrix extends Controller {
 			elseif (($new_matrix_str[$i] != '|') && ($count==2)){
 				
 				if ($new_matrix_str[$i] == 0){
-					$new_matrix['has_weekdays'] = $new_matrix['monday_price'] = $new_matrix['tuesday_price'] = $new_matrix['wednesday_price'] = $new_matrix['thrusday_price'] = $new_matrix['friday_price'] = $new_matrix['saturday_price'] = $new_matrix['sunday_price'] = '0';
+					$new_matrix['has_weekdays'] = $new_matrix['monday_price'] = $new_matrix['tuesday_price'] = $new_matrix['wednesday_price'] = $new_matrix['thursday_price'] = $new_matrix['friday_price'] = $new_matrix['saturday_price'] = $new_matrix['sunday_price'] = '0';
+					
 					$count = 0; $i = $i +2;
 					$new_matrices[$pointer] = $new_matrix;
 					
-					$new_matrix = array('ROOMS_HOTELS_id' => '', 'price_per_night' => '', 'has_weekdays' => '', 'monday_price' => '', 'tuesday_price' => '', 'wednesday_price' => '', 'thrusday_price' => '', 'friday_price' => '', 'saturday_price' => '', 'sunday_price' => '');
+					$new_matrix = array('SEASON_id' => '', 'PLAN_id' => '', 'ROOMS_HOTELS_id' => '', 'price_per_night' => '', 'has_weekdays' => '', 'monday_price' => '', 'tuesday_price' => '', 'wednesday_price' => '', 'thursday_price' => '', 'friday_price' => '', 'saturday_price' => '', 'sunday_price' => '');
 					
 					$pointer++;
 				}
@@ -272,7 +271,7 @@ class Price_matrix extends Controller {
 				$new_matrix['wednesday_price'] .= $new_matrix_str[$i];
 			}
 			elseif (($new_matrix_str[$i] != '|') && ($count==6)){
-				$new_matrix['thrusday_price'] .= $new_matrix_str[$i];
+				$new_matrix['thursday_price'] .= $new_matrix_str[$i];
 			}
 			elseif (($new_matrix_str[$i] != '|') && ($count==7)){
 				$new_matrix['friday_price'] .= $new_matrix_str[$i];
@@ -287,7 +286,7 @@ class Price_matrix extends Controller {
 				$count = 0; $i++;
 				$new_matrices[$pointer] = $new_matrix; 
 				
-				$new_matrix = array('ROOMS_HOTELS_id' => '', 'price_per_night' => '', 'has_weekdays' => '', 'monday_price' => '', 'tuesday_price' => '', 'wednesday_price' => '', 'thrusday_price' => '', 'friday_price' => '', 'saturday_price' => '', 'sunday_price' => '');
+				$new_matrix = array('SEASON_id' => '', 'PLAN_id' => '', 'ROOMS_HOTELS_id' => '', 'price_per_night' => '', 'has_weekdays' => '', 'monday_price' => '', 'tuesday_price' => '', 'wednesday_price' => '', 'thursday_price' => '', 'friday_price' => '', 'saturday_price' => '', 'sunday_price' => '');
 				
 				$pointer++;
 			}
@@ -295,9 +294,7 @@ class Price_matrix extends Controller {
 				$count++;
 			}
 		}
-		echo('<pre>');
-		var_dump($new_matrices);
-		echo('</pre>');
+		return($new_matrices);
 	}
 }
 

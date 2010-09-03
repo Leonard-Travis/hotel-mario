@@ -3,6 +3,7 @@
 <?php if ($hotels) {?>
 <div class="separadorv"></div>
 <div class="separadorv"></div>
+<h1>Hotel</h1>
     <div id="asociar_c">
     <ul>
         <li class="li_tit_1"><img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel</li> 

@@ -251,6 +251,13 @@ class Quotation extends Controller {
 		$this->quotations_model->insert_quote($data);
 		
 	}
+	
+	function travelers_info(){
+		//$data['cant_adults'] = $_POST["cant_adults"];
+		echo('ddddddddddddddddddddddddddddddddddddddddd');
+		//$data['cant_kids'] = $_POST["cant_kids"];
+		//$this->load->view('travelers_info', $data);
+	}
 
 }
 
