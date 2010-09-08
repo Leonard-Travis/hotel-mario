@@ -42,7 +42,7 @@
             	<input type="text" name="price_per_adult" id="price_per_adult" size="12" maxlength="10"/>BsF.c/u
             </td>
             
-            <td><strong>Ninos:</strong></td>
+            <td><strong>Ni&ntilde;os:</strong></td>
             <td><input type="text" name="cant_kids" id="cant_kids"  size="5" maxlength="2"/>
             	<input type="text" name="price_per_kid" id="price_per_kid" size="12" maxlength="10"/>BsF.c/u
             </td>
@@ -51,8 +51,8 @@
             <tr>
             <td></td> <td><input type="checkbox" name="idayvuelta" id="idayvuelta" /> Ida y vuelta</td>
             </tr>
-           
-            <tr> <td></td> <td></td> <td></td> <td align="center"><input type="image" src="http://localhost/hotel-mario/designed_views/imagenes/bejecutar.jpg" onclick="test();"/></td> </tr>
+            
+            <tr> <td></td> <td></td> <td></td> <td align="center"><img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="flight_quote_data();" /></td></tr>
             
         </table> 
         <div id="travelers_info" name="travelers_info">

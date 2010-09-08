@@ -1,3 +1,4 @@
+<div id="quotation">
 <?php
 $this->load->view('global/header');
 ?>
@@ -24,26 +25,22 @@ $this->load->view('global/header');
 
 <?php echo validation_errors(); ?>
 <div class="separadorv"></div><div class="separadorv"></div>
-<form name="searchForm" method="post" action="<?php echo base_url(); ?>customer/search_form" onsubmit="return validarNum(this.ci_client.value);">
+<form name="searchForm">
 <div id="asociar_c">
     <ul>
         <li class="li_tit_1"><img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Buscador de Cliente</li> 
 		<li> <div class="cajat"> <input type="text" name="ci_client" id="ci_client" value="Ejem: 18888888" onclick="document.searchForm.ci_client.value ='';" maxlength="10"/></div>
-             <input name="enviar" type="submit" value="Seleccionar" /> </li> 
+             <input name="enviar" type="button" value="Seleccionar" onclick="client_quote();" /> </li> 
      </ul>  
 </div>
 </form> 
 
-<?php if ($customer != NULL){ 
-	$customer_aux = ''; ?>
+<?php if ($customer != NULL){ ?>
     <div class="separador"></div>
     <div class="separadorv_gris"></div>
 	<?php foreach ($customer as $client) { ?>  
     	<table><tr><td>Cliente: <strong><?php echo($client['name'].' '.$client['lastname']); ?></strong></td>
-        <td>CI: <strong><?php echo($client['customer_ci_id']); ?></strong></td></tr></table>
-        <?php $customer_aux = $client['customer_ci_id']; ?>        
-    <?php }
-} ?>
+        <td>CI: <strong><?php echo($client['customer_ci_id']); ?></strong></td></tr></table>    
 
 <div class="separadorv"></div>
 <div class="cuerpo">
@@ -52,13 +49,15 @@ $this->load->view('global/header');
 									en todo caso el ancho completo es de 950 px-->
 			<div id="asociar">
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/tabla1.jpg" alt="" class="floati valign" />
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Hoteles" class="valign" /><a href="#" onclick="quote(<?php echo($customer_aux); ?>, 'hotel_quote') ">Agregar Hoteles</a>
+				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Hoteles" class="valign" /><a href="#" onclick="quote(<?php echo($client['customer_ci_id']); ?>, 'hotel_quote') ">Agregar Hoteles</a>
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/nada.gif" alt="" width="20" />
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Boletos" class="valign" /><a href="#" onclick="quote(<?php echo($customer_aux); ?>, 'flight_quote') ">Agregar Boletos</a>
+				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Boletos" class="valign" /><a href="#" onclick="quote(<?php echo($client['customer_ci_id']); ?>, 'flight_quote') ">Agregar Boletos</a>
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/nada.gif" alt="" width="20" />
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Genérica" class="valign" /><a href="#" onclick="quote(<?php echo($customer_aux); ?>, 'generic_quote') ">Agregar Genérica</a>
+				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Genérica" class="valign" /><a href="#" onclick="quote(<?php echo($client['customer_ci_id']); ?>, 'generic_quote') ">Agregar Genérica</a>
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/tabla3.jpg" alt=""  class="floatd valign"/>
-            </div>
+            </div> 
+       <?php }
+} ?>
 <div id="asociar2" >
 
 	<div id="hotel_quote">
@@ -69,23 +68,11 @@ $this->load->view('global/header');
     </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-		</div>
+		<!--</div>-->
 			<div class="separador"></div>
 			<div class="tpiec"><img src="http://localhost/hotel-mario/designed_views/imagenes/esq1.gif" alt="" /><img src="http://localhost/hotel-mario/designed_views/imagenes/esq3.gif" alt="" class="floatd" /></div>
 			<div class="separadorv"></div>
-	</div>
-</div>
+	<!--</div>
+</div>-->
 </body>
 </html>

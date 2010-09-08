@@ -11,8 +11,13 @@ class Quotation extends Controller {
 	}
 
 	function new_quote($ci_client){
-		$data['customer'] = $this->client_model->find($ci_client);
-		$this->load->view('quotation',$data);
+		$data['customer'] = NULL;
+		
+		if ($ci_client != '0'){
+			$data['customer'] = $this->client_model->find($ci_client);
+		}   
+		
+		$this->load->view('quotation', $data);
 	}
 	
 	function hotel_quote (){
@@ -253,10 +258,16 @@ class Quotation extends Controller {
 	}
 	
 	function travelers_info(){
-		//$data['cant_adults'] = $_POST["cant_adults"];
-		echo('ddddddddddddddddddddddddddddddddddddddddd');
-		//$data['cant_kids'] = $_POST["cant_kids"];
-		//$this->load->view('travelers_info', $data);
+		$data['cant_adults'] = $_POST["cant_adults"];
+		$data['cant_kids'] = $_POST["cant_kids"];
+		$this->load->view('travelers_info', $data);
+	}
+	
+	function flight_quote_insert(){
+		$flight_adults = $_POST['flight_adults'];
+		echo('<pre>');
+		var_dump($flight_adults);
+		echo('</pre>');
 	}
 
 }

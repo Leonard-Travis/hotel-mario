@@ -32,6 +32,20 @@ function test(){
 	else return false;
 }
 
+function client_quote(){
+	customer_id = $F('ci_client');
+	
+	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/new_quote/'+customer_id,{
+      method: 'post',
+      parameters: {},
+	  asynchronous: true,
+      onSuccess: function(consultadoA){
+		 $('quotation').update(consultadoA.responseText);
+      }
+      }
+   );
+}
+
 function quote(client_id, quote_type){
 	 customer_id = client_id;
      new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/'+quote_type,{
@@ -355,18 +369,41 @@ function process_new_matrix(){
    );
 }
 
-function add_matrix_to_season(){
-	new Ajax.Request('http://localhost/hotel-mario/index.php/price_matrix/existing_season_data',{
-	  method: 'post',
-	  parameters: {hotel_id : hotel_id},
-	  asynchronous: true,
-	  onSuccess: function(consultadoA){	
-			$('travelers_info').update(consultadoA.responseText);
-	  }
-	  }
-	);
+function travelers_info(){
+	alert('jojojjo');
 }
 
+function flight_quote_data(){
+	 flight_origin= $F('origin');
+	 flight_destination=$F('destination');
+	 go_date=$F('go_date');
+	 go_time=$F('go_time');
+	 back_date=$F('back_date');
+	 back_time=$F('back_time');
+	 flight_number=$F('number');
+	 airline=$F('airline');
+	 flight_class=$F('class');
+	 cant_adults=$F('cant_adults');
+	 cant_kids=$F('cant_kids');
+	 price_per_adult= $F('price_per_adult');
+	 price_per_kid= $F('price_per_kid');
+	 
+	 if ((cant_adults == '') && (cant_kids == ''))
+	 	alert ('Debe haber por lo menos un pasajero');
+	 else{
+	 
+		 new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/travelers_info',{
+		  method: 'post',
+		  parameters: {cant_adults : cant_adults,
+					   cant_kids : cant_kids},
+		  asynchronous: true,
+		  onSuccess: function(consultadoA){	
+				$('travelers_info').update(consultadoA.responseText);
+		  }
+		  }
+		);
+	 }
+}
 
 
 
