@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 03, 2010 at 02:25 PM
+-- Generation Time: Sep 18, 2010 at 10:16 PM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -25,12 +25,15 @@ CREATE TABLE IF NOT EXISTS `_admin_airlines` (
   `name` varchar(45) NOT NULL,
   `code` varchar(45) NOT NULL,
   PRIMARY KEY (`airline_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `_admin_airlines`
 --
 
+INSERT INTO `_admin_airlines` (`airline_id`, `name`, `code`) VALUES
+(1, 'American Airline', '123'),
+(2, 'Santa Barbara', '234');
 
 -- --------------------------------------------------------
 
@@ -91,22 +94,31 @@ CREATE TABLE IF NOT EXISTS `_admin_flights` (
   `AIRLINES_id` int(10) unsigned NOT NULL,
   `number` int(10) unsigned NOT NULL,
   `class` enum('first class','turist','economic') NOT NULL,
-  `price` float NOT NULL,
+  `price_per_adult` float NOT NULL,
+  `price_per_kid` float NOT NULL,
   `origin` int(10) unsigned NOT NULL,
   `destination` int(10) unsigned NOT NULL,
   `time` varchar(45) NOT NULL,
   `date` date NOT NULL,
-  `type` tinyint(1) NOT NULL,
+  `type` enum('national','international') NOT NULL,
   PRIMARY KEY (`flight_id`),
   KEY `fk__ADMIN_FLIGHTS_has_ADMIN_AIRLINES` (`AIRLINES_id`),
   KEY `origin_flight_city` (`origin`),
   KEY `destination_flight_city` (`destination`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
 
 --
 -- Dumping data for table `_admin_flights`
 --
 
+INSERT INTO `_admin_flights` (`flight_id`, `AIRLINES_id`, `number`, `class`, `price_per_adult`, `price_per_kid`, `origin`, `destination`, `time`, `date`, `type`) VALUES
+(69, 1, 1, 'first class', 1.9, 1.1, 1, 4, 'hh:mm', '0000-00-00', 'international'),
+(70, 1, 1, 'first class', 1.9, 1.1, 4, 1, 'hh:mm', '0000-00-00', 'international'),
+(71, 1, 2, 'first class', 1.1, 0, 1, 4, 'hh:mm', '0000-00-00', 'international'),
+(72, 1, 5, 'first class', 1.9, 0, 1, 1, 'hh:mm', '0000-00-00', 'national'),
+(73, 1, 5, 'first class', 1.9, 0, 1, 1, 'hh:mm', '0000-00-00', 'national'),
+(74, 1, 9, 'first class', 1.1, 0, 1, 1, 'hh:mm', '0000-00-00', 'national'),
+(75, 1, 9, 'first class', 1.1, 0, 1, 1, 'hh:mm', '0000-00-00', 'national');
 
 -- --------------------------------------------------------
 
@@ -121,12 +133,17 @@ CREATE TABLE IF NOT EXISTS `_admin_flights_city` (
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`flight_city_id`),
   KEY `FLIGHTS_CITY_FKIndex1` (`FLIGHTS_COUNTRY_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `_admin_flights_city`
 --
 
+INSERT INTO `_admin_flights_city` (`flight_city_id`, `FLIGHTS_COUNTRY_id`, `name`) VALUES
+(1, 1, 'caracas'),
+(2, 1, 'maracaibo'),
+(3, 2, 'bogota'),
+(4, 2, 'medellin');
 
 -- --------------------------------------------------------
 
@@ -139,12 +156,15 @@ CREATE TABLE IF NOT EXISTS `_admin_flights_country` (
   `flight_country_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`flight_country_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `_admin_flights_country`
 --
 
+INSERT INTO `_admin_flights_country` (`flight_country_id`, `name`) VALUES
+(1, 'venezuela'),
+(2, 'colombia');
 
 -- --------------------------------------------------------
 
@@ -156,7 +176,6 @@ DROP TABLE IF EXISTS `_admin_flights_per_quote`;
 CREATE TABLE IF NOT EXISTS `_admin_flights_per_quote` (
   `QUOTATIONS_FLIGHTS_id` int(10) unsigned NOT NULL,
   `FLIGHTS_id` int(10) unsigned NOT NULL,
-  `number_of_people` int(10) unsigned NOT NULL,
   PRIMARY KEY (`QUOTATIONS_FLIGHTS_id`,`FLIGHTS_id`),
   KEY `fk_QUOTATIONS_FLIGHTS_has_FLIGHTS_QUOTATIONS_FLIGHTS` (`QUOTATIONS_FLIGHTS_id`),
   KEY `fk__ADMIN_QUOTATIONS_FLIGHTS_has_ADMIN_FLIGHTS_ADMIN_FLIGHTS` (`FLIGHTS_id`)
@@ -358,12 +377,17 @@ CREATE TABLE IF NOT EXISTS `_admin_quotations_flights` (
   `status` varchar(45) NOT NULL,
   `total` float NOT NULL,
   PRIMARY KEY (`quote_flight_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `_admin_quotations_flights`
 --
 
+INSERT INTO `_admin_quotations_flights` (`quote_flight_id`, `status`, `total`) VALUES
+(16, 'x', 6),
+(17, 'x', 1.1),
+(18, 'x', 3.8),
+(19, 'x', 2.2);
 
 -- --------------------------------------------------------
 
@@ -560,19 +584,25 @@ INSERT INTO `_admin_seasons_per_hotel` (`SEASON_id`, `HOTEL_id`, `season_name`) 
 
 DROP TABLE IF EXISTS `_admin_travelers`;
 CREATE TABLE IF NOT EXISTS `_admin_travelers` (
-  `traveler_ci_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `traveler_ci_id` int(10) unsigned NOT NULL,
   `name` varchar(45) DEFAULT NULL,
   `lastname` varchar(45) DEFAULT NULL,
   `passport` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `type` enum('senior','kid','adult') DEFAULT NULL,
   PRIMARY KEY (`traveler_ci_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_admin_travelers`
 --
 
+INSERT INTO `_admin_travelers` (`traveler_ci_id`, `name`, `lastname`, `passport`, `email`, `type`) VALUES
+(1, 'pepe', 'perez', '1', '1', 'adult'),
+(2, 'pedro', 'perez', '2', '2', 'kid'),
+(4, 'carlos', 'longo', '4', '4', 'adult'),
+(8, 'nombre', 'apellido', '8', '8', 'adult'),
+(9, 'nombre', 'apellido', '9', '9', 'adult');
 
 -- --------------------------------------------------------
 
@@ -593,6 +623,16 @@ CREATE TABLE IF NOT EXISTS `_admin_travelers_per_flight` (
 -- Dumping data for table `_admin_travelers_per_flight`
 --
 
+INSERT INTO `_admin_travelers_per_flight` (`TRAVELERS_ci_id`, `FLIGHTS_id`) VALUES
+(1, 69),
+(1, 70),
+(2, 69),
+(2, 70),
+(4, 71),
+(8, 72),
+(8, 73),
+(9, 74),
+(9, 75);
 
 --
 -- Constraints for dumped tables
@@ -617,6 +657,7 @@ ALTER TABLE `_admin_flights_city`
 -- Constraints for table `_admin_flights_per_quote`
 --
 ALTER TABLE `_admin_flights_per_quote`
+  ADD CONSTRAINT `flights_quotations_quote` FOREIGN KEY (`QUOTATIONS_FLIGHTS_id`) REFERENCES `_admin_quotations_flights` (`quote_flight_id`),
   ADD CONSTRAINT `FK_flights_flight_per_quote` FOREIGN KEY (`FLIGHTS_id`) REFERENCES `_admin_flights` (`flight_id`),
   ADD CONSTRAINT `FK_quotations_flight_per_quote` FOREIGN KEY (`QUOTATIONS_FLIGHTS_id`) REFERENCES `_admin_flights_per_quote` (`QUOTATIONS_FLIGHTS_id`);
 
@@ -668,8 +709,8 @@ ALTER TABLE `_admin_rooms_per_quote`
 -- Constraints for table `_admin_seasons_per_hotel`
 --
 ALTER TABLE `_admin_seasons_per_hotel`
-  ADD CONSTRAINT `season_in_seasons_per_hotel` FOREIGN KEY (`SEASON_id`) REFERENCES `_admin_season` (`season_id`),
-  ADD CONSTRAINT `hotel_in_seasons_per_hotel` FOREIGN KEY (`HOTEL_id`) REFERENCES `_admin_hotels` (`hotel_id`);
+  ADD CONSTRAINT `hotel_in_seasons_per_hotel` FOREIGN KEY (`HOTEL_id`) REFERENCES `_admin_hotels` (`hotel_id`),
+  ADD CONSTRAINT `season_in_seasons_per_hotel` FOREIGN KEY (`SEASON_id`) REFERENCES `_admin_season` (`season_id`);
 
 --
 -- Constraints for table `_admin_travelers_per_flight`
