@@ -72,5 +72,92 @@ class Quotations_model extends Model {
 			$this->db->insert('_admin_rooms_per_quote', $data);
 		}
 	}
+	
+	function flight_citys(){
+		$query =  $this->db->get('_admin_flights_city');
+		return $query->result_array();
+	}
+	
+	function airlines(){
+		$query =  $this->db->get('_admin_airlines');
+		return $query->result_array();
+	}
+	
+	function enum_values($table, $enum_column){		
+		$query =  $this->db->query("SHOW COLUMNS FROM ".$table." LIKE '".$enum_column."'");
+		return $query->result_array();
+	}
+	
+	function select_venezuela(){
+		$this->db->select('flight_country_id');
+		$this->db->where('name', 'venezuela');
+		$query = $this->db->get('_admin_flights_country');
+		return $query->result_array();
+	}
+	
+	function select_country($city_id){
+		$this->db->select('FLIGHTS_COUNTRY_id');
+		$this->db->where('flight_city_id', $city_id);
+		$query = $this->db->get('_admin_flights_city');
+		return $query->result_array();
+	}
+	
+	function find_traveler($traveler_ci_id){
+		$this->db->where('traveler_ci_id', $traveler_ci_id);
+		$query = $this->db->get('_admin_travelers');
+		return $query->result_array();
+	}
+	
+	function insert_flight_quote($new, $total){
+		$flights = array();
+		
+		foreach($new as $flight){
+			$flight_id = 0;
+			$flight_quote_id = 0;
+			$this->db->insert('_admin_flights', $flight[0]);
+			
+			$this->db->select_max('flight_id');
+			$query = $this->db->get('_admin_flights');
+			
+			foreach ($query->result_array() as $value)
+				foreach ($value as $value)
+					$flight_id = $value;
+			
+			$flights[count($flights)] = $flight_id;
+			
+			
+			for($i=1; $i<count($flight); $i++){
+				$traveler = $this->find_traveler($flight[$i]['traveler_ci_id']);
+				if ($traveler == NULL){
+					$this->db->insert('_admin_travelers', $flight[$i]);
+					$data_traveler['TRAVELERS_ci_id'] = $flight[$i]['traveler_ci_id'];
+				}
+				else{
+					foreach($traveler as $traveler){
+						$data_traveler['TRAVELERS_ci_id'] = $traveler['traveler_ci_id'];
+					}
+				}
+				$data_traveler['FLIGHTS_id']= $flight_id;
+				$this->db->insert('_admin_travelers_per_flight', $data_traveler);
+				
+			}
+		}
+		$data_quote_flight = array('quote_flight_id' => '', 'status' => 'x', 'total' => $total);
+		$this->db->insert('_admin_quotations_flights', $data_quote_flight);
+		
+		$this->db->select_max('quote_flight_id');
+			$query = $this->db->get('_admin_quotations_flights');
+			
+		foreach ($query->result_array() as $value)
+			foreach ($value as $value)
+				$flight_quote_id = $value;
+				
+		foreach ($flights as $flight){
+			$data_flights_per_quote = array ('QUOTATIONS_FLIGHTS_id' => $flight_quote_id, 'FLIGHTS_id' => $flight);
+			$this->db->insert('_admin_flights_per_quote', $data_flights_per_quote);
+		}
+				
+		
+	}
 }
 ?>

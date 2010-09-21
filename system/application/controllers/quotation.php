@@ -28,7 +28,19 @@ class Quotation extends Controller {
 	}
 	
 	function flight_quote(){
-		$this->load->view('flight_quote');
+		$data['cont_f'] = $_POST['cont_f'];
+		$data['citys'] = $this->quotations_model->flight_citys();
+		$data['airlines'] = $this->quotations_model->airlines();
+		$class = $this->quotations_model->enum_values('_admin_flights', 'class');
+		
+		foreach($class as $class){
+			preg_match('/enum\((.*)\)$/', $class['Type'], $matches);
+			$data['classes'] = explode(',', $matches[1]);
+		}	
+		
+		if ($data['cont_f'] == 1)
+			$this->load->view('flight_frame');
+		$this->load->view('flight_quote', $data);
 	}
 	
 	function generic_quote(){
@@ -260,14 +272,111 @@ class Quotation extends Controller {
 	function travelers_info(){
 		$data['cant_adults'] = $_POST["cant_adults"];
 		$data['cant_kids'] = $_POST["cant_kids"];
+		$data['cont_f'] = $_POST["cont_flight"];
 		$this->load->view('travelers_info', $data);
 	}
 	
+	function flight_type($origin, $destination){
+		$venezuela_id = $this->quotations_model->select_venezuela();
+		$origin_country = $this->quotations_model->select_country($origin);
+		$destination_country = $this->quotations_model->select_country($destination);
+		
+		foreach($origin_country as $origin_country){
+			foreach($venezuela_id as $venezuela_id){
+				foreach($destination_country as $destination_country){
+					if (($origin_country['FLIGHTS_COUNTRY_id'] == $venezuela_id['flight_country_id']) && ($destination_country['FLIGHTS_COUNTRY_id'] == $venezuela_id['flight_country_id']))
+						return ('national');
+					else return('international');
+				}
+			}
+		}
+		
+	}
+	
+	function process_flight($flight_aux, $all_data){
+		$flight = array(  'flight_id' => '', 'AIRLINES_id' => '', 'number' => '', 'class' => '', 'price_per_adult' => '', 'price_per_kid' => '', 'origin' => '', 'destination' => '', 'time' => '', 'date' => '', 'type' => '');
+		
+		$flight_data = array(); //all info of one flight including passengers once processed and ready		
+		$travelers_aux = array(); //travelers before explode, example: name|lastname|passport|...||..
+		$traveler_aux = array(); //each traveler after explode but with no indexes
+		$traveler = array('traveler_ci_id' => '', 'name' => '', 'lastname' => '', 'passport' => '', 'email' => '', 'type' => '');
+		
+		
+		$flight['flight_id'] = '';
+				
+		if ($flight_aux[11] == 'S'){
+			$flight['origin'] = $flight_aux[1];
+			$flight['destination'] = $flight_aux[0];
+			$flight['date'] = $flight_aux[12];
+			$flight['time'] = $flight_aux[13];
+			
+		}
+		else {
+			$flight['origin'] = $flight_aux[0];
+			$flight['destination'] = $flight_aux[1];
+			$flight['date'] = $flight_aux[2];
+			$flight['time'] = $flight_aux[3];
+			
+		}
+		$flight['number'] = $flight_aux[4];
+		$flight['AIRLINES_id'] = $flight_aux[5];
+		$flight['class'] = str_replace("'", "",$flight_aux[6]);
+		$flight['type'] = $this->flight_type($flight['origin'], $flight['destination']);
+		$flight['price_per_adult'] = $flight_aux[7];
+		$flight['price_per_kid'] = $flight_aux[8];
+		
+		$flight_data[0] = $flight;
+		
+		for ($i=1; $i<count($all_data); $i++){
+			$travelers_aux[count($travelers_aux)] = $all_data[$i]; 
+		}
+		
+		foreach($travelers_aux as $travelers_aux){
+			$traveler_aux = explode('|', $travelers_aux);
+			$traveler['name'] = $traveler_aux[0];
+			$traveler['lastname'] = $traveler_aux[1];
+			$traveler['traveler_ci_id'] = $traveler_aux[2];
+			$traveler['passport'] = $traveler_aux[3];
+			$traveler['email'] = $traveler_aux[4];
+			$traveler['type'] =  $traveler_aux[5];
+			
+			$flight_data[count($flight_data)] = $traveler;
+		}
+		return $flight_data;
+	}
+	
 	function flight_quote_insert(){
-		$flight_adults = $_POST['flight_adults'];
-		echo('<pre>');
-		var_dump($flight_adults);
-		echo('</pre>');
+		$flights_quote = $_POST["flights_quote"];
+		echo($flights_quote.'<br />');
+		
+		$flights_each = array();
+		$flights_each = explode('|||', $flights_quote); //array with info of every flight
+		$all_flights = array(); //all flights from the same quote that in the end will be saved.
+		
+		$total = 0;
+		
+		
+		foreach($flights_each as $flights){			
+			if ($flights != ''){
+				
+				$all_data = array(); //all info of one flight including passengers, but rough
+				$flight_aux = array(); //all info of flight exploded but with no indexes
+				
+				$all_data = explode('||', $flights);
+				$flight_aux = explode('|', $all_data[0]);
+				$all_flights[count($all_flights)] = $this->process_flight($flight_aux, $all_data);
+				$total += (($flight_aux[9] * (floatval($flight_aux[7]))) + ($flight_aux[10] * (floatval($flight_aux[8]))));
+				if ($flight_aux[11] == 'Y'){
+					$back_flight = str_replace("|Y|", "|S|", $flights);
+					$all_data = explode('||', $back_flight);
+					$flight_aux = explode('|', $all_data[0]);		
+					$all_flights[count($all_flights)] = $this->process_flight($flight_aux, $all_data);
+					$total += (($flight_aux[9] * (floatval($flight_aux[7]))) + ($flight_aux[10] * (floatval($flight_aux[8]))));
+				}
+			}
+			
+		}
+		$this->quotations_model->insert_flight_quote($all_flights, $total);
 	}
 
 }

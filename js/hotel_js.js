@@ -11,22 +11,11 @@ var plan_id = '';
 var persons = '';
 var season_name = '';
 
-var flight_origin='';
-var flight_destination='';
-var go_date='';
-var go_time='';
-var back_date='';
-var back_time='';
-var flight_number='';
-var airline='';
-var flight_class='';
-var cant_adults='';
-var cant_kids='';
-var price_per_adult='';
-var price_per_kid='';
+var cont_f = 1;
+var flights_quote = '';
 
 function test(){
-	if (confirm('amame!')){
+	if (confirm('amame!....')){
 		return true;
 	}
 	else return false;
@@ -47,13 +36,31 @@ function client_quote(){
 }
 
 function quote(client_id, quote_type){
+	 if (quote_type == 'flight_quote'){
+	 	cont_f = 1;
+		flights_quote = '';
+	 }
+		
 	 customer_id = client_id;
      new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/'+quote_type,{
       method: 'post',
-      parameters: {},
+      parameters: {cont_f : cont_f},
 	  asynchronous: true,
       onSuccess: function(consultadoA){
 		 $(quote_type).update(consultadoA.responseText);
+      }
+      }
+   );
+}
+
+function add_flight(){
+	cont_f = cont_f + 1;
+	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/flight_quote',{
+      method: 'post',
+      parameters: {cont_f : cont_f},
+	  asynchronous: true,
+      onSuccess: function(consultadoA){
+		 $('flight_quote'+cont_f).update(consultadoA.responseText);
       }
       }
    );
@@ -369,43 +376,102 @@ function process_new_matrix(){
    );
 }
 
-function travelers_info(){
-	alert('jojojjo');
-}
-
-function flight_quote_data(){
-	 flight_origin= $F('origin');
-	 flight_destination=$F('destination');
-	 go_date=$F('go_date');
-	 go_time=$F('go_time');
-	 back_date=$F('back_date');
-	 back_time=$F('back_time');
-	 flight_number=$F('number');
-	 airline=$F('airline');
-	 flight_class=$F('class');
-	 cant_adults=$F('cant_adults');
-	 cant_kids=$F('cant_kids');
-	 price_per_adult= $F('price_per_adult');
-	 price_per_kid= $F('price_per_kid');
+function flight_quote_data(cont_flight){
+	 var cant_adults=$F('cant_adults'+cont_flight);
+	 var cant_kids=$F('cant_kids'+cont_flight);
 	 
-	 if ((cant_adults == '') && (cant_kids == ''))
+	 if (((cant_adults == '') && (cant_kids == '')) || ((cant_adults == '0') && (cant_kids == '0'))|| ((cant_adults == '') && (cant_kids == '0'))|| ((cant_adults == '0') && (cant_kids == '')))
 	 	alert ('Debe haber por lo menos un pasajero');
 	 else{
 	 
 		 new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/travelers_info',{
 		  method: 'post',
 		  parameters: {cant_adults : cant_adults,
-					   cant_kids : cant_kids},
+					   cant_kids : cant_kids,
+					   cont_flight : cont_flight},
 		  asynchronous: true,
 		  onSuccess: function(consultadoA){	
-				$('travelers_info').update(consultadoA.responseText);
+				$('travelers_info'+cont_flight).update(consultadoA.responseText);
 		  }
 		  }
 		);
 	 }
 }
 
+function travelers(cont_flight){	
+	flights_quote += $F('origin'+cont_flight) +'|'+ $F('destination'+cont_flight) +'|'+ $F('go_date'+cont_flight) +'|'+ $F('go_time'+cont_flight) +'|'+ $F('number'+cont_flight) +'|'+ $F('airline'+cont_flight) +'|'+ $F('class'+cont_flight) +'|'+ $F('price_per_adult'+cont_flight) +'|'+ $F('price_per_kid'+cont_flight) +'|'+ $F('cant_adults'+cont_flight) +'|'+ $F('cant_kids'+cont_flight) +'|';
+	
+	round_trip = $F('round_trip'+cont_flight);
+	
+	if (round_trip){
+		flights_quote += 'Y|' +$F('back_date'+cont_flight) +'|'+ $F('back_time'+cont_flight) +'|';
+	}
+	else flights_quote += 'N|' ;
 
+	var cant_adults=$F('cant_adults'+cont_flight);
+	var cant_kids=$F('cant_kids'+cont_flight);
+	
+	var adults = '';
+	var kids = '';
+	
+	flights_quote += '|';
+	
+	if ((cant_adults != '0') && (cant_adults != '')){
+		for (i=1; i <= parseInt(cant_adults); i++){
+			adults += $F(cont_flight+'_adult'+i+'_name') + '|' + $F(cont_flight+'_adult'+i+'_lastname') + '|' + $F(cont_flight+'_adult'+i+'_ci') + '|' + $F(cont_flight+'_adult'+i+'_passport') + '|' + $F(cont_flight+'_adult'+i+'_email') + '|adult||'; 
+		}
+		flights_quote += adults;
+	}
+	
+	if ((cant_kids != '0') && (cant_kids != '')){
+		for (i=1; i <= parseInt(cant_kids); i++){
+			kids += $F(cont_flight+'_kid'+i+'_name') + '|' + $F(cont_flight+'_kid'+i+'_lastname') + '|' + $F(cont_flight+'_kid'+i+'_ci') + '|' + $F(cont_flight+'_kid'+i+'_passport') + '|' + $F(cont_flight+'_kid'+i+'_email') + '|kid||'; 
+		}
+		
+		flights_quote += kids;
+	}
+	flights_quote += '|';
+	
+	$('flight_quote_summary').update('<input type="button" value="Procesar" onclick="flight_quote_process();" />');
+	
+	
+	/*new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/flight_quote_insert',{
+		  method: 'post',
+		  parameters: {	flights_quote : flights_quote },
+		  asynchronous: true,
+		  onSuccess: function(consultadoA){	
+		  		alert('Cotizacion de vuelo ingresada exitosamente!');
+				$('travelers_info'+cont_flight).update(consultadoA.responseText);
+		  }
+		  }
+		);*/
+}
+
+function flight_quote_process(){
+	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/flight_quote_insert',{
+		  method: 'post',
+		  parameters: {	flights_quote : flights_quote },
+		  asynchronous: true,
+		  onSuccess: function(consultadoA){	
+		  		alert('Cotizacion de vuelo ingresada exitosamente!');
+				$('travelers_info'+cont_flight).update(consultadoA.responseText);
+		  }
+		  }
+		);
+}
+
+function back_data(cont_flight){
+	var round_trip = $F('round_trip'+cont_flight);
+	
+	if (round_trip){
+		$('back'+cont_flight).style.visibility = 'visible'; 
+		$('back_data'+cont_flight).style.visibility = 'visible'; 
+	}
+	else {
+		$('back'+cont_flight).style.visibility = 'hidden'; 
+		$('back_data'+cont_flight).style.visibility = 'hidden'; 
+	}
+}
 
 
 

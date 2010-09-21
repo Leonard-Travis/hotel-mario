@@ -74,5 +74,6 @@ $this->load->view('global/header');
 			<div class="separadorv"></div>
 	<!--</div>
 </div>-->
+
 </body>
 </html>
