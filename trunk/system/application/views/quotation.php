@@ -64,7 +64,11 @@ $this->load->view('global/header');
     </div>
     <div id="flight_quote">
     </div>
+    <div id="flight_quote_summary">
+    </div>
     <div id="generic_quote">
+    </div>
+    <div id="generic_summary">
     </div>
 
 </div>

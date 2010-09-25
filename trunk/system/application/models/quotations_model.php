@@ -156,8 +156,52 @@ class Quotations_model extends Model {
 			$data_flights_per_quote = array ('QUOTATIONS_FLIGHTS_id' => $flight_quote_id, 'FLIGHTS_id' => $flight);
 			$this->db->insert('_admin_flights_per_quote', $data_flights_per_quote);
 		}
-				
+	}
+	
+	function find_city($city_id){
+		$this->db->where('flight_city_id', $city_id);
+		$query = $this->db->get('_admin_flights_city');
+		return $query->result_array();
+	}
+	
+	function find_airline($airline_id){
+		$this->db->where('airline_id', $airline_id);
+		$query = $this->db->get('_admin_airlines');
+		return $query->result_array();
+	}
+	
+	function generic_process($new, $total){
+		$generic_quote_id = 0;
+		$generic_id = 0;
 		
+		$data_generic_quotation = array ('quotes_generic_id' => '', 'total' => $total);
+		$this->db->insert('_admin_quotations_generic', $data_generic_quotation);
+		
+		$this->db->select_max('quotes_generic_id');
+			$query = $this->db->get('_admin_quotations_generic');
+			
+		foreach ($query->result_array() as $value)
+			foreach ($value as $value)
+				$generic_quote_id = $value;
+		
+		foreach($new as $new){
+			$data_generic = array('generic_id' => '',
+								  'description' => $new[0],
+								  'quantity' => $new[1],
+								  'unit_price' => $new[2]);
+			$this->db->insert('_admin_generic', $data_generic);
+			
+			$this->db->select_max('generic_id');
+			$query = $this->db->get('_admin_generic');
+			
+			foreach ($query->result_array() as $value)
+				foreach ($value as $value)
+					$generic_id = $value;
+					
+			$data_generic_per_quote = array('QUOTES_GENERIC_id' => $generic_quote_id,
+											'GENERIC_id' => $generic_id);
+			$this->db->insert('_admin_generic_per_quote', $data_generic_per_quote);
+		}
 	}
 }
 ?>
