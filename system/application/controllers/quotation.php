@@ -38,13 +38,13 @@ class Quotation extends Controller {
 			$data['classes'] = explode(',', $matches[1]);
 		}	
 		
-		if ($data['cont_f'] == 1)
+		if ($data['cont_f'] == 0)
 			$this->load->view('flight_frame');
 		$this->load->view('flight_quote', $data);
 	}
 	
 	function generic_quote(){
-		echo('generic_quote');
+		$this->load->view('generic');
 	}
 	
 	function hotel_selected_quote(){
@@ -293,7 +293,7 @@ class Quotation extends Controller {
 		
 	}
 	
-	function process_flight($flight_aux, $all_data){
+	function process_flight($flight_aux, $all_data, $summary){
 		$flight = array(  'flight_id' => '', 'AIRLINES_id' => '', 'number' => '', 'class' => '', 'price_per_adult' => '', 'price_per_kid' => '', 'origin' => '', 'destination' => '', 'time' => '', 'date' => '', 'type' => '');
 		
 		$flight_data = array(); //all info of one flight including passengers once processed and ready		
@@ -301,14 +301,15 @@ class Quotation extends Controller {
 		$traveler_aux = array(); //each traveler after explode but with no indexes
 		$traveler = array('traveler_ci_id' => '', 'name' => '', 'lastname' => '', 'passport' => '', 'email' => '', 'type' => '');
 		
-		
-		$flight['flight_id'] = '';
+		if ($summary == 0)
+			$flight['flight_id'] = '';
+		elseif ($summary == 1) $flight['flight_id'] = $flight_aux[11];
 				
-		if ($flight_aux[11] == 'S'){
+		if ($flight_aux[12] == 'S'){
 			$flight['origin'] = $flight_aux[1];
 			$flight['destination'] = $flight_aux[0];
-			$flight['date'] = $flight_aux[12];
-			$flight['time'] = $flight_aux[13];
+			$flight['date'] = $flight_aux[13];
+			$flight['time'] = $flight_aux[14];
 			
 		}
 		else {
@@ -345,9 +346,8 @@ class Quotation extends Controller {
 		return $flight_data;
 	}
 	
-	function flight_quote_insert(){
+	function flight_quote_insert($summary){
 		$flights_quote = $_POST["flights_quote"];
-		echo($flights_quote.'<br />');
 		
 		$flights_each = array();
 		$flights_each = explode('|||', $flights_quote); //array with info of every flight
@@ -364,21 +364,90 @@ class Quotation extends Controller {
 				
 				$all_data = explode('||', $flights);
 				$flight_aux = explode('|', $all_data[0]);
-				$all_flights[count($all_flights)] = $this->process_flight($flight_aux, $all_data);
+				$all_flights[count($all_flights)] = $this->process_flight($flight_aux, $all_data, $summary);
 				$total += (($flight_aux[9] * (floatval($flight_aux[7]))) + ($flight_aux[10] * (floatval($flight_aux[8]))));
-				if ($flight_aux[11] == 'Y'){
+				if ($flight_aux[12] == 'Y'){
 					$back_flight = str_replace("|Y|", "|S|", $flights);
 					$all_data = explode('||', $back_flight);
 					$flight_aux = explode('|', $all_data[0]);		
-					$all_flights[count($all_flights)] = $this->process_flight($flight_aux, $all_data);
+					$all_flights[count($all_flights)] = $this->process_flight($flight_aux, $all_data, $summary);
 					$total += (($flight_aux[9] * (floatval($flight_aux[7]))) + ($flight_aux[10] * (floatval($flight_aux[8]))));
 				}
 			}
 			
 		}
-		$this->quotations_model->insert_flight_quote($all_flights, $total);
+		if ($summary == '1')
+			$this->flight_quote_summary($all_flights, $total);
+		elseif ($summary == '0'){
+			$this->quotations_model->insert_flight_quote($all_flights, $total);
+			$data_total_quotations = array('type' => 'flight_quote', 'total' => $total);
+			$this->load->view('total_quotations', $data_total_quotations);
+		}
 	}
+	
+	function flight_quote_summary($all_flights, $total){
+		for($i=0; $i < count($all_flights); $i++){			
+			$city_aux = $this->quotations_model->find_city($all_flights[$i][0]['origin']);
+			foreach($city_aux as $city){
+				$all_flights[$i][0]['origin'] = $city['name'];
+			}
+			
+			
+			$city_aux = $this->quotations_model->find_city($all_flights[$i][0]['destination']);
+			foreach($city_aux as $city){
+				$all_flights[$i][0]['destination'] = $city['name'];
+			}
+			
+			$airline_aux = $this->quotations_model->find_airline($all_flights[$i][0]['AIRLINES_id']);
+			foreach ($airline_aux as $airline_aux){
+				$all_flights[$i][0]['AIRLINES_id'] = $airline_aux['code'];
+			}
+		}
+		
+		/*echo('<pre>');
+		var_dump($all_flights);
+		echo('</pre>');*/
+		
+		$data['all_flights'] = $all_flights;
+		$data['total'] = $total;
+		$this->load->view('flight_quote_summary', $data);
+	}
+	
+	function find_traveler($traveler_ci){
+		$traveler = $this->quotations_model->find_traveler($traveler_ci);
+		if ($traveler != NULL){
+			foreach($traveler as $traveler){
+				echo($traveler['name'].'|'.$traveler['lastname'].'|'.$traveler['passport'].'|'.$traveler['email']);
+			}
+		}
+		else echo('');
+	}
+	
+	function generic_summary(){
+		$generic = $_POST["generic_quote"];	
+		$total = $_POST["generic_total"];
+		$generic = explode('||', $generic);
 
+		for($i=0; $i < count($generic); $i++){
+			$generic[$i] = explode('|', $generic[$i]);
+		}
+		
+		$data['generic'] = $generic;
+		$data['total'] = $total;
+		$this->load->view('generic_summary', $data);
+	}
+	
+	function generic_process(){
+		$generic = $_POST["generic_quote"];	
+		$total = $_POST["generic_total"];
+		$generic = explode('||', $generic);
+
+		for($i=0; $i < count($generic); $i++){
+			$generic[$i] = explode('|', $generic[$i]);
+		}
+		
+		$this->quotations_model->generic_process($generic, $total);
+	}
 }
 
 

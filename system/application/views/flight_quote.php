@@ -1,3 +1,4 @@
+<div id="flight_quote_aux">
 <table width="100%">
         	<tr>
             <td><strong>Origen:</strong></td>
@@ -5,6 +6,7 @@
             	<?php foreach($citys as $city){ ?>
                 	<option value="<?php echo($city['flight_city_id']); ?>"><?php echo($city['name']); ?></option>
                 <?php } ?>
+                </select>
             </td>
             <td><strong>Partida:</strong></td>
             <td>
@@ -20,6 +22,7 @@
             	<?php foreach($citys as $city){ ?>
                 	<option value="<?php echo($city['flight_city_id']); ?>"><?php echo($city['name']); ?></option>
                 <?php } ?>
+                </select>
             </td>
             
             <td>
@@ -43,6 +46,7 @@
             	<?php foreach($airlines as $airline){ ?>
                 	<option value="<?php echo($airline['airline_id']); ?>"><?php echo($airline['name']); ?></option>
                 <?php } ?>
+                </select>
                  </td> 
             </tr>
             <tr> <td><strong>Clase:</strong></td> 
@@ -50,6 +54,7 @@
             	<?php foreach($classes as $class){ ?>
                 	<option value="<?php echo($class); ?>"><?php echo($class); ?></option>
                 <?php } ?>
+                </select>
                  </td> 
             </tr>
             
@@ -69,22 +74,18 @@
             <td></td> <td><input type="checkbox" name="round_trip<?php echo($cont_f); ?>" id="round_trip<?php echo($cont_f); ?>" onclick="back_data(<?php echo($cont_f); ?>);" checked="checked" /> Ida y vuelta</td>
             </tr>
             
-            <tr> <td></td> <td></td> <td></td> <td align="center"><img src="http://localhost/hotel-mario/designed_views/imagenes/bagregar.jpg" onclick="flight_quote_data(<?php echo($cont_f); ?>);" /></td></tr>
+            <tr> <td></td> <td></td> <td></td> <td align="center"><input type="button" value="Agregar Viajeros"onclick="flight_quote_data(<?php echo($cont_f); ?>);" /></td></tr>
             
         <div id="flight_quote<?php echo(((int) $cont_f) + 1); ?>" name="flight_quote<?php echo(((int) $cont_f) + 1); ?>">
         </div>
         </table>
         
         <div id="travelers_info<?php echo($cont_f); ?>" name="travelers_info<?php echo($cont_f); ?>">
-        </div>
-        
-        <div id="flight_quote_summary">
-        </div>
-        
+        </div>        
         
         
      
-     <?php if ($cont_f != 1) { ?>
+     <?php if ($cont_f != 0) { ?>
 		<div class="separadorv"></div><div class="separadorv_gris"></div><div class="separadorv"></div>
 	 <?php } ?>
     
@@ -92,4 +93,5 @@
         <div class="separadorv"></div>
         <div class="separadorv"></div>
     </div>
+</div>
 </div>
