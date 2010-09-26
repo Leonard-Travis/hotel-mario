@@ -70,6 +70,9 @@ $this->load->view('global/header');
     </div>
     <div id="generic_summary">
     </div>
+    
+    <div id="close_quotation">
+    </div>
 
 </div>
 		<!--</div>-->

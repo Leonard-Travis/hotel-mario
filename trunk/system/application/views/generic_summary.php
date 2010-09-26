@@ -37,7 +37,10 @@
         <tr>
         	<td class="numerico sinborde"></td> 
             <td class="numerico sinborde" colspan="3">
-            <img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="generic_process();" /></td>
+            <div id="generic_process_button">
+            <img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="generic_process();" />
+            </div>
+            </td>
         </tr>
     </table>
 </div>
