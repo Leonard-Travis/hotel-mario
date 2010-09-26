@@ -265,8 +265,8 @@ class Quotation extends Controller {
 		$data['date_end'] = $_POST["date_end"];
 		$data['subtotal'] = $_POST["subtotal"];
 		$data['quote_rooms'] = $this->str_to_array($_POST["rooms_selected"]);
-		$this->quotations_model->insert_quote($data);
-		
+		$quote_hotel_id = $this->quotations_model->insert_hotel_quote($data);
+		echo($quote_hotel_id);
 	}
 	
 	function travelers_info(){
@@ -379,9 +379,8 @@ class Quotation extends Controller {
 		if ($summary == '1')
 			$this->flight_quote_summary($all_flights, $total);
 		elseif ($summary == '0'){
-			$this->quotations_model->insert_flight_quote($all_flights, $total);
-			$data_total_quotations = array('type' => 'flight_quote', 'total' => $total);
-			$this->load->view('total_quotations', $data_total_quotations);
+			$flight_quote_id = $this->quotations_model->insert_flight_quote($all_flights, $total);
+			echo($flight_quote_id);
 		}
 	}
 	
@@ -446,7 +445,20 @@ class Quotation extends Controller {
 			$generic[$i] = explode('|', $generic[$i]);
 		}
 		
-		$this->quotations_model->generic_process($generic, $total);
+		$generic_quote_id = $this->quotations_model->insert_generic_quote($generic, $total);
+		echo($generic_quote_id);
+	}
+	
+	function process_quotation(){
+		$data['quote_id'] = '';
+		$data['CUSTOMERS_ci_id'] = $_POST["customer_id"];
+		$data['EMPLOYEES_id'] = 1;
+		$data['QUOTATIONS_HOTELS_id'] = $_POST["hotel_quote_id"];		
+		$data['QUOTATIONS_FLIGHTS_id'] = $_POST["flight_quote_id"];
+		$data['QUOTATIONS_GENERIC_id'] = $_POST["generic_quote_id"];
+		$data['quote_date'] = date('Y-m-d');
+		
+		$this->quotations_model->insert_quotation($data);
 	}
 }
 

@@ -248,3 +248,201 @@ ERROR - 2010-09-25 03:49:29 --> 404 Page Not Found --> ui
 ERROR - 2010-09-25 03:49:29 --> 404 Page Not Found --> themes
 ERROR - 2010-09-25 03:49:29 --> 404 Page Not Found --> demos.css
 ERROR - 2010-09-25 03:49:30 --> Severity: Warning  --> unlink(C:\wamp\www\hotel-mario/system/cache/6c8349cc7260ae62e3b1396831a8398f) [<a href='function.unlink'>function.unlink</a>]: No such file or directory C:\wamp\www\hotel-mario\system\codeigniter\Common.php 74
+ERROR - 2010-09-25 12:50:00 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 12:50:00 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 12:50:01 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 12:53:38 --> Severity: Notice  --> Undefined offset: 1 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 190
+ERROR - 2010-09-25 12:53:38 --> Severity: Notice  --> Undefined offset: 2 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 191
+ERROR - 2010-09-25 12:53:38 --> Query error: Column 'quantity' cannot be null
+ERROR - 2010-09-25 12:58:54 --> Severity: Notice  --> Undefined offset: 1 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 190
+ERROR - 2010-09-25 12:58:54 --> Severity: Notice  --> Undefined offset: 2 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 191
+ERROR - 2010-09-25 12:58:54 --> Query error: Column 'quantity' cannot be null
+ERROR - 2010-09-25 13:03:03 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 13:03:03 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 13:03:03 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 13:03:03 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 13:03:04 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 13:03:04 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 13:03:04 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 13:03:04 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 13:03:05 --> Severity: Warning  --> chmod() [<a href='function.chmod'>function.chmod</a>]: No such file or directory C:\wamp\www\hotel-mario\system\codeigniter\Common.php 73
+ERROR - 2010-09-25 13:03:05 --> Severity: Warning  --> unlink(C:\wamp\www\hotel-mario/system/cache/fc490ca45c00b1249bbe3554a4fdf6fb) [<a href='function.unlink'>function.unlink</a>]: No such file or directory C:\wamp\www\hotel-mario\system\codeigniter\Common.php 74
+ERROR - 2010-09-25 13:06:13 --> Severity: Notice  --> Undefined offset: 1 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 190
+ERROR - 2010-09-25 13:06:13 --> Severity: Notice  --> Undefined offset: 2 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 191
+ERROR - 2010-09-25 13:06:13 --> Query error: Column 'quantity' cannot be null
+ERROR - 2010-09-25 13:08:46 --> Severity: Notice  --> Undefined offset: 1 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 189
+ERROR - 2010-09-25 13:08:46 --> Severity: Notice  --> Undefined offset: 2 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 190
+ERROR - 2010-09-25 13:08:46 --> Severity: Notice  --> Undefined offset: 1 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 193
+ERROR - 2010-09-25 13:08:46 --> Severity: Notice  --> Undefined offset: 2 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 194
+ERROR - 2010-09-25 13:08:46 --> Query error: Column 'quantity' cannot be null
+ERROR - 2010-09-25 13:10:07 --> Severity: Notice  --> Undefined offset: 1 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 189
+ERROR - 2010-09-25 13:10:07 --> Severity: Notice  --> Undefined offset: 2 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 190
+ERROR - 2010-09-25 13:10:07 --> Severity: Notice  --> Undefined offset: 1 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 193
+ERROR - 2010-09-25 13:10:07 --> Severity: Notice  --> Undefined offset: 2 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 194
+ERROR - 2010-09-25 13:15:15 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 13:15:15 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 13:15:15 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 13:15:15 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 13:15:15 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 13:15:15 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 13:15:16 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 13:19:37 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 13:19:37 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 13:19:37 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 13:19:37 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 13:19:37 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 13:19:37 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 13:19:37 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 13:19:37 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 13:37:24 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 13:37:24 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 13:37:24 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:42:37 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 14:42:37 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 14:42:38 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 14:42:42 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:42:42 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:42:42 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 14:42:42 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 14:42:42 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:42:42 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:42:42 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 14:47:43 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 14:47:43 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 14:47:44 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:47:44 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 14:47:44 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:47:44 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:47:44 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 14:47:44 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 14:52:25 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:52:25 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 14:52:25 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:52:25 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 14:52:25 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 14:52:25 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 14:52:25 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:52:25 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:52:25 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:52:25 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 14:58:11 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 14:58:11 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 14:58:11 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:58:11 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:58:12 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 14:58:12 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 14:58:12 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 14:58:12 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 14:58:12 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 14:58:12 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 15:03:34 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 15:03:34 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 15:03:34 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 15:03:34 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 15:03:34 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 15:03:34 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 15:03:35 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 15:03:35 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:08:34 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:08:34 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:08:34 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:08:34 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:08:35 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:08:35 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:08:35 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:08:35 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:08:36 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:11:20 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:11:20 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:11:20 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:11:20 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:11:21 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:11:21 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:11:21 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:11:21 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:12:41 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:12:41 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:12:41 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:12:42 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:12:42 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:12:42 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:13:25 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:13:25 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:13:25 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:13:25 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:13:25 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:13:25 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:13:25 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:13:25 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:18:15 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:18:15 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:18:15 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:18:16 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:18:16 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:18:16 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:18:16 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:18:16 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:18:16 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:32:12 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:32:12 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:32:12 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:32:12 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:32:12 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:32:13 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:32:13 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:32:13 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:32:13 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:32:46 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:32:46 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:32:46 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:32:46 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:32:47 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:32:47 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:32:47 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:32:47 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:34:04 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:34:04 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:34:04 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:34:04 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:34:05 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:34:05 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:34:05 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:34:05 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:37:10 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:37:10 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:37:10 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:37:10 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:41:19 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:41:19 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:41:19 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:41:19 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:41:19 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:49:12 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:49:12 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:50:56 --> 404 Page Not Found --> jquery-1.3.2.js
+ERROR - 2010-09-25 18:50:56 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:50:56 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 18:50:57 --> 404 Page Not Found --> themes
+ERROR - 2010-09-25 18:50:57 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:50:57 --> 404 Page Not Found --> ui
+ERROR - 2010-09-25 18:50:57 --> 404 Page Not Found --> demos.css
+ERROR - 2010-09-25 19:10:38 --> 404 Page Not Found --> customer/ui
+ERROR - 2010-09-25 19:10:38 --> 404 Page Not Found --> customer/ui
+ERROR - 2010-09-25 19:10:38 --> 404 Page Not Found --> customer/ui
+ERROR - 2010-09-25 19:10:38 --> 404 Page Not Found --> customer/themes
+ERROR - 2010-09-25 19:10:38 --> 404 Page Not Found --> customer/demos.css
+ERROR - 2010-09-25 19:10:42 --> 404 Page Not Found --> customer/themes
+ERROR - 2010-09-25 19:10:42 --> 404 Page Not Found --> customer/ui
+ERROR - 2010-09-25 19:10:42 --> 404 Page Not Found --> customer/demos.css
+ERROR - 2010-09-25 19:10:48 --> 404 Page Not Found --> customer/ui
+ERROR - 2010-09-25 19:10:48 --> 404 Page Not Found --> customer/ui
+ERROR - 2010-09-25 19:10:48 --> 404 Page Not Found --> customer/ui
+ERROR - 2010-09-25 19:10:48 --> 404 Page Not Found --> customer/demos.css
+ERROR - 2010-09-25 19:10:53 --> 404 Page Not Found --> customer/themes
+ERROR - 2010-09-25 19:10:54 --> 404 Page Not Found --> customer/ui
+ERROR - 2010-09-25 19:10:54 --> 404 Page Not Found --> customer/ui
+ERROR - 2010-09-25 19:10:54 --> 404 Page Not Found --> customer/demos.css
+ERROR - 2010-09-25 19:34:23 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`hoteles.com.ve`.`_admin_quotations`, CONSTRAINT `FK_quotations_generic` FOREIGN KEY (`QUOTATIONS_GENERIC_id`) REFERENCES `_admin_quotations_generic` (`quotes_generic_id`))
+ERROR - 2010-09-25 19:34:29 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`hoteles.com.ve`.`_admin_quotations`, CONSTRAINT `FK_quotations_generic` FOREIGN KEY (`QUOTATIONS_GENERIC_id`) REFERENCES `_admin_quotations_generic` (`quotes_generic_id`))
+ERROR - 2010-09-25 19:35:03 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`hoteles.com.ve`.`_admin_quotations`, CONSTRAINT `FK_quotations_generic` FOREIGN KEY (`QUOTATIONS_GENERIC_id`) REFERENCES `_admin_quotations_generic` (`quotes_generic_id`))
+ERROR - 2010-09-25 19:35:03 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`hoteles.com.ve`.`_admin_quotations`, CONSTRAINT `FK_quotations_generic` FOREIGN KEY (`QUOTATIONS_GENERIC_id`) REFERENCES `_admin_quotations_generic` (`quotes_generic_id`))

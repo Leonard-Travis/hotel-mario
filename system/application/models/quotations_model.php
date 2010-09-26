@@ -40,7 +40,7 @@ class Quotations_model extends Model {
 		return $query->result_array();
 	}
 	
-	function insert_quote($new_quote){
+	function insert_hotel_quote($new_quote){
 		$quote_hotel_id = 0;
 		$data = array(
                'quote_hotel_id' => '' ,
@@ -71,6 +71,7 @@ class Quotations_model extends Model {
 					'unit_price' => $quote_room['PU']);
 			$this->db->insert('_admin_rooms_per_quote', $data);
 		}
+		return $quote_hotel_id;
 	}
 	
 	function flight_citys(){
@@ -156,6 +157,7 @@ class Quotations_model extends Model {
 			$data_flights_per_quote = array ('QUOTATIONS_FLIGHTS_id' => $flight_quote_id, 'FLIGHTS_id' => $flight);
 			$this->db->insert('_admin_flights_per_quote', $data_flights_per_quote);
 		}
+		return $flight_quote_id;
 	}
 	
 	function find_city($city_id){
@@ -170,7 +172,7 @@ class Quotations_model extends Model {
 		return $query->result_array();
 	}
 	
-	function generic_process($new, $total){
+	function insert_generic_quote($generic, $total){
 		$generic_quote_id = 0;
 		$generic_id = 0;
 		
@@ -184,24 +186,35 @@ class Quotations_model extends Model {
 			foreach ($value as $value)
 				$generic_quote_id = $value;
 		
-		foreach($new as $new){
-			$data_generic = array('generic_id' => '',
-								  'description' => $new[0],
-								  'quantity' => $new[1],
-								  'unit_price' => $new[2]);
-			$this->db->insert('_admin_generic', $data_generic);
-			
-			$this->db->select_max('generic_id');
-			$query = $this->db->get('_admin_generic');
-			
-			foreach ($query->result_array() as $value)
-				foreach ($value as $value)
-					$generic_id = $value;
-					
-			$data_generic_per_quote = array('QUOTES_GENERIC_id' => $generic_quote_id,
-											'GENERIC_id' => $generic_id);
-			$this->db->insert('_admin_generic_per_quote', $data_generic_per_quote);
+		foreach($generic as $new){
+			if ($new[0] != ''){
+				$data_generic = array('generic_id' => '',
+									  'description' => $new[0],
+									  'quantity' => $new[1],
+									  'unit_price' => $new[2]);
+				$this->db->insert('_admin_generic', $data_generic);
+				
+				$this->db->select_max('generic_id');
+				$query = $this->db->get('_admin_generic');
+				
+				foreach ($query->result_array() as $value)
+					foreach ($value as $value)
+						$generic_id = $value;
+						
+				$data_generic_per_quote = array('QUOTES_GENERIC_id' => $generic_quote_id,
+												'GENERIC_id' => $generic_id);
+				$this->db->insert('_admin_generic_per_quote', $data_generic_per_quote);
+			}
 		}
+		return $generic_quote_id;
+	}
+	
+	function insert_quotation($data){		
+		if($data['QUOTATIONS_HOTELS_id'] == '') $data['QUOTATIONS_HOTELS_id'] = NULL;		
+		if($data['QUOTATIONS_FLIGHTS_id'] == '') $data['QUOTATIONS_FLIGHTS_id'] = NULL;
+		if($data['QUOTATIONS_GENERIC_id'] == '') $data['QUOTATIONS_GENERIC_id'] = NULL;
+
+		$this->db->insert('_admin_quotations', $data);
 	}
 }
 ?>

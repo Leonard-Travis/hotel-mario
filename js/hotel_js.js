@@ -20,6 +20,10 @@ var generic_quote_array = new Array();
 var generic_total = 0;
 var generic_number = 0;
 
+var hotel_quote_id = null;
+var flight_quote_id = null;
+var generic_quote_id = null;
+
 function test(){
 	if (confirm('amame!....')){
 		return true;
@@ -28,7 +32,9 @@ function test(){
 }
 
 function client_quote(){
+	alert('client quote');
 	customer_id = $F('ci_client');
+	alert(customer_id);
 	
 	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/new_quote/'+customer_id,{
       method: 'post',
@@ -273,9 +279,12 @@ function save_quote(){
 	  			   subtotal : subtotal
 		  			},
 	  asynchronous: true,
-      onSuccess: function(consultadoA){	
-	  		alert('La cotizacion de Hotel ha sido procesado exitosamente');
+      onSuccess: function(consultadoA){		  		
 			$('add_quote_button').update('');
+			hotel_quote_id = consultadoA.responseText;
+			alert('Cotizacion de hotel agregada con exito: '+hotel_quote_id);
+			
+			$('close_quotation').update('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="http://localhost/hotel-mario/designed_views/imagenes/finalizar.jpg" onclick="process_quotation();" align="middle" /></td></tr> </table>');
       }
       }
    );
@@ -527,8 +536,11 @@ function flight_quote_process(){
 		  parameters: {	flights_quote : flights_quote },
 		  asynchronous: true,
 		  onSuccess: function(consultadoA){	
-		  		alert('Cotizacion de vuelo agregada exitosamente!');
 				$('flight_process_button').update('');
+				flight_quote_id = consultadoA.responseText;
+				alert('Cotizacion de vuelo agregada con exito: '+flight_quote_id);
+				
+			$('close_quotation').update('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="http://localhost/hotel-mario/designed_views/imagenes/finalizar.jpg" onclick="process_quotation();" align="middle" /></td></tr> </table>');
 		  }
 		  }
 		);
@@ -606,6 +618,7 @@ function drop_generic(generic_element){
 }
 
 function add_generic(){
+	$('generic_info').style.visibility = 'visible';
 	generic_number = generic_number + 1;
 	var tr = document.createElement("tr"); //create object <TR> 
 	tr.innerHTML = '<td align="center"><input type="text" id="description'+generic_number+'" name="description'+generic_number+'" size="60"></td>     <td align="center"><input type="text" id="cant'+generic_number+'" name="cant'+generic_number+'" size="3" maxlength="2" ></td> <td align="center">BsF.<input type="text" id="price'+generic_number+'" name="price'+generic_number+'" onBlur="generic_set_total('+generic_number+');" ></td> <td class="rojo totall"><div id="generic_total'+generic_number+'"></div></td> <td></td><td></td>'; 
@@ -620,8 +633,12 @@ function generic_process(){
 		  				generic_total : generic_total},
 		  asynchronous: true,
 		  onSuccess: function(consultadoA){	
-		  		alert('Cotizacion generica agregada exitosamente!!');
-				//$('generic_summary').update(consultadoA.responseText);
+				$('generic_info').style.visibility = 'hidden';
+				$('generic_process_button').update('');
+				generic_quote_id = consultadoA.responseText;
+				alert('Cotizacion generica agregada con exito: '+generic_quote_id);
+				
+				$('close_quotation').update('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="http://localhost/hotel-mario/designed_views/imagenes/finalizar.jpg" onclick="process_quotation();" align="middle" /></td></tr> </table>');
 				
 		  }
 		  }
@@ -649,6 +666,26 @@ function find_traveler(cont_flight, cont_traveler, type){
 		);
 }
 
+function process_quotation(){
+	alert('process');
+	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/process_quotation',{
+			  method: 'post',
+			  parameters: {hotel_quote_id : hotel_quote_id,
+			  			   flight_quote_id : flight_quote_id,
+			  			   generic_quote_id : generic_quote_id,
+						   customer_id: customer_id},
+			  asynchronous: true,
+			  onSuccess: function(consultadoA){	
+			  		alert('Cotizacion finalizada');
+					$('close_quotation').update(consultadoA.responseText);
+			  }
+			  }
+			);
+}
+
+function existing_quotation(customer_ci){
+	
+}
 
 
 

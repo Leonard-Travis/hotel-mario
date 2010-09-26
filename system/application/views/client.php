@@ -1,3 +1,4 @@
+<div id="quotation">
 <?php
 $this->load->view('global/header');
 ?>
@@ -114,8 +115,15 @@ function confirmar(){
     </td>
     </tr>
     
-    <tr> <td> <img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="" class="valign" /><a href="<?php echo base_url(); ?>quotation/new_quote/<?php echo ($ci_aux) ?>"><strong>Agregar Cotizacion</strong></a> </td>
-    <td><img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="" class="valign" /><a href="#"><strong>Cotizacion Existente</strong></a></td>
+    <tr> 
+    
+    <!--<td> <img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="" class="valign" /><a href="<?php //echo base_url(); ?>quotation/new_quote/<?php //echo ($ci_aux) ?>"><strong>Agregar Cotizacion</strong></a> 
+    </td>-->
+    
+    <td> <img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="" class="valign" /><a href="#" onclick="client_quote();"><strong>Agregar Cotizacion</strong></a> 
+    </td>
+    
+    <td><img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="" class="valign" onclick="existing_quotation(<?php echo ($ci_aux) ?>);" /><a href="#"><strong>Cotizacion Existente</strong></a></td>
     </tr>
 	</table>
     
@@ -124,6 +132,6 @@ function confirmar(){
 </div> <!--End div id="datos"-->
 <div id="cot" name="cot"></div>
      
-     
+</div>
 </body>
 </html>
