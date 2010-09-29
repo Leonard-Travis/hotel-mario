@@ -30,7 +30,7 @@ $this->load->view('global/header');
     <ul>
         <li class="li_tit_1"><img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Buscador de Cliente</li> 
 		<li> <div class="cajat"> <input type="text" name="ci_client" id="ci_client" value="Ejem: 18888888" onclick="document.searchForm.ci_client.value ='';" maxlength="10"/></div>
-             <input name="enviar" type="button" value="Seleccionar" onclick="client_quote();" /> </li> 
+             <input name="enviar" type="button" value="Seleccionar" onclick="client_quote(document.searchForm.ci_client.value);" /> </li> 
      </ul>  
 </div>
 </form> 

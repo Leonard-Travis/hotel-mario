@@ -28,7 +28,7 @@ class Client_model extends Model {
 			   'email' => $new['email'] ,
 			   'address' => $new['address'] ,
 			   'sex' => $new['sex'] ,
-			   'birth_date' => $new['birth_date']
+			   'birth_date' => $new['birthdate']
             );
 
 		$this->db->insert('_admin_customers', $data); 
@@ -49,6 +49,12 @@ class Client_model extends Model {
 
 		$this->db->where('customer_ci_id', $info['ci_client']);
 		$this->db->update('_admin_customers', $data);  
+	}
+	
+	function existing_quotation($customer_id){
+		$this->db->where('CUSTOMERS_ci_id',$customer_id);
+		$query =  $this->db->get('_admin_quotations');
+		return $query->result_array();
 	}
 }
 ?>

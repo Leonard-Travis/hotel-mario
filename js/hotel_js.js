@@ -31,10 +31,11 @@ function test(){
 	else return false;
 }
 
-function client_quote(){
-	alert('client quote');
-	customer_id = $F('ci_client');
-	alert(customer_id);
+function client_quote(customer){
+	customer_id = customer;
+	hotel_quote_id = null;
+	flight_quote_id = null;
+	generic_quote_id = null;
 	
 	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/new_quote/'+customer_id,{
       method: 'post',
@@ -270,14 +271,14 @@ function save_quote(){
 		}
 	}
 	
-	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/save_quote',{
+	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/save_hotel_quote',{
       method: 'post',
       parameters: {plan_id : plan_id,
 				   date_start : date_start,
 				   date_end : date_end,
 		    	   rooms_selected : imploded,
-	  			   subtotal : subtotal
-		  			},
+	  			   subtotal : subtotal,
+				   persons : persons},
 	  asynchronous: true,
       onSuccess: function(consultadoA){		  		
 			$('add_quote_button').update('');
@@ -298,11 +299,14 @@ function drop_element_from_quote(rooms_hotels_id){
 				}
 				
 			}
-			
-		if (rooms_selected.length > 0)	process_quote_hotel();
-		else start_quote();
+		
+		calculate_sub();
+		if ((capacity_total < persons) || (rooms_selected.length == 0)){
+			alert('La capacidad total de las habitaciones ('+capacity_total+') debe ser igual o mayor a las cantidad de adultos ('+persons+') a ospedarse, debera escoger las habitaciones nuevamente');
+			start_quote();
+		}
+		else if (rooms_selected.length > 0)	process_quote_hotel();
 	}
-	else return false;
 }
 
 function new_matrix_season(hotel_selected_id){
@@ -667,7 +671,6 @@ function find_traveler(cont_flight, cont_traveler, type){
 }
 
 function process_quotation(){
-	alert('process');
 	new Ajax.Request('http://localhost/hotel-mario/index.php/quotation/process_quotation',{
 			  method: 'post',
 			  parameters: {hotel_quote_id : hotel_quote_id,
@@ -677,16 +680,193 @@ function process_quotation(){
 			  asynchronous: true,
 			  onSuccess: function(consultadoA){	
 			  		alert('Cotizacion finalizada');
-					$('close_quotation').update(consultadoA.responseText);
+					new Ajax.Request('http://localhost/hotel-mario/index.php/customer/search_form',{
+					  method: 'post',
+					  parameters: {ci_client : customer_id},
+					  asynchronous: true,
+					  onSuccess: function(consultadoA){	
+							$('quotation').update(consultadoA.responseText);
+					  }
+					  }
+					);
+					existing_quotation(customer_id);
 			  }
 			  }
 			);
 }
 
-function existing_quotation(customer_ci){
-	
+function existing_quotation(customer){
+	new Ajax.Request('http://localhost/hotel-mario/index.php/customer/existing_quotation',{
+			  method: 'post',
+			  parameters: {customer : customer},
+			  asynchronous: true,
+			  onSuccess: function(consultadoA){	
+					$('existing_quotation').update(consultadoA.responseText);
+			  }
+			  }
+			);
 }
 
+function existing_quote_details(quote_id, close_div){
+	if(close_div == '1'){
+		$('existing_quote_details'+quote_id).update('');
+		$('existing_quote_details_button'+quote_id).update('<a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/fazul.jpg" alt="" onclick="existing_quote_details('+quote_id+',0);" /></a>');
+	}
+	else{
+		new Ajax.Request('http://localhost/hotel-mario/index.php/customer/existing_quote_details',{
+				  method: 'post',
+				  parameters: {quote_id : quote_id},
+				  asynchronous: true,
+				  onSuccess: function(consultadoA){	
+						$('existing_quote_details'+quote_id).update(consultadoA.responseText);
+						$('existing_quote_details_button'+quote_id).update('<a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/fazul_abajo.jpg" alt="" onclick="existing_quote_details('+quote_id+',1);" /></a>');
+				  }
+				  }
+				);
+	}
+}
+
+function search_client(customer){
+	
+	new Ajax.Request('http://localhost/hotel-mario/index.php/customer/search_form',{
+		  method: 'post',
+		  parameters: {ci_client : customer},
+		  asynchronous: true,
+		  onSuccess: function(consultadoA){	
+				var aux = consultadoA.responseText;
+				if (aux == 'non_existent'){
+					
+					if ( confirm('No se encuentra registrado, ¿Desea agregarlo?') ){
+						new_client(customer);
+					}
+				}
+				else $('customer').update(consultadoA.responseText);
+				
+		  }
+		  }
+		);
+}
+
+function new_client(customer){
+	new Ajax.Request('http://localhost/hotel-mario/index.php/customer/new_client/'+customer,{
+			  method: 'post',
+			  parameters: {},
+			  asynchronous: true,
+			  onSuccess: function(consultadoA){	
+					$('customer').update(consultadoA.responseText);
+			  }
+			  }
+			);
+}
+
+function new_client_data(){
+	var ci_client = $F('client_id');
+	var name = $F('name');
+	var lastname = $F('lastname');
+	var phone = $F('phone');
+	var email = $F('email');
+	var address = $F('address');
+	var birthdate = $F('birthdate');
+	var sex = $F('sex');
+	
+	if((ci_client != '') && (name != '') && (lastname != '') && (phone != '') && (email != '') && (address != '') && (birthdate != '')){
+	
+	new Ajax.Request('http://localhost/hotel-mario/index.php/customer/new_client/'+ci_client,{
+			  method: 'post',
+			  parameters: {ci_client :ci_client,
+			  			   name : name,
+						   lastname : lastname,
+						   phone : phone,
+						   email : email,
+						   address : address,
+						   birthdate : birthdate,
+						   sex : sex},
+			  asynchronous: true,
+			  onSuccess: function(consultadoA){	
+					var aux = consultadoA.responseText;
+					if(aux == 'exist') {
+						alert('Ya existe un cliente en el sistema con ese numero de cedula');
+					}
+					else {
+						alert('Cliente agregado con exito');
+						search_client(ci_client);
+					}
+			  }
+			  }
+			);
+	}
+	else alert('Hay campo(s) obligatorios vacios');
+}
+
+function modify_client_button(customer){
+	new Ajax.Request('http://localhost/hotel-mario/index.php/customer/modify_client',{
+			  method: 'post',
+			  parameters: {ci_client : customer},
+			  asynchronous: true,
+			  onSuccess: function(consultadoA){	
+					$('customer').update(consultadoA.responseText);
+			  }
+			  }
+			);
+}
+
+function modify_client(){
+	var ci_client = $F('client_id');
+	var name = $F('name');
+	var lastname = $F('lastname');
+	var phone = $F('phone');
+	var email = $F('email');
+	var address = $F('address');
+	var birthdate = $F('birthdate');
+	var sex = $F('sex');
+	
+	if((ci_client != '') && (name != '') && (lastname != '') && (phone != '') && (email != '') && (address != '') && (birthdate != '')){
+	
+		new Ajax.Request('http://localhost/hotel-mario/index.php/customer/modify_client',{
+				  method: 'post',
+				  parameters: {ci_client :ci_client,
+							   name : name,
+							   lastname : lastname,
+							   phone : phone,
+							   email : email,
+							   address : address,
+							   birthdate : birthdate,
+							   sex : sex},
+				  asynchronous: true,
+				  onSuccess: function(consultadoA){	
+						alert('Informacion actualizada!');
+						search_client(ci_client);
+				  }
+				  }
+				);
+	}
+	else alert('Hay campo(s) obligatorios vacios');
+}
+
+function delete_client(customer){
+	if( confirm('¿Realmente desea eliminar este cliente?') ){
+		new Ajax.Request('http://localhost/hotel-mario/index.php/customer/delete_client/'+customer,{
+				  method: 'post',
+				  parameters: {},
+				  asynchronous: true,
+				  onSuccess: function(consultadoA){	
+						alert('Cliente eliminado');
+						
+						new Ajax.Request('http://localhost/hotel-mario/index.php/customer/search_form',{
+						  method: 'post',
+						  parameters: {},
+						  asynchronous: true,
+						  onSuccess: function(consultadoA){	
+								$('quotation').update(consultadoA.responseText);
+								
+				  }
+				  }
+				);
+				  }
+				  }
+				);
+	}
+}
 
 
 

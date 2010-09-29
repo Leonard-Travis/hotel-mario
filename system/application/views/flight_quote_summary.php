@@ -51,7 +51,7 @@
             <td class="numerico sinborde"><span class="rojo">BsF.<?php echo($total); ?></span></td>
         </tr>
         <tr>
-         	<td>
+         	<td class="sinborde">
             <div id="flight_process_button"> 
             	<img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="flight_quote_process();" />
             </div> 
