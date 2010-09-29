@@ -259,11 +259,12 @@ class Quotation extends Controller {
 		$this->load->view('hotel_summary', $data);
 	}
 	
-	function save_quote(){
+	function save_hotel_quote(){
 		$data['plan_id'] = $_POST["plan_id"];
 		$data['date_start'] = $_POST["date_start"];
 		$data['date_end'] = $_POST["date_end"];
 		$data['subtotal'] = $_POST["subtotal"];
+		$data['persons'] = $_POST["persons"];
 		$data['quote_rooms'] = $this->str_to_array($_POST["rooms_selected"]);
 		$quote_hotel_id = $this->quotations_model->insert_hotel_quote($data);
 		echo($quote_hotel_id);
@@ -459,6 +460,15 @@ class Quotation extends Controller {
 		$data['quote_date'] = date('Y-m-d');
 		
 		$this->quotations_model->insert_quotation($data);
+		
+		 /*$to = "mariomunera89@gmail.com";
+		 $subject = "Hi!";
+		 $body = "Hi,\n\nHow are you?";
+		 if (mail($to, $subject, $body)) {
+		   echo("<p>Message successfully sent!</p>");
+		  } else {
+		   echo("<p>Message delivery failed...</p>");
+		  }*/
 	}
 }
 

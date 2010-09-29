@@ -12,6 +12,8 @@ $this->load->view('global/header');
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/f3.png" alt="" class="floati" />
             </li>
 			<li><a href="<?php echo base_url(); ?>price_matrix/index/0">Matriz de Precios</a></li>
+            <li class="palito"><img src="http://localhost/hotel-mario/designed_views/imagenes/naranja3.gif" alt="" /></li>
+            <li><a href="<?php echo base_url(); ?>quotation/new_quote/0">Cotizaciones</a></li>
 		</ul>
 	</div>
 </div>

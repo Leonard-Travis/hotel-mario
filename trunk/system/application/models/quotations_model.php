@@ -48,6 +48,7 @@ class Quotations_model extends Model {
 			   'date_check_out' => $new_quote['date_end'],
 			   'PLAN_id' => $new_quote['plan_id'],
 			   'total' => $new_quote['subtotal'],
+			   'persons' => $new_quote['persons'],
 			   'reservation_status' => 'x',
 			   'collect_status' => 'x',
 			   'payment_status' => 'x',
@@ -209,12 +210,144 @@ class Quotations_model extends Model {
 		return $generic_quote_id;
 	}
 	
-	function insert_quotation($data){		
-		if($data['QUOTATIONS_HOTELS_id'] == '') $data['QUOTATIONS_HOTELS_id'] = NULL;		
+	function find_quote($id, $table, $column){
+		$this->db->where($column, $id);
+		$query = $this->db->get($table);
+		return $query->result_array();
+	}
+	
+	function insert_quotation($data){
+		$total = 0;
+		if($data['QUOTATIONS_HOTELS_id'] == '') $data['QUOTATIONS_HOTELS_id'] = NULL;	
+		else {
+		    $quote = $this->find_quote($data['QUOTATIONS_HOTELS_id'], '_admin_quotations_hotels', 'quote_hotel_id');	
+			foreach($quote as $quote)
+				$total += $quote['total'];
+			
+		}
+		
 		if($data['QUOTATIONS_FLIGHTS_id'] == '') $data['QUOTATIONS_FLIGHTS_id'] = NULL;
+		else {
+			$quote = $this->find_quote($data['QUOTATIONS_FLIGHTS_id'], '_admin_quotations_flights', 'quote_flight_id');	
+			foreach($quote as $quote)
+				$total += $quote['total'];
+			
+		}
+		
 		if($data['QUOTATIONS_GENERIC_id'] == '') $data['QUOTATIONS_GENERIC_id'] = NULL;
-
+		else {
+			$quote = $this->find_quote($data['QUOTATIONS_GENERIC_id'], '_admin_quotations_generic', 'quotes_generic_id');	
+			foreach($quote as $quote)
+				$total += $quote['total'];
+			
+		}
+		
+		$data['total'] = $total;
 		$this->db->insert('_admin_quotations', $data);
+	}
+	
+	function quote_hotel_data($quotation){
+		$hotel_data = array('hotel_name' => '', 'hotel_location' => '', 'check_in' => '', 'check_out' => '', 'plan' => '', 'persons' => '', 'total' => '', 'rooms' => array() );
+		
+		foreach($quotation as $quotation){
+			$hotel_data['check_in'] = $quotation['date_check_in'];
+			$hotel_data['check_out'] = $quotation['date_check_out'];
+			$hotel_data['persons'] = $quotation['persons'];
+			$hotel_data['total'] = $quotation['total'];
+			
+			$this->db->select ('h.name, h.location');
+			$this->db->from ('_admin_hotels h, _admin_rooms_hotels rh, _admin_rooms_per_quote rq');
+			$this->db->where ( "rq.QUOTATIONS_HOTELS_id =".$quotation['quote_hotel_id']."
+								AND rq.ROOMS_HOTELS_id = rh.rooms_hotels_id
+								AND rh.HOTELS_id = h.hotel_id");
+			$query = $this->db->get();
+			
+			
+			
+			foreach ($query->result_array() as $value){
+				$hotel_data['hotel_name'] = $value['name'];
+				$hotel_data['hotel_location'] = $value['location'];
+			
+			}
+			
+			
+			$this->db->where('plan_id', $quotation['PLAN_id']);
+			$query = $this->db->get('_admin_plans');
+			
+			foreach ($query->result_array() as $value)
+				$hotel_data['plan'] = $value['name_spanish'].'/'.$value['name_english'];
+			
+			
+			$this->db->select ('r.name_spanish, r.special, rq.*');
+			$this->db->from ('_admin_rooms r, _admin_rooms_hotels rh, _admin_rooms_per_quote rq');
+			$this->db->where ( "rq.QUOTATIONS_HOTELS_id =".$quotation['quote_hotel_id']."
+								AND rq.ROOMS_HOTELS_id = rh.rooms_hotels_id
+								AND rh.ROOMS_id = r.room_id");
+			$query = $this->db->get();
+			
+			$pos = 0;
+			foreach ($query->result_array() as $value){
+				$hotel_data['rooms'][$pos]['name'] = $value['name_spanish'];
+				$hotel_data['rooms'][$pos]['special'] = $value['special'];
+				$hotel_data['rooms'][$pos]['quantity'] = $value['quantity_of_rooms'];
+				$hotel_data['rooms'][$pos]['unit_price'] = $value['unit_price'];
+				$hotel_data['rooms'][$pos]['subtotal'] = $value['subtotal'];
+				$pos++;				
+			}
+			
+		}
+		return ($hotel_data);		
+	}
+	
+	function quote_flight_data($quotation){
+		$flight_data = array();
+		$pos = 0;
+		foreach($quotation as $quotation){			
+			$this->db->select('f . * , a.name AS airline, fc.name AS origin_name');
+			$this->db->from('_admin_flights f, _admin_flights_per_quote fq, _admin_airlines a, _admin_flights_city fc');
+			$this->db->where('fq.QUOTATIONS_FLIGHTS_id ='.$quotation['quote_flight_id'].'
+								AND fq.FLIGHTS_id = f.flight_id
+								AND f.AIRLINES_id = a.airline_id
+								AND f.origin = fc.flight_city_id');
+			$query = $this->db->get();
+			
+			 $post=0;
+			foreach ($query->result_array() as $value){				
+				$flight_data[$pos]['origin'] = $value['origin_name'];
+				
+				$destination = $this->find_quote($value['destination'], '_admin_flights_city', 'flight_city_id');
+				foreach($destination as $destination)
+					$flight_data[$pos]['destination'] = $destination['name']; 
+					
+				$flight_data[$pos]['number'] = $value['number'];
+				$flight_data[$pos]['airline'] = $value['airline'];
+				$flight_data[$pos]['price_per_adult'] = $value['price_per_adult'];
+				$flight_data[$pos]['price_per_kid'] = $value['price_per_kid'];
+				$flight_data[$pos]['date'] = $value['date'];
+				$flight_data[$pos]['time'] = $value['time'];
+				
+				$this->db->select('t.*');
+				$this->db->from('_admin_travelers t, _admin_travelers_per_flight tf');
+			    $this->db->where('tf.FLIGHTS_id ='.$value['flight_id'].' AND tf.TRAVELERS_ci_id = t.traveler_ci_id');
+				$query = $this->db->get();
+				foreach ($query->result_array() as $traveler){
+					$flight_data[$pos]['traveler'][$post] = $traveler;	
+					$post++;
+				}
+				$pos++;
+			}
+		}
+		return $flight_data;
+	}
+	
+	function quote_generic_data($quotation){
+		foreach($quotation as $quotation){
+			$this->db->select('g.*');
+			$this->db->from('_admin_generic g, _admin_generic_per_quote gq');
+			$this->db->where('gq.QUOTES_GENERIC_id ='.$quotation['quotes_generic_id'].' AND gq.GENERIC_id = g.generic_id');
+			$query = $this->db->get();
+		}
+		return $query->result_array();
 	}
 }
 ?>
