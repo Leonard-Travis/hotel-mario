@@ -7,6 +7,7 @@ $this->load->view('global/header');
 	<div class="cuerpo">
 		<ul>
         	<li><a href="<?php echo base_url(); ?>customer/search_form">Clientes</a></li>
+            <li class="palito"><img src="http://localhost/hotel-mario/designed_views/imagenes/naranja3.gif" alt="" /></li>
 			<li><a href="<?php echo base_url(); ?>home/management">Gestion</a></li>
 			<li class="palito"><img src="http://localhost/hotel-mario/designed_views/imagenes/naranja3.gif" alt="" /></li>
 			<li><a href="<?php echo base_url(); ?>price_matrix/index/0">Matriz de Precios</a></li>
@@ -84,3 +85,4 @@ $this->load->view('global/header');
 
 </body>
 </html>
+</div>

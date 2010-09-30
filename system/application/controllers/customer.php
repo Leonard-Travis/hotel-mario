@@ -33,6 +33,13 @@ class Customer extends Controller {
 		}
 	}
 	
+	function customer_after_quote($ci_client){
+		$data['query'] = $this->client_model->find($ci_client);
+		$this->load->view('client');
+		$this->load->view('client_data',$data);
+		$this->existing_quotation($ci_client);
+	}
+	
 	function delete_client($ci_client)
     {
 		//By now I'm working only with basic information of the client, later it will modify and delete all data related to that customer quotes.
@@ -111,10 +118,10 @@ class Customer extends Controller {
 		}
 	}
 	
-	function existing_quotation(){
-		$customer_id = $_POST["customer"];
+	function existing_quotation($customer_id){
 		$data['quotations'] = $this->client_model->existing_quotation($customer_id);
-		$this->load->view('existing_quotations', $data);
+		if($data['quotations'])		$this->load->view('existing_quotations', $data);
+		else						echo('no-quote');
 	}
 	
 	function existing_quote_details(){

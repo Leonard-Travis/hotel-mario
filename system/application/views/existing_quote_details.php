@@ -138,7 +138,7 @@
     
     <?php } ?>
     <tr>
-        <td class="numerico sinborde" colspan="3"><span class="rojo">Total:</span></td>
+        <td class="numerico sinborde" colspan="3"><span class="rojo"></span></td>
         <td class="numerico sinborde"><span class="rojo">Total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BsF. <?php echo($total); ?></span></td>
     </tr>
 </table>
