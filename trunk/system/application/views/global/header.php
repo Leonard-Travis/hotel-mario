@@ -4,11 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Hoteles.com.ve</title>
 	<link type="text/css" href="themes/redmond/ui.all.css" rel="stylesheet" />
-	<script type="text/javascript" src="jquery-1.3.2.js"></script>
-	<script type="text/javascript" src="ui/ui.core.js"></script>
-	<script type="text/javascript" src="ui/ui.datepicker.js"></script>
     <script language="javascript" src="http://localhost/hotel-mario/system/application/views/calendario/popcalendar6.js"> </script>
-	<script type="text/javascript" src="ui/i18n/ui.datepicker-es.js"></script>
     <script type="text/javascript" src="http://localhost/hotel-mario/js/prototype-1.6.0.3.js"></script>
     <script type="text/javascript" src="http://localhost/hotel-mario/js/hotel_js.js"></script>
 	<link type="text/css" href="demos.css" rel="stylesheet" />

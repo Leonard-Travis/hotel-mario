@@ -16,12 +16,6 @@ re=/^([0-9])*$/
     }
 }
 
-function confirmar(){
-	if (confirm('¿Seguro desea eliminar el Cliente?')){
-		return true;
-	}
-	else return false;
-}
 </script>
 
 <div id="menu">

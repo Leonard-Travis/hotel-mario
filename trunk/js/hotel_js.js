@@ -577,15 +577,18 @@ function generic_q(){
 	generic_quote_array = clean_array;
 	generic_total = 0;
 	
-	for(i=0; i <= generic_number; i++){		
-		generic_quote_array[i] = new Array();
-		generic_quote_array[i][0] = $F('description'+i);
-		generic_quote_array[i][1] = $F('cant'+i);
-		generic_quote_array[i][2] = $F('price'+i);
-		generic_quote_array[i][3] = parseInt( $F('cant'+i) ) * parseFloat( $F('price'+i) );
-		generic_quote_array[i][4] = i;
-		
-		generic_total += generic_quote_array[i][3];
+	for(i=0; i <= generic_number; i++){	
+		if(($F('description'+i) != '') || ($F('cant'+i) != '') || ($F('price'+i) != '')){
+			var length = generic_quote_array.length;
+			generic_quote_array[length] = new Array();
+			generic_quote_array[length][0] = $F('description'+i);
+			generic_quote_array[length][1] = $F('cant'+i);
+			generic_quote_array[length][2] = $F('price'+i);
+			generic_quote_array[length][3] = parseInt( $F('cant'+i) ) * parseFloat( $F('price'+i) );
+			generic_quote_array[length][4] = i;
+			
+			generic_total += generic_quote_array[length][3];
+		}
 	}
 	generic_summary(generic_quote_array);
 }
@@ -680,28 +683,32 @@ function process_quotation(){
 			  asynchronous: true,
 			  onSuccess: function(consultadoA){	
 			  		alert('Cotizacion finalizada');
-					new Ajax.Request('http://localhost/hotel-mario/index.php/customer/search_form',{
-					  method: 'post',
-					  parameters: {ci_client : customer_id},
-					  asynchronous: true,
-					  onSuccess: function(consultadoA){	
-							$('quotation').update(consultadoA.responseText);
-					  }
-					  }
-					);
-					existing_quotation(customer_id);
+					
+			new Ajax.Request('http://localhost/hotel-mario/index.php/customer/customer_after_quote/'+customer_id,{
+			  method: 'post',
+			  parameters: {},
+			  asynchronous: true,
+			  onSuccess: function(consultadoA){	
+					$('quotation').update(consultadoA.responseText);
+			  }
+			  }
+			);
+			existing_quotation(customer_id);
+			
 			  }
 			  }
 			);
 }
 
 function existing_quotation(customer){
-	new Ajax.Request('http://localhost/hotel-mario/index.php/customer/existing_quotation',{
+	new Ajax.Request('http://localhost/hotel-mario/index.php/customer/existing_quotation/'+customer,{
 			  method: 'post',
-			  parameters: {customer : customer},
+			  parameters: {},
 			  asynchronous: true,
 			  onSuccess: function(consultadoA){	
-					$('existing_quotation').update(consultadoA.responseText);
+			  		var aux = consultadoA.responseText;
+					if(aux != 'no-quote')	$('existing_quotation').update(consultadoA.responseText);
+					else					alert('El cliente no posee cotizaciones hasta el momento');
 			  }
 			  }
 			);
