@@ -61,23 +61,29 @@ $this->load->view('global/management_bar');
 <?php if ($hotel_selected) {?>
 	<?php $hotel_id_aux = 111;?>
         <br  />
+        <h1>Datos del Hotel</h1>
+        
         <table  align="center" width="60%">
         <?php foreach ($hotel_selected as $hotel_selected) { ?>
-        <tr> <td colspan="2" align="center"><strong>Datos del Hotel</strong></td> </tr>
         <tr>
         <td>Nombre</td> <td><input width="100%" type="text" name="name" id="name" size="40" readonly="readonly" value="<?php echo ($hotel_selected['name']);?>" onclick="test2()"/></td>
         </tr> 
         <tr>
         <td>Ubicacion</td> <td><textarea name="location" cols="24" rows=""  maxlength="50" readonly="readonly"><?php echo ($hotel_selected['location']);?></textarea></td>
+        <td>
+        <a href="<?php echo base_url(); ?>hotels/modify_hotel/<?php echo ($hotel_selected['hotel_id']);?>" >
+        <img src="http://localhost/hotel-mario/designed_views/imagenes/bmodificar.jpg" />
+        </a>
+        </td>
         </tr>
         </table> 
         <br /><br />
         
         
-        <table>
-        <tr>
-        <td>Habitaciones</td> <td>Planes</td> 
-        </tr>
+        <table width="100%">
+          <tr>
+        <td><span class="naranja">Habitaciones</span></td> <td><span class="naranja">Planes</span></td>
+    	</tr>
         <tr></tr><tr></tr><tr></tr>
         <tr>
         <td valign="top" width="50%">
@@ -85,34 +91,28 @@ $this->load->view('global/management_bar');
                 <strong>No hay habitaciones relacionadas</strong> </td>
         <?php }
               else { ?>
-                <table width="100%">
-                    <?php $gray_row = true;?>   
-                    <tr> 
-                    <td align="center"><strong>Nombre Español</strong></td>
-                    <td align="center"><strong>English Name</strong></td>
-                    <td align="center"><strong>Desc.</strong></td> 
+                <table class="resumen" width="100%">
+                    <thead>
+            		<tr class="pthead"> 
+                    <td align="center"><strong>Nombre</strong></td>
+                    <td align="center"><strong>Name</strong></td>
+                    <td align="center"><strong>Descripcion</strong></td> 
                     <td align="center"><strong>Cap.</strong></td>
                     <td align="center"><strong>Esp.</strong></td>
                     <td align="center" width="17px"><strong></strong></td>
                     </tr>
+                    </thead>
                     <?php foreach ($rooms as $room) { ?>
-                        <?php if ($gray_row){?>
-                                <tr bgcolor="#CCCCCC">
-                                <?php $gray_row = false;
-                              }
-                              else{  ?>
-                                <tr>
-                                <?php $gray_row = true;
-                              }?>
+                         <tr>
                         <td align="center"> <?php echo ($room['name_spanish']);?> </td>
                         <td align="center"> <?php echo ($room['name_english']);?> </td>
                         <td align="center"> <?php echo ($room['description']);?> </td>
                         <td align="center"> <?php echo ($room['capacity']);?> </td>
-                        <?php if ($room['commissionable'] == 1) {?>
-                                <td align="center">TRUE</td>
+                        <?php if ($room['commissionable'] == 0) {?>
+                                <td align="center">SI</td>
                                 <?php }
                               else {?>
-                                <td align="center">FALSE</td>
+                                <td align="center">NO</td>
                         <?php }?>
                         <td align="center"> <a href="<?php echo base_url(); ?>hotels/disassociate_room/<?php echo ($room['room_id']);?>/<?php echo ($hotel_selected['hotel_id']);?>"><img src="http://localhost/hotel-mario/system/application/views/img/eliminar.png" onclick="return confirmar('room');" /></a></td>
                         </tr>
@@ -125,28 +125,23 @@ $this->load->view('global/management_bar');
                 <strong>No hay planes relacionados</strong> </td>
         <?php }
               else { ?>
-                <table width="100%">
-                <?php $gray_row = true;?>   
-                <tr> 
-                <td align="center"><strong>Nombre Español</strong></td>
-                <td align="center"><strong>English Name</strong></td> 
-                <td align="center"><strong>Desc.</strong></td> 
+                <table class="resumen" width="100%">
+                <?php $gray_row = true;?> 
+                <thead>
+            	<tr class="pthead">   
+                <td align="center"><strong>Nombre</strong></td>
+                <td align="center"><strong>Name</strong></td> 
+                <td align="center"><strong>Descripcion</strong></td> 
                 <td align="center" width="17px"><strong></strong></td>
                 </tr>
+                </thead>
                 <?php foreach ($plans as $plan) { ?>
-                    <?php if ($gray_row){?>
-                            <tr bgcolor="#CCCCCC">
-                            <?php $gray_row = false;
-                          }
-                          else{  ?>
-                            <tr>
-                            <?php $gray_row = true;
-                          }?>
+                   <tr>
                     <td align="center"> <?php echo ($plan['name_spanish']);?> </td>
                     <td align="center"> <?php echo ($plan['name_english']);?> </td>
                     <td align="center"> <?php echo ($plan['description']);?> </td>
                     <td align="center"> <a href="<?php echo base_url(); ?>hotels/disassociate_plan/<?php echo ($plan['plan_id']);?>/<?php echo ($hotel_selected['hotel_id']);?>"><img src="http://localhost/hotel-mario/system/application/views/img/eliminar.png" onclick="return confirmar('plan');"/></a></td>
-                    </tr>
+                   </tr>
                 <?php }?> <!-- end of foreach $plans -->
                 </table> 
         <?php }?> <!-- end of else -->
@@ -154,8 +149,6 @@ $this->load->view('global/management_bar');
         </tr>
         <?php $hotel_id_aux = $hotel_selected['hotel_id'];?>
         <?php }?>
-        <tr> <td><a href="<?php echo base_url(); ?>hotels/modify_hotel/<?php echo ($hotel_selected['hotel_id']);?>" ><strong>Modificar Hotel</strong></a></td> <td></td>
-        <tr>
     
     <form method="post" action="<?php echo base_url(); ?>hotels/associate_room">
         <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo ($hotel_id_aux);?>"  />

@@ -72,15 +72,10 @@ class Quotation extends Controller {
 		
 		foreach ($seasons as $value){
 			$aux = $this->quotations_model->get_prices($hotel_selected_id, $value['season_id'], $plan_selected);
-			
 			if (!empty($aux)) {
 				foreach($aux as $aux){
 					$prices[$i]['name_spanish'] = $aux['name_spanish'];
 					$prices[$i]['rooms_hotels_id'] = $aux['rooms_hotels_id'];
-					$prices[$i]['price'] = $aux['price_per_night'];
-					$prices[$i]['capacity'] = $aux['capacity'];
-					$prices[$i]['date_start'] = $aux['date_start'];
-					$prices[$i]['date_end'] = $aux['date_end'];
 					$prices[$i]['capacity'] = $aux['capacity'];
 					$i = $i + 1;
 				}
@@ -88,16 +83,15 @@ class Quotation extends Controller {
 			}
 		}
 		
+		
+		
 		/*echo('<pre>');
 		var_dump($prices);
-		echo('</pre>');*/		
-		
-		$data['date_start_quote'] = $date_ini;
-		$data['date_end_quote'] = $date_end;
-		$data['plan_selected'] = $plan_selected;
-		$data['hotel_selected_id'] = $hotel_selected_id;
+		echo('</pre>');	*/	
 		$data['counter'] = $counter;
 
+
+		//the flag is = 1 when you are adding a room, so it recieves all the rooms that have been selected so far and compares with the rooms from the quest, those ones that matches with the already selected rooms are deleted from the price array
 		if (($flag == 1) && (!empty($prices)) ){			
 			$rooms_selected = explode('|',$_POST["rooms_selected"]);
 			$pos = array();
@@ -111,17 +105,18 @@ class Quotation extends Controller {
 			}
 			
 			foreach($pos as $pos){
-				unset($prices[$pos]);
+				unset($prices[$pos]); //delet the ones that are already selected so they don't appear again
 			}
 		}
+		//-------------------------------------------------------------------------------
 		
-		if (empty($prices)) $data['prices'] = 11;
+		if (empty($prices)) $data['prices'] = 11; //if prices array is empty it means that all the rooms possible have been selected, and is given a null value (11)
 		else				{
 			sort($prices);
 			$data['prices'] = $prices; 
 		}
 		
-		if ($flag == 0)	$this->load->view('start_quote',$data);
+		if ($flag == 0)	$this->load->view('start_quote', $data);
 		
 		$this->load->view('quote_details_form',$data);
 	}
@@ -178,7 +173,7 @@ class Quotation extends Controller {
 		return $day."-".$month."-".$year; 
 	}
 	
-	
+	//here is the price calculated
 	function setting_subtotal(){
 		$room_hotel = $_POST["room"];
 		$date_start = $_POST["date_start"];
@@ -194,28 +189,74 @@ class Quotation extends Controller {
 			$prices = $this->quotations_model->get_prices_with_room($room_hotel, $value['season_id'], $plan);
 			
 			if (!empty($prices)){
+				
 				foreach($prices as $price){
+					
+//first of all, the season dates are subtracted, in order to have the total days of the season 
 					$subtract_season_dates = ($this->subtract_dates($this->change_date_format($price['date_start']), $this->change_date_format($price['date_end'])));
 					
+//then, three options are checked, 1)the hole season is contained between the user dates
 					if (($this->check_in_range($date_start, $date_end, $price['date_start'])) && ($this->check_in_range($date_start, $date_end, $price['date_end']))){
-						$subtotal = $subtotal + ($subtract_season_dates*$price['price_per_night']);																													  					}
 						
+						if($price['has_weekdays'] == 1){
+							$STARTSTAMP = strtotime($price['date_start']);  
+							$ENDSTAMP = strtotime($price['date_end']);
+							
+							$noofdays = ceil(($ENDSTAMP - $STARTSTAMP) / 86400);
+							for ($i = 0; $i <= $noofdays; $i++){ 
+								$ts = $STARTSTAMP + ($i * 86400); 
+								$day = strtolower(date("l", $ts)).'_price';
+								$subtotal += $price[$day];
+								//echo('<br />'.strtolower(date("l", $ts)).', precio: '.$price[$day].'<br />'); 
+							}
+						}
+						else $subtotal = $subtotal + ($subtract_season_dates*$price['price_per_night']);	
+							
+					}					
+						
+// 2)the start date of the season is contained in the user dates, in wich case the end season date and the user end date are subtracted, the result is subtracted to the total days of the season and the result is the exact amount of days that overlap the dates of the user with the dates of the season.
 					elseif ($this->check_in_range($date_start, $date_end, $price['date_start'])){
 						$subtract_aux = ($this->subtract_dates($this->change_date_format($date_end), $this->change_date_format($price['date_end'])));
 						
-						$subtotal = $subtotal+(($subtract_season_dates-$subtract_aux)*$price['price_per_night']);																 
+						
+						if($price['has_weekdays'] == 1){
+							$STARTSTAMP = strtotime($price['date_start']);  
+							$ENDSTAMP = strtotime($date_end);
+							
+							$noofdays = ceil(($ENDSTAMP - $STARTSTAMP) / 86400);
+							for ($i = 0; $i <= $noofdays; $i++){ 
+								$ts = $STARTSTAMP + ($i * 86400); 
+								$day = strtolower(date("l", $ts)).'_price';
+								$subtotal += $price[$day];
+								//echo('<br />'.strtolower(date("l", $ts)).', precio: '.$price[$day].'<br />'); 
+							}
+						}
+						else $subtotal = $subtotal+(($subtract_season_dates-$subtract_aux)*$price['price_per_night']);																
+
+//3)same as above but instead of being the start date of the season, is the end date wich is contained
 					}
 					elseif ($this->check_in_range($date_start, $date_end, $price['date_end'])){
 						$subtract_aux = ($this->subtract_dates($this->change_date_format($price['date_start']), $this->change_date_format($date_start)));
 						
-						$subtotal = $subtotal+(($subtract_season_dates-$subtract_aux)*$price['price_per_night']);																 
+						if($price['has_weekdays'] == 1){
+							$STARTSTAMP = strtotime($date_start);						
+							$ENDSTAMP = strtotime($price['date_end']);
+							
+							$noofdays = ceil(($ENDSTAMP - $STARTSTAMP) / 86400);
+							for ($i = 0; $i <= $noofdays; $i++){ 
+								$ts = $STARTSTAMP + ($i * 86400); 
+								$day = strtolower(date("l", $ts)).'_price';
+								$subtotal += $price[$day];
+								//echo('<br />'.strtolower(date("l", $ts)).', precio: '.$price[$day].'<br />'); 
+							}
+						}
+						else $subtotal = $subtotal+(($subtract_season_dates-$subtract_aux)*$price['price_per_night']);																 
 					}
 				}
 			}
 		}
 		
-		$data['subtotal'] = $subtotal * $quantity;
-		$this->load->view('subtotal', $data);
+		echo($subtotal * $quantity);
 	}
 	
 	function str_to_array ($rooms_selected){

@@ -3,6 +3,7 @@
 $this->load->view('global/header');
 ?>
 
+
 <div id="menu">
 	<div class="cuerpo">
 		<ul>

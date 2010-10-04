@@ -1,6 +1,33 @@
 <?php
 $this->load->view('global/header');
 ?>
+
+<!--<head>
+	<meta charset="UTF-8" />
+	<title>jQuery UI Datepicker - Default functionality</title>
+	<link type="text/css" href="http://localhost/hotel-mario/js/jquery/themes/base/jquery.ui.all.css" rel="stylesheet" />
+	<script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery-1.4.2.js"></script>
+	<script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery.ui.core.js"></script>
+	<script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery.ui.datepicker.js"></script>
+	<link type="text/css" href="http://localhost/hotel-mario/js/jquery/demos.css" rel="stylesheet" />
+	<script type="text/javascript">
+	$(function() {
+		$("#datepicker").datepicker();
+	});
+	</script>
+</head>
+<body>
+
+<div>
+
+<p>Date: <input type="text" id="datepicker"></p>
+
+</div><!-- End demo -->
+
+
+
+
 <div id="menu">
 	<div class="cuerpo">
 		<ul>

@@ -11,6 +11,7 @@ class Price_matrix extends Controller {
 		$this->load->model(array('hotels_model','plans_model','price_matrix_model'));
 	}
 	
+//this function gets all the price matrices that belongs to an specific given hotel. Sorted by plan and dates.
 	function matrices ($hotel_selected_id)
 	{
 		$query = $this->price_matrix_model->all_matrices ($hotel_selected_id);
@@ -51,7 +52,40 @@ class Price_matrix extends Controller {
 					$m = $m + 1;
 				}
 			}
-			return ($all_matrices);
+			
+			/*echo('<br /> all matrices<pre>');
+			var_dump($all_matrices);
+			echo('</pre>');*/
+			
+//------------------Sorting by plan and within, by date.-------------------
+			function cmp($a, $b)
+			{
+				return strcmp($a["date_start"], $b["date_start"]);
+			}			
+			
+			$aux_matrix = array();
+			$plan = '';
+			$middle_matrix = array();
+			
+			foreach($all_matrices as $matrix){
+				if($matrix['plan_name'] != $plan){
+					if(count($middle_matrix) > 0){
+						usort($middle_matrix, "cmp");
+						foreach($middle_matrix as $middle) 
+							$aux_matrix[count($aux_matrix)] = $middle;
+						$middle_matrix = array();
+					}
+					$plan = $matrix['plan_name'];
+				}
+				$middle_matrix[count($middle_matrix)] = $matrix;
+			}
+//----------------------------------------------------------------------------
+			
+			/*echo('<br /> aux matrix <pre>');
+			var_dump($aux_matrix);
+			echo('</pre>');*/
+	
+			return ($aux_matrix);
 		}
 		else
 			return ('empty');

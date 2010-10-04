@@ -1,5 +1,3 @@
-<script type="text/javascript" src="http://localhost/hotel-mario/js/prototype-1.6.0.3.js"></script>
-
 <?php if ($hotels) {?>
 <div class="separadorv"></div>
 <div class="separadorv"></div>
@@ -64,7 +62,7 @@
                 <td><input type="text" name="persons" id="persons" maxlength="3" size="4"/></td>
             </tr>
             <tr> <td></td> <td></td> 
-            <td><input type="image" name="procesar" id="procesar" src="http://localhost/hotel-mario/designed_views/imagenes/bseleccionar.jpg" onclick="start_quote();"/></td>
+            <td><input type="image" name="procesar" id="procesar" src="http://localhost/hotel-mario/designed_views/imagenes/bseleccionar.jpg" onclick="start_hotel_quote();"/></td>
             </tr>
         </table>
     </div>
