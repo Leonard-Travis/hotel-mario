@@ -22,7 +22,7 @@ class Quotations_model extends Model {
 	}
 	
 	function get_prices_with_room ($room_hotel_id, $season_id, $plan_id){
-		$this->db->select ('p.price_per_night, s.date_start, s.date_end');
+		$this->db->select ('p.*, s.date_start, s.date_end');
 		$this->db->from ('_admin_price p, _admin_season s');
 		$this->db->where ("p.ROOMS_HOTELS_id =".$room_hotel_id."
 						   AND p.PLAN_id =".$plan_id."

@@ -2,11 +2,11 @@
 
 <td align="center">
 
-    <input type="hidden" id="date_start" name="date_start" value="<?php echo($date_start_quote);?>"  />
-    <input type="hidden" id="date_end" name="date_end" value="<?php echo($date_end_quote);?>"  />
-    <input type="hidden" id="plan" name="plan" value="<?php echo($plan_selected);?>"  />
-    <input type="hidden" id="hotel_id" name="hotel_id" value="<?php echo($hotel_selected_id);?>"  />
-    <input type="hidden" id="counter" name="counter" value="<?php echo($counter);?>"  />
+    <!--<input type="hidden" id="date_start" name="date_start" value="<?php //echo($date_start_quote);?>"  />
+    <input type="hidden" id="date_end" name="date_end" value="<?php //echo($date_end_quote);?>"  />
+    <input type="hidden" id="plan" name="plan" value="<?php //echo($plan_selected);?>"  />
+    <input type="hidden" id="hotel_id" name="hotel_id" value="<?php //echo($hotel_selected_id);?>"  />
+    <input type="hidden" id="counter" name="counter" value="<?php //echo($counter);?>"  />-->
     
     <select name="rooms<?php echo($counter);?>" id="rooms<?php echo($counter);?>" onchange="setting_PU(<?php echo($counter);?>);" >
     <option value="-">-----------</option>

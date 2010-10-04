@@ -44,25 +44,19 @@ $this->load->view('global/management_bar');
 <tr>
 </table> 
     
-<table width="80%" align="center">
-    <tr>
+<table class="resumen" align="center">
+    <thead>
+    <tr class="pthead">
     <td align="center"><strong>Nombre Español</strong></td> 
     <td align="center"><strong>English Name</strong></td> 
     <td align="center"><strong>Especial</strong></td>
     <td align="center" width="17px"></td>
     <td align="center" width="17px"></td>
     </tr>
+    </thead>
     <?php $gray_row = TRUE;?>
     <?php foreach ($query as $room) { ?>
-		<?php if ($gray_row){?>
-        		<tr bgcolor="#CCCCCC">
-        		<?php $gray_row = false;
-        	  }
-        	  else{  ?>
-        		<tr>
-       		    <?php $gray_row = true;
-        	  }?>
-        
+        <tr>
         <td align="center"><?php echo ($room['name_spanish']);?></td>
         <td align="center"><?php echo ($room['name_english']);?></td>
         <?php if ($room['special'] == 1) {?>

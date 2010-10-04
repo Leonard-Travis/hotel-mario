@@ -44,24 +44,18 @@ $this->load->view('global/management_bar');
 <tr>
 </table>
 
-<table width="80%" align="center">
-    <tr>
+<table class="resumen" width="80%" align="center">
+    <thead>
+    <tr class="pthead">
     <td align="center"><strong>Nombre Español</strong></td>
     <td align="center"><strong>English Name</strong></td>
     <td align="center" width="17px"></td>
     <td align="center" width="17px"></td> 
     </tr>
+    </thead>
     <?php $gray_row = TRUE;?>
     <?php foreach ($query as $plan) { ?>
-		<?php if ($gray_row){?>
-        		 <tr bgcolor="#CCCCCC">
-        		 <?php $gray_row = false;
-        	  }
-              else{  ?>
-        		 <tr>
-        		 <?php $gray_row = true;
-        	  }?>
-        
+        <tr>
         <td align="center"><?php echo ($plan['name_spanish']);?></td>
         <td align="center"><?php echo ($plan['name_english']);?></td>
         <td align="center"> <a href="<?php echo base_url(); ?>plans/modify_plan/<?php echo ($plan['plan_id']);?>"><img src="http://localhost/hotel-mario/system/application/views/img/modificar.png" /></a></td>

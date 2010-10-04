@@ -104,7 +104,7 @@ function hotel_info(){
    );
 }
 
-function start_quote(){
+function start_hotel_quote(){
 	var clean_array = new Array();
 	rooms_selected = clean_array;
 	subtotal = 0;
@@ -295,15 +295,13 @@ function drop_element_from_quote(rooms_hotels_id){
 	if (confirm('¿Desea eliminar el elemento de la cotizacion?')){
 		for (i=0; i<rooms_selected.length; i++) {
 				if(rooms_selected[i]['room'] == rooms_hotels_id){
-					rooms_selected.splice(rooms_selected[i],1);
+					rooms_selected.splice(i,1);
 				}
-				
 			}
-		
 		calculate_sub();
 		if ((capacity_total < persons) || (rooms_selected.length == 0)){
 			alert('La capacidad total de las habitaciones ('+capacity_total+') debe ser igual o mayor a las cantidad de adultos ('+persons+') a ospedarse, debera escoger las habitaciones nuevamente');
-			start_quote();
+			start_hotel_quote();
 		}
 		else if (rooms_selected.length > 0)	process_quote_hotel();
 	}
@@ -613,7 +611,7 @@ function generic_summary(generic_array){
 function drop_generic(generic_element){
 	if( confirm('¿Desea eliminar este elemento de la cotizacion?') ){
 		for(i=0; i < generic_quote_array.length; i++){
-			if(generic_quote_array[i][4] == generic_element) generic_quote_array.splice(generic_quote_array[i],1);
+			if(generic_quote_array[i][4] == generic_element) generic_quote_array.splice(i,1);
 		}
 		if(generic_quote_array.length > 0)
 			generic_summary(generic_quote_array);
@@ -693,7 +691,6 @@ function process_quotation(){
 			  }
 			  }
 			);
-			existing_quotation(customer_id);
 			
 			  }
 			  }
@@ -873,6 +870,11 @@ function delete_client(customer){
 				  }
 				);
 	}
+}
+
+function delete_matrix(season_id, hotel_id, prices){
+	alert('delete');
+	alert('season '+season_id+', hotel: '+hotel_id);
 }
 
 

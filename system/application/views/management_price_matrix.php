@@ -62,7 +62,7 @@ $this->load->view('global/management_bar');
     
     <table width="100%">
 	<tr>
-    <td colspan="2" align="center"><strong><?php echo($hotel_name); ?></strong></td>
+    <td colspan="2" align="center"><h1><?php echo($hotel_name); ?></h1></td>
     </tr>
     </table>
     
@@ -78,22 +78,34 @@ $this->load->view('global/management_bar');
 	<div class="separadorv_gris"></div>
        
 	<?php if ($all_matrices != 'empty') { 
+			  $plan = '';
               foreach ($all_matrices as $value) { ?>
-			  	<?php $prices_id = "";?>
+			  	<?php $prices_id = "|";?>
               	<table width="40%">
                 <br /><br />
-                <tr> <td><strong>Plan:</strong></td> <td><?php echo($value['plan_name']); ?></td> </tr>
+                <?php if($value['plan_name'] != $plan) {?>
+                <div class="separadorv_gris"></div>
+                <tr> <td><span class="naranja">Plan:</span</td> <td><?php echo($value['plan_name']); ?></td> </tr>
+                <?php $plan = $value['plan_name'];
+				      } ?>
                 <tr> <td><strong>Desde:</strong></td> <td> <?php echo($value['date_start']); ?></td> 
-                     <td><strong>Hasta:</strong></td> <td> <?php echo($value['date_end']); ?></td> </tr>
+                     <td><strong>Hasta:</strong></td> <td> <?php echo($value['date_end']); ?></td> 
+                     <td><a href="#">
+                     <?php echo('<br />prices_id: '.$prices_id.'<br />'); ?>
+                     <img src="http://localhost/hotel-mario/designed_views/imagenes/x.jpg" alt="" onclick="delete_matrix(<?php echo($value['season_id']); ?>, <?php echo($hotel_id);?>, <?php echo($prices_id);?>);"/>
+                     </a></td>
+                </tr>
                 <?php $gray_row = TRUE; ?>
-                <table border="1" width="100%">
-                    <tr> 
-                    <td width="14.7%" align="center"><strong>Habitacion</strong></td>
-                    <td align="center"><strong>Precio</strong></td>
-                    </tr>
+                <table class="resumen" width="100%">
+                    <thead>
+                        <tr class="pthead"> 
+                            <td width="14.7%" align="center"><strong>Habitacion</strong></td>
+                            <td align="center"><strong>Precio</strong></td>
+                        </tr>
+                    </thead>
                     <?php foreach ($value['prices'] as $price)  { ?>                    	
                         <?php if ($gray_row){?>
-                             <tr bgcolor="#CCCCCC">
+                             <tr>
                              <?php $gray_row = false;
                           }
                           else{  ?>
@@ -103,15 +115,16 @@ $this->load->view('global/management_bar');
                         <td width="14.7%" align="center"><?php echo ($price['room_name']); ?></td>
                         <td align="center"><?php echo ($price['price_per_night']); ?></td> 
                         </tr>    
-						<?php $prices_id = $prices_id.'|'.$price['price_id']?> 
+						<?php $prices_id = $prices_id.$price['price_id'].'|'?> 
                     <?php } ?>				
                 </table> 
+         <?php echo($prices_id); ?>
         <form method="post" action="<?php echo base_url(); ?>price_matrix/delete_matrix">
         <input type="hidden" name="prices_id" id="prices_id" value="<?php echo($prices_id); ?>"  />
         <input type="hidden" name="season_id" id="season_id" value="<?php echo($value['season_id']); ?>"  />
         <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo($hotel_id);?>"/>
         <input type="submit" value="Eliminar"  onclick="return confirmar();"/>
-        </form>               
+        </form>              
         <?php } ?> <!-- end of foreach ($all_matrices as $value) -->
     <?php }  // end of if ($all_matrices != 'empty')
     else { ?>
