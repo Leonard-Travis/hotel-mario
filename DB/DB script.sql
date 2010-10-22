@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 23, 2010 at 04:41 PM
+-- Generation Time: Oct 20, 2010 at 06:40 PM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -34,6 +34,52 @@ CREATE TABLE IF NOT EXISTS `_admin_airlines` (
 INSERT INTO `_admin_airlines` (`airline_id`, `name`, `code`) VALUES
 (1, 'American Airline', 'A.A.'),
 (2, 'Santa Barbara', 'S.B.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_admin_categories`
+--
+
+DROP TABLE IF EXISTS `_admin_categories`;
+CREATE TABLE IF NOT EXISTS `_admin_categories` (
+  `categorie_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name_spanish` varchar(50) NOT NULL,
+  PRIMARY KEY (`categorie_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `_admin_categories`
+--
+
+INSERT INTO `_admin_categories` (`categorie_id`, `name_spanish`) VALUES
+(1, 'Margarita'),
+(2, 'Playita'),
+(3, 'Colonia Tovar'),
+(4, 'Navideño');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_admin_categories_package`
+--
+
+DROP TABLE IF EXISTS `_admin_categories_package`;
+CREATE TABLE IF NOT EXISTS `_admin_categories_package` (
+  `CATEGORIE_id` int(10) unsigned NOT NULL,
+  `PACKAGE_id` int(10) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `_admin_categories_package`
+--
+
+INSERT INTO `_admin_categories_package` (`CATEGORIE_id`, `PACKAGE_id`) VALUES
+(1, 1),
+(2, 1),
+(3, 2),
+(4, 2),
+(4, 3);
 
 -- --------------------------------------------------------
 
@@ -73,14 +119,21 @@ INSERT INTO `_admin_customers` (`customer_ci_id`, `name`, `lastname`, `phone`, `
 
 DROP TABLE IF EXISTS `_admin_employees`;
 CREATE TABLE IF NOT EXISTS `_admin_employees` (
-  `employees_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `employees_id` int(10) unsigned NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `type` enum('manager','seller') NOT NULL,
+  `password` int(6) NOT NULL,
   PRIMARY KEY (`employees_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_admin_employees`
 --
 
+INSERT INTO `_admin_employees` (`employees_id`, `name`, `lastname`, `type`, `password`) VALUES
+(1234, 'Mario', 'Munera', 'seller', 9876),
+(5678, 'juan', 'varon', 'manager', 0);
 
 -- --------------------------------------------------------
 
@@ -325,6 +378,32 @@ INSERT INTO `_admin_hotels_plans` (`HOTELS_id`, `PLANS_id`, `description`, `stat
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `_admin_packages`
+--
+
+DROP TABLE IF EXISTS `_admin_packages`;
+CREATE TABLE IF NOT EXISTS `_admin_packages` (
+  `package_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `HOTEL_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `date_start` date NOT NULL,
+  `date_end` date NOT NULL,
+  `description` varchar(450) NOT NULL,
+  PRIMARY KEY (`package_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `_admin_packages`
+--
+
+INSERT INTO `_admin_packages` (`package_id`, `HOTEL_id`, `name`, `date_start`, `date_end`, `description`) VALUES
+(1, 1, 'Paquete Dunas Margarita', '2010-11-15', '2010-11-20', 'Incluye:\n-Alojamiento\n-Bebidad Nacionales\n-Sillas y toldos enla playa\n-Buffets abierto 24 horas'),
+(2, 1, 'Paquete Navideño', '2010-12-15', '2010-12-21', 'paquete navideño con cena navideña'),
+(3, 1, 'Paquete Navidad', '2010-12-15', '2010-12-25', 'Paquete navideño con todoo');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `_admin_plans`
 --
 
@@ -540,7 +619,7 @@ INSERT INTO `_admin_rooms` (`room_id`, `name_spanish`, `name_english`, `special`
 (4, 'Doble', 'Double', 0, 'active'),
 (6, 'Suite', 'Suite', 0, 'active'),
 (7, 'Menores', 'Under-age', 1, 'active'),
-(9, 'Matrimonial', 'Wedding room ', 0, 'inactive'),
+(9, 'Matrimonial', 'Wedding room ', 0, 'active'),
 (14, 'Triple', 'Triple', 0, 'active'),
 (15, 'cuadruple', 'Quad', 0, 'inactive'),
 (16, 'Mayores', 'Senior', 1, 'inactive');
@@ -563,7 +642,7 @@ CREATE TABLE IF NOT EXISTS `_admin_rooms_hotels` (
   PRIMARY KEY (`rooms_hotels_id`),
   KEY `fk__ADMIN_ROOMS_HOTELS_ADMIN_HOTELS` (`HOTELS_id`),
   KEY `fk__ADMIN_ROOMS_HOTELS_ADMIN_ROOMS` (`ROOMS_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
 
 --
 -- Dumping data for table `_admin_rooms_hotels`
@@ -571,10 +650,36 @@ CREATE TABLE IF NOT EXISTS `_admin_rooms_hotels` (
 
 INSERT INTO `_admin_rooms_hotels` (`rooms_hotels_id`, `ROOMS_id`, `HOTELS_id`, `commissionable`, `description`, `capacity`, `status`) VALUES
 (29, 1, 1, 1, 'Cama individual', 1, 'active'),
-(33, 9, 2, 1, 'Habitacion con cama matrimonial y sala de estar', 2, 'inactive'),
+(33, 9, 2, 1, 'Cama matrimonial para recien casados', 2, 'active'),
 (40, 4, 1, 1, 'Dos camas con A/A', 2, 'active'),
-(41, 9, 1, 1, 'Cama Matrimonial', 2, 'inactive'),
-(42, 6, 1, 1, 'habitacion amplia', 4, 'inactive');
+(41, 9, 1, 1, 'Cama matrimonial con AA', 2, 'active'),
+(42, 6, 1, 1, 'habitacion amplia', 4, 'inactive'),
+(43, 1, 2, 1, 'Cama individual', 1, 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_admin_rooms_per_package`
+--
+
+DROP TABLE IF EXISTS `_admin_rooms_per_package`;
+CREATE TABLE IF NOT EXISTS `_admin_rooms_per_package` (
+  `PACKAGE_id` int(10) unsigned NOT NULL,
+  `ROOMS_HOTELS_id` int(10) unsigned NOT NULL,
+  `price_per_person` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `_admin_rooms_per_package`
+--
+
+INSERT INTO `_admin_rooms_per_package` (`PACKAGE_id`, `ROOMS_HOTELS_id`, `price_per_person`) VALUES
+(1, 29, 1200),
+(1, 40, 900),
+(2, 29, 3000),
+(2, 40, 2500),
+(3, 40, 4000),
+(3, 29, 3500);
 
 -- --------------------------------------------------------
 

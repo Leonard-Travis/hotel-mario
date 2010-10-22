@@ -1,3 +1,4 @@
+<div id="home">
 <?php
 $this->load->view('global/header');
 ?>
@@ -43,3 +44,5 @@ $this->load->view('global/header');
 </div>
 </body>
 </html>
+
+</div>
