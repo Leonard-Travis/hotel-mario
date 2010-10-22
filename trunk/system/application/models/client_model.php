@@ -56,5 +56,12 @@ class Client_model extends Model {
 		$query =  $this->db->get('_admin_quotations');
 		return $query->result_array();
 	}
+	
+	function login($type, $password){
+		$this->db->where('type',$type);
+		$this->db->where('password',$password);
+		$query =  $this->db->get('_admin_employees');
+		return $query->result_array();
+	}
 }
 ?>

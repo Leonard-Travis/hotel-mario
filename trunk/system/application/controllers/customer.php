@@ -5,7 +5,7 @@ class Customer extends Controller {
 	function Customer (){
 		parent :: Controller();	
 		$this->load->helper(array('form'));
-		$this->load->library('validation');
+		$this->load->library(array('validation', 'session'));
 		$this->load->library(array('form_validation'));
 		$this->load->model(array('client_model', 'quotations_model'));
 	}
@@ -148,6 +148,7 @@ class Customer extends Controller {
 		}
 		$this->load->view('existing_quote_details', $data);
 	}
+	
 }
 
 ?>

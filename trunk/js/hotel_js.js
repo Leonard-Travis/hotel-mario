@@ -24,6 +24,8 @@ var hotel_quote_id = null;
 var flight_quote_id = null;
 var generic_quote_id = null;
 
+var package_count = 0;
+
 function test(){
 	if (confirm('amame!....')){
 		return true;
@@ -877,5 +879,187 @@ function delete_matrix(season_id, hotel_id, prices){
 	alert('season '+season_id+', hotel: '+hotel_id);
 }
 
+function login(){
+	var user_type = $F('user_type');
+	var user_id = $F('user_id');
+	var user_password = $F('user_password');
+	
+	new Ajax.Request('http://localhost/hotel-mario/index.php/seller/login',{
+			  method: 'post',
+			  parameters: {user_type : user_type,
+			  			   user_id : user_id,
+			  			   user_password : user_password},
+			  asynchronous: true,
+			  onSuccess: function(consultadoA){	
+			  		var resp = consultadoA.responseText;
+					if (resp == ('error1')) alert('Combinacion erronea de Usuario y Password');
+					else		$('login').update(consultadoA.responseText);
+					
+	  }
+	  }
+	);
+}
+
+function add_seller(){
+	var name = $F('seller_name');
+	var lastname = $F('seller_lastname');
+	var id = $F('seller_id');
+	var type = $F('seller_type');
+	var password = $F('password');
+	
+	new Ajax.Request('http://localhost/hotel-mario/index.php/seller/add_seller',{
+			  method: 'post',
+			  parameters: {name : name,
+			  			   lastname : lastname,
+						   id : id,
+						   type : type,
+						   password : password},
+			  asynchronous: true,
+			  onSuccess: function(consultadoA){	
+			  		alert('Agregado con exito');
+			  		$('seller').update(consultadoA.responseText);
+					
+	  }
+	  }
+	);
+}
+
+function categorie_packages(){
+	var categorie_id = $F('categories');
+	
+	new Ajax.Request('http://localhost/hotel-mario/index.php/packages/categorie_packages/0',{
+			  method: 'post',
+			  parameters: {categorie_id : categorie_id},
+			  asynchronous: true,
+			  onSuccess: function(consultadoA){	
+			  		$('packages').update(consultadoA.responseText);
+					
+	  }
+	  }
+	);
+}
+
+function package_details(pack_id, close_div){
+	if(close_div == '1'){
+		$('package'+pack_id).update('');
+		$('package_arrow'+pack_id).update('<a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/fazul.jpg" alt="" onclick="package_details('+pack_id+',0);" /></a>');
+	}
+	else{
+		new Ajax.Request('http://localhost/hotel-mario/index.php/packages/package_details',{
+				  method: 'post',
+				  parameters: {pack_id : pack_id},
+				  asynchronous: true,
+				  onSuccess: function(consultadoA){	
+						$('package'+pack_id).update(consultadoA.responseText);
+						$('package_arrow'+pack_id).update('<a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/fazul_abajo.jpg" alt="" onclick="package_details('+pack_id+',1);" /></a>');
+				  }
+				  }
+				);
+	}
+}
+
+function new_package(){
+	package_count = 1;
+	new Ajax.Request('http://localhost/hotel-mario/index.php/packages/new_package/1/0',{
+			  method: 'post',
+			  parameters: {count : package_count},
+			  asynchronous: true,
+			  onSuccess: function(consultadoA){	
+			  		$('new_package').update(consultadoA.responseText);
+					$('new_package_process_button').update('<div class="separadorv"></div> <table><tr><td><img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="process_package();" /></td></tr></table>');
+					
+	  }
+	  }
+	);
+}
+
+function new_package_hotel(){
+	var hotel_id = $F('hotels');
+	if(hotel_id != '-'){
+		new Ajax.Request('http://localhost/hotel-mario/index.php/packages/new_package/0/1',{
+				  method: 'post',
+				  parameters: {hotel_id : hotel_id,
+							   count : package_count},
+				  asynchronous: true,
+				  onSuccess: function(consultadoA){	
+						$('new_package_room').update(consultadoA.responseText);
+		  }
+		  }
+		);	
+	}
+	else $('new_package_room').update('');
+}
+
+function new_package_room(hotel_id){
+	package_count = package_count + 1;
+	new Ajax.Request('http://localhost/hotel-mario/index.php/packages/new_package/0/0',{
+		  method: 'post',
+		  parameters: {hotel_id : hotel_id,
+			  		   count : package_count},
+		  asynchronous: true,
+		  onSuccess: function(consultadoA){	
+				var tr = document.createElement("tr"); //create object <TR> 
+				tr.innerHTML = consultadoA.responseText; 
+				obj1 = document.getElementById("new_package_table"); 
+				obj1.lastChild.appendChild(tr);
+		  }
+		  }
+	   );
+}
+
+function new_package_categories(){
+	var number_of_categories = $F('number_of_categories');
+	new Ajax.Request('http://localhost/hotel-mario/index.php/packages/package_categories',{
+		  method: 'post',
+		  parameters: {number_of_categories : number_of_categories},
+		  asynchronous: true,
+		  onSuccess: function(consultadoA){	
+				$('new_package_categories').update(consultadoA.responseText);
+		  }
+		  }
+	   );
+}
+
+function new_categorie(cont){
+	var categorie = $F('categories'+cont);
+	if(categorie == 'new'){
+	$('categorie'+cont).update('Nueva: <input type="text" id="categories'+cont+'" name="categories'+cont+'">');
+	}
+}
+
+function process_package(){
+	var hotel = $F('hotels');
+	var name_package = $F('name');
+	var number_of_categories = $F('number_of_categories');
+	var date_start_package = $F('date_start');
+	var date_end_package = $F('date_end');
+	var description = $F('description');
+	var categories = '';
+	var rooms = '';
+	for(i=0; i < parseInt(number_of_categories); i++){
+		categories += $F('categories'+i)+'|';
+	}
+	
+	for(j=1; j <= package_count; j++){
+		rooms += $F('rooms'+j)+'|'+$F('price'+j)+'||';
+	}
+	
+	new Ajax.Request('http://localhost/hotel-mario/index.php/packages/add_package',{
+		  method: 'post',
+		  parameters: {hotel : hotel,
+		  			   name : name_package,
+		  			   date_start : date_start_package,
+					   date_end : date_end_package,
+					   description : description,
+					   categories : categories,
+					   rooms : rooms},
+		  asynchronous: true,
+		  onSuccess: function(consultadoA){	
+		  		$('management_packages').update(consultadoA.responseText);
+				alert('Paquete agregado con exito');
+		  }
+		  }
+	   );
+}
 
 

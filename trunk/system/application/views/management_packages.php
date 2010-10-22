@@ -1,3 +1,4 @@
+<div id="management_packages">
 <?php
 $this->load->view('global/header');
 ?>
@@ -22,17 +23,34 @@ $this->load->view('global/header');
 <div class="separadorv"></div>
 
 <?php
-if($this->session->userdata('type') == 'manager'){
-	$this->load->view('global/management_bar');
-	$this->load->view('global/management_close');
-}
-else{ ?>
+$this->load->view('global/management_bar');
+?>
 
-<div id="asociar2">
-<div class="alertar">
-    <img src="http://localhost/hotel-mario/designed_views/imagenes/alerta.gif" alt="Alerta" class="valign" /><strong>ERROR: personal no autorizado</strong>
-</div>
-</div>
-	
-<?php } ?>
+<?php if ($query) {?>
+	<table align="center" width="40%">
+		<tr>
+			<td> <strong>Seleccione una Categoria</strong> </td> 
+		<td align="center">
+		<form>
+			<select name="categories" id="categories">
+			<?php foreach ($query as $categorie) { ?>
+				<option value="<?php echo ($categorie['categorie_id']);?>"><?php echo ($categorie['name_spanish']);?></option> 
+			<?php }?>
+			</select>
+			</td> <td> <img src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="categorie_packages();" </td> </tr>
+		</form>
+	</table>
+ 
+<?php }?>
 
+<div id="packages">
+</div>
+
+
+<?php
+$this->load->view('global/management_close');
+?>
+
+</body>
+</html>
+</div>

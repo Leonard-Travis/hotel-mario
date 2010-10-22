@@ -22,5 +22,15 @@
 		<a href="#" class="logo">Hoteles.com.ve</a>
 		<div class="palito"><img src="http://localhost/hotel-mario/designed_views/imagenes/palito.gif" alt="" /></div>
 		<div class="floati">Gestion de servicios</div>
+        <?php if($this->session->userdata('type')){ ?>
+        <div class="cintillod">
+			<img src="http://localhost/hotel-mario/designed_views/imagenes/user_orange.png" alt="Usuario" class="valign" />            
+            Bienvenido, <a href="#"><?php echo($this->session->userdata('name').' '.$this->session->userdata('lastname')); ?></a>
+			<!--<img src="http://localhost/hotel-mario/designed_views/imagenes/cog_edit.png" alt="Opciones" class="valign" />
+			<a href="#">Opciones</a>-->
+			<img src="http://localhost/hotel-mario/designed_views/imagenes/lock.png" alt="Desconectar" class="valign" />
+			<a href="<?php echo base_url(); ?>home">Desconectar</a>
+		</div>
+        <?php } ?>
 	</div>
 </div>
