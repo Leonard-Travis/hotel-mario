@@ -29,19 +29,23 @@ $this->load->view('global/management_bar');
 <?php if ($query) {?>
 	<table align="center" width="40%">
 		<tr>
-			<td> <strong>Seleccione una Categoria</strong> </td> 
-		<td align="center">
-		<form>
+			<td align="center"> <strong>Seleccione una Categoria</strong> </td>
+             
+			<td align="center">
 			<select name="categories" id="categories">
 			<?php foreach ($query as $categorie) { ?>
 				<option value="<?php echo ($categorie['categorie_id']);?>"><?php echo ($categorie['name_spanish']);?></option> 
 			<?php }?>
 			</select>
-			</td> <td> <img src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="categorie_packages();" </td> </tr>
-		</form>
+			</td> 
+            
+            <td> <img src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="categorie_packages();" /></td> 
+        
+        </tr>
 	</table>
  
 <?php }?>
+
 
 <div id="packages">
 </div>

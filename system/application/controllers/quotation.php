@@ -7,7 +7,7 @@ class Quotation extends Controller {
 		$this->load->helper(array('form'));
 		$this->load->library('validation');
 		$this->load->library(array('form_validation'));
-		$this->load->model(array ('hotels_model', 'client_model', 'price_matrix_model', 'quotations_model'));
+		$this->load->model(array ('hotels_model', 'client_model', 'price_matrix_model', 'quotations_model', 'packages_model'));
 	}
 
 	function new_quote($ci_client){
@@ -501,15 +501,84 @@ class Quotation extends Controller {
 		$data['quote_date'] = date('Y-m-d');
 		
 		$this->quotations_model->insert_quotation($data);
+	}
+	
+	//'pq' stands fo Package Quote
+	function package_quote(){
+		$data['all_categories'] = $this->packages_model->all_categories();
+		$data['all_packages'] = NULL;
+		$this->load->view('package_quote_categories', $data);
+	}
+	
+	function pq_selected_categorie(){
+		$categorie = $_POST["categorie"];
+		$data['all_categories'] = NULL;
+		$packages = $this->packages_model->all_packages_categorie($categorie);
+		$all_packages = array();
 		
-		 /*$to = "mariomunera89@gmail.com";
-		 $subject = "Hi!";
-		 $body = "Hi,\n\nHow are you?";
-		 if (mail($to, $subject, $body)) {
-		   echo("<p>Message successfully sent!</p>");
-		  } else {
-		   echo("<p>Message delivery failed...</p>");
-		  }*/
+		for($i=0; $i < count($packages); $i++){			
+			$since_price = $this->packages_model->select_lowest_price($packages[$i]['package_id']);
+			foreach($since_price as $since_price){
+				$packages[$i]['since_price'] = $since_price['price_per_person'];
+			}
+		}
+		
+		$data['all_packages'] = $packages;		
+		$this->load->view('package_quote_categories', $data);
+	}
+	
+	function pq_selected_package(){
+		$package_id = $_POST["package"];
+		$data['package'] = $this->packages_model->find($package_id);
+		$data['rooms'] = $this->packages_model->package_rooms($package_id);
+		$this->load->view('pq_rooms', $data);
+		
+		/*echo('room <pre>');
+		var_dump($data['rooms']);
+		echo('</pre>');*/
+	}
+	
+	function pq_selected_hotel($frame){
+		$package = $_POST["package"];
+		$hotel = $_POST["hotel"];
+		$data['rooms'] = $this->packages_model->package_hotel_rooms($package, $hotel);
+		$data['hotel'] = $this->hotels_model->find($hotel);
+		$data['frame'] = $frame;
+		$data['pq_count'] = $_POST["pq_count"];
+		$this->load->view('pq_details', $data);
+	}
+	
+	function pq_process(){
+		$rooms = $_POST["rooms"];
+		$total = $_POST["pq_total"];
+		
+		$array2 = array(); // array aux to put the 2 sticks segment.
+		$rooms_array = array(); //after the explode the rooms are stored here, but disorderly. so to order the array and avoid validation, is moved to the rooms array 2 after been cleaned
+		$array2 = explode('||',$rooms);
+		$rooms_array2 = array();
+		
+		for($i=0; $i < count($array2); $i++){
+			$rooms_array[count($rooms_array)] = array();
+			$rooms_array[count($rooms_array)] = explode('|', $array2[$i]);
+		}
+		
+		$pos = 0;
+		for($i=0; $i < count($rooms_array); $i++){
+			if(count($rooms_array[$i]) > 0){
+				if($rooms_array[$i][0] != ''){
+					$pos = count($rooms_array2);
+					$rooms_array2[$pos] = array();
+					$rooms_array2[$pos] = $rooms_array[$i];
+					
+					$rooms_array2[$pos]['name']=$this->packages_model->find_room_package_name($rooms_array[$i][0]);
+				}
+			}
+		}		
+		
+		$this->quotations_model->pq_insert($rooms_array2, $total);
+		$data['total'] = $total;
+		$data['package_rooms'] = $rooms_array2;
+		$this->load->view('package_summary', $data);		
 	}
 }
 

@@ -1,16 +1,9 @@
 <div class="separadorv"></div>
 
-<div id="datos">
+<div id="new_package">
+
 <table align="center" width="50%">
     <tr> <td colspan="3" align="center"><span class="naranja">Paquete Nuevo</span></td></tr>
-    <tr>
-    <td>Hotel:</td><td><select id="hotels" name="hotels" onchange="new_package_hotel();">
-    					<option value="-">---------------------</option>
-                       <?php foreach ($query as $hotel) { ?>
-                       	  <option value="<?php echo($hotel['hotel_id']);?>"><?php echo($hotel['name']);?></option> 
-                       <?php }?>
-        			   </select></td>
-    </tr>
    
     <tr>
     <td>Categoria(s):</td>
@@ -49,15 +42,12 @@
     <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td>
     </tr>
     <tr>
-        <td colspan="3">
-            <div id="new_package_room">
-            </div>
-        </td>
-    </tr>
-    <tr>
         <td colspan="3" align="right">
-            <div id="new_package_process_button">
-			</div>
+            
+            	<a href="#" onclick="new_package_hotels();">Agregar Hotel(es)</a>
+			
         </td>
     </tr>
 </table>
+
+</div>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 20, 2010 at 06:40 PM
+-- Generation Time: Oct 23, 2010 at 02:05 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -79,7 +79,12 @@ INSERT INTO `_admin_categories_package` (`CATEGORIE_id`, `PACKAGE_id`) VALUES
 (2, 1),
 (3, 2),
 (4, 2),
-(4, 3);
+(4, 3),
+(1, 4),
+(2, 4),
+(1, 5),
+(2, 5),
+(4, 5);
 
 -- --------------------------------------------------------
 
@@ -132,6 +137,7 @@ CREATE TABLE IF NOT EXISTS `_admin_employees` (
 --
 
 INSERT INTO `_admin_employees` (`employees_id`, `name`, `lastname`, `type`, `password`) VALUES
+(1, 'todo', 'elmundo', 'seller', 7896),
 (1234, 'Mario', 'Munera', 'seller', 9876),
 (5678, 'juan', 'varon', 'manager', 0);
 
@@ -158,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `_admin_flights` (
   KEY `fk__ADMIN_FLIGHTS_has_ADMIN_AIRLINES` (`AIRLINES_id`),
   KEY `origin_flight_city` (`origin`),
   KEY `destination_flight_city` (`destination`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=102 ;
 
 --
 -- Dumping data for table `_admin_flights`
@@ -184,7 +190,9 @@ INSERT INTO `_admin_flights` (`flight_id`, `AIRLINES_id`, `number`, `class`, `pr
 (96, 1, 7867, 'first class', 1.2, 0, 1, 4, 'hh:mm', '0000-00-00', 'international'),
 (97, 1, 5678, 'first class', 1.2, 0, 4, 3, 'hh:mm', '0000-00-00', 'international'),
 (98, 1, 5678, 'first class', 1.2, 0, 3, 4, 'hh:mm', '0000-00-00', 'international'),
-(99, 1, 8998, 'first class', 1.1, 0, 4, 1, 'hh:mm', '0000-00-00', 'international');
+(99, 1, 8998, 'first class', 1.1, 0, 4, 1, 'hh:mm', '0000-00-00', 'international'),
+(100, 1, 1234, 'first class', 156, 0, 1, 2, 'hh:mm', '0000-00-00', 'national'),
+(101, 1, 1234, 'first class', 156, 0, 2, 1, 'hh:mm', '0000-00-00', 'national');
 
 -- --------------------------------------------------------
 
@@ -267,7 +275,9 @@ INSERT INTO `_admin_flights_per_quote` (`QUOTATIONS_FLIGHTS_id`, `FLIGHTS_id`) V
 (25, 96),
 (25, 97),
 (25, 98),
-(25, 99);
+(25, 99),
+(26, 100),
+(26, 101);
 
 -- --------------------------------------------------------
 
@@ -282,7 +292,7 @@ CREATE TABLE IF NOT EXISTS `_admin_generic` (
   `quantity` int(11) NOT NULL,
   `unit_price` float NOT NULL,
   PRIMARY KEY (`generic_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `_admin_generic`
@@ -291,7 +301,8 @@ CREATE TABLE IF NOT EXISTS `_admin_generic` (
 INSERT INTO `_admin_generic` (`generic_id`, `description`, `quantity`, `unit_price`) VALUES
 (1, 'cama adicional', 1, 125.65),
 (2, 'toallas', 4, 35.657),
-(3, 'masaje', 1, 750);
+(3, 'masaje', 1, 750),
+(4, 'mamisa', 2, 122);
 
 -- --------------------------------------------------------
 
@@ -314,7 +325,8 @@ CREATE TABLE IF NOT EXISTS `_admin_generic_per_quote` (
 INSERT INTO `_admin_generic_per_quote` (`QUOTES_GENERIC_id`, `GENERIC_id`) VALUES
 (1, 1),
 (1, 2),
-(1, 3);
+(1, 3),
+(2, 4);
 
 -- --------------------------------------------------------
 
@@ -385,12 +397,12 @@ DROP TABLE IF EXISTS `_admin_packages`;
 CREATE TABLE IF NOT EXISTS `_admin_packages` (
   `package_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `HOTEL_id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
+  `name` varchar(200) NOT NULL,
   `date_start` date NOT NULL,
   `date_end` date NOT NULL,
   `description` varchar(450) NOT NULL,
   PRIMARY KEY (`package_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `_admin_packages`
@@ -399,7 +411,9 @@ CREATE TABLE IF NOT EXISTS `_admin_packages` (
 INSERT INTO `_admin_packages` (`package_id`, `HOTEL_id`, `name`, `date_start`, `date_end`, `description`) VALUES
 (1, 1, 'Paquete Dunas Margarita', '2010-11-15', '2010-11-20', 'Incluye:\n-Alojamiento\n-Bebidad Nacionales\n-Sillas y toldos enla playa\n-Buffets abierto 24 horas'),
 (2, 1, 'Paquete Navideño', '2010-12-15', '2010-12-21', 'paquete navideño con cena navideña'),
-(3, 1, 'Paquete Navidad', '2010-12-15', '2010-12-25', 'Paquete navideño con todoo');
+(3, 1, 'Paquete Navidad', '2010-12-15', '2010-12-25', 'Paquete navideño con todoo'),
+(4, 1, 'PAQUETE ESPECIAL NAVIDAD: Plan Todo Incluido Isla de Margarita ', '2010-12-15', '2010-12-20', 'Incluye:\n\nBoleto aéreo Caracas/ Porlamar/ Caracas\nTraslado Aeropuerto/ Hotel/ Aeropuerto\n05 Noches de alojamiento en el Hotel selecionado\nDesayunos\nAlmuerzos\nCenas\nSnacks\nBebidas alcohólicas y no alcohólicas nacionales ilimitadas\nDisfrute de las instalaciones\nNOTA: Incluye Cena y Fiesta de Navidad'),
+(5, 2, 'Paquete Especial Navidad: Hesperia Playa El Agua', '2010-12-22', '2010-12-27', 'Incluye:\nBoleto aéreo Caracas/ Porlamar/ Caracas\nTraslado Aeropuerto/ Hotel/ Aeropuerto\n05 Noches de alojamiento \nDesayunos\nAlmuerzos\nCenas\nBebidas alcohólicas y no alcohólicas nacionales ilimitadas\nSnakcs\nCena Especial de Navidad\nDisfrute de todas las instalaciones');
 
 -- --------------------------------------------------------
 
@@ -508,18 +522,21 @@ CREATE TABLE IF NOT EXISTS `_admin_quotations` (
   `QUOTATIONS_FLIGHTS_id` int(10) unsigned DEFAULT NULL,
   `QUOTATIONS_GENERIC_id` int(10) unsigned DEFAULT NULL,
   `quote_date` date DEFAULT NULL,
+  `total` float NOT NULL,
   PRIMARY KEY (`quote_id`),
   KEY `fk_ADMIN_QUOTATIONS_ADMIN_EMPLOYEES` (`EMPLOYEES_id`),
   KEY `fk_ADMIN_QUOTATIONS_ADMIN_QUOTATIONS_GENERIC` (`QUOTATIONS_GENERIC_id`),
   KEY `fk_ADMIN_QUOTATIONS_ADMIN_QUOTATIONS_FLIGHTS` (`QUOTATIONS_FLIGHTS_id`),
   KEY `fk_ADMIN_QUOTATIONS_ADMIN_CUSTOMERS` (`CUSTOMERS_ci_id`),
   KEY `fk_ADMIN_QUOTATIONS_ADMIN_QUOTATIONS_HOTELS` (`QUOTATIONS_HOTELS_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `_admin_quotations`
 --
 
+INSERT INTO `_admin_quotations` (`quote_id`, `CUSTOMERS_ci_id`, `EMPLOYEES_id`, `QUOTATIONS_HOTELS_id`, `QUOTATIONS_FLIGHTS_id`, `QUOTATIONS_GENERIC_id`, `quote_date`, `total`) VALUES
+(2, 18277056, 1, 4, 26, 2, '2010-10-23', 30418);
 
 -- --------------------------------------------------------
 
@@ -533,7 +550,7 @@ CREATE TABLE IF NOT EXISTS `_admin_quotations_flights` (
   `status` varchar(45) NOT NULL,
   `total` float NOT NULL,
   PRIMARY KEY (`quote_flight_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `_admin_quotations_flights`
@@ -543,7 +560,8 @@ INSERT INTO `_admin_quotations_flights` (`quote_flight_id`, `status`, `total`) V
 (22, 'x', 8),
 (23, 'x', 9.4),
 (24, 'x', 2.2),
-(25, 'x', 11.6);
+(25, 'x', 11.6),
+(26, 'x', 624);
 
 -- --------------------------------------------------------
 
@@ -556,14 +574,15 @@ CREATE TABLE IF NOT EXISTS `_admin_quotations_generic` (
   `quotes_generic_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `total` float unsigned NOT NULL,
   PRIMARY KEY (`quotes_generic_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `_admin_quotations_generic`
 --
 
 INSERT INTO `_admin_quotations_generic` (`quotes_generic_id`, `total`) VALUES
-(1, 1018.28);
+(1, 1018.28),
+(2, 244);
 
 -- --------------------------------------------------------
 
@@ -578,21 +597,44 @@ CREATE TABLE IF NOT EXISTS `_admin_quotations_hotels` (
   `date_check_out` date NOT NULL,
   `PLAN_id` int(10) unsigned NOT NULL,
   `total` float unsigned NOT NULL,
+  `persons` int(3) NOT NULL,
   `reservation_status` varchar(45) NOT NULL,
   `collect_status` varchar(45) NOT NULL,
   `payment_status` varchar(45) NOT NULL,
   `billing_status` varchar(45) NOT NULL,
   PRIMARY KEY (`quote_hotel_id`),
   KEY `FK_qq_hh` (`PLAN_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `_admin_quotations_hotels`
 --
 
-INSERT INTO `_admin_quotations_hotels` (`quote_hotel_id`, `date_check_in`, `date_check_out`, `PLAN_id`, `total`, `reservation_status`, `collect_status`, `payment_status`, `billing_status`) VALUES
-(2, '2010-04-23', '2010-04-22', 1, 11, 'AF', 'af', 'F', 'f'),
-(3, '2010-01-01', '2010-02-01', 1, 6000, 'x', 'x', 'x', 'x');
+INSERT INTO `_admin_quotations_hotels` (`quote_hotel_id`, `date_check_in`, `date_check_out`, `PLAN_id`, `total`, `persons`, `reservation_status`, `collect_status`, `payment_status`, `billing_status`) VALUES
+(2, '2010-04-23', '2010-04-22', 1, 11, 0, 'AF', 'af', 'F', 'f'),
+(3, '2010-01-01', '2010-02-01', 1, 6000, 0, 'x', 'x', 'x', 'x'),
+(4, '2010-01-01', '2010-12-03', 1, 29550, 2, 'x', 'x', 'x', 'x');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_admin_quotations_package`
+--
+
+DROP TABLE IF EXISTS `_admin_quotations_package`;
+CREATE TABLE IF NOT EXISTS `_admin_quotations_package` (
+  `quote_package_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `total` float NOT NULL,
+  PRIMARY KEY (`quote_package_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `_admin_quotations_package`
+--
+
+INSERT INTO `_admin_quotations_package` (`quote_package_id`, `total`) VALUES
+(1, 2333),
+(2, 4555);
 
 -- --------------------------------------------------------
 
@@ -664,22 +706,52 @@ INSERT INTO `_admin_rooms_hotels` (`rooms_hotels_id`, `ROOMS_id`, `HOTELS_id`, `
 
 DROP TABLE IF EXISTS `_admin_rooms_per_package`;
 CREATE TABLE IF NOT EXISTS `_admin_rooms_per_package` (
+  `room_per_package_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `PACKAGE_id` int(10) unsigned NOT NULL,
   `ROOMS_HOTELS_id` int(10) unsigned NOT NULL,
-  `price_per_person` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `price_per_person` float NOT NULL,
+  PRIMARY KEY (`room_per_package_id`),
+  KEY `FK_room_per_package_package` (`PACKAGE_id`),
+  KEY `FK_room_per_package_rooms` (`ROOMS_HOTELS_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `_admin_rooms_per_package`
 --
 
-INSERT INTO `_admin_rooms_per_package` (`PACKAGE_id`, `ROOMS_HOTELS_id`, `price_per_person`) VALUES
-(1, 29, 1200),
-(1, 40, 900),
-(2, 29, 3000),
-(2, 40, 2500),
-(3, 40, 4000),
-(3, 29, 3500);
+INSERT INTO `_admin_rooms_per_package` (`room_per_package_id`, `PACKAGE_id`, `ROOMS_HOTELS_id`, `price_per_person`) VALUES
+(1, 1, 29, 1200),
+(2, 1, 40, 900),
+(3, 2, 29, 3000),
+(4, 2, 40, 2500),
+(5, 3, 40, 4000),
+(6, 3, 29, 3500),
+(7, 4, 29, 3200),
+(8, 4, 40, 2800),
+(9, 5, 43, 4863),
+(10, 5, 33, 4700);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_admin_rooms_per_package_quote`
+--
+
+DROP TABLE IF EXISTS `_admin_rooms_per_package_quote`;
+CREATE TABLE IF NOT EXISTS `_admin_rooms_per_package_quote` (
+  `QUOTE_PACKAGE_id` int(3) unsigned NOT NULL,
+  `ROOM_PER_PACKAGE_id` int(10) unsigned NOT NULL,
+  `number_of_rooms` int(2) NOT NULL,
+  KEY `FK_rooms_per_package_quote` (`QUOTE_PACKAGE_id`),
+  KEY `FK_rooms_per_package_rooms` (`ROOM_PER_PACKAGE_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `_admin_rooms_per_package_quote`
+--
+
+INSERT INTO `_admin_rooms_per_package_quote` (`QUOTE_PACKAGE_id`, `ROOM_PER_PACKAGE_id`, `number_of_rooms`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -704,7 +776,9 @@ CREATE TABLE IF NOT EXISTS `_admin_rooms_per_quote` (
 
 INSERT INTO `_admin_rooms_per_quote` (`ROOMS_HOTELS_id`, `QUOTATIONS_HOTELS_id`, `quantity_of_rooms`, `subtotal`, `unit_price`) VALUES
 (29, 2, 22, 0, ''),
-(29, 3, 2, 6000, '100BsF. (desde 2010-01-01 hasta 2010-01-31).<br />');
+(29, 3, 2, 6000, '100BsF. (desde 2010-01-01 hasta 2010-01-31).<br />'),
+(29, 4, 1, 11240, '100BsF. (desde 2010-01-01 hasta 2010-01-31).<br />100BsF. (desde 2010-06-01 hasta 2010-09-03).<br />'),
+(40, 4, 1, 18310, '190BsF. (desde 2010-06-01 hasta 2010-09-03).<br />');
 
 -- --------------------------------------------------------
 
@@ -817,8 +891,12 @@ INSERT INTO `_admin_travelers_per_flight` (`TRAVELERS_ci_id`, `FLIGHTS_id`) VALU
 (1, 81),
 (1, 82),
 (1, 83),
+(1, 100),
+(1, 101),
 (2, 80),
 (2, 81),
+(2, 100),
+(2, 101),
 (177, 87),
 (177, 88),
 (178, 86),
@@ -899,6 +977,20 @@ ALTER TABLE `_admin_quotations_hotels`
 ALTER TABLE `_admin_rooms_hotels`
   ADD CONSTRAINT `FK_hotel_room` FOREIGN KEY (`HOTELS_id`) REFERENCES `_admin_hotels` (`hotel_id`),
   ADD CONSTRAINT `FK_rooms_rooms` FOREIGN KEY (`ROOMS_id`) REFERENCES `_admin_rooms` (`room_id`);
+
+--
+-- Constraints for table `_admin_rooms_per_package`
+--
+ALTER TABLE `_admin_rooms_per_package`
+  ADD CONSTRAINT `FK_room_per_package_rooms` FOREIGN KEY (`ROOMS_HOTELS_id`) REFERENCES `_admin_rooms_hotels` (`rooms_hotels_id`),
+  ADD CONSTRAINT `FK_room_per_package_package` FOREIGN KEY (`PACKAGE_id`) REFERENCES `_admin_packages` (`package_id`);
+
+--
+-- Constraints for table `_admin_rooms_per_package_quote`
+--
+ALTER TABLE `_admin_rooms_per_package_quote`
+  ADD CONSTRAINT `FK_rooms_per_package_rooms` FOREIGN KEY (`ROOM_PER_PACKAGE_id`) REFERENCES `_admin_rooms_per_package` (`room_per_package_id`),
+  ADD CONSTRAINT `FK_rooms_per_package_quote` FOREIGN KEY (`QUOTE_PACKAGE_id`) REFERENCES `_admin_quotations_package` (`quote_package_id`);
 
 --
 -- Constraints for table `_admin_rooms_per_quote`
