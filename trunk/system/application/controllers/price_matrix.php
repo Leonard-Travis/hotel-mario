@@ -53,7 +53,7 @@ class Price_matrix extends Controller {
 				}
 			}
 			
-			/*echo('<br /> all matrices<pre>');
+			/*echo('<br /> all matrices before sort<pre>');
 			var_dump($all_matrices);
 			echo('</pre>');*/
 			
@@ -69,15 +69,25 @@ class Price_matrix extends Controller {
 			
 			foreach($all_matrices as $matrix){
 				if($matrix['plan_name'] != $plan){
+					$plan = $matrix['plan_name'];
+					
 					if(count($middle_matrix) > 0){
 						usort($middle_matrix, "cmp");
 						foreach($middle_matrix as $middle) 
 							$aux_matrix[count($aux_matrix)] = $middle;
+							
 						$middle_matrix = array();
 					}
-					$plan = $matrix['plan_name'];
 				}
+				
 				$middle_matrix[count($middle_matrix)] = $matrix;
+			}
+			
+			if(count($middle_matrix) > 0){
+				usort($middle_matrix, "cmp");
+				foreach($middle_matrix as $middle) 
+					$aux_matrix[count($aux_matrix)] = $middle;
+
 			}
 //----------------------------------------------------------------------------
 			
@@ -113,7 +123,7 @@ class Price_matrix extends Controller {
 			$data['plans'] = $this->hotels_model->all_plans($hotel_selected_id);
 			$data['hotel_selected'] = $this->hotels_model->find($hotel_selected_id);
 			if ($management_flag == 1){
-				$data['all_matrices'] = $this->matrices($hotel_selected_id);			
+				$data['all_matrices'] = $this->matrices($hotel_selected_id);	
 				$this->load->view('management_price_matrix',$data);	
 			}
 			else

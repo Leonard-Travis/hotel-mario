@@ -53,7 +53,7 @@ $this->load->view('global/management_bar');
         <td align="center"><?php echo ($seller['lastname']);?></td>
         <td align="center"><?php echo ($seller['employees_id']);?></td>
         <td align="center"><?php echo ($seller['type']);?></td>
-        <td align="center"> <a href="#"><img src="http://localhost/hotel-mario/system/application/views/img/eliminar.png"/></a></td>
+        <td align="center"> <a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/x.jpg"/></a></td>
         </tr>
     <?php }?>
 </table>

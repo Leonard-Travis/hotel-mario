@@ -42,7 +42,7 @@ $this->load->view('global/management_bar');
 <?php if ($query) {?>
 	<table align="center" width="40%">
 		<tr>
-			<td> <strong>Seleccione un Hotel</strong> </td> 
+			<td align="center"> <strong>Seleccione un Hotel</strong> </td> 
 		<td align="center">
 		<form method="post" action="<?php echo base_url(); ?>hotels">
 			<select name="hotels" id="hotels">

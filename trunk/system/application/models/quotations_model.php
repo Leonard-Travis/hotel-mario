@@ -349,5 +349,27 @@ class Quotations_model extends Model {
 		}
 		return $query->result_array();
 	}
+	
+	function pq_insert($rooms, $total){
+		$pq_id = '';
+		$data_pq = array('quote_package_id' => '', 'total' => $total);
+		$this->db->insert('_admin_quotations_package', $data_pq);
+		
+		$this->db->select_max('quote_package_id');
+		$query = $this->db->get('_admin_quotations_package');
+				
+		foreach ($query->result_array() as $value)
+			foreach ($value as $value)
+				$pq_id = $value;
+				
+		foreach($rooms as $room){
+			if(count($room) > 0){
+				if($room[0] != ''){
+					$data_rp = array('QUOTE_PACKAGE_id' => $pq_id, 'ROOM_PER_PACKAGE_id' => $room[0], 'number_of_people' => $room[2]);
+					$this->db->insert('_admin_rooms_per_package_quote', $data_rp);
+				}
+			}
+		}
+	}
 }
 ?>

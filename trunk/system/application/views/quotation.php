@@ -56,6 +56,8 @@ $this->load->view('global/header');
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Boletos" class="valign" /><a href="#" onclick="quote(<?php echo($client['customer_ci_id']); ?>, 'flight_quote') ">Agregar Boletos</a>
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/nada.gif" alt="" width="20" />
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Genérica" class="valign" /><a href="#" onclick="quote(<?php echo($client['customer_ci_id']); ?>, 'generic_quote') ">Agregar Genérica</a>
+                <img src="http://localhost/hotel-mario/designed_views/imagenes/nada.gif" alt="" width="20" />
+				<img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar Genérica" class="valign" /><a href="#" onclick="quote(<?php echo($client['customer_ci_id']); ?>, 'package_quote') ">Agregar Paquete</a>
 				<img src="http://localhost/hotel-mario/designed_views/imagenes/tabla3.jpg" alt=""  class="floatd valign"/>
             </div> 
        <?php }
@@ -71,6 +73,8 @@ $this->load->view('global/header');
     <div id="generic_quote">
     </div>
     <div id="generic_summary">
+    </div>
+    <div id="package_quote">
     </div>
     
     <div id="close_quotation">

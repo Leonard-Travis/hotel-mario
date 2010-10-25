@@ -3,28 +3,34 @@
 
 <table width="100%">
     <tr>
-    
-    <td>
-    <span class="naranja">Descripcion: </span> <?php echo($description); ?>
-    </td>
-    
-     <td width="50%">
-        <table width="100%">
-            <thead>
-                <tr class="pthead">
-                    <td align="center">Habitaciones</td> <td align="center">Precio p/persona</td>
-                </tr>
-            </thead>
-            
-            <?php foreach($rooms as $room){ ?>
-            <tr>
-            <td align="center"><?php echo($room['name_spanish']); ?></td> 
-            <td align="center">BsF. <?php echo($room['price_per_person']); ?></td>
+        <td>
+        <span class="naranja">Descripcion: </span><br /> <?php echo nl2br($description); ?><br />
+        </td>
+    </tr>
+</table>
+
+<table width="50%" align="center">
+    <?php $hotel = ''; 
+	foreach($rooms as $room){
+    	if($hotel != $room['name']){
+			$hotel = $room['name'];?>
+        	<tr>
+                <td colspan="2" align="center">
+                    <span class="naranja"><?php echo($room['name']);?></span>
+                </td>
             </tr>
-            <?php } ?>
-        </table>
-    </td>
-    
+            
+            <tr>
+            	<td align="center"><strong>Habitaciones</strong></td> 
+                <td align="center"><strong>Precio p/persona</strong></td>
+            </tr>
+   <?php } ?>
+   		<tr>
+        	<td align="center"><?php echo($room['name_spanish']);?></td>
+            <td align="center">BsF. <?php echo($room['price_per_person']);?></td>
+        </tr>
+    	
+<?php } ?>
    
 </table>
 <br  />
