@@ -27,7 +27,7 @@ class Packages_model extends Model {
 	}
 	
 	function package_rooms($pack_id){		
-	  $this->db->select('r.name_spanish, r.name_english, rp.price_per_person, rp.ROOMS_HOTELS_id, h.name, h.hotel_id 
+	  $this->db->select('r.name_spanish, r.name_english, rp.*, h.name, h.hotel_id 
 						 FROM _admin_rooms_per_package rp, _admin_rooms r, _admin_rooms_hotels rh, _admin_hotels h
 						 WHERE rp.PACKAGE_id ='.$pack_id.'
 						 AND rp.ROOMS_HOTELS_id = rh.rooms_hotels_id
@@ -98,7 +98,7 @@ class Packages_model extends Model {
 		
 		for($i=1; $i<count($rooms);$i++){
 			for($j=1; $j<count($rooms[$i]);$j++){
-				$data_room = array('room_per_package_id' => '', 'PACKAGE_id' => $pack_id, 'ROOMS_HOTELS_id' => $rooms[$i]['room'.$j][0], 'price_per_person' => $rooms[$i]['room'.$j][1]);
+				$data_room = array('room_per_package_id' => '', 'PACKAGE_id' => $pack_id, 'ROOMS_HOTELS_id' => $rooms[$i]['room'.$j][0], 'price_per_person' => $rooms[$i]['room'.$j][1], 'additional_night' => $rooms[$i]['room'.$j][3], 'price_per_kid' => $rooms[$i]['room'.$j][2]);
 				$this->db->insert('_admin_rooms_per_package', $data_room);
 			}
 		}

@@ -85,11 +85,11 @@ $this->load->view('global/management_bar');
                 <br /><br />
                 <?php if($value['plan_name'] != $plan) {?>
                 <div class="separadorv_gris"></div>
-                <tr> <td><span class="naranja">Plan:</span></td> <td><?php echo($value['plan_name']); ?></td> </tr>
+                <tr> <td><span class="naranja">Plan:</span></td> <td bgcolor="#00FF33"><?php echo($value['plan_name']); ?></td> </tr>
                 <?php $plan = $value['plan_name'];
 				      } ?>
-                <tr> <td><strong>Desde:</strong></td> <td> <?php echo($value['date_start']); ?></td> 
-                     <td><strong>Hasta:</strong></td> <td> <?php echo($value['date_end']); ?></td> 
+                <tr> <td><strong>Desde:</strong></td> <td bgcolor="#CCFF66"> <?php echo($value['date_start']); ?></td> 
+                     <td><strong>Hasta:</strong></td> <td bgcolor="#CCFF66"> <?php echo($value['date_end']); ?></td> 
                 </tr>
                 <?php $gray_row = TRUE; ?>
                 <table class="resumen" width="100%">

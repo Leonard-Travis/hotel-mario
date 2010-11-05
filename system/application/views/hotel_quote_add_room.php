@@ -1,12 +1,6 @@
 <?php if ($prices != 11) {?>
-
+<tr>
 <td align="center">
-
-    <!--<input type="hidden" id="date_start" name="date_start" value="<?php //echo($date_start_quote);?>"  />
-    <input type="hidden" id="date_end" name="date_end" value="<?php //echo($date_end_quote);?>"  />
-    <input type="hidden" id="plan" name="plan" value="<?php //echo($plan_selected);?>"  />
-    <input type="hidden" id="hotel_id" name="hotel_id" value="<?php //echo($hotel_selected_id);?>"  />
-    <input type="hidden" id="counter" name="counter" value="<?php //echo($counter);?>"  />-->
     
     <select name="rooms<?php echo($counter);?>" id="rooms<?php echo($counter);?>" onchange="setting_PU(<?php echo($counter);?>);" >
     <option value="-">-----------</option>
@@ -22,7 +16,7 @@
 <td align="center">
 	<input type="text" name="quantity<?php echo($counter);?>" id="quantity<?php echo($counter);?>" maxlength="2" size="3" value="00" onblur="setting_subtotal(<?php echo($counter);?>)" onclick="document.quote_data.quantity<?php echo($counter);?>.value ='';" />
 </td>
- <td align="center">
+<td align="center">
     <div id="price_per_night<?php echo($counter);?>" name="price_per_night<?php echo($counter);?>"></div>
 </td>
 <td align="center">
@@ -46,5 +40,3 @@ else {
     </span>
 </td>
 <?php } ?>
-
-</table>

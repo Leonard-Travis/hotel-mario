@@ -41,6 +41,12 @@ $this->load->view('global/management_bar');
 
 
 <?php if ($hotel_selected) {?>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#date_ini").datepicker({dateFormat: 'yy-mm-dd'});
+		$("#date_end").datepicker({dateFormat: 'yy-mm-dd'});
+	});
+</script>
 	<div class="separadorv_gris"></div>
     <form name="form1" method="post" action="<?php echo base_url(); ?>price_matrix/price_matrix_data/1">
         <br  />
@@ -71,8 +77,8 @@ $this->load->view('global/management_bar');
             </td>
             </tr>
             <tr> 
-            <td>Desde:</td> <td><input type="text" name="date_ini" id="date_ini" value="<?php echo($date_ini);?>" onclick="popUpCalendar(this, form1.date_ini, 'yyyy-mm-dd')" readonly="readonly" /></td>
-            <td>Hasta:</td> <td><input type="text" name="date_end" id="date_end" value="<?php echo($date_end);?>" onclick="popUpCalendar(this, form1.date_end, 'yyyy-mm-dd')" readonly="readonly" /></td>
+            <td>Desde:</td> <td><input type="text" name="date_ini" id="date_ini" value="<?php echo($date_ini);?>" readonly="readonly" /></td>
+            <td>Hasta:</td> <td><input type="text" name="date_end" id="date_end" value="<?php echo($date_end);?>" readonly="readonly" /></td>
             </tr>
             <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo ($hotel_selected['hotel_id']);?>"  />
         <?php }?> <!-- end of foreach $hotel_selected -->

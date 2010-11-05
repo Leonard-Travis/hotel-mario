@@ -5,6 +5,7 @@
     <table class="resumen" align="center">    
         <thead>
             <tr class="pthead">
+                <td align="center" width="10px">Ida y Vuelta</td>
                 <td align="center">Orig-Dest</td>
                 <td align="center">Vuelo</td>
                 <td align="center">Adultos</td>
@@ -19,6 +20,13 @@
         
 	<?php foreach($all_flights as $flight) {?>
         <tr>
+        	<?php if($flight[0]['round_trip'] == '1') {?>
+            	<td align="center"><img src="http://localhost/hotel-mario/designed_views/imagenes/tick.png" /></td>
+            <?php } 
+				  else {?>
+                <td></td>
+            <?php }?>
+        	
             <td align="center"><?php echo($flight[0]['origin'].'-'.$flight[0]['destination']); ?></td>
             <td align="center"><?php echo($flight[0]['number'].', '.$flight[0]['AIRLINES_id']); ?></td>
             
@@ -37,7 +45,12 @@
             <td align="center">BsF.<?php echo($flight[0]['price_per_adult']); ?></td>
             <td align="center">BsF.<?php echo($flight[0]['price_per_kid']); ?></td>
             <td align="center">BsF.<?php echo($sub_total); ?></td>
-            <td><a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/x.jpg" alt="" onclick="drop_flight(<?php echo($flight[0]['flight_id']); ?>)"/></a></td>
+            <td>
+            <div id="drop_flight_div<?php echo($flight[0]['flight_id']); ?>">
+            <a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/x.jpg" alt="" onclick="drop_flight(<?php echo($flight[0]['flight_id']); ?>)"/>
+            </a>
+            </div>
+            </td>
         </tr>
     <?php } ?>
 

@@ -2,6 +2,12 @@
 <div id="boletos2">
     <span class="naranja">Resumen Paquete</span>
     <div class="separadorv_gris"></div>
+    <table>
+    <tr>
+    	<td><strong>Check In: </strong> <?php echo($check_in);?></td>
+        <td><strong>Check Out: </strong> <?php echo($check_out);?></td>
+    </tr>
+    </table>
     <table class="resumen" align="center">
         <thead>
             <tr>
@@ -22,13 +28,23 @@
 		<?php }?>
         <tr><td class="sinborde">&nbsp;</td></tr>
         <tr>
-            <td class="numerico sinborde" colspan="3"><strong>Subtotal General Genérico:</strong></td>
+            <td class="numerico sinborde" colspan="3"><strong>Subtotal Paquete Genérico:</strong></td>
             <td class="numerico sinborde"><strong>BsF <?php echo($total); ?></strong></td>
         </tr>
         <tr>
-            <td class="numerico sinborde" colspan="3"><span class="rojo">Total General Genérico:</span></td>
+            <td class="numerico sinborde" colspan="3"><span class="rojo">Total Paquete Genérico:</span></td>
             <td class="numerico sinborde"><span class="rojo">BsF <?php echo($total); ?></span></td>
-        </tr>    </table>
+        </tr>    
+        <tr>
+        <td colspan="4" align="right">
+        <div id="pq_process_button_summary">
+        <a href="#">
+        <img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="pq_process(1);" />
+        </a>
+        </td>
+        </div>
+        </tr>
+        </table>
 </div>
 <div class="separadorv"></div>
 <div class="separadorv"></div>

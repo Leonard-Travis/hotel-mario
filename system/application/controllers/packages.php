@@ -43,7 +43,10 @@ class Packages extends Controller {
 		
 		$pack = $this->packages_model->find($pack_id);
 		
-		foreach($pack as $pack) 		$data['description'] = $pack['description'];
+		foreach($pack as $pack){
+			$data['description'] = $pack['description'];
+			$data['days_nights'] = $pack['number_of_days'].' D&iacute;as / '.$pack['number_of_nights'].' Noches';
+		}
 		
 		$data['rooms'] = $pack_rooms;
 		$this->load->view('package_details', $data);
@@ -90,8 +93,10 @@ class Packages extends Controller {
 		$package['date_start'] = $_POST["date_start"];
 		$package['date_end'] = $_POST["date_end"];
 		$package['description'] = $_POST["description"];
+		$package['number_of_days'] = $_POST["days"];
+		$package['number_of_nights'] = $_POST["nights"];
 		$categories = $_POST["categories"];
-		$rooms = $_POST["rooms"]; //hotel_id||room1|price1||room2|price2|||hotel_id|room1|price1||...|||
+		$rooms = $_POST["rooms"]; //hotel_id||room1|priceAdult|priceKid|priceAdditional||room2|price2|priceAdult|priceKid|priceAdditional|||hotel_id|room1|price1||...|||
 		
 		$categories_array = array();
 		$categories_array = explode('|', $categories);

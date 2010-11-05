@@ -1,6 +1,11 @@
 <div class="separador"></div>
 <div class="separadorv_gris"></div>
 <?php echo validation_errors(); ?>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#birthdate").datepicker({dateFormat: 'yy-mm-dd'});
+	});
+</script>
 <form>
 <?php foreach ($query as $client) { ?>  
 <div id="asociar2">
@@ -25,7 +30,7 @@
         <li class="li_tit_2">Direccion:</li>
         <li><textarea name="address" id="address" cols="18" rows=""  maxlength="50"><?php echo ($client['address']); ?></textarea></li>
         <li class="li_tit_2">Fecha de Nacimiento:</li>
-        <li><div class="cajat"><input type="text" name="birthdate" id="birthdate" value="<?php echo ($client['birth_date']); ?>" /></div></li>
+        <li><div class="cajat"><input type="text" name="birthdate" id="birthdate" value="<?php echo ($client['birth_date']); ?>" readonly="readonly" /></div></li>
         
         <li class="li_tit_2">Sexo:</li>
         <li>

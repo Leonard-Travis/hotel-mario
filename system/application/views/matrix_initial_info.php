@@ -1,4 +1,10 @@
 <?php if ($hotel_selected) {?>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#date_ini").datepicker({dateFormat: 'yy-mm-dd'});
+		$("#date_end").datepicker({dateFormat: 'yy-mm-dd'});
+	});
+</script>
         <table width="40%">
         <tr> <td colspan="4" align="center"><strong>Nueva Matriz con nueva Season</strong></td></tr>
         <?php foreach ($hotel_selected as $hotel_selected) { ?>
@@ -25,8 +31,8 @@
         <td>Nombre:</td> <td><input type="text" name="season_name" id="season_name"></td>
         </tr>
         <tr> 
-        <td>Desde:</td> <td><input type="text" name="date_ini" id="date_ini"  /></td>
-        <td>Hasta:</td> <td><input type="text" name="date_end" id="date_end"  /></td>
+        <td>Desde:</td> <td><input type="text" name="date_ini" id="date_ini" readonly="readonly"/></td>
+        <td>Hasta:</td> <td><input type="text" name="date_end" id="date_end" readonly="readonly"/></td>
         <td><input type="button" value="Validar" onClick="validate_dates()"></td><td><div id="validate_check" name="validate_check"></div></td>
         </tr>
         <?php }?> <!-- end of foreach $hotel_selected -->

@@ -100,23 +100,18 @@ else { ?>
 	<div class="separador"></div>
 	<div class="separadorv_gris"></div>
     
-    <table width="100%">
+    <table width="100%" class="resumen">
+    <thead>
     <tr> 
     <td width="14.7%" align="center" class="primera"><strong>Habitacion</strong></td>
-    <td align="center"><strong>Precio</strong></td>    
-	<?php if ($weekdays == 0){
-		 $gray_row = TRUE; ?>
+    <td align="center"><strong>Precio</strong></td>  
+  
+	<?php if ($weekdays == 0){?>
 				</tr>
+                </thead>
 				<?php foreach ($prices as $prices) { ?>
 				<?php foreach ($prices as $price)  { ?>
-					<?php if ($gray_row){?>
-						 <tr bgcolor="#CCCCCC">
-						 <?php $gray_row = false;
-					  }
-					  else{  ?>
-						 <tr>
-						 <?php $gray_row = true;
-					  }?>
+					<tr>
 					<td width="14.7%" align="center"><?php echo ($price['name_spanish']); ?></td>
 					<td align="center"><?php echo ($price['price_per_night']); ?></td> 
 					</tr>             
@@ -124,9 +119,8 @@ else { ?>
 				<?php } ?>
 			</table>
 	  <?php }      
-	  else if ($weekdays == 1){ 
-		$gray_row = TRUE; ?>
-
+	  else if ($weekdays == 1){?>
+			
 			<td align="center"><strong>Lunes</strong></td>
 			<td align="center"><strong>Martes</strong></td>
 			<td align="center"><strong>Miercoles</strong></td>
@@ -135,17 +129,10 @@ else { ?>
 			<td align="center"><strong>Sabado</strong></td>
 			<td align="center"><strong>Domingo</strong></td>
 			</tr>
+            </thead>
 			<?php foreach ($prices as $prices)  { 
 				  foreach ($prices as $price) {?>
-            
-				<?php if ($gray_row){?>
-					 <tr bgcolor="#CCCCCC">
-					 <?php $gray_row = false;
-				  }
-				  else{  ?>
-					 <tr>
-					 <?php $gray_row = true;
-				  }?>
+            	<tr>
 				<td align="center"><?php echo ($price['name_spanish']); ?></td>
 				<td align="center"><?php echo ($price['price_per_night']); ?></td> 
                 <?php

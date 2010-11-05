@@ -1,4 +1,4 @@
-<link href="../../../designed_views/estilos.css" rel="stylesheet" type="text/css">
+
 <br /><br />
 <table  width="80%" align="center">
 <tr>
@@ -6,7 +6,13 @@
     </td>
 </tr>
 <tr>
-	<td align="center">Vigente del <?php echo($package[0]['date_start']);?> al <?php echo($package[0]['date_end']);?>
+	<td align="center">Tarifas vigentes del <?php echo($package[0]['date_start']);?> al <?php echo($package[0]['date_end']);?>
+    </td>
+</tr>
+<tr>
+	<td align="center">
+    <strong>
+	<?php echo($package[0]['number_of_days']);?> D&iacute;as / <?php echo($package[0]['number_of_nights']);?> Noches</strong>
     </td>
 </tr>
 <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr>
@@ -25,7 +31,7 @@
     	if($hotel != $room['name']){
 			$hotel = $room['name'];?>
         	<tr>
-                <td colspan="2" align="center">
+                <td colspan="4" align="center">
                     <span class="naranja"><?php echo($room['name']);?></span>
                 </td>
                 <td width="10%">
@@ -34,13 +40,17 @@
             </tr>
             
             <tr>
-            	<td align="center"><strong>Habitaciones</strong></td> 
-                <td align="center" colspan="2" width="50%"><strong>Precio p/persona</strong></td>
+            	<td align="center" width="40%"><strong>Habitaciones</strong></td> 
+                <td align="center"><strong>Precio p/persona</strong></td>
+                <td align="center"><strong>Precio p/ni&ntilde;o</strong></td>
+                <td align="center"><strong>Noche Adicional</strong></td>
             </tr>
    <?php } ?>
    		<tr>
-        	<td align="center"><?php echo($room['name_spanish']);?></td>
-            <td align="center" colspan="2">BsF. <?php echo($room['price_per_person']);?></td>
+        	<td align="center" bgcolor="#00FF33"><?php echo($room['name_spanish']);?></td>
+            <td align="center" bgcolor="#99FF33">BsF. <?php echo($room['price_per_person']);?></td>
+            <td align="center">BsF. <?php echo($room['price_per_kid']);?></td>
+            <td align="center">BsF. <?php echo($room['additional_night']);?></td>
         </tr>
     	
 <?php } ?>

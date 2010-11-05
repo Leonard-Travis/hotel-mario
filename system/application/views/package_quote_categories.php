@@ -1,6 +1,4 @@
 <?php if ($all_categories) {?>
-<link href="../../../designed_views/estilos.css" rel="stylesheet" type="text/css">
-
 <div class="separadorv"></div>
 <div class="separadorv"></div>
 <h1>Paquete</h1>
@@ -30,8 +28,8 @@
     <thead>
     <tr class="pthead">
 	    <td align="center">Nombre</td> 
-        <td align="center">Check In</td> 
-        <td align="center">Check Out</td> 
+        <td align="center">Valido Desde</td> 
+        <td align="center">Hasta</td> 
         <td align="center"><span class="naranja">Desde</span></td>
         <td align="center" width="17px"></td>
     </tr>
