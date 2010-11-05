@@ -1,6 +1,12 @@
 <div class="separadorv"></div>
-
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#date_start").datepicker({dateFormat: 'yy-mm-dd'});
+		$("#date_end").datepicker({dateFormat: 'yy-mm-dd'});
+	});
+</script>
 <div id="new_package">
+<form name="new_package_form" id="new_package_form">
 
 <table align="center" width="50%">
     <tr> <td colspan="3" align="center"><span class="naranja">Paquete Nuevo</span></td></tr>
@@ -29,12 +35,24 @@
     <td>Nombre: </td> <td><input type="text" name="name" id="name" /></td>
     <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td> 
     </tr>
+    <tr> <td></td> <td></td>
+    </tr>
     <tr> 
-    <td>Fecha In: </td> <td><input type="text" name="date_start" id="date_start" /></td>
+    <td>Fecha In: </td> <td><input type="text" name="date_start" id="date_start" readonly="readonly"/></td>
     <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td> 
     </tr>
     <tr> 
-    <td>Fecha Out: </td> <td><input type="text" name="date_end" id="date_end"/></td>
+    <td>Fecha Out: </td> <td><input type="text" name="date_end" id="date_end" readonly="readonly"/></td>
+    <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td> 
+    </tr>
+    <tr>
+    <tr> 
+    <td>Dias/Noches: </td> 
+    <td>
+    <input type="text" name="days" id="days" size="3" maxlength="2" value="00" onclick="document.new_package_form.days.value ='';" onblur="if(document.new_package_form.days.value == '') document.new_package_form.days.value = '00';"/>
+    <strong>/</strong>
+    <input type="text" name="nights" id="nights" size="3" maxlength="2" value="00" onclick="document.new_package_form.nights.value ='';" onblur="if(document.new_package_form.nights.value == '') document.new_package_form.nights.value = '00';"/>
+    </td>
     <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td> 
     </tr>
     <tr>
@@ -49,5 +67,7 @@
         </td>
     </tr>
 </table>
+
+</form>
 
 </div>

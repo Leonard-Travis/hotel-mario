@@ -12,8 +12,8 @@
     <thead>
         <tr class="pthead">
             <td align="center">Nombre</td>
-            <td align="center">Check In</td>
-            <td align="center">Check Out</td>
+            <td align="center">Valido Desde</td>
+            <td align="center">Hasta</td>
             <td align="center"><span class="naranja">Desde</span></td>
             <td width="10px"></td>
         </tr>

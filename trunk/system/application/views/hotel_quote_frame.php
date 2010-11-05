@@ -13,7 +13,7 @@
         <td align="center"></td>
     </tr>
 
-</form>		
+</form>	
 
 <?php } 
 else echo('No hay precios referentes con las especificaciones dadas');?>			

@@ -7,7 +7,7 @@ class Customer extends Controller {
 		$this->load->helper(array('form'));
 		$this->load->library(array('validation', 'session'));
 		$this->load->library(array('form_validation'));
-		$this->load->model(array('client_model', 'quotations_model'));
+		$this->load->model(array('client_model', 'quotations_model', 'packages_model'));
 	}
 
     function search_form()
@@ -126,7 +126,7 @@ class Customer extends Controller {
 	
 	function existing_quote_details(){
 		$quote_id = $_POST["quote_id"];
-		$data = array ('hotel' => NULL, 'flight' => NULL, 'generic' => NULL);
+		$data = array ('hotel' => NULL, 'flight' => NULL, 'generic' => NULL, 'package' => NULL);
 		$quote = $this->quotations_model->find_quote($quote_id, '_admin_quotations', 'quote_id');
 		foreach($quote as $quote){
 			if ($quote['QUOTATIONS_HOTELS_id']) {
@@ -144,6 +144,18 @@ class Customer extends Controller {
 			if ($quote['QUOTATIONS_GENERIC_id']){ 
 				$data['generic'] = $this->quotations_model->find_quote($quote['QUOTATIONS_GENERIC_id'], '_admin_quotations_generic', 'quotes_generic_id');
 				$data['generic'] = $this->quotations_model->quote_generic_data($data['generic']);
+			}
+			
+			if ($quote['QUOTATIONS_PACKAGE_id']){ 
+				$package = $this->quotations_model->find_quote($quote['QUOTATIONS_PACKAGE_id'], '_admin_quotations_package', 'quote_package_id');
+				$data['package'] = $this->quotations_model->quote_package_data($package[0]['quote_package_id']);
+				$data['package']['check_in'] = $package[0]['check_in'];
+				$data['package']['check_out'] = $package[0]['check_out'];
+				$data['package']['total'] = $package[0]['total'];
+				
+				/*echo('<pre>');
+				var_dump($data['package']);
+				echo('</pre>');*/
 			}
 		}
 		$this->load->view('existing_quote_details', $data);

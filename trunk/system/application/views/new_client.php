@@ -1,6 +1,11 @@
 <div class="separador"></div>
 <div class="separadorv_gris"></div>
 <?php echo validation_errors(); ?>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#birthdate").datepicker({dateFormat: 'yy-mm-dd'});
+	});
+</script>
 <form name="form1">
 
 <div id="asociar2">
@@ -30,7 +35,7 @@
     <li class="li_tit_2">Direccion:</li>
     <li><textarea name="address" id="address" cols="18" rows=""  maxlength="50"></textarea></li>
     <li class="li_tit_2">Fecha de Nacimiento:</li>
-    <li><div class="cajat"><input type="text" name="birthdate" id="birthdate" onclick="popUpCalendar(this, form1.fecha, 'yyyy-mm-dd')" /></div></li>
+    <li><div class="cajat"><input type="text" name="birthdate" id="birthdate" readonly="readonly"/></div></li>
     <li class="li_tit_2">Sexo:</li>
     <li>
     <input name="sex" id="sex" type="radio" value="m" checked="checked" />M 

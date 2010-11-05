@@ -1,4 +1,10 @@
 <div id="flight_quote_aux">
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#go_date<?php echo($cont_f); ?>").datepicker({dateFormat: 'yy-mm-dd'});
+		$("#back_date<?php echo($cont_f); ?>").datepicker({dateFormat: 'yy-mm-dd'});
+	});
+</script>
 <table width="100%">
         	<tr>
             <td><strong>Origen:</strong></td>
@@ -10,7 +16,7 @@
             </td>
             <td><strong>Partida:</strong></td>
             <td>
-            <input type="text" name="go_date<?php echo($cont_f); ?>" id="go_date<?php echo($cont_f); ?>" value="yyyy-mm-dd" onclick="document.fboletos.go_date<?php echo($cont_f); ?>.value ='';" width="11" maxlength="10"/>
+            <input type="text" name="go_date<?php echo($cont_f); ?>" id="go_date<?php echo($cont_f); ?>" value="yyyy-mm-dd" width="11" maxlength="10" readonly="readonly"/>
             
             <input type="text" name="go_time<?php echo($cont_f); ?>" id="go_time<?php echo($cont_f); ?>" value="hh:mm" onclick="document.fboletos.go_time<?php echo($cont_f); ?>.value ='';" width="6%" maxlength="5"/>
             </td>
@@ -32,7 +38,7 @@
             </td>
             <td>
             <div id="back_data<?php echo($cont_f); ?>">
-            <input type="text" name="back_date<?php echo($cont_f); ?>" id="back_date<?php echo($cont_f); ?>" value="yyyy-mm-dd" width="11" maxlength="10" onclick="document.fboletos.back_date<?php echo($cont_f); ?>.value ='';"/>
+            <input type="text" name="back_date<?php echo($cont_f); ?>" id="back_date<?php echo($cont_f); ?>" value="yyyy-mm-dd" width="11" maxlength="10" readonly="readonly"/>
             <input type="text" name="back_time<?php echo($cont_f); ?>" id="back_time<?php echo($cont_f); ?>" value="hh:mm" width="6%" maxlength="5" onclick="document.fboletos.back_time<?php echo($cont_f); ?>.value ='';"/>
             </div>
             </td>

@@ -209,3 +209,194 @@ ERROR - 2010-10-25 05:26:47 --> Severity: Notice  --> Undefined offset: 0 C:\wam
 ERROR - 2010-10-25 05:26:47 --> Severity: Notice  --> Undefined offset: 0 C:\wamp\www\hotel-mario\system\application\views\package_summary.php 16
 ERROR - 2010-10-25 11:49:19 --> 404 Page Not Found --> demos.css
 ERROR - 2010-10-25 11:49:40 --> 404 Page Not Found --> demos.css
+ERROR - 2010-10-25 12:37:40 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 12:37:40 --> 404 Page Not Found --> demos.css
+ERROR - 2010-10-25 12:37:41 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 12:37:41 --> 404 Page Not Found --> demos.css
+ERROR - 2010-10-25 12:39:20 --> Severity: Warning  --> Missing argument 1 for Quotation::find_traveler() C:\wamp\www\hotel-mario\system\application\controllers\quotation.php 465
+ERROR - 2010-10-25 12:39:20 --> Severity: Notice  --> Undefined variable: traveler_ci C:\wamp\www\hotel-mario\system\application\controllers\quotation.php 466
+ERROR - 2010-10-25 12:39:25 --> Severity: Notice  --> Undefined offset: 14 C:\wamp\www\hotel-mario\system\application\controllers\quotation.php 376
+ERROR - 2010-10-25 12:41:35 --> Severity: Notice  --> Undefined offset: 14 C:\wamp\www\hotel-mario\system\application\controllers\quotation.php 376
+ERROR - 2010-10-25 12:43:02 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 12:43:03 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 12:57:03 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 12:57:04 --> 404 Page Not Found --> demos.css
+ERROR - 2010-10-25 12:57:04 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 13:06:51 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 13:06:51 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 13:21:01 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 13:21:02 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 13:21:02 --> 404 Page Not Found --> demos.css
+ERROR - 2010-10-25 13:40:14 --> 404 Page Not Found --> demos.css
+ERROR - 2010-10-25 13:40:14 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 14:45:56 --> 404 Page Not Found --> demos.css
+ERROR - 2010-10-25 14:46:04 --> 404 Page Not Found --> customer/demos.css
+ERROR - 2010-10-25 14:46:04 --> 404 Page Not Found --> customer/themes
+ERROR - 2010-10-25 14:46:10 --> Severity: Notice  --> Undefined variable: packe C:\wamp\www\hotel-mario\system\application\controllers\customer.php 151
+ERROR - 2010-10-25 14:46:10 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`.`name` AS hotel
+ FROM _admin_rooms_per_package_quote rpq, `_admin_rooms_per_p' at line 1
+ERROR - 2010-10-25 14:46:13 --> Severity: Notice  --> Undefined variable: packe C:\wamp\www\hotel-mario\system\application\controllers\customer.php 151
+ERROR - 2010-10-25 14:46:13 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`.`name` AS hotel
+ FROM _admin_rooms_per_package_quote rpq, `_admin_rooms_per_p' at line 1
+ERROR - 2010-10-25 14:46:56 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`.`name` AS hotel
+ FROM _admin_rooms_per_package_quote rpq, `_admin_rooms_per_p' at line 1
+ERROR - 2010-10-25 14:48:01 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`.`name` AS hotel 
+ FROM _admin_rooms_per_package_quote rpq, `_admin_rooms_per_' at line 1
+ERROR - 2010-10-25 14:48:28 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`.`name` AS hotel 
+ FROM _admin_rooms_per_package_quote rpq, `_admin_rooms_per_' at line 1
+ERROR - 2010-10-25 14:49:28 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`.`name` AS hotel FROM _admin_rooms_per_package_quote rpq, `_admin_rooms_per_pac' at line 1
+ERROR - 2010-10-25 14:51:16 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`1`' at line 6
+ERROR - 2010-10-25 14:52:11 --> Severity: Notice  --> Undefined offset: 0 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 363
+ERROR - 2010-10-25 14:52:11 --> Query error: Unknown column 'r.name_spanish
+' in 'field list'
+ERROR - 2010-10-25 14:53:13 --> Query error: Unknown column 'r.name_spanish
+' in 'field list'
+ERROR - 2010-10-25 14:54:21 --> Query error: Unknown column 'r.name_spanish
+' in 'field list'
+ERROR - 2010-10-25 14:56:57 --> Severity: Notice  --> Undefined offset: 0 C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 364
+ERROR - 2010-10-25 15:04:02 --> Severity: Warning  --> Invalid argument supplied for foreach() C:\wamp\www\hotel-mario\system\application\views\existing_quote_details.php 170
+ERROR - 2010-10-25 15:05:43 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:05:43 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:05:43 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:05:43 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:05:43 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:06:06 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:06:06 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:06:06 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:06:06 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:06:06 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:06:09 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:06:09 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:06:09 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:06:09 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:06:09 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:09:51 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:09:51 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:09:51 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:09:51 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:09:51 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:09:58 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:09:58 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:09:58 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:09:58 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:09:58 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:09:58 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:10:42 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:10:42 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:10:42 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:10:42 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:10:42 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:10:42 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:10:44 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:10:44 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:10:44 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:10:44 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:10:44 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:11:00 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:11:00 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:11:01 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:11:01 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:11:01 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:11:02 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:11:02 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:11:02 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:11:02 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:11:02 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:11:18 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:11:18 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:11:18 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:11:18 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:11:18 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:11:20 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:11:20 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:11:20 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:12:09 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:12:09 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:12:09 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:12:09 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:12:09 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:12:13 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:12:13 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:12:13 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:12:13 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:12:13 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:12:17 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:12:17 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:12:17 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:12:17 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:12:17 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:12:27 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:12:27 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:12:27 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:12:28 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:12:28 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:12:29 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:12:29 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:12:29 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:12:29 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:12:29 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:12:41 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:12:41 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:12:41 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:12:41 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:12:41 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:12:48 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:12:48 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:12:48 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:12:48 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:12:48 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:12:49 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:12:49 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:12:49 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:12:49 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:12:49 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:12:51 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:12:51 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:12:51 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:12:51 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:12:51 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:12:53 --> Severity: Notice  --> Undefined index: hotel_id C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 137
+ERROR - 2010-10-25 15:12:53 --> Severity: Notice  --> Undefined index: date_end C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 138
+ERROR - 2010-10-25 15:12:53 --> Severity: Notice  --> Undefined index: date_ini C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 139
+ERROR - 2010-10-25 15:12:53 --> Severity: Notice  --> Undefined index: plan C:\wamp\www\hotel-mario\system\application\controllers\price_matrix.php 140
+ERROR - 2010-10-25 15:12:53 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+ERROR - 2010-10-25 15:14:23 --> Severity: Warning  --> Missing argument 1 for Customer::customer_after_quote() C:\wamp\www\hotel-mario\system\application\controllers\customer.php 36
+ERROR - 2010-10-25 15:14:23 --> Severity: Notice  --> Undefined variable: ci_client C:\wamp\www\hotel-mario\system\application\controllers\customer.php 37
+ERROR - 2010-10-25 15:14:23 --> Severity: Notice  --> Undefined variable: ci_client C:\wamp\www\hotel-mario\system\application\controllers\customer.php 40
+ERROR - 2010-10-25 15:15:56 --> Severity: Notice  --> Undefined index: date C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 326
+ERROR - 2010-10-25 15:15:56 --> Severity: Notice  --> Undefined index: time C:\wamp\www\hotel-mario\system\application\models\quotations_model.php 327
+ERROR - 2010-10-25 15:17:36 --> Severity: Notice  --> Undefined index: date C:\wamp\www\hotel-mario\system\application\views\existing_quote_details.php 89
+ERROR - 2010-10-25 15:17:36 --> Severity: Notice  --> Undefined index: time C:\wamp\www\hotel-mario\system\application\views\existing_quote_details.php 89
+ERROR - 2010-10-25 17:26:42 --> 404 Page Not Found --> demos.css
+ERROR - 2010-10-25 17:26:42 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 17:28:01 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 17:28:03 --> 404 Page Not Found --> home/themes
+ERROR - 2010-10-25 17:28:03 --> 404 Page Not Found --> home/demos.css
+ERROR - 2010-10-25 17:28:09 --> 404 Page Not Found --> customer/demos.css
+ERROR - 2010-10-25 17:28:09 --> 404 Page Not Found --> customer/themes
+ERROR - 2010-10-25 17:28:20 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 17:28:30 --> 404 Page Not Found --> home/themes
+ERROR - 2010-10-25 17:28:32 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 19:34:24 --> 404 Page Not Found --> customer/themes
+ERROR - 2010-10-25 19:41:43 --> 404 Page Not Found --> home/demos.css
+ERROR - 2010-10-25 19:41:54 --> 404 Page Not Found --> seller/themes
+ERROR - 2010-10-25 19:42:14 --> 404 Page Not Found --> seller/demos.css
+ERROR - 2010-10-25 19:43:43 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 19:43:50 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 19:43:50 --> 404 Page Not Found --> demos.css
+ERROR - 2010-10-25 19:44:12 --> 404 Page Not Found --> hotels/themes
+ERROR - 2010-10-25 19:44:18 --> 404 Page Not Found --> demos.css
+ERROR - 2010-10-25 19:44:22 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 19:44:22 --> 404 Page Not Found --> demos.css
+ERROR - 2010-10-25 19:45:45 --> 404 Page Not Found --> demos.css
+ERROR - 2010-10-25 19:45:48 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 19:45:52 --> 404 Page Not Found --> hotels/themes
+ERROR - 2010-10-25 19:46:04 --> 404 Page Not Found --> demos.css
+ERROR - 2010-10-25 19:46:10 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 19:46:10 --> 404 Page Not Found --> demos.css
+ERROR - 2010-10-25 19:46:17 --> 404 Page Not Found --> hotels/themes
+ERROR - 2010-10-25 19:47:12 --> 404 Page Not Found --> hotels/themes
+ERROR - 2010-10-25 19:48:01 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 19:48:07 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 19:48:15 --> 404 Page Not Found --> themes
+ERROR - 2010-10-25 19:48:15 --> 404 Page Not Found --> demos.css

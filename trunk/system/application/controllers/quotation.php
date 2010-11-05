@@ -116,9 +116,9 @@ class Quotation extends Controller {
 			$data['prices'] = $prices; 
 		}
 		
-		if ($flag == 0)	$this->load->view('start_quote', $data);
+		if ($flag == 0)	$this->load->view('hotel_quote_frame', $data);
 		
-		$this->load->view('quote_details_form',$data);
+		$this->load->view('hotel_quote_add_room',$data);
 	}
 	
 	function setting_PU(){
@@ -336,37 +336,29 @@ class Quotation extends Controller {
 	}
 	
 	function process_flight($flight_aux, $all_data, $summary){
-		$flight = array(  'flight_id' => '', 'AIRLINES_id' => '', 'number' => '', 'class' => '', 'price_per_adult' => '', 'price_per_kid' => '', 'origin' => '', 'destination' => '', 'time' => '', 'date' => '', 'type' => '');
+		$flight = array(  'flight_id' => '', 'AIRLINES_id' => '', 'number' => '', 'class' => '', 'price_per_adult' => '', 'price_per_kid' => '', 'origin' => '', 'destination' => '', 'go_time' => '', 'go_date' => '', 'type' => '', 'round_trip' => '', 'back_time' => '', 'back_date' => '');
 		
 		$flight_data = array(); //all info of one flight including passengers once processed and ready		
 		$travelers_aux = array(); //travelers before explode, example: name|lastname|passport|...||..
 		$traveler_aux = array(); //each traveler after explode but with no indexes
 		$traveler = array('traveler_ci_id' => '', 'name' => '', 'lastname' => '', 'passport' => '', 'email' => '', 'type' => '');
 		
-		if ($summary == 0)
-			$flight['flight_id'] = '';
-		elseif ($summary == 1) $flight['flight_id'] = $flight_aux[11];
+		if ($summary == 0)		$flight['flight_id'] = '';
+		elseif 					($summary == 1) $flight['flight_id'] = $flight_aux[11];
 				
-		if ($flight_aux[12] == 'S'){
-			$flight['origin'] = $flight_aux[1];
-			$flight['destination'] = $flight_aux[0];
-			$flight['date'] = $flight_aux[13];
-			$flight['time'] = $flight_aux[14];
-			
-		}
-		else {
-			$flight['origin'] = $flight_aux[0];
-			$flight['destination'] = $flight_aux[1];
-			$flight['date'] = $flight_aux[2];
-			$flight['time'] = $flight_aux[3];
-			
-		}
+		$flight['origin'] = $flight_aux[0];
+		$flight['destination'] = $flight_aux[1];
+		$flight['go_date'] = $flight_aux[2];
+		$flight['go_time'] = $flight_aux[3];
 		$flight['number'] = $flight_aux[4];
 		$flight['AIRLINES_id'] = $flight_aux[5];
 		$flight['class'] = str_replace("'", "",$flight_aux[6]);
 		$flight['type'] = $this->flight_type($flight['origin'], $flight['destination']);
 		$flight['price_per_adult'] = $flight_aux[7];
 		$flight['price_per_kid'] = $flight_aux[8];
+		$flight['round_trip'] = $flight_aux[12];
+		$flight['back_date'] = $flight_aux[13];
+		$flight['back_time'] = $flight_aux[14];
 		
 		$flight_data[0] = $flight;
 		
@@ -392,7 +384,7 @@ class Quotation extends Controller {
 		$flights_quote = $_POST["flights_quote"];
 		
 		$flights_each = array();
-		$flights_each = explode('|||', $flights_quote); //array with info of every flight
+		$flights_each = explode('|||', $flights_quote); //at each position is a long string with the info of a flight, example: origin|destination|go_date|go_time|...||travelers info|||
 		$all_flights = array(); //all flights from the same quote that in the end will be saved.
 		
 		$total = 0;
@@ -401,20 +393,22 @@ class Quotation extends Controller {
 		foreach($flights_each as $flights){			
 			if ($flights != ''){
 				
-				$all_data = array(); //all info of one flight including passengers, but rough
-				$flight_aux = array(); //all info of flight exploded but with no indexes
+				$all_data = array(); //[0] info of the flight in a long string , [1] info of the travelers in a long string
+				$flight_aux = array(); //info of the flight in a array, example :
+									  //[0]origin, [1]destination,...,[12]round trip
 				
 				$all_data = explode('||', $flights);
 				$flight_aux = explode('|', $all_data[0]);
+				
 				$all_flights[count($all_flights)] = $this->process_flight($flight_aux, $all_data, $summary);
 				$total += (($flight_aux[9] * (floatval($flight_aux[7]))) + ($flight_aux[10] * (floatval($flight_aux[8]))));
-				if ($flight_aux[12] == 'Y'){
-					$back_flight = str_replace("|Y|", "|S|", $flights);
-					$all_data = explode('||', $back_flight);
-					$flight_aux = explode('|', $all_data[0]);		
-					$all_flights[count($all_flights)] = $this->process_flight($flight_aux, $all_data, $summary);
-					$total += (($flight_aux[9] * (floatval($flight_aux[7]))) + ($flight_aux[10] * (floatval($flight_aux[8]))));
-				}
+				//if ($flight_aux[12] == 'Y'){
+					//$back_flight = str_replace("|Y|", "|S|", $flights);
+					//$all_data = explode('||', $back_flight);
+					//$flight_aux = explode('|', $all_data[0]);		
+					//$all_flights[count($all_flights)] = $this->process_flight($flight_aux, $all_data, $summary);
+					//$total += (($flight_aux[9] * (floatval($flight_aux[7]))) + ($flight_aux[10] * (floatval($flight_aux[8]))));
+				//}
 			}
 			
 		}
@@ -498,7 +492,13 @@ class Quotation extends Controller {
 		$data['QUOTATIONS_HOTELS_id'] = $_POST["hotel_quote_id"];		
 		$data['QUOTATIONS_FLIGHTS_id'] = $_POST["flight_quote_id"];
 		$data['QUOTATIONS_GENERIC_id'] = $_POST["generic_quote_id"];
+		$data['QUOTATIONS_PACKAGE_id'] = $_POST["package_quote_id"];
+		
 		$data['quote_date'] = date('Y-m-d');
+		
+		echo('<pre>');
+		var_dump($data);
+		echo('</pre>');
 		
 		$this->quotations_model->insert_quotation($data);
 	}
@@ -548,9 +548,11 @@ class Quotation extends Controller {
 		$this->load->view('pq_details', $data);
 	}
 	
-	function pq_process(){
+	function pq_process($summary){
 		$rooms = $_POST["rooms"];
 		$total = $_POST["pq_total"];
+		$check_in = $_POST["check_in"];
+		$check_out = $_POST["check_out"];
 		
 		$array2 = array(); // array aux to put the 2 sticks segment.
 		$rooms_array = array(); //after the explode the rooms are stored here, but disorderly. so to order the array and avoid validation, is moved to the rooms array 2 after been cleaned
@@ -575,10 +577,19 @@ class Quotation extends Controller {
 			}
 		}		
 		
-		$this->quotations_model->pq_insert($rooms_array2, $total);
-		$data['total'] = $total;
-		$data['package_rooms'] = $rooms_array2;
-		$this->load->view('package_summary', $data);		
+		if($summary == 1){
+			
+			$pq_id = $this->quotations_model->pq_insert($rooms_array2, $total, $check_in, $check_out);
+			echo($pq_id);
+		}
+		else{
+			$data['total'] = $total;
+			$data['package_rooms'] = $rooms_array2;
+			$data['check_in'] = $check_in;
+			$data['check_out'] = $check_out;
+			$this->load->view('package_summary', $data);	
+		}
+		
 	}
 }
 

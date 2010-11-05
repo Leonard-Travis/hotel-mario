@@ -6,7 +6,7 @@
         <td><span class="naranja">Hotel</span></td>
     </tr>
     <tr>
-    	<td><strong>Hotel</strong>:</td> <td><?php echo($hotel['hotel_name'].' '.$hotel['hotel_location']); ?></td>
+    	<td><strong>Hotel</strong>:</td> <td bgcolor="#00FF33"><?php echo($hotel['hotel_name'].' '.$hotel['hotel_location']); ?></td>
     </tr>
     <tr>
     	<td><strong>Fecha checkin</strong>:</td> <td> <?php echo($hotel['check_in'])?></td>
@@ -18,10 +18,7 @@
     	<td><strong>Plan</strong>:</td> <td> <?php echo($hotel['plan']); ?></td>
     </tr>
     <tr>
-    	<td><strong>Peronsas</strong>:</td> <td> <?php echo($hotel['persons']); ?></td>
-    </tr>
-     <tr>
-    	<td><strong>Total</strong>:</td> <td>BsF. <?php echo($hotel['total']); ?></td>
+    	<td><strong>Personas</strong>:</td> <td> <?php echo($hotel['persons']); ?></td>
     </tr>
 </table>
 
@@ -45,6 +42,10 @@
     </tr>
     
     <?php } ?>
+    <tr>
+        <td class="numerico sinborde" colspan="3"><span class="rojo">Total:</span></td>
+        <td class="numerico sinborde"><span class="rojo">BsF. <?php echo($hotel['total']);?></span></td>
+    </tr>
 </table>
 
 <?php } ?>
@@ -138,12 +139,69 @@
     
     <?php } ?>
     <tr>
-        <td class="numerico sinborde" colspan="3"><span class="rojo"></span></td>
+        <td class="numerico sinborde" colspan="2"><span class="rojo"></span></td>
         <td class="numerico sinborde"><span class="rojo">Total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BsF. <?php echo($total); ?></span></td>
     </tr>
 </table>
 
 <?php } ?>
+
+
+
+
+<div class="separadorv"></div>
+<div class="separadorv"></div>
+<?php if($package){ ?>
+<table>
+    <tr>
+        <td><span class="naranja">Paquete</span></td>
+    </tr>
+    <tr>
+    	<td><strong>Paquete</strong>:</td> <td bgcolor="#00FF33"><?php echo($package['pack_data']['name']); ?></td>
+    </tr>
+    <tr>
+    	<td><strong>Descripcion</strong>:</td> <td><?php echo nl2br($package['pack_data']['description']); ?></td>
+    </tr>
+    <tr>
+    	<td><strong>Tarifas validas desde <?php echo($package['pack_data']['date_start']);?> hasta <?php echo($package['pack_data']['date_end']);?></strong></td><td></td>
+    </tr>
+    <tr>
+    	<td><strong>Fecha checkin</strong>:</td> <td> <?php echo($package['check_in'])?></td>
+    </tr>
+    <tr>
+    	<td><strong>Fecha checkin</strong>:</td> <td> <?php echo($package['check_out']); ?></td>
+    </tr>
+</table>
+
+<br />
+
+<table width="100%">
+    <tr class="pthead">
+        <td class="centrado">Tipo de Habitación</td>
+        <td class="centrado">Cant. Personas</td>
+        <td class="centrado">Precio unitario</td>
+        <td class="centrado">SubTotal</td>
+    </tr>
+    
+    <?php foreach($package['rooms'] as $rooms){ 
+			if(count($rooms) > 0){ ?>
+    
+    <tr>
+        <td class="centrado"><?php echo($rooms["name_spanish"]); ?></td>
+        <td class="centrado"><?php echo($rooms["number_of_people"]); ?></td>
+        <td class="centrado">BsF. <?php echo($rooms["price_per_person"]); ?></td>
+        <td class="centrado">BsF. <?php echo((int)$rooms["number_of_people"]*(float)$rooms["price_per_person"]);?></td>
+    </tr>
+    <?php } }?>
+    <tr>
+        <td class="numerico sinborde" colspan="2"><span class="rojo"></span></td>
+        <td class="numerico sinborde"><span class="rojo">Total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BsF. <?php echo($package['total']); ?></span></td>
+    </tr>
+</table>
+
+<?php } ?>
+
+
 
 <br /><br /><br />
 <div class="separadorv"></div>

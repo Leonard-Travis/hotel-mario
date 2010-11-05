@@ -218,7 +218,7 @@ class Quotations_model extends Model {
 	
 	function insert_quotation($data){
 		$total = 0;
-		if($data['QUOTATIONS_HOTELS_id'] == '') $data['QUOTATIONS_HOTELS_id'] = NULL;	
+		if($data['QUOTATIONS_HOTELS_id'] == 'null') $data['QUOTATIONS_HOTELS_id'] = NULL;	
 		else {
 		    $quote = $this->find_quote($data['QUOTATIONS_HOTELS_id'], '_admin_quotations_hotels', 'quote_hotel_id');	
 			foreach($quote as $quote)
@@ -226,7 +226,7 @@ class Quotations_model extends Model {
 			
 		}
 		
-		if($data['QUOTATIONS_FLIGHTS_id'] == '') $data['QUOTATIONS_FLIGHTS_id'] = NULL;
+		if($data['QUOTATIONS_FLIGHTS_id'] == 'null') $data['QUOTATIONS_FLIGHTS_id'] = NULL;
 		else {
 			$quote = $this->find_quote($data['QUOTATIONS_FLIGHTS_id'], '_admin_quotations_flights', 'quote_flight_id');	
 			foreach($quote as $quote)
@@ -234,9 +234,17 @@ class Quotations_model extends Model {
 			
 		}
 		
-		if($data['QUOTATIONS_GENERIC_id'] == '') $data['QUOTATIONS_GENERIC_id'] = NULL;
+		if($data['QUOTATIONS_GENERIC_id'] == 'null') $data['QUOTATIONS_GENERIC_id'] = NULL;
 		else {
 			$quote = $this->find_quote($data['QUOTATIONS_GENERIC_id'], '_admin_quotations_generic', 'quotes_generic_id');	
+			foreach($quote as $quote)
+				$total += $quote['total'];
+			
+		}
+		
+		if($data['QUOTATIONS_PACKAGE_id'] == 'null') $data['QUOTATIONS_PACKAGE_id'] = NULL;
+		else {
+			$quote = $this->find_quote($data['QUOTATIONS_PACKAGE_id'], '_admin_quotations_generic', 'quotes_generic_id');	
 			foreach($quote as $quote)
 				$total += $quote['total'];
 			
@@ -323,8 +331,8 @@ class Quotations_model extends Model {
 				$flight_data[$pos]['airline'] = $value['airline'];
 				$flight_data[$pos]['price_per_adult'] = $value['price_per_adult'];
 				$flight_data[$pos]['price_per_kid'] = $value['price_per_kid'];
-				$flight_data[$pos]['date'] = $value['date'];
-				$flight_data[$pos]['time'] = $value['time'];
+				$flight_data[$pos]['date'] = $value['go_date'];
+				$flight_data[$pos]['time'] = $value['go_time'];
 				
 				$this->db->select('t.*');
 				$this->db->from('_admin_travelers t, _admin_travelers_per_flight tf');
@@ -350,9 +358,56 @@ class Quotations_model extends Model {
 		return $query->result_array();
 	}
 	
-	function pq_insert($rooms, $total){
+	function quote_package_data($quotation){
+		$pack_data = array();
+		$rooms = array();
+		 $this->db->select('p.*, h.name AS hotel FROM _admin_rooms_per_package_quote rpq, _admin_rooms_per_package rp, _admin_rooms_hotels rh, _admin_packages p, _admin_hotels h
+						   WHERE rpq.QUOTE_PACKAGE_id ='.$quotation.'
+						   AND rpq.ROOM_PER_PACKAGE_id = rp.room_per_package_id
+						   AND rp.PACKAGE_id = p.package_id
+						   AND rp.ROOMS_HOTELS_id = rh.rooms_hotels_id
+						   AND rh.HOTELS_id = h.hotel_id');
+		 $query = $this->db->get();
+		 foreach ($query->result_array() as $value) {
+			 $pack_data = $value;
+		 }
+			
+									
+		
+		$this->db->where('QUOTE_PACKAGE_id', $quotation);
+		$query2 = $this->db->get('_admin_rooms_per_package_quote');
+		
+		foreach ($query2->result_array() as $value){			
+			 $this->db->select('rp.*, r.name_spanish FROM _admin_rooms_per_package rp, _admin_rooms r, _admin_rooms_hotels rh
+							   WHERE rp.room_per_package_id ='.$value['ROOM_PER_PACKAGE_id'].'
+							   AND rp.ROOMS_HOTELS_id = rh.rooms_hotels_id
+							   AND rh.ROOMS_id = r.room_id');
+			 $query3 = $this->db->get();
+		 	 foreach ($query3->result_array() as $value2) {
+				 $pos = count($rooms);
+				 $rooms[$pos] = array();
+				 $rooms[$pos] = $value2;
+				 $rooms[$pos]['number_of_people'] = $value['number_of_people'];
+			 }
+		}
+		/*echo('pack data<pre>');
+		var_dump($pack_data);
+		echo('</pre>');
+		
+		echo('rooms<pre>');
+		var_dump($rooms);
+		echo('</pre>');*/
+		
+		$resp = array('pack_data' => $pack_data, 'rooms' => $rooms);
+		
+		return $resp;
+		
+		
+	}
+	
+	function pq_insert($rooms, $total, $check_in, $check_out){
 		$pq_id = '';
-		$data_pq = array('quote_package_id' => '', 'total' => $total);
+		$data_pq = array('quote_package_id' => '', 'check_in' => $check_in, 'check_out' => $check_out, 'total' => $total);
 		$this->db->insert('_admin_quotations_package', $data_pq);
 		
 		$this->db->select_max('quote_package_id');
@@ -370,6 +425,8 @@ class Quotations_model extends Model {
 				}
 			}
 		}
+		
+		return $pq_id;
 	}
 }
 ?>

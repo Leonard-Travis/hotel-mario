@@ -1,4 +1,18 @@
 <?php if ($hotels) {?>
+<script type="text/javascript">
+	$(function() {
+		var availableTags = new Array();
+		
+		
+		<?php for($i=0; $i <  count($hotels) ; $i++){?>
+			availableTags[<?php echo($i); ?>] = "hola"+<?php echo($hotels[$i]['name']);?>;
+		<?php } ?>	
+		//var availableTags = ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"];
+		$("#tags").autocomplete({
+			source: availableTags
+		});
+	});
+</script>
 <div class="separadorv"></div>
 <div class="separadorv"></div>
 <h1>Hotel</h1>
@@ -6,11 +20,12 @@
     <ul>
         <li class="li_tit_1"><img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel</li> 
 		<li><select name="hotels" id="hotels" onchange="hotel_info();">
-        	<option value="-">------</option>
+        	<option value="-">----------------</option>
 			<?php foreach ($hotels as $hotel) { ?>
 				<option value="<?php echo ($hotel['hotel_id']);?>"><?php echo ($hotel['name']);?></option> 
 			<?php }?>
 			</select> 
+            <input id="tags" />
         </li>
     </ul>
 	</div>
@@ -18,6 +33,15 @@
 <?php }?>
 
 <?php if ($hotel_selected) {?>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#date_start").datepicker({dateFormat: 'yy-mm-dd'});
+		$("#date_end").datepicker({dateFormat: 'yy-mm-dd'});
+	});
+</script>
+
+
 <?php foreach ($hotel_selected as $hotel_selected) { ?>
     <div class="separador"></div>
     <div class="separadorv_gris"></div>
@@ -32,11 +56,11 @@
             </tr>
             <tr>
                 <td><strong>Fecha In:</strong></td>
-                <td><input type="text" name="date_start" id="date_start"/></td>
+                <td><input type="text" name="date_start" id="date_start" readonly="readonly"/></td>
             </tr>
             <tr>
                 <td><strong>Fecha Out:</strong></td>
-                <td><input type="text" name="date_end" id="date_end"/></td>
+                <td><input type="text" name="date_end" id="date_end" readonly="readonly"/></td>
             </tr>
             <tr>
                 <td><strong>Plan:</strong></td>

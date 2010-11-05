@@ -48,6 +48,13 @@ $this->load->view('global/header');
 <?php }?>
 				
 <?php if ($hotel_selected) {?>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#date_ini").datepicker({dateFormat: 'yy-mm-dd'});
+		$("#date_end").datepicker({dateFormat: 'yy-mm-dd'});
+	});
+</script>
+
 	<div class="separador"></div>
 	<div class="separadorv_gris"></div>
 
@@ -75,8 +82,8 @@ $this->load->view('global/header');
         </td>
         </tr>
         <tr> 
-        <td>Desde:</td> <td><input type="text" name="date_ini" id="date_ini" onclick="popUpCalendar(this, form1.date_ini, 'yyyy-mm-dd')" readonly="readonly" /></td>
-        <td>Hasta:</td> <td><input type="text" name="date_end" id="date_end" onclick="popUpCalendar(this, form1.date_end, 'yyyy-mm-dd')" readonly="readonly" /></td>
+        <td>Desde:</td> <td><input type="text" name="date_ini" id="date_ini" readonly="readonly" /></td>
+        <td>Hasta:</td> <td><input type="text" name="date_end" id="date_end" readonly="readonly" /></td>
         </tr>
         <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo ($hotel_selected['hotel_id']);?>"  />
         <?php }?> <!-- end of foreach $hotel_selected -->
