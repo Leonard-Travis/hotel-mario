@@ -7,7 +7,7 @@
 <!-----------------------------------------JQUERY----------------------------------------------------------
 note: components should be included in this specific order, so that everything works properly -->
 
-<link type="text/css" href="http://localhost/hotel-mario/js/jquery/themes/base/jquery.ui.all.css" rel="stylesheet" />
+<link type="text/css" href="http://localhost/hotel-mario/js/jquery/jquery.ui.all.css" rel="stylesheet" />
 <script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery-1.4.2.js"></script>
 <script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery.ui.core.js"></script>
 <script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery.ui.widget.js"></script>

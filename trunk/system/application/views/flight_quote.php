@@ -1,18 +1,53 @@
 <div id="flight_quote_aux">
 <script type="text/javascript">
+	$(function compl(tag) {
+		var availableTags = new Array();
+		<?php for($i=0; $i <  count($citys) ; $i++){?>
+			availableTags[<?php echo($i); ?>] = {label: "<?php echo($citys[$i]['name']);?>",
+												 value: "<?php echo($citys[$i]['flight_city_id']);?>"};
+		<?php } ?>	
+		
+		$('#origin<?php echo($cont_f); ?>_tag').autocomplete({
+			minLength: 0,
+			source: availableTags,
+			focus: function(event, ui) {
+				$('#origin<?php echo($cont_f); ?>_tag').val(ui.item.label);
+				return false;
+			},
+			select: function(event, ui) {
+				$('#origin<?php echo($cont_f); ?>_tag').val(ui.item.label);
+				$('#origin<?php echo($cont_f); ?>').val(ui.item.value);				
+				return false;
+			}
+		});
+		$('#destination<?php echo($cont_f); ?>_tag').autocomplete({
+			minLength: 0,
+			source: availableTags,
+			focus: function(event, ui) {
+				$('#destination<?php echo($cont_f); ?>_tag').val(ui.item.label);
+				return false;
+			},
+			select: function(event, ui) {
+				$('#destination<?php echo($cont_f); ?>_tag').val(ui.item.label);
+				$('#destination<?php echo($cont_f); ?>').val(ui.item.value);				
+				return false;
+			}
+		});
+	});
+	
+	
 	$(document).ready(function() {
 		$("#go_date<?php echo($cont_f); ?>").datepicker({dateFormat: 'yy-mm-dd'});
 		$("#back_date<?php echo($cont_f); ?>").datepicker({dateFormat: 'yy-mm-dd'});
 	});
 </script>
+
 <table width="100%">
         	<tr>
             <td><strong>Origen:</strong></td>
-            <td><select name="origin<?php echo($cont_f); ?>" id="origin<?php echo($cont_f); ?>">
-            	<?php foreach($citys as $city){ ?>
-                	<option value="<?php echo($city['flight_city_id']); ?>"><?php echo($city['name']); ?></option>
-                <?php } ?>
-                </select>
+            <td>
+                <input id="origin<?php echo($cont_f); ?>_tag"/>
+            	<input type="hidden" id="origin<?php echo($cont_f); ?>" />
             </td>
             <td><strong>Partida:</strong></td>
             <td>
@@ -24,11 +59,9 @@
             
             <tr>
             <td><strong>Destino:</strong></td>
-            <td><select name="destination<?php echo($cont_f); ?>" id="destination<?php echo($cont_f); ?>">
-            	<?php foreach($citys as $city){ ?>
-                	<option value="<?php echo($city['flight_city_id']); ?>"><?php echo($city['name']); ?></option>
-                <?php } ?>
-                </select>
+            <td>
+                <input id="destination<?php echo($cont_f); ?>_tag"/>
+            	<input type="hidden" id="destination<?php echo($cont_f); ?>" />
             </td>
             
             <td>

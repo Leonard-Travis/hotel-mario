@@ -66,6 +66,13 @@ class Plans_model extends Model {
 		$this->db->update('_admin_plans', $data);
 	}
 	
+		
+	function plan_description($plan, $hotel){
+		$this->db->where('HOTELS_id', $hotel);
+		$this->db->where('PLANS_id', $plan);
+		$query = $this->db->get('_admin_hotels_plans');
+		return $query->result_array();
+	}
 	
 //-------------------------------sin usar------------------------	
 	function plan_in_quote($plan_id)

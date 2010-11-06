@@ -43,6 +43,12 @@ $this->load->view('global/management_bar');
         <td>Cedula: </td> <td><input type="text" id="seller_id" name="seller_id" maxlength="25"></td>
         </tr>
         <tr>
+        <td>Correo Electr&oacute;nico: </td> <td><input type="text" id="email" maxlength="100"></td>
+        </tr>
+        <tr>
+        <td>Nombre de Usuario: </td> <td><input type="text" id="nick_name" maxlength="100"></td>
+        </tr>
+        <tr>
         <td>Tipo: </td> <td><select id="seller_type">
                             <option value="seller">Vendedor</option>
                             <option value="manager">Administrador&nbsp;&nbsp;&nbsp;</option>

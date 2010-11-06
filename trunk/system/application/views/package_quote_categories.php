@@ -1,4 +1,27 @@
 <?php if ($all_categories) {?>
+<script type="text/javascript">
+	$(function() {
+		var availableTags = new Array();
+		<?php for($i=0; $i <  count($all_categories) ; $i++){?>
+			availableTags[<?php echo($i); ?>] = {label: "<?php echo($all_categories[$i]['name_spanish']);?>",
+												 value: "<?php echo($all_categories[$i]['categorie_id']);?>"};
+		<?php } ?>	
+		
+		$('#tags').autocomplete({
+			minLength: 0,
+			source: availableTags,
+			focus: function(event, ui) {
+				$('#tags').val(ui.item.label);
+				return false;
+			},
+			select: function(event, ui) {
+				$('#tags').val(ui.item.label);
+				$('#categories').val(ui.item.value);				
+				return false;
+			}
+		});
+	});
+</script>
 <div class="separadorv"></div>
 <div class="separadorv"></div>
 <h1>Paquete</h1>
@@ -7,12 +30,12 @@
     <table>
     	<tr>
         <td class="li_tit_1"><img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione una Categoria</td> 
-        <td><select name="categories" id="categories" onchange="pq_select_categorie();">
-        	<option value="-">---------------------</option>
-			<?php foreach ($all_categories as $categorie) { ?>
-				<option value="<?php echo ($categorie['categorie_id']);?>"><?php echo ($categorie['name_spanish']);?></option> 
-			<?php }?>
-			</select> 
+        <td>
+            <input id="tags" />
+            <input type="hidden" id="categories" />
+        </td>
+        <td>
+            <input type="image" src="http://localhost/hotel-mario/designed_views/imagenes/bseleccionar.jpg" onclick="pq_select_categorie();"/>
         </td>
         </tr>
     </table>

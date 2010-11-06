@@ -964,7 +964,6 @@ function delete_matrix(season_id, hotel_id, prices){
 }
 
 function login(){
-	var user_type =$("#user_type").val();
 	var user_id =$("#user_id").val();
 	var user_password = $('#user_password').val();
 	
@@ -972,8 +971,7 @@ function login(){
       url: "http://localhost/hotel-mario/index.php/seller/login",
       global: false,
       type: "POST",
-      data: ({user_type : user_type,
-			  user_id : user_id,
+      data: ({user_id : user_id,
 			  user_password : user_password}),
       async:false,
 	  dataType:"html",
@@ -989,25 +987,34 @@ function add_seller(){
 	var name = $('#seller_name').val();
 	var lastname = $('#seller_lastname').val();
 	var id = $('#seller_id').val();
+	var email = $('#email').val();
+	var nick_name = $('#nick_name').val();
 	var type = $('#seller_type').val();
 	var password = $('#password').val();
-
-	 $.ajax({
-      url: "http://localhost/hotel-mario/index.php/seller/add_seller",
-      global: false,
-      type: "POST",
-      data: ({name : name,
-			   lastname : lastname,
-			   id : id,
-			   type : type,
-			   password : password}),
-      async:false,
-	  dataType:"html",
-      success: function(msg){
-			alert('Agregado con exito');
-			$('#seller').html(msg);
-      }
-	})
+	
+	if((name == "")||(lastname == "")||(id == "")||(email == "")||(nick_name == "")||(password == "")){
+		alert("Dejo uno o mas campos obligatorios vacios");
+	}
+	else{
+		 $.ajax({
+		  url: "http://localhost/hotel-mario/index.php/seller/add_seller",
+		  global: false,
+		  type: "POST",
+		  data: ({name : name,
+				   lastname : lastname,
+				   id : id,
+				   email : email,
+				   nick : nick_name,
+				   type : type,
+				   password : password}),
+		  async:false,
+		  dataType:"html",
+		  success: function(msg){
+				alert('Agregado con exito');
+				$('#seller').html(msg);
+		  }
+		})
+	}
 }
 
 function categorie_packages(){
@@ -1362,4 +1369,47 @@ function pq_process(summary){
 	})
 }
 
+function management_hotel_chosen(){
+	var hotel_chosen = $('#hotels').val();
+	$.ajax({
+      url: "http://localhost/hotel-mario/index.php/hotels",
+      global: false,
+      type: "POST",
+      data: ({hotels : hotel_chosen}),
+      async:false,
+	  dataType:"html",
+      success: function(msg){
+			$("#management_hotels_div").html(msg);
+      }
+	})
+}
 
+function management_price_matrix(){
+	var hotel_chosen = $('#hotels').val();
+	$.ajax({
+      url: "http://localhost/hotel-mario/index.php/price_matrix/index/1",
+      global: false,
+      type: "POST",
+      data: ({hotels : hotel_chosen}),
+      async:false,
+	  dataType:"html",
+      success: function(msg){
+			$("#management_price_matrix_div").html(msg);
+      }
+	})
+}
+
+function price_matrix_hotel(){
+	var hotel_chosen = $('#hotels').val();
+	$.ajax({
+      url: "http://localhost/hotel-mario/index.php/price_matrix/index/0",
+      global: false,
+      type: "POST",
+      data: ({hotels : hotel_chosen}),
+      async:false,
+	  dataType:"html",
+      success: function(msg){
+			$("#price_matrix_div").html(msg);
+      }
+	})
+}

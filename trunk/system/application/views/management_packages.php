@@ -27,16 +27,36 @@ $this->load->view('global/management_bar');
 ?>
 
 <?php if ($query) {?>
+<script type="text/javascript">
+	$(function() {
+		var availableTags = new Array();
+		<?php for($i=0; $i <  count($query) ; $i++){?>
+			availableTags[<?php echo($i); ?>] = {label: "<?php echo($query[$i]['name_spanish']);?>",
+												 value: "<?php echo($query[$i]['categorie_id']);?>"};
+		<?php } ?>	
+		
+		$('#tags').autocomplete({
+			minLength: 0,
+			source: availableTags,
+			focus: function(event, ui) {
+				$('#tags').val(ui.item.label);
+				return false;
+			},
+			select: function(event, ui) {
+				$('#tags').val(ui.item.label);
+				$('#categories').val(ui.item.value);				
+				return false;
+			}
+		});
+	});
+</script>
 	<table align="center" width="40%">
 		<tr>
-			<td align="center"> <strong>Seleccione una Categoria</strong> </td>
+			<td align="center"><img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione una Categoria</td>
              
 			<td align="center">
-			<select name="categories" id="categories">
-			<?php foreach ($query as $categorie) { ?>
-				<option value="<?php echo ($categorie['categorie_id']);?>"><?php echo ($categorie['name_spanish']);?></option> 
-			<?php }?>
-			</select>
+			<input id="tags" />
+            <input type="hidden" id="categories" />
 			</td> 
             
             <td> <img src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="categorie_packages();" /></td> 

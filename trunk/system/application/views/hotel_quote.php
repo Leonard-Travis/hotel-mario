@@ -2,14 +2,23 @@
 <script type="text/javascript">
 	$(function() {
 		var availableTags = new Array();
-		
-		
 		<?php for($i=0; $i <  count($hotels) ; $i++){?>
-			availableTags[<?php echo($i); ?>] = "hola"+<?php echo($hotels[$i]['name']);?>;
+			availableTags[<?php echo($i); ?>] = {label: "<?php echo($hotels[$i]['name']);?>",
+												 value: "<?php echo($hotels[$i]['hotel_id']);?>"};
 		<?php } ?>	
-		//var availableTags = ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"];
-		$("#tags").autocomplete({
-			source: availableTags
+		
+		$('#tags').autocomplete({
+			minLength: 0,
+			source: availableTags,
+			focus: function(event, ui) {
+				$('#tags').val(ui.item.label);
+				return false;
+			},
+			select: function(event, ui) {
+				$('#tags').val(ui.item.label);
+				$('#hotels').val(ui.item.value);				
+				return false;
+			}
 		});
 	});
 </script>
@@ -19,13 +28,12 @@
     <div id="asociar_c">
     <ul>
         <li class="li_tit_1"><img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel</li> 
-		<li><select name="hotels" id="hotels" onchange="hotel_info();">
-        	<option value="-">----------------</option>
-			<?php foreach ($hotels as $hotel) { ?>
-				<option value="<?php echo ($hotel['hotel_id']);?>"><?php echo ($hotel['name']);?></option> 
-			<?php }?>
-			</select> 
-            <input id="tags" />
+		<li>
+            <input id="tags"/>
+            <input type="hidden" id="hotels" />
+        </li>
+        <li>
+            <input type="image" src="http://localhost/hotel-mario/designed_views/imagenes/bseleccionar.jpg" onclick="hotel_info();"/>
         </li>
     </ul>
 	</div>

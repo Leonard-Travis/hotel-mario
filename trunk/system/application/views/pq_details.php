@@ -1,4 +1,10 @@
 <?php if($frame == '1'){ ?>
+<script>
+$(document).ready(function() {
+		$("#check_in").datepicker({dateFormat: 'yy-mm-dd'});
+		$("#check_out").datepicker({dateFormat: 'yy-mm-dd'});
+	});
+</script>
 <form id="pq_details_form" name="pq_details_form">
 
     <table align="center" width="60%" class="resumen">
@@ -12,8 +18,8 @@
 
 	<table align="center" width="80%" id="pq_table">
         <tr>
-            <td>Check In:<div id="check_in_div"><input type="text" id="check_in" name="check_in" maxlength="10" size="11"/></div></td>
-            <td>Check Out:<input type="text" id="check_out" name="check_out" maxlength="10" size="11"/></td>
+            <td>Check In:<div id="check_in_div"><input type="text" id="check_in" maxlength="10" size="11" readonly="readonly"/></div></td>
+            <td>Check Out:<input type="text" id="check_out" maxlength="10" size="11" readonly="readonly"/></td>
         </tr>
         <tr>
         <td>

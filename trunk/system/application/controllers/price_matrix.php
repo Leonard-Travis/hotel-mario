@@ -106,6 +106,7 @@ class Price_matrix extends Controller {
 		$rules['hotels']	= "required";
 		$this->validation->set_rules($rules);
 		$data['hotel_selected'] = NULL;
+		$data['prices'] = NULL;
 
 		if ($this->validation->run() == FALSE)
 		{
@@ -138,6 +139,7 @@ class Price_matrix extends Controller {
 		$date_end = $_POST["date_end"];
 		$date_ini = $_POST["date_ini"];
 		$plan_selected = $_POST["plan"];
+		$data['no_price'] = array();
 		
 		$seasons = $this->price_matrix_model->get_seasons($date_ini, $date_end);
 		$i = 0;
@@ -150,7 +152,10 @@ class Price_matrix extends Controller {
 			else{
 				$prices[$i] = $this->price_matrix_model->get_prices_without_plan($hotel_selected_id, $value['season_id']);
 			}
-			if (empty($prices[$i]))	unset($prices[$i]); 
+			if (empty($prices[$i]))	{
+				unset($prices[$i]); 
+				$data['no_price'][count($data['no_price'])] = $this->price_matrix_model->find_season_id($value['season_id']);;
+			}
 			else	$i = ($i + 1);
 		}		
 		
@@ -178,13 +183,15 @@ class Price_matrix extends Controller {
 			$data['query'] = $this->hotels_model->all_hotels();
 			$data['plans'] = $this->hotels_model->all_plans($hotel_selected_id);
 			$data['plan_selected'] = $this->plans_model->find($plan_selected);
+			$data['plan_description'] = $this->plans_model->plan_description($plan_selected, $hotel_selected_id);
 			$data['hotel_selected'] = $this->hotels_model->find($hotel_selected_id);
+		
 			if ($management_flag == 1){
 				$data['all_matrices'] = $this->matrices($hotel_selected_id);
 				$this->load->view('management_price_matrix_complete',$data);
 			}
 			else
-				$this->load->view('price_matrix_complete',$data);
+				$this->load->view('price_matrix',$data);
 	}
 	
 	function delete_matrix ()
