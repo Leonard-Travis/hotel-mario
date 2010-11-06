@@ -11,10 +11,9 @@ class Seller_model extends Model {
 		return $query->result_array();
 	}
 	
-	function login($type, $password, $id){
-		$this->db->where('type',$type);
+	function login($password, $id){
 		$this->db->where('password',$password);
-		$this->db->where('employees_id',$id);
+		$this->db->where('nick_name',$id);
 		$query =  $this->db->get('_admin_employees');
 		return $query->result_array();
 	}

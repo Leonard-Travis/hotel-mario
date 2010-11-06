@@ -1,3 +1,4 @@
+<div id="management_hotels_div">
 <?php
 $this->load->view('global/header');
 ?>
@@ -40,19 +41,41 @@ $this->load->view('global/management_bar');
 ?>
           	
 <?php if ($query) {?>
-	<table align="center" width="40%">
-		<tr>
-			<td align="center"> <strong>Seleccione un Hotel</strong> </td> 
-		<td align="center">
-		<form method="post" action="<?php echo base_url(); ?>hotels">
-			<select name="hotels" id="hotels">
-			<?php foreach ($query as $hotel) { ?>
-				<option value="<?php echo ($hotel['hotel_id']);?>"><?php echo ($hotel['name']);?></option> 
-			<?php }?>
-			</select>
-			</td> <td> <input name="send" type="submit" value="Aceptar" /> </td> </tr>
-		</form>
-	</table>
+<script type="text/javascript">
+	$(function() {
+		var availableTags = new Array();
+		<?php for($i=0; $i <  count($query) ; $i++){?>
+			availableTags[<?php echo($i); ?>] = {label: "<?php echo($query[$i]['name']);?>",
+												 value: "<?php echo($query[$i]['hotel_id']);?>"};
+		<?php } ?>	
+		
+		$('#tags').autocomplete({
+			minLength: 0,
+			source: availableTags,
+			focus: function(event, ui) {
+				$('#tags').val(ui.item.label);
+				return false;
+			},
+			select: function(event, ui) {
+				$('#tags').val(ui.item.label);
+				$('#hotels').val(ui.item.value);				
+				return false;
+			}
+		});
+	});
+</script>
+<table align="center" width="40%">
+    <tr>
+        <td align="center"> <img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel</td>
+        <td align="center">           
+                <input id="tags" />
+         </td> 
+         <td> 
+             <img src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="management_hotel_chosen();" />             
+             <input type="hidden" id="hotels" name="hotels" />
+         </td> 
+    </tr>
+</table>
  
 <?php }?>
     
@@ -169,3 +192,4 @@ $this->load->view('global/management_close');
 
 </body>
 </html>
+</div><!-- end of management hotels div-->

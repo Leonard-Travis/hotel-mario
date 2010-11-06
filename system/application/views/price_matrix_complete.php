@@ -1,3 +1,4 @@
+<div id="price_matrix_complete_div">
 <?php
 $this->load->view('global/header');
 ?>
@@ -34,18 +35,44 @@ $this->load->view('global/header');
 			<div id="matriz2">
 
 <?php if ($query) {?>
+<script type="text/javascript">
+	$(function() {
+		var availableTags = new Array();
+		<?php for($i=0; $i <  count($query) ; $i++){?>
+			availableTags[<?php echo($i); ?>] = {label: "<?php echo($query[$i]['name']);?>",
+												 value: "<?php echo($query[$i]['hotel_id']);?>"};
+		<?php } ?>	
+		
+		$('#tags').autocomplete({
+			minLength: 0,
+			source: availableTags,
+			focus: function(event, ui) {
+				$('#tags').val(ui.item.label);
+				return false;
+			},
+			select: function(event, ui) {
+				$('#tags').val(ui.item.label);
+				$('#hotels').val(ui.item.value);				
+				return false;
+			}
+		});
+	});
+</script>
+
+
 <div class="separadorv"></div><div class="separadorv"></div>
-		<form method="post" action="<?php echo base_url(); ?>price_matrix/index/0">
     <div id="asociar_c">
     <ul>
         <li class="li_tit_1"><img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel</li> 
-		<li>	<select name="hotels" id="hotels">
-			<?php foreach ($query as $hotel) { ?>
-				<option value="<?php echo ($hotel['hotel_id']);?>"><?php echo ($hotel['name']);?></option> 
-			<?php }?>
-			</select> </div>
-			<input name="send" type="submit" value="Aceptar" /> </td> </li>
-		</form>
+		<li>
+         <input id="tags" />
+         <input type="hidden" id="hotels" />	
+        </li>
+        <li>
+    <img src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="price_matrix_hotel();" /> 
+        </li>
+     </ul>
+     </div>
 <?php }?>
 
 
@@ -171,3 +198,4 @@ else { ?>
 	</div>
 </body>
 </html>
+</div><!-- end of price_matrix_complete_div -->

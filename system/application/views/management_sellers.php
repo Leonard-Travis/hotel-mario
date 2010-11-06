@@ -41,7 +41,8 @@ $this->load->view('global/management_bar');
     <tr class="pthead">
     <td align="center"><strong>Nombre</strong></td>
     <td align="center"><strong>Apellido</strong></td>
-    <td align="center"><strong>Cedula</strong></td>
+    <td align="center"><strong>C&eacute;dula</strong></td>
+    <td align="center"><strong>Nombre de Usuario</strong></td>
     <td align="center"><strong>Tipo</strong></td>
     <td align="center" width="17px"></td>
     </tr>
@@ -52,6 +53,7 @@ $this->load->view('global/management_bar');
         <td align="center"><?php echo ($seller['name']);?></td>
         <td align="center"><?php echo ($seller['lastname']);?></td>
         <td align="center"><?php echo ($seller['employees_id']);?></td>
+        <td align="center"><?php echo ($seller['nick_name']);?></td>
         <td align="center"><?php echo ($seller['type']);?></td>
         <td align="center"> <a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/x.jpg"/></a></td>
         </tr>

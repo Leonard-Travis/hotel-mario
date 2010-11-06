@@ -244,13 +244,14 @@ class Quotations_model extends Model {
 		
 		if($data['QUOTATIONS_PACKAGE_id'] == 'null') $data['QUOTATIONS_PACKAGE_id'] = NULL;
 		else {
-			$quote = $this->find_quote($data['QUOTATIONS_PACKAGE_id'], '_admin_quotations_generic', 'quotes_generic_id');	
+			$quote = $this->find_quote($data['QUOTATIONS_PACKAGE_id'], '_admin_quotations_package', 'quote_package_id');	
 			foreach($quote as $quote)
 				$total += $quote['total'];
 			
 		}
 		
 		$data['total'] = $total;
+		
 		$this->db->insert('_admin_quotations', $data);
 	}
 	

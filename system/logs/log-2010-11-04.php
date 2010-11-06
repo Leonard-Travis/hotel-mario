@@ -47,3 +47,6 @@ ERROR - 2010-11-04 20:19:03 --> Severity: Notice  --> Undefined variable: hotel 
 ERROR - 2010-11-04 20:19:03 --> Severity: Notice  --> Undefined variable: hotel C:\wamp\www\hotel-mario\system\application\views\hotel_quote.php 9
 ERROR - 2010-11-04 20:19:03 --> Severity: Notice  --> Undefined variable: hotel C:\wamp\www\hotel-mario\system\application\views\hotel_quote.php 9
 ERROR - 2010-11-04 20:19:03 --> Severity: Notice  --> Undefined variable: hotel C:\wamp\www\hotel-mario\system\application\views\hotel_quote.php 9
+ERROR - 2010-11-04 23:17:05 --> 404 Page Not Found --> themes
+ERROR - 2010-11-04 23:17:05 --> 404 Page Not Found --> demos.css
+ERROR - 2010-11-04 23:28:36 --> 404 Page Not Found --> themes

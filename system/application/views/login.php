@@ -8,50 +8,6 @@ alert('Su sesion sera desconectada');
 
 <?php $this->session->sess_destroy(); } ?>	
 
-
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-	<link type="text/css" href="http://localhost/hotel-mario/js/jquery/themes/base/jquery.ui.all.css" rel="stylesheet" />
-<script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery-1.4.2.js"></script>
-<script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery.ui.core.js"></script>
-<script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery.ui.widget.js"></script>
-
-<script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery.ui.position.js"></script>
-<script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery.ui.autocomplete.js"></script>
-
-<link type="text/css" href="http://localhost/hotel-mario/js/jquery/demos.css" rel="stylesheet" />
-	<script type="text/javascript">
-	$(function() {
-		var availableTags = ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"];
-		$("#tags").autocomplete({
-			source: availableTags
-		});
-	});
-	</script>
-</head>
-<body>
-	
-<div class="demo">
-
-<div class="ui-widget">
-	<label for="tags">Tags: </label>
-	<input id="tags" />
-</div>
-
-</div><!-- End demo -->
-
-</body>
-</html>-->
-
-
-
-
-
-
-
-	
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -63,7 +19,7 @@ alert('Su sesion sera desconectada');
 	<link href="http://localhost/hotel-mario/designed_views/estilos.css" rel="stylesheet" type="text/css" />
 	</script>
 
-	<link type="text/css" href="http://localhost/hotel-mario/js/jquery/themes/base/jquery.ui.all.css" rel="stylesheet" />
+	<link type="text/css" href="http://localhost/hotel-mario/js/jquery/jquery.ui.all.css" rel="stylesheet" />
 	<script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery-1.4.2.js"></script>
 </head>
 
@@ -92,17 +48,9 @@ alert('Su sesion sera desconectada');
             <div id="asociar2" >
             <br /><br /> 
             <table id="user_table" align="center">
-            	<tr> 
-                <td>Usuario:</td>
-                <td><select id="user_type" name="user_type">
-                	<option value="manager">Administrador&nbsp;&nbsp;&nbsp;</option>
-                    <option value="seller" selected>Vendedor</option>
-                    </select>	
-                </td>
-                </tr>
                 <tr> 
-                <td>Cedula:</td>
-                <td><input type="text" id="user_id" name="user_id" maxlength="7"></td>
+                <td>Usuario:</td>
+                <td><input type="text" id="user_id" name="user_id" maxlength="20"></td>
                 </tr>
                 <tr> 
                 <td>Password:</td>

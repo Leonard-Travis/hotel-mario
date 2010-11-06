@@ -14,6 +14,7 @@
         <td align="center"><strong>Noche Adicional</strong></td>
     </tr>
 <?php } ?>
+
 	<tr>
         <td class="primera" align="center">
         <select id="rooms<?php echo($counter.'_'.$number_of_hotel);?>">

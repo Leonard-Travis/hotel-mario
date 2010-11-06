@@ -496,10 +496,6 @@ class Quotation extends Controller {
 		
 		$data['quote_date'] = date('Y-m-d');
 		
-		echo('<pre>');
-		var_dump($data);
-		echo('</pre>');
-		
 		$this->quotations_model->insert_quotation($data);
 	}
 	

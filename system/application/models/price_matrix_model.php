@@ -18,12 +18,13 @@ class Price_matrix_model extends Model {
 	}
 	
 	function get_prices ($hotel_id, $season_id, $plan_id){		
-		 $this->db->select('p.*, r.*
-							FROM _admin_price p, _admin_rooms_hotels h, _admin_rooms r
+		 $this->db->select('p.*, r.*, s.*
+							FROM _admin_price p, _admin_rooms_hotels h, _admin_rooms r, _admin_season s
 							WHERE p.ROOMS_HOTELS_id = h.rooms_hotels_id
 							AND h.HOTELS_id ='.$hotel_id.'
 							AND p.PLAN_id ='.$plan_id.'
 							AND p.SEASON_id ='.$season_id.'
+							AND s.season_id ='.$season_id.'
 							AND h.ROOMS_id = r.room_id');		
 		$query = $this->db->get();
 		return $query->result_array();
@@ -68,6 +69,12 @@ class Price_matrix_model extends Model {
 	function find_season($date_start, $date_end) {
 		$this->db->where('date_start', $date_start);
 		$this->db->where('date_end', $date_end);
+		$query = $this->db->get('_admin_season');
+		return $query->result_array();
+	}
+	
+	function find_season_id($season_id){
+		$this->db->where('season_id', $season_id);
 		$query = $this->db->get('_admin_season');
 		return $query->result_array();
 	}
