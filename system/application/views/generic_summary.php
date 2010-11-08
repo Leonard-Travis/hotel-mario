@@ -37,7 +37,7 @@
         <tr>
    			<td class="sinborde">
             <div id="generic_process_button">
-            <img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="generic_process();" />
+            <img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="generic_process(<?php echo($this->session->userdata('id'));?>);" />
             </div>
             </td>
         </tr>

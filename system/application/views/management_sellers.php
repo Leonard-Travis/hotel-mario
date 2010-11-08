@@ -55,7 +55,7 @@ $this->load->view('global/management_bar');
         <td align="center"><?php echo ($seller['employees_id']);?></td>
         <td align="center"><?php echo ($seller['nick_name']);?></td>
         <td align="center"><?php echo ($seller['type']);?></td>
-        <td align="center"> <a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/x.jpg"/></a></td>
+        <td align="center"> <a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/x.jpg" onclick="delete_seller(<?php echo ($seller['employees_id']);?>);"/></a></td>
         </tr>
     <?php }?>
 </table>

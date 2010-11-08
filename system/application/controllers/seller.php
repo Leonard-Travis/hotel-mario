@@ -40,15 +40,36 @@ class Seller extends Controller {
 	}
 	
 	function add_seller(){
-		$new = array (	'employees_id' => $_POST["id"],
-					    'name' => $_POST["name"],
-						'lastname' => $_POST["lastname"],
-						'nick_name' => $_POST["nick"],
-						'email' => $_POST["email"],
-						'type' => $_POST["type"],
-						'password' => $_POST["password"]);
+		$possible = $this->seller_model->find($_POST["id"], "employees_id");
+		$nick = $this->seller_model->find($_POST["nick"], "nick_name");
 		
-		$this->seller_model->add($new);
+		if((count($possible) > 0) && ($possible[0]["status"] == "inactive")){
+			$this->seller_model->update_status($_POST["id"], "active");
+			$this->management();
+		}
+		elseif((count($possible) > 0) && ($possible[0]["status"] == "active")){
+			echo "existing";
+		}
+		elseif(count($nick) > 0){
+			echo "nick";
+		}
+		else{
+			$new = array (	'employees_id' => $_POST["id"],
+							'name' => $_POST["name"],
+							'lastname' => $_POST["lastname"],
+							'nick_name' => $_POST["nick"],
+							'email' => $_POST["email"],
+							'type' => $_POST["type"],
+							'status' => "active",
+							'password' => $_POST["password"]);
+			
+			$this->seller_model->add($new);
+			$this->management();
+		}
+	}
+	
+	function delete_seller($employees_id){
+		$this->seller_model->update_status($employees_id, "inactive");
 		$this->management();
 	}
 }
