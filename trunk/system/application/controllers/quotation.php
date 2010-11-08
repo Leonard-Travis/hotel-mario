@@ -7,7 +7,7 @@ class Quotation extends Controller {
 		$this->load->helper(array('form'));
 		$this->load->library('validation');
 		$this->load->library(array('form_validation'));
-		$this->load->model(array ('hotels_model', 'client_model', 'price_matrix_model', 'quotations_model', 'packages_model'));
+		$this->load->model(array ('hotels_model', 'client_model', 'price_matrix_model', 'quotations_model', 'packages_model', 'seller_model'));
 	}
 
 	function new_quote($ci_client){
@@ -486,9 +486,17 @@ class Quotation extends Controller {
 	}
 	
 	function process_quotation(){
+		echo($_POST["employees_id"]);
+		$employees = $this->seller_model->find($_POST["employees_id"], "employees_id");
+		/*$str = $this->db->last_query();
+		echo($str);
+		echo('<pre>');
+		var_dump($employees);
+		echo('</pre>');*/
+		
 		$data['quote_id'] = '';
 		$data['CUSTOMERS_ci_id'] = $_POST["customer_id"];
-		$data['EMPLOYEES_id'] = 1;
+		$data['EMPLOYEES_id'] = $employees[0]['employees_id'];
 		$data['QUOTATIONS_HOTELS_id'] = $_POST["hotel_quote_id"];		
 		$data['QUOTATIONS_FLIGHTS_id'] = $_POST["flight_quote_id"];
 		$data['QUOTATIONS_GENERIC_id'] = $_POST["generic_quote_id"];

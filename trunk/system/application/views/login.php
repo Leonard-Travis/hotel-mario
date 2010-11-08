@@ -19,7 +19,7 @@ alert('Su sesion sera desconectada');
 	<link href="http://localhost/hotel-mario/designed_views/estilos.css" rel="stylesheet" type="text/css" />
 	</script>
 
-	<link type="text/css" href="http://localhost/hotel-mario/js/jquery/jquery.ui.all.css" rel="stylesheet" />
+	<link type="text/css" href="http://localhost/hotel-mario/js/jquery/themes/base/jquery.ui.all.css" rel="stylesheet" />
 	<script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery-1.4.2.js"></script>
 </head>
 

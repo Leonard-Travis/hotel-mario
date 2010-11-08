@@ -33,29 +33,34 @@ $this->load->view('global/management_bar');
 <div id="datos">
     <table id="new_seller" align="center" width="50%">
         <tr>
-        <td width="30%">Nombre: </td> <td width="50%"><input type="text" id="seller_name" name="seller_name" maxlength="25"></td>
+            <td width="30%"><strong>Nombre:</strong> </td> 
+            <td width="50%"><input type="text" id="seller_name" name="seller_name" maxlength="25"></td>
         </tr>
         <tr>
-        <td>Apellido: </td> <td><input type="text" id="seller_lastname" name="seller_lastname" maxlength="25"></td>
+            <td><strong>Apellido:</strong> </td> 
+            <td><input type="text" id="seller_lastname" name="seller_lastname" maxlength="25"></td>
         </tr>
         <tr>
-        <tr>
-        <td>Cedula: </td> <td><input type="text" id="seller_id" name="seller_id" maxlength="25"></td>
+            <td bgcolor=""><div id="user_id_div"><strong>Cedula:</strong></div> </td> 
+            <td><input type="text" id="seller_id" name="seller_id" maxlength="25"></td>
         </tr>
         <tr>
-        <td>Correo Electr&oacute;nico: </td> <td><input type="text" id="email" maxlength="100"></td>
+            <td><strong>Correo Electr&oacute;nico: </strong></td> 
+            <td><input type="text" id="email" maxlength="100"></td>
         </tr>
         <tr>
-        <td>Nombre de Usuario: </td> <td><input type="text" id="nick_name" maxlength="100"></td>
+            <td><div id="user_name_div"><strong>Nombre de Usuario:</strong> </div></td> 
+            <td><input type="text" id="nick_name" maxlength="100"></td>
         </tr>
         <tr>
-        <td>Tipo: </td> <td><select id="seller_type">
+        <td><strong>Tipo:</strong> </td> <td><select id="seller_type">
                             <option value="seller">Vendedor</option>
                             <option value="manager">Administrador&nbsp;&nbsp;&nbsp;</option>
                             </select></td>
         </tr>
         <tr>
-        <td>Password:</td> <td><input type="text" id="password" name="password"></td>
+            <td><div id="pass_div"><strong>Password:</strong></div></td> 
+            <td><input type="text" id="password" name="password" maxlength="16"></td>
         </tr>
         
         <tr></tr><tr></tr>

@@ -24,7 +24,7 @@
             	<td align="center"><img src="http://localhost/hotel-mario/designed_views/imagenes/tick.png" /></td>
             <?php } 
 				  else {?>
-                <td></td>
+                <td align="center">--</td>
             <?php }?>
         	
             <td align="center"><?php echo($flight[0]['origin'].'-'.$flight[0]['destination']); ?></td>
@@ -66,7 +66,7 @@
         <tr>
          	<td class="sinborde">
             <div id="flight_process_button"> 
-            	<img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="flight_quote_process();" />
+            	<img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="flight_quote_process(<?php echo($this->session->userdata('id'));?>);" />
             </div> 
             </td>
         </tr>
