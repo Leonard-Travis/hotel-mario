@@ -12,8 +12,10 @@
         <thead>
             <tr>
                 <td align="center">Habitacion</td>
-                <td align="center">Cantidad</td>
-                <td align="center">Precio Unitario</td>
+                <td align="center">Adultos</td>
+                <td align="center">Precio p/Adulto</td>
+                <td align="center">Infantes</td>
+                <td align="center">Precio p/Infante</td>
                 <td align="center">Sub-Total</td>
                 <td></td>
             </tr>
@@ -21,9 +23,11 @@
 		<?php foreach($package_rooms as $room){ ?>       
         <tr>
             <td align="center"> <?php echo($room['name'][0]['name_spanish']); ?> </td>
-            <td align="center"> <?php echo($room[2]); ?> </td>
+            <td align="center"> <?php echo($room[3]); ?> </td>
             <td align="center">BsF. <?php echo($room[1]); ?> </td>
-            <td align="center">BsF <?php echo((int)$room[2] * (float)$room[1]); ?> </td>
+            <td align="center"> <?php echo($room[4]); ?> </td>
+            <td align="center">BsF. <?php echo($room[2]); ?> </td>
+            <td align="center">BsF <?php echo(  ((int)$room[3] * (float)$room[1])+((int)$room[4] * (float)$room[2])    ); ?> </td>
         </tr>
 		<?php }?>
         <tr><td class="sinborde">&nbsp;</td></tr>
@@ -39,7 +43,7 @@
         <td colspan="4" align="right">
         <div id="pq_process_button_summary">
         <a href="#">
-        <img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="pq_process(1);" />
+        <img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="pq_process(1, <?php echo($this->session->userdata('id'));?>);" />
         </a>
         </td>
         </div>

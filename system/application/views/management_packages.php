@@ -59,7 +59,7 @@ $this->load->view('global/management_bar');
             <input type="hidden" id="categories" />
 			</td> 
             
-            <td> <img src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="categorie_packages();" /></td> 
+            <td> <input type="image" src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="categorie_packages();" /></td> 
         
         </tr>
 	</table>

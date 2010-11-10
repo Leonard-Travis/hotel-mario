@@ -154,10 +154,10 @@
 <?php if($package){ ?>
 <table>
     <tr>
-        <td><span class="naranja">Paquete</span></td>
+        <td><span class="naranja">Paquete : <?php echo($package['pack_data']['name']); ?></span></td>
     </tr>
     <tr>
-    	<td><strong>Paquete</strong>:</td> <td bgcolor="#00FF33"><?php echo($package['pack_data']['name']); ?></td>
+    	<td><strong>Hotel</strong>:</td> <td bgcolor="#00FF33" align="center"><?php echo($package['pack_data']['hotel']); ?></td>
     </tr>
     <tr>
     	<td><strong>Descripcion</strong>:</td> <td><?php echo nl2br($package['pack_data']['description']); ?></td>
@@ -178,8 +178,10 @@
 <table width="100%">
     <tr class="pthead">
         <td class="centrado">Tipo de Habitación</td>
-        <td class="centrado">Cant. Personas</td>
-        <td class="centrado">Precio unitario</td>
+        <td class="centrado">Adultos</td>
+        <td class="centrado">Precio p/Adulto</td>
+        <td class="centrado">Infantes</td>
+        <td class="centrado">Precio p/Infante</td>
         <td class="centrado">SubTotal</td>
     </tr>
     
@@ -188,13 +190,18 @@
     
     <tr>
         <td class="centrado"><?php echo($rooms["name_spanish"]); ?></td>
-        <td class="centrado"><?php echo($rooms["number_of_people"]); ?></td>
+        <td class="centrado"><?php echo($rooms["number_of_adults"]); ?></td>
         <td class="centrado">BsF. <?php echo($rooms["price_per_person"]); ?></td>
-        <td class="centrado">BsF. <?php echo((int)$rooms["number_of_people"]*(float)$rooms["price_per_person"]);?></td>
+        <td class="centrado"><?php echo($rooms["number_of_kids"]); ?></td>
+        <td class="centrado">BsF. <?php echo($rooms["price_per_kid"]); ?></td>
+        <td class="centrado">
+        BsF. <?php echo(   ((int)$rooms["number_of_adults"]*(float)$rooms["price_per_person"])+((int)$rooms["number_of_kids"]*(float)$rooms["price_per_kid"])    );?>
+        
+        </td>
     </tr>
     <?php } }?>
     <tr>
-        <td class="numerico sinborde" colspan="2"><span class="rojo"></span></td>
+        <td class="numerico sinborde" colspan="4"><span class="rojo"></span></td>
         <td class="numerico sinborde"><span class="rojo">Total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BsF. <?php echo($package['total']); ?></span></td>
     </tr>
 </table>
