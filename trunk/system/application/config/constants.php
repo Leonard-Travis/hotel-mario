@@ -18,6 +18,11 @@ define('FILE_WRITE_MODE', 0666);
 define('DIR_READ_MODE', 0755);
 define('DIR_WRITE_MODE', 0777);
 
+
+define('IMG', "http://localhost/hotel-mario/designed_views/imagenes/");
+define('JSQ', "http://localhost/hotel-mario/js/jquery/");
+
+
 /*
 |--------------------------------------------------------------------------
 | File Stream Modes

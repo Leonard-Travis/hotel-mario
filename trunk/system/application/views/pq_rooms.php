@@ -1,5 +1,7 @@
 
 <br /><br />
+<input type="hidden" value="<?php echo($package[0]['date_start']);?>" id="pq_date_start" />
+<input type="hidden" value="<?php echo($package[0]['date_end']);?>" id="pq_date_end" />
 <table  width="80%" align="center">
 <tr>
 	<td align="center"><span class="naranja">Paquete:<?php echo($package[0]['name']);?></span></td>

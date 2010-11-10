@@ -560,18 +560,35 @@ class Quotation extends Controller {
 		
 		$array2 = array(); // array aux to put the 2 sticks segment.
 		$rooms_array = array(); //after the explode the rooms are stored here, but disorderly. so to order the array and avoid validation, is moved to the rooms array 2 after been cleaned
-		$array2 = explode('||',$rooms);
-		$rooms_array2 = array();
+		
+		$array2 = explode('||',$rooms); 
+			//[0]: rooms_per_package_id|price per adult|price per kid|cant of adults|cant of kids 
+			//[1]:...
+			
+		$rooms_array2 = array(); //FINAL array
+			//[0]
+			//	[name]:room's name
+			//	[0]: rooms_per_package_id
+			//	[1]: price per adult
+			//	[2]: price per kid
+			// 	[3]: cant of adults
+			//	[4]: cant of kids
+			//[1]
+			//	...
+			
 		
 		for($i=0; $i < count($array2); $i++){
 			$rooms_array[count($rooms_array)] = array();
+					// [0]:rooms_per_package_id, [1]:price per adult,[2]:price per kid,
+					// [3]:cant of adults,[4]:cant of kids
+					
 			$rooms_array[count($rooms_array)] = explode('|', $array2[$i]);
 		}
 		
 		$pos = 0;
 		for($i=0; $i < count($rooms_array); $i++){
-			if(count($rooms_array[$i]) > 0){
-				if($rooms_array[$i][0] != ''){
+			if(count($rooms_array[$i]) > 0){	//this two IF are filtering the result of the explode.
+				if($rooms_array[$i][0] != ''){	//
 					$pos = count($rooms_array2);
 					$rooms_array2[$pos] = array();
 					$rooms_array2[$pos] = $rooms_array[$i];

@@ -46,9 +46,11 @@
 	$(document).ready(function() {
 		$("#date_start").datepicker({dateFormat: 'yy-mm-dd'});
 		$("#date_end").datepicker({dateFormat: 'yy-mm-dd'});
+		
+		//$("#date_end").datepicker({dateFormat: 'yy-mm-dd'});
 	});
-</script>
-
+	
+</script> 
 
 <?php foreach ($hotel_selected as $hotel_selected) { ?>
     <div class="separador"></div>
@@ -102,7 +104,14 @@
 	<div id="hoteles">
     	<div id="quote_details_form" name="quote_details_form" ></div>
         <div id="add_quote_button"></div>
-    </div>
+    </div>   
+    
+<!--<script>
+	$('#date_end').click(function() {			   
+	  alert($('#date_start').val());
+	 $('#date_end').datepicker('setDate', 'c+1d');
+	});
+</script>-->
     
 <?php } ?>
 <?php } ?>

@@ -71,7 +71,7 @@ $this->load->view('global/management_bar');
                 <input id="tags" />
          </td> 
          <td> 
-             <img src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="management_hotel_chosen();" />             
+             <input type="image" src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="management_hotel_chosen();" />             
              <input type="hidden" id="hotels" name="hotels" />
          </td> 
     </tr>

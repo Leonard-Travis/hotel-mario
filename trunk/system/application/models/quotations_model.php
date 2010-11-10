@@ -388,7 +388,8 @@ class Quotations_model extends Model {
 				 $pos = count($rooms);
 				 $rooms[$pos] = array();
 				 $rooms[$pos] = $value2;
-				 $rooms[$pos]['number_of_people'] = $value['number_of_people'];
+				 $rooms[$pos]['number_of_adults'] = $value['number_of_people'];
+				 $rooms[$pos]['number_of_kids'] = $value['number_of_kids'];
 			 }
 		}
 		/*echo('pack data<pre>');
@@ -421,7 +422,7 @@ class Quotations_model extends Model {
 		foreach($rooms as $room){
 			if(count($room) > 0){
 				if($room[0] != ''){
-					$data_rp = array('QUOTE_PACKAGE_id' => $pq_id, 'ROOM_PER_PACKAGE_id' => $room[0], 'number_of_people' => $room[2]);
+					$data_rp = array('QUOTE_PACKAGE_id' => $pq_id, 'ROOM_PER_PACKAGE_id' => $room[0], 'number_of_people' => $room[3], 'number_of_kids' => $room[4]);
 					$this->db->insert('_admin_rooms_per_package_quote', $data_rp);
 				}
 			}

@@ -105,7 +105,7 @@ class Packages_model extends Model {
 	}
 	
 	function package_hotel_rooms($package, $hotel){
-		 $this->db->select('rp . *, r.name_spanish 
+		 $this->db->select('rp.*, r.name_spanish 
 						   FROM _admin_rooms_per_package rp, _admin_rooms_hotels rh, _admin_rooms r
 							WHERE rp.PACKAGE_id ='.$package.'
 							AND rp.ROOMS_HOTELS_id = rh.rooms_hotels_id

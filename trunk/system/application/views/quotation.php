@@ -27,16 +27,19 @@ $this->load->view('global/header');
 
 <?php echo validation_errors(); ?>
 <div class="separadorv"></div><div class="separadorv"></div>
-<form name="searchForm">
+
 <div id="asociar_c">
     <ul>
         <li class="li_tit_1"><img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Buscador de Cliente</li> 
-		<li> <div class="cajat"> <input type="text" name="ci_client" id="ci_client" value="Ejem: 18888888" onclick="document.searchForm.ci_client.value ='';" maxlength="10"/></div>
-             <input name="enviar" type="button" value="Seleccionar" onclick="client_quote(document.searchForm.ci_client.value);" /> </li> 
+		<li> <div class="cajat"> <input type="text" name="ci_client" id="ci_client" value="Ejem: 18888888" maxlength="10"/></div>
+        	<input type="image" src="http://localhost/hotel-mario/designed_views/imagenes/bseleccionar.jpg" onclick="client_quote($('#ci_client').val());"/></li> 
      </ul>  
 </div>
-</form> 
-
+<script>
+	$('#ci_client').click(function() {			   
+	  $('#ci_client').val("");
+	});
+</script>
 <?php if ($customer != NULL){ ?>
     <div class="separador"></div>
     <div class="separadorv_gris"></div>
@@ -64,6 +67,8 @@ $this->load->view('global/header');
 } ?>
 <div id="asociar2" >
 
+	<div id="package_quote">
+    </div>
 	<div id="hotel_quote">
     </div>
     <div id="flight_quote">
@@ -74,8 +79,7 @@ $this->load->view('global/header');
     </div>
     <div id="generic_summary">
     </div>
-    <div id="package_quote">
-    </div>
+    
     
     <div id="close_quotation">
     </div>

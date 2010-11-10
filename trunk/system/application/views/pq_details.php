@@ -16,7 +16,7 @@ $(document).ready(function() {
     </table>
 
 
-	<table align="center" width="80%" id="pq_table">
+	<table align="center" width="80%" id="pq_table" border="1">
         <tr>
             <td>Check In:<div id="check_in_div"><input type="text" id="check_in" maxlength="10" size="11" readonly="readonly"/></div></td>
             <td>Check Out:<input type="text" id="check_out" maxlength="10" size="11" readonly="readonly"/></td>
@@ -28,13 +28,16 @@ $(document).ready(function() {
         </tr>
         <tr>
             <td class="primera" align="center"><strong>Habitaci&oacute;n</strong></td>
-            <td align="center"><strong>Precio p/persona</strong></td>
-            <td align="center"><strong>Cant. de Personas</strong></td>
+            <td align="center" width="15%"><strong>Precio p/Adulto</strong></td>
+            <td align="center" width="15%"><strong>Precio p/Infante</strong></td>
+            <td align="center"><strong>Adultos</strong></td>
+            <td align="center"><strong>Infantes</strong></td>
             <td align="center"><strong>Subtotal</strong></div></td>
             <td align="center" width="17px"></td>
         </tr>
     
 </form>
+
 <?php } ?>
 <!------------------------------------------add room------------------------------------------------->
 
@@ -43,16 +46,23 @@ $(document).ready(function() {
     <select id="room<?php echo($pq_count);?>" onchange="pq_set_price(<?php echo($pq_count);?>);">
     <option value="-">----------------</option>
     <?php foreach($rooms as $room) { ?>
-            <option value="<?php echo($room['room_per_package_id']);?>|<?php echo($room['price_per_person']);?>"><?php echo($room['name_spanish']); ?></option> 
+            <option value="<?php echo($room['room_per_package_id'].'|'.$room['price_per_person'].'|'.$room['price_per_kid']);?>"><?php echo($room['name_spanish']); ?></option> 
     <?php }?>
     </select>
     </td>
     <td align="center">
-    	<div id="pq_price<?php echo($pq_count);?>">
+    	<div id="pq_price_adult<?php echo($pq_count);?>">
+        </div>
+    </td>
+     <td align="center">
+    	<div id="pq_price_kid<?php echo($pq_count);?>">
         </div>
     </td>
     <td align="center">
-    	<input type="text" id="cant_persons<?php echo($pq_count);?>" size="3" maxlength="2" onblur="pq_set_subtotal(<?php echo($pq_count);?>);"/>
+    	<input type="text" id="cant_persons<?php echo($pq_count);?>" size="3" maxlength="2" onblur="pq_set_subtotal(<?php echo($pq_count);?>, <?php echo($this->session->userdata('id'));?>);" value="00"/>
+    </td>
+    <td align="center">
+    	<input type="text" id="cant_kids<?php echo($pq_count);?>" size="3" maxlength="2" onblur="pq_set_subtotal(<?php echo($pq_count);?>, <?php echo($this->session->userdata('id'));?>);" value="00"/>
     </td>
     <td align="center">
     	<div id="pq_subtotal<?php echo($pq_count);?>"></div>
@@ -61,9 +71,17 @@ $(document).ready(function() {
     	</span>
     </td>
     <td>
-    	<div id="package_additionals">
-        </div>
     </td>
 </tr>
-    
+<script>
+	$('#cant_persons<?php echo($pq_count);?>').click(function() {			   
+	  $('#cant_persons<?php echo($pq_count);?>').val("");
+	});
+	$('#cant_kids<?php echo($pq_count);?>').click(function() {			   
+	  $('#cant_kids<?php echo($pq_count);?>').val("");
+	});
+	$('#check_out').click(function() {			   
+	  $('#cant_kids<?php echo($pq_count);?>').val("");
+	});
+</script>
     
