@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 14, 2010 at 06:07 AM
+-- Generation Time: Nov 14, 2010 at 06:08 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -19,6 +19,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `_admin_airlines`
 --
 
+DROP TABLE IF EXISTS `_admin_airlines`;
 CREATE TABLE IF NOT EXISTS `_admin_airlines` (
   `airline_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -40,6 +41,7 @@ INSERT INTO `_admin_airlines` (`airline_id`, `name`, `code`) VALUES
 -- Table structure for table `_admin_categories`
 --
 
+DROP TABLE IF EXISTS `_admin_categories`;
 CREATE TABLE IF NOT EXISTS `_admin_categories` (
   `categorie_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name_spanish` varchar(50) NOT NULL,
@@ -70,6 +72,7 @@ INSERT INTO `_admin_categories` (`categorie_id`, `name_spanish`) VALUES
 -- Table structure for table `_admin_categories_package`
 --
 
+DROP TABLE IF EXISTS `_admin_categories_package`;
 CREATE TABLE IF NOT EXISTS `_admin_categories_package` (
   `CATEGORIE_id` int(10) unsigned NOT NULL,
   `PACKAGE_id` int(10) unsigned NOT NULL,
@@ -117,6 +120,7 @@ INSERT INTO `_admin_categories_package` (`CATEGORIE_id`, `PACKAGE_id`) VALUES
 -- Table structure for table `_admin_customers`
 --
 
+DROP TABLE IF EXISTS `_admin_customers`;
 CREATE TABLE IF NOT EXISTS `_admin_customers` (
   `customer_ci_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -148,6 +152,7 @@ INSERT INTO `_admin_customers` (`customer_ci_id`, `name`, `lastname`, `phone`, `
 -- Table structure for table `_admin_employees`
 --
 
+DROP TABLE IF EXISTS `_admin_employees`;
 CREATE TABLE IF NOT EXISTS `_admin_employees` (
   `employees_id` int(10) unsigned NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -182,6 +187,7 @@ INSERT INTO `_admin_employees` (`employees_id`, `name`, `lastname`, `nick_name`,
 -- Table structure for table `_admin_flights`
 --
 
+DROP TABLE IF EXISTS `_admin_flights`;
 CREATE TABLE IF NOT EXISTS `_admin_flights` (
   `flight_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `AIRLINES_id` int(10) unsigned NOT NULL,
@@ -263,6 +269,7 @@ INSERT INTO `_admin_flights` (`flight_id`, `AIRLINES_id`, `number`, `class`, `pr
 -- Table structure for table `_admin_flights_city`
 --
 
+DROP TABLE IF EXISTS `_admin_flights_city`;
 CREATE TABLE IF NOT EXISTS `_admin_flights_city` (
   `flight_city_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `FLIGHTS_COUNTRY_id` int(10) unsigned NOT NULL,
@@ -287,6 +294,7 @@ INSERT INTO `_admin_flights_city` (`flight_city_id`, `FLIGHTS_COUNTRY_id`, `name
 -- Table structure for table `_admin_flights_country`
 --
 
+DROP TABLE IF EXISTS `_admin_flights_country`;
 CREATE TABLE IF NOT EXISTS `_admin_flights_country` (
   `flight_country_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -307,6 +315,7 @@ INSERT INTO `_admin_flights_country` (`flight_country_id`, `name`) VALUES
 -- Table structure for table `_admin_flights_per_quote`
 --
 
+DROP TABLE IF EXISTS `_admin_flights_per_quote`;
 CREATE TABLE IF NOT EXISTS `_admin_flights_per_quote` (
   `QUOTATIONS_FLIGHTS_id` int(10) unsigned NOT NULL,
   `FLIGHTS_id` int(10) unsigned NOT NULL,
@@ -371,6 +380,7 @@ INSERT INTO `_admin_flights_per_quote` (`QUOTATIONS_FLIGHTS_id`, `FLIGHTS_id`) V
 -- Table structure for table `_admin_generic`
 --
 
+DROP TABLE IF EXISTS `_admin_generic`;
 CREATE TABLE IF NOT EXISTS `_admin_generic` (
   `generic_id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(250) NOT NULL,
@@ -431,6 +441,7 @@ INSERT INTO `_admin_generic` (`generic_id`, `description`, `quantity`, `unit_pri
 -- Table structure for table `_admin_generic_per_quote`
 --
 
+DROP TABLE IF EXISTS `_admin_generic_per_quote`;
 CREATE TABLE IF NOT EXISTS `_admin_generic_per_quote` (
   `QUOTES_GENERIC_id` int(11) NOT NULL,
   `GENERIC_id` int(11) NOT NULL,
@@ -490,6 +501,7 @@ INSERT INTO `_admin_generic_per_quote` (`QUOTES_GENERIC_id`, `GENERIC_id`) VALUE
 -- Table structure for table `_admin_hotels`
 --
 
+DROP TABLE IF EXISTS `_admin_hotels`;
 CREATE TABLE IF NOT EXISTS `_admin_hotels` (
   `hotel_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `percent_commission` varchar(45) NOT NULL,
@@ -516,6 +528,7 @@ INSERT INTO `_admin_hotels` (`hotel_id`, `percent_commission`, `collect_type`, `
 -- Table structure for table `_admin_hotels_plans`
 --
 
+DROP TABLE IF EXISTS `_admin_hotels_plans`;
 CREATE TABLE IF NOT EXISTS `_admin_hotels_plans` (
   `HOTELS_id` int(10) unsigned NOT NULL,
   `PLANS_id` int(10) unsigned NOT NULL,
@@ -548,35 +561,10 @@ INSERT INTO `_admin_hotels_plans` (`HOTELS_id`, `PLANS_id`, `description`, `stat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `_admin_hotel_packages`
---
-
-CREATE TABLE IF NOT EXISTS `_admin_hotel_packages` (
-  `hotel_package_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `PACKAGE_id` int(10) unsigned NOT NULL,
-  `HOTEL_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`hotel_package_id`),
-  KEY `FK_hotel_packages_package` (`PACKAGE_id`),
-  KEY `FK_hotel_packages_hotel` (`HOTEL_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `_admin_hotel_packages`
---
-
-INSERT INTO `_admin_hotel_packages` (`hotel_package_id`, `PACKAGE_id`, `HOTEL_id`) VALUES
-(1, 1, 2),
-(2, 1, 1),
-(3, 2, 1),
-(4, 2, 2),
-(5, 2, 5);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `_admin_packages`
 --
 
+DROP TABLE IF EXISTS `_admin_packages`;
 CREATE TABLE IF NOT EXISTS `_admin_packages` (
   `package_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
@@ -613,6 +601,7 @@ INSERT INTO `_admin_packages` (`package_id`, `name`, `date_start`, `date_end`, `
 -- Table structure for table `_admin_plans`
 --
 
+DROP TABLE IF EXISTS `_admin_plans`;
 CREATE TABLE IF NOT EXISTS `_admin_plans` (
   `plan_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name_english` varchar(45) NOT NULL,
@@ -641,6 +630,7 @@ INSERT INTO `_admin_plans` (`plan_id`, `name_english`, `status`, `name_spanish`)
 -- Table structure for table `_admin_price`
 --
 
+DROP TABLE IF EXISTS `_admin_price`;
 CREATE TABLE IF NOT EXISTS `_admin_price` (
   `price_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `SEASON_id` int(10) unsigned NOT NULL,
@@ -691,6 +681,7 @@ INSERT INTO `_admin_price` (`price_id`, `SEASON_id`, `ROOMS_HOTELS_id`, `price_p
 -- Table structure for table `_admin_price_record`
 --
 
+DROP TABLE IF EXISTS `_admin_price_record`;
 CREATE TABLE IF NOT EXISTS `_admin_price_record` (
   `price_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `season_id` int(10) unsigned NOT NULL,
@@ -714,6 +705,7 @@ INSERT INTO `_admin_price_record` (`price_id`, `season_id`, `rooms_hotels_id`, `
 -- Table structure for table `_admin_quotations`
 --
 
+DROP TABLE IF EXISTS `_admin_quotations`;
 CREATE TABLE IF NOT EXISTS `_admin_quotations` (
   `quote_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `CUSTOMERS_ci_id` int(10) unsigned NOT NULL,
@@ -769,6 +761,7 @@ INSERT INTO `_admin_quotations` (`quote_id`, `CUSTOMERS_ci_id`, `EMPLOYEES_id`, 
 -- Table structure for table `_admin_quotations_flights`
 --
 
+DROP TABLE IF EXISTS `_admin_quotations_flights`;
 CREATE TABLE IF NOT EXISTS `_admin_quotations_flights` (
   `quote_flight_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `status` varchar(45) NOT NULL,
@@ -813,6 +806,7 @@ INSERT INTO `_admin_quotations_flights` (`quote_flight_id`, `status`, `total`) V
 -- Table structure for table `_admin_quotations_generic`
 --
 
+DROP TABLE IF EXISTS `_admin_quotations_generic`;
 CREATE TABLE IF NOT EXISTS `_admin_quotations_generic` (
   `quotes_generic_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `total` float unsigned NOT NULL,
@@ -860,6 +854,7 @@ INSERT INTO `_admin_quotations_generic` (`quotes_generic_id`, `total`) VALUES
 -- Table structure for table `_admin_quotations_hotels`
 --
 
+DROP TABLE IF EXISTS `_admin_quotations_hotels`;
 CREATE TABLE IF NOT EXISTS `_admin_quotations_hotels` (
   `quote_hotel_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `date_check_in` date NOT NULL,
@@ -899,6 +894,7 @@ INSERT INTO `_admin_quotations_hotels` (`quote_hotel_id`, `date_check_in`, `date
 -- Table structure for table `_admin_quotations_package`
 --
 
+DROP TABLE IF EXISTS `_admin_quotations_package`;
 CREATE TABLE IF NOT EXISTS `_admin_quotations_package` (
   `quote_package_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `check_in` date NOT NULL,
@@ -954,6 +950,7 @@ INSERT INTO `_admin_quotations_package` (`quote_package_id`, `check_in`, `check_
 -- Table structure for table `_admin_rooms`
 --
 
+DROP TABLE IF EXISTS `_admin_rooms`;
 CREATE TABLE IF NOT EXISTS `_admin_rooms` (
   `room_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name_spanish` varchar(45) NOT NULL,
@@ -983,6 +980,7 @@ INSERT INTO `_admin_rooms` (`room_id`, `name_spanish`, `name_english`, `special`
 -- Table structure for table `_admin_rooms_hotels`
 --
 
+DROP TABLE IF EXISTS `_admin_rooms_hotels`;
 CREATE TABLE IF NOT EXISTS `_admin_rooms_hotels` (
   `rooms_hotels_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ROOMS_id` int(10) unsigned NOT NULL,
@@ -1021,6 +1019,7 @@ INSERT INTO `_admin_rooms_hotels` (`rooms_hotels_id`, `ROOMS_id`, `HOTELS_id`, `
 -- Table structure for table `_admin_rooms_per_package`
 --
 
+DROP TABLE IF EXISTS `_admin_rooms_per_package`;
 CREATE TABLE IF NOT EXISTS `_admin_rooms_per_package` (
   `room_per_package_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `PACKAGE_id` int(10) unsigned NOT NULL,
@@ -1079,6 +1078,7 @@ INSERT INTO `_admin_rooms_per_package` (`room_per_package_id`, `PACKAGE_id`, `RO
 -- Table structure for table `_admin_rooms_per_package_quote`
 --
 
+DROP TABLE IF EXISTS `_admin_rooms_per_package_quote`;
 CREATE TABLE IF NOT EXISTS `_admin_rooms_per_package_quote` (
   `QUOTE_PACKAGE_id` int(3) unsigned NOT NULL,
   `ROOM_PER_PACKAGE_id` int(10) unsigned NOT NULL,
@@ -1148,6 +1148,7 @@ INSERT INTO `_admin_rooms_per_package_quote` (`QUOTE_PACKAGE_id`, `ROOM_PER_PACK
 -- Table structure for table `_admin_rooms_per_quote`
 --
 
+DROP TABLE IF EXISTS `_admin_rooms_per_quote`;
 CREATE TABLE IF NOT EXISTS `_admin_rooms_per_quote` (
   `ROOMS_HOTELS_id` int(10) unsigned NOT NULL,
   `QUOTATIONS_HOTELS_id` int(10) unsigned NOT NULL,
@@ -1186,6 +1187,7 @@ INSERT INTO `_admin_rooms_per_quote` (`ROOMS_HOTELS_id`, `QUOTATIONS_HOTELS_id`,
 -- Table structure for table `_admin_season`
 --
 
+DROP TABLE IF EXISTS `_admin_season`;
 CREATE TABLE IF NOT EXISTS `_admin_season` (
   `season_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `date_start` date NOT NULL,
@@ -1216,6 +1218,7 @@ INSERT INTO `_admin_season` (`season_id`, `date_start`, `date_end`) VALUES
 -- Table structure for table `_admin_seasons_per_hotel`
 --
 
+DROP TABLE IF EXISTS `_admin_seasons_per_hotel`;
 CREATE TABLE IF NOT EXISTS `_admin_seasons_per_hotel` (
   `SEASON_id` int(10) unsigned NOT NULL,
   `HOTEL_id` int(10) unsigned NOT NULL,
@@ -1248,6 +1251,7 @@ INSERT INTO `_admin_seasons_per_hotel` (`SEASON_id`, `HOTEL_id`, `season_name`) 
 -- Table structure for table `_admin_travelers`
 --
 
+DROP TABLE IF EXISTS `_admin_travelers`;
 CREATE TABLE IF NOT EXISTS `_admin_travelers` (
   `traveler_ci_id` int(10) unsigned NOT NULL,
   `name` varchar(45) DEFAULT NULL,
@@ -1285,6 +1289,7 @@ INSERT INTO `_admin_travelers` (`traveler_ci_id`, `name`, `lastname`, `passport`
 -- Table structure for table `_admin_travelers_per_flight`
 --
 
+DROP TABLE IF EXISTS `_admin_travelers_per_flight`;
 CREATE TABLE IF NOT EXISTS `_admin_travelers_per_flight` (
   `TRAVELERS_ci_id` int(10) unsigned NOT NULL,
   `FLIGHTS_id` int(10) unsigned NOT NULL,
@@ -1394,13 +1399,6 @@ ALTER TABLE `_admin_flights_per_quote`
 ALTER TABLE `_admin_hotels_plans`
   ADD CONSTRAINT `FK_hotel_hotel` FOREIGN KEY (`HOTELS_id`) REFERENCES `_admin_hotels` (`hotel_id`),
   ADD CONSTRAINT `FK_hotel_plan` FOREIGN KEY (`PLANS_id`) REFERENCES `_admin_plans` (`plan_id`);
-
---
--- Constraints for table `_admin_hotel_packages`
---
-ALTER TABLE `_admin_hotel_packages`
-  ADD CONSTRAINT `FK_hotel_packages_hotel` FOREIGN KEY (`HOTEL_id`) REFERENCES `_admin_hotels` (`hotel_id`),
-  ADD CONSTRAINT `FK_hotel_packages_package` FOREIGN KEY (`PACKAGE_id`) REFERENCES `_admin_packages` (`package_id`);
 
 --
 -- Constraints for table `_admin_price`
