@@ -1,7 +1,10 @@
 // JavaScript Document
+var IMG = 'http://localhost/hotel-mario/designed_views/imagenes/';
+var CONTROLLERS = 'http://localhost/hotel-mario/index.php/';
+
 var counter = 0;
 var matrix_counter = 0;
-var subtotal = 0;
+var hotel_subtotal = 0;
 var capacity_total = 0;
 var customer_id;
 var rooms_selected = new Array();
@@ -49,6 +52,10 @@ var pq_total = new Array();
 var pq_total_numeric = 0;
 var pq_check_in = '';
 var pq_check_out = '';
+var pq_additional_nights = 0;
+
+var current_quotes = [];
+var employee_id = '';
 
 
 function test(){
@@ -65,7 +72,7 @@ function client_quote(customer){
 	generic_quote_id = null;	
 	
 	$.ajax({
-      url: 'http://localhost/hotel-mario/index.php/quotation/new_quote/'+customer_id,
+      url: CONTROLLERS+'quotation/new_quote/'+customer_id,
       global: false,
       type: "POST",
       data: ({}),
@@ -78,6 +85,27 @@ function client_quote(customer){
 }
 
 function quote(client_id, quote_type){
+	var existing_quote = false;
+	
+	$.each(current_quotes, function(index, value){
+	   if(value == quote_type)
+			existing_quote = true;
+	 });
+	
+	if(existing_quote){
+		if(confirm("Ya se esta llevando a cabo una cotizacion de tipo "+quote_type+', si continua se perderan todos los datos de la misma')){
+			show_new_quote(client_id, quote_type);
+		}
+	}
+	else {
+		current_quotes[current_quotes.length] = quote_type;
+		show_new_quote(client_id, quote_type);
+	}
+	 
+}
+
+function show_new_quote(client_id, quote_type){
+	
 	 if (quote_type == 'flight_quote'){
 	 	cont_f = 0;
 		flights_quote = '';
@@ -95,24 +123,24 @@ function quote(client_id, quote_type){
 	 customer_id = client_id; 
 	 
 	$.ajax({
-      url: 'http://localhost/hotel-mario/index.php/quotation/'+quote_type,
+      url: CONTROLLERS+'quotation/'+quote_type,
       global: false,
       type: "POST",
       data: ({cont_f : cont_f}),
       async:false,
 	  dataType:"html",
       success: function(msg){
+		 // $("#quotes").append(msg);
 		$("#"+quote_type).html(msg);
       }
 	})
-	 
 }
 
 function add_flight(){
 	cont_f = cont_f + 1;	
 	
 	$.ajax({
-      url: 'http://localhost/hotel-mario/index.php/quotation/flight_quote',
+      url: CONTROLLERS+'quotation/flight_quote',
       global: false,
       type: "POST",
       data: ({cont_f : cont_f}),
@@ -128,7 +156,7 @@ function hotel_info(){
 	var hotel_id = $("#hotels").val();	
 	
 	$.ajax({
-      url: 'http://localhost/hotel-mario/index.php/quotation/hotel_selected_quote',
+      url: CONTROLLERS+'quotation/hotel_selected_quote',
       global: false,
       type: "POST",
       data: ({hotel_id : hotel_id,
@@ -144,7 +172,7 @@ function hotel_info(){
 function start_hotel_quote(emp_id){
 	var clean_array = new Array();
 	rooms_selected = clean_array;
-	subtotal = 0;
+	hotel_subtotal = 0;
 	capacity_total = 0;
 	counter = 0;
 	plan_id = $('#plan').val();
@@ -154,7 +182,7 @@ function start_hotel_quote(emp_id){
 	persons = $('#persons').val();
 	
 	$.ajax({
-      url: 'http://localhost/hotel-mario/index.php/quotation/start_quote/0',
+      url: CONTROLLERS+'quotation/start_quote/0',
       global: false,
       type: "POST",
 	  data:  ({hotel_id : hotel_id,
@@ -166,7 +194,7 @@ function start_hotel_quote(emp_id){
 	  dataType:"html",
       success: function(msg){
 		$("#quote_details_form").html(msg);
-		$("#add_quote_button").html('<input type="image"  src="http://localhost/hotel-mario/designed_views/imagenes/bagregar.jpg" onclick="process_quote_hotel('+emp_id+');"/>');
+		$("#add_quote_button").html('<input type="image"  src="'+IMG+'bagregar.jpg" onclick="process_quote_hotel('+emp_id+');"/>');
       }
 	})
 }
@@ -188,8 +216,11 @@ function setting_PU(countaux){
 	}
 	rooms_selected[countaux]['capacity'] = parseInt(rooms_selected[countaux]['capacity']);
 	
+	$('#quantity'+countaux).val("00");
+	hotel_quote_print_totals(countaux, 0);
+	
 	$.ajax({
-      url: 'http://localhost/hotel-mario/index.php/quotation/setting_PU',
+      url: CONTROLLERS+'quotation/setting_PU',
       global: false,
       type: "POST",
       data: ({room : rooms_selected[countaux]['room'],
@@ -207,11 +238,11 @@ function setting_PU(countaux){
 }
 
 function calculate_sub(){
-	subtotal = 0;
+	hotel_subtotal = 0;
 	capacity_total = 0;
 	for (i=0; i < rooms_selected.length; i++){
 		if (rooms_selected[i]){
-			subtotal += rooms_selected[i]['subtotal'];
+			hotel_subtotal += rooms_selected[i]['subtotal'];
 			capacity_total += ((rooms_selected[i]['capacity']*rooms_selected[i]['quantity']));
 		}
 	}
@@ -221,7 +252,7 @@ function setting_subtotal(countaux){
 	rooms_selected[countaux]['quantity'] = parseInt($('#quantity'+countaux).val());
 	
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/quotation/setting_subtotal",
+      url: CONTROLLERS+"quotation/setting_subtotal",
       global: false,
       type: "POST",
       data: ({room : rooms_selected[countaux]['room'],
@@ -232,12 +263,17 @@ function setting_subtotal(countaux){
       async:false,
 	  dataType:"html",
       success: function(msg){
-		  rooms_selected[countaux]['subtotal'] = parseFloat(msg);
-		  calculate_sub();
-		  $('#subtotal'+countaux).html('BsF. '+msg);
-		  $('#total'+counter).html('---------------- <br />BsF.'+subtotal);
-      }
+		  			hotel_quote_print_totals(countaux, parseFloat(msg));
+		        }
 	})
+}
+
+function hotel_quote_print_totals(countaux, subtotal){
+	rooms_selected[countaux]['subtotal'] = subtotal;
+	  calculate_sub();
+	  $('#subtotal'+countaux).html('BsF. '+subtotal);
+	  $('#total'+counter).html('---------------- <br />BsF.'+hotel_subtotal);
+
 }
 
 function add_room(){ 	
@@ -252,7 +288,7 @@ function add_room(){
 	}
 		
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/quotation/start_quote/1",
+      url: CONTROLLERS+"quotation/start_quote/1",
       global: false,
       type: "POST",
       data: ({hotel_id : hotel_id,
@@ -265,7 +301,7 @@ function add_room(){
 	  dataType:"html",
       success: function(msg){
 		$("#quote_hotel_table").append(msg);	
-		$('#total'+counter).html('---------------- <br />BsF. '+subtotal);
+		$('#total'+counter).html('---------------- <br />BsF. '+hotel_subtotal);
       }
 	})
 
@@ -283,16 +319,16 @@ function process_quote_hotel(emp_id){
 		}
 				
 			$.ajax({
-			  url: 'http://localhost/hotel-mario/index.php/quotation/hotel_summary',
+			  url: CONTROLLERS+'quotation/hotel_summary',
 			  global: false,
 			  type: "POST",
 			  data: ({rooms_selected : imploded,
-					  subtotal : subtotal}),
+					  subtotal : hotel_subtotal}),
 			  async:false,
 			  dataType:"html",
 			  success: function(msg){
 				  $('#quote_details_form').html(msg);
-				  $('#add_quote_button').html('<td class="ntd"> <input type="image" name="procesar" id="procesar" src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="save_hotel_quote('+emp_id+')"/>	</td>');
+				  $('#add_quote_button').html('<td class="ntd"> <input type="image" name="procesar" id="procesar" src="'+IMG+'bprocesar.jpg" onclick="save_hotel_quote('+emp_id+')"/>	</td>');
 			  }
 			})
 	
@@ -312,14 +348,14 @@ function save_hotel_quote(emp_id){
 	}
 
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/quotation/save_hotel_quote",
+      url: CONTROLLERS+"quotation/save_hotel_quote",
       global: false,
       type: "POST",
       data: ({plan_id : plan_id,
 			   date_start : date_start,
 			   date_end : date_end,
 			   rooms_selected : imploded,
-			   subtotal : subtotal,
+			   subtotal : hotel_subtotal,
 			   persons : persons}),
       async:false,
 	  dataType:"html",
@@ -327,7 +363,7 @@ function save_hotel_quote(emp_id){
 		 $('#add_quote_button').html('');
 			hotel_quote_id = msg;
 			alert('Cotizacion de hotel agregada con exito: '+hotel_quote_id);
-			$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="http://localhost/hotel-mario/designed_views/imagenes/finalizar.jpg" onclick="process_quotation('+emp_id+');" align="middle" /></td></tr> </table>'); 
+			$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="'+IMG+'finalizar.jpg" onclick="process_quotation('+emp_id+');" align="middle" /></td></tr> </table>'); 
       }
 	})
 }
@@ -352,7 +388,7 @@ function new_matrix_season(hotel_selected_id){
 	hotel_id = hotel_selected_id;
 
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/price_matrix/new_matrix_season",
+      url: CONTROLLERS+"price_matrix/new_matrix_season",
       global: false,
       type: "POST",
       data: ({hotel_selected_id : hotel_id}),
@@ -372,7 +408,7 @@ function validate_dates(){
 	matrix_counter = 0;
 	
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/price_matrix/validate_dates",
+      url: CONTROLLERS+"price_matrix/validate_dates",
       global: false,
       type: "POST",
       data: ({hotel_id : hotel_id,
@@ -383,12 +419,12 @@ function validate_dates(){
       success: function(msg){
 		if (msg == '')	alert('Las fechas dadas se solapan con seasons existentes');
 		else{
-				$('#validate_check').html('<img src="http://localhost/hotel-mario/designed_views/imagenes/tick.png"/>');
+				$('#validate_check').html('<img src="'+IMG+'tick.png"/>');
 	  			$('#new_matrix_data').html(msg);
 				
 				new_matrix_add_room();
 				
-				$('#process_new_matrix_button').html('<div class="separadorv"></div> <div class="tit2"> <input type="image" name="Agregar" id="Agregar" src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg"  onclick="process_new_matrix();"/> </div> <div class="separador"></div>');
+				$('#process_new_matrix_button').html('<div class="separadorv"></div> <div class="tit2"> <input type="image" name="Agregar" id="Agregar" src="'+IMG+'bprocesar.jpg"  onclick="process_new_matrix();"/> </div> <div class="separador"></div>');
 		}
       }
 	})
@@ -398,7 +434,7 @@ function new_matrix_add_room(){
 	matrix_counter = matrix_counter + 1;
 	
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/price_matrix/new_matrix_add_room",
+      url: CONTROLLERS+"price_matrix/new_matrix_add_room",
       global: false,
       type: "POST",
       data: ({hotel_id : hotel_id,
@@ -425,7 +461,7 @@ function process_new_matrix(){
 	}
 
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/price_matrix/process_new_matrix",
+      url: CONTROLLERS+"price_matrix/process_new_matrix",
       global: false,
       type: "POST",
       data: ({hotel_id : hotel_id,
@@ -439,7 +475,7 @@ function process_new_matrix(){
       success: function(msg){
 		alert('Matriz agregada con exito!');
 				$.ajax({
-				  url: "http://localhost/hotel-mario/index.php/price_matrix/index/1",
+				  url: CONTROLLERS+"price_matrix/index/1",
 				  global: false,
 				  type: "POST",
 				  data: ({hotels : hotel_id}),
@@ -461,7 +497,7 @@ function flight_quote_data(cont_flight){
 	 	alert ('Debe haber por lo menos un pasajero');
 	 else{		 
 			$.ajax({
-			  url: "http://localhost/hotel-mario/index.php/quotation/travelers_info",
+			  url: CONTROLLERS+"quotation/travelers_info",
 			  global: false,
 			  type: "POST",
 			  data: ({cant_adults : cant_adults,
@@ -556,7 +592,7 @@ function flight_summary(){
 	}
 	
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/quotation/flight_quote_insert/1",
+      url: CONTROLLERS+"quotation/flight_quote_insert/1",
       global: false,
       type: "POST",
       data: ({	flights_quote : flights_quote }),
@@ -586,7 +622,7 @@ function drop_flight(flight_id){
 
 function flight_quote_process(emp_id){
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/quotation/flight_quote_insert/0",
+      url: CONTROLLERS+"quotation/flight_quote_insert/0",
       global: false,
       type: "POST",
       data: ({	flights_quote : flights_quote }),
@@ -602,7 +638,7 @@ function flight_quote_process(emp_id){
 					
 			alert('Cotizacion de vuelo agregada con exito: '+flight_quote_id);
 			
-			$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="http://localhost/hotel-mario/designed_views/imagenes/finalizar.jpg" onclick="process_quotation('+emp_id+');" align="middle" /></td></tr> </table>');
+			$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="'+IMG+'finalizar.jpg" onclick="process_quotation('+emp_id+');" align="middle" /></td></tr> </table>');
       }
 	})
 }
@@ -657,7 +693,7 @@ function generic_summary(generic_array){
 			generic_quote += generic_array[i].join("|")+'||';
 
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/quotation/generic_summary",
+      url: CONTROLLERS+"quotation/generic_summary",
       global: false,
       type: "POST",
       data: ({generic_quote : generic_quote ,
@@ -694,7 +730,7 @@ function add_generic(){
 
 function generic_process(emp_id){
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/quotation/generic_process",
+      url: CONTROLLERS+"quotation/generic_process",
       global: false,
       type: "POST",
       data: ({generic_quote : generic_quote,
@@ -707,7 +743,7 @@ function generic_process(emp_id){
 				generic_quote_id = msg;
 				alert('Cotizacion generica agregada con exito: '+generic_quote_id);
 				
-				$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="http://localhost/hotel-mario/designed_views/imagenes/finalizar.jpg" onclick="process_quotation('+emp_id+');" align="middle" /></td></tr> </table>');
+				$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="'+IMG+'finalizar.jpg" onclick="process_quotation('+emp_id+');" align="middle" /></td></tr> </table>');
 				
       }
 	})
@@ -716,7 +752,7 @@ function generic_process(emp_id){
 function find_traveler(cont_flight, cont_traveler, type){	
 	var traveler_ci = $('#'+cont_flight+'_'+type+cont_traveler+'_ci').val();
 	$.ajax({
-      url: 'http://localhost/hotel-mario/index.php/quotation/find_traveler/'+traveler_ci,
+      url: CONTROLLERS+'quotation/find_traveler/'+traveler_ci,
       global: false,
       type: "POST",
       data: ({}),
@@ -737,7 +773,7 @@ function find_traveler(cont_flight, cont_traveler, type){
 
 function process_quotation(emp_id){
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/quotation/process_quotation",
+      url: CONTROLLERS+"quotation/process_quotation",
       global: false,
       type: "POST",
       data: ({hotel_quote_id : hotel_quote_id,
@@ -757,7 +793,7 @@ function process_quotation(emp_id){
 		//$('#quotation').html(msg);
 		
 				$.ajax({
-				  url: "http://localhost/hotel-mario/index.php/customer/customer_after_quote/"+customer_id,
+				  url: CONTROLLERS+"customer/customer_after_quote/"+customer_id,
 				  global: false,
 				  type: "POST",
 				  data: ({}),
@@ -773,7 +809,7 @@ function process_quotation(emp_id){
 
 function existing_quotation(customer){
 	$.ajax({
-      url: 'http://localhost/hotel-mario/index.php/customer/existing_quotation/'+customer,
+      url: CONTROLLERS+'customer/existing_quotation/'+customer,
       global: false,
       type: "POST",
       data: ({}),
@@ -789,11 +825,11 @@ function existing_quotation(customer){
 function existing_quote_details(quote_id, close_div){
 	if(close_div == '1'){
 		$('#existing_quote_details'+quote_id).html('');
-		$('#existing_quote_details_button'+quote_id).html('<a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/fazul.jpg" alt="" onclick="existing_quote_details('+quote_id+',0);" /></a>');
+		$('#existing_quote_details_button'+quote_id).html('<a href="javascript:void(0);"><img src="'+IMG+'fazul.jpg" alt="" onclick="existing_quote_details('+quote_id+',0);" /></a>');
 	}
 	else{
 			$.ajax({
-			  url: "http://localhost/hotel-mario/index.php/customer/existing_quote_details",
+			  url: CONTROLLERS+"customer/existing_quote_details",
 			  global: false,
 			  type: "POST",
 			  data: ({quote_id : quote_id}),
@@ -801,7 +837,7 @@ function existing_quote_details(quote_id, close_div){
 			  dataType:"html",
 			  success: function(msg){
 					$('#existing_quote_details'+quote_id).html(msg);
-					$('#existing_quote_details_button'+quote_id).html('<a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/fazul_abajo.jpg" alt="" onclick="existing_quote_details('+quote_id+',1);" /></a>');
+					$('#existing_quote_details_button'+quote_id).html('<a href="javascript:void(0);"><img src="'+IMG+'fazul_abajo.jpg" alt="" onclick="existing_quote_details('+quote_id+',1);" /></a>');
 			  }
 			})
 	}
@@ -809,7 +845,7 @@ function existing_quote_details(quote_id, close_div){
 
 function search_client(customer){	
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/customer/search_form",
+      url: CONTROLLERS+"customer/search_form",
       global: false,
       type: "POST",
       data: ({ci_client : customer}),
@@ -829,7 +865,7 @@ function search_client(customer){
 
 function new_client(customer){	
 	$.ajax({
-      url: 'http://localhost/hotel-mario/index.php/customer/new_client/'+customer,
+      url: CONTROLLERS+'customer/new_client/'+customer,
       global: false,
       type: "POST",
       data: ({}),
@@ -854,7 +890,7 @@ function new_client_data(){
 	if((ci_client != '') && (name != '') && (lastname != '') && (phone != '') && (email != '') && (address != '') && (birthdate != '')){
 	
 	  $.ajax({
-		  url: 'http://localhost/hotel-mario/index.php/customer/new_client/'+ci_client,
+		  url: CONTROLLERS+'customer/new_client/'+ci_client,
 		  global: false,
 		  type: "POST",
 		  data: ({ci_client :ci_client,
@@ -885,7 +921,7 @@ function new_client_data(){
 
 function modify_client_button(customer){
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/customer/modify_client",
+      url: CONTROLLERS+"customer/modify_client",
       global: false,
       type: "POST",
       data: ({ci_client : customer}),
@@ -910,7 +946,7 @@ function modify_client(){
 	if((ci_client != '') && (name != '') && (lastname != '') && (phone != '') && (email != '') && (address != '') && (birthdate != '')){
 		
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/customer/modify_client",
+      url: CONTROLLERS+"customer/modify_client",
       global: false,
       type: "POST",
       data: ({ci_client :ci_client,
@@ -937,7 +973,7 @@ function modify_client(){
 function delete_client(customer){
 	if( confirm('¿Realmente desea eliminar este cliente?') ){
 		$.ajax({
-		  url: 'http://localhost/hotel-mario/index.php/customer/delete_client/'+customer,
+		  url: CONTROLLERS+'customer/delete_client/'+customer,
 		  global: false,
 		  type: "POST",
 		  data: ({}),
@@ -946,7 +982,7 @@ function delete_client(customer){
 		  success: function(msg){
 				 alert('Cliente eliminado');
 				 $.ajax({
-					  url: "http://localhost/hotel-mario/index.php/customer/search_form",
+					  url: CONTROLLERS+"customer/search_form",
 					  global: false,
 					  type: "POST",
 					  data: ({}),
@@ -971,7 +1007,7 @@ function login(){
 	var user_password = $('#user_password').val();
 	
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/seller/login",
+      url: CONTROLLERS+"seller/login",
       global: false,
       type: "POST",
       data: ({user_id : user_id,
@@ -1006,7 +1042,7 @@ function add_seller(){
 	else if(re.exec(password)){
 		if((password.length > 5) && (password.length < 16)){
 				 $.ajax({
-				  url: "http://localhost/hotel-mario/index.php/seller/add_seller",
+				  url: CONTROLLERS+"seller/add_seller",
 				  global: false,
 				  type: "POST",
 				  data: ({name : name,
@@ -1047,7 +1083,7 @@ function add_seller(){
 
 function delete_seller(employees){
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/seller/delete_seller/"+employees,
+      url: CONTROLLERS+"seller/delete_seller/"+employees,
       global: false,
       type: "POST",
       data: ({}),
@@ -1064,7 +1100,7 @@ function categorie_packages(){
 	var categorie_id = $('#categories').val();
 	
 	 $.ajax({
-      url: "http://localhost/hotel-mario/index.php/packages/categorie_packages/0",
+      url: CONTROLLERS+"packages/categorie_packages/0",
       global: false,
       type: "POST",
       data: ({categorie_id : categorie_id}),
@@ -1080,11 +1116,11 @@ function package_details(pack_id, close_div){
 	var ruta = "<?php echo('fazul_abajo.jpg');?>";
 	if(close_div == '1'){
 		$('#package'+pack_id).html('');
-		$('#package_arrow'+pack_id).html('<a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/fazul.jpg" alt="" onclick="package_details('+pack_id+',0);" /></a>');
+		$('#package_arrow'+pack_id).html('<a href="javascript:void(0);"><img src="'+IMG+'fazul.jpg" alt="" onclick="package_details('+pack_id+',0);" /></a>');
 	}
 	else{
 			$.ajax({
-			  url: "http://localhost/hotel-mario/index.php/packages/package_details",
+			  url: CONTROLLERS+"packages/package_details",
 			  global: false,
 			  type: "POST",
 			  data: ({pack_id : pack_id}),
@@ -1092,7 +1128,7 @@ function package_details(pack_id, close_div){
 			  dataType:"html",
 			  success: function(msg){
 					$('#package'+pack_id).html(msg);
-					$('#package_arrow'+pack_id).html('<a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/'+ruta+'" alt="" onclick="package_details('+pack_id+',1);" /></a>');
+					$('#package_arrow'+pack_id).html('<a href="javascript:void(0);"><img src="'+IMG+''+ruta+'" alt="" onclick="package_details('+pack_id+',1);" /></a>');
 			  }
 			})
 	}
@@ -1103,7 +1139,7 @@ function new_package(){
 	package_count = 1;
 	
 	 $.ajax({
-      url: "http://localhost/hotel-mario/index.php/packages/new_package/1/0",
+      url: CONTROLLERS+"packages/new_package/1/0",
       global: false,
       type: "POST",
       data: ({count : package_count}),
@@ -1119,7 +1155,7 @@ function new_package_categories(){
 	var number_of_categories = $('#number_of_categories').val();
 
 	 $.ajax({
-      url: "http://localhost/hotel-mario/index.php/packages/package_categories",
+      url: CONTROLLERS+"packages/package_categories",
       global: false,
       type: "POST",
       data: ({number_of_categories : number_of_categories}),
@@ -1155,7 +1191,7 @@ function new_package_hotels(){
 		}
 		
 		$.ajax({
-		  url: "http://localhost/hotel-mario/index.php/packages/new_package_hotels/1",
+		  url: CONTROLLERS+"packages/new_package_hotels/1",
 		  global: false,
 		  type: "POST",
 		  data: ({}),
@@ -1176,7 +1212,7 @@ function np_print_hotels(){
 	np_number_of_hotels = $('#number_of_hotels').val();
 	
 	  $.ajax({
-		  url: "http://localhost/hotel-mario/index.php/packages/new_package_hotels/0",
+		  url: CONTROLLERS+"packages/new_package_hotels/0",
 		  global: false,
 		  type: "POST",
 		  data: ({number_of_hotels : np_number_of_hotels}),
@@ -1184,7 +1220,7 @@ function np_print_hotels(){
 		  dataType:"html",
 		  success: function(msg){
 				$('#new_package').html(msg);
-				$('#new_package_process_button').html('<div class="separadorv"></div> <table><tr><td><img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="process_package();" /></td></tr></table>');
+				$('#new_package_process_button').html('<div class="separadorv"></div> <table><tr><td><img src="'+IMG+'bprocesar.jpg" onclick="process_package();" /></td></tr></table>');
 		  }
 		})
 }
@@ -1200,7 +1236,7 @@ function np_process_hotels(number_of_hotel){
 		package_hotels_array[number_of_hotel][1] = 1;
 
 		$.ajax({
-		  url: "http://localhost/hotel-mario/index.php/packages/new_package/0/1",
+		  url: CONTROLLERS+"packages/new_package/0/1",
 		  global: false,
 		  type: "POST",
 		  data: ({hotel_id : hotel_id,
@@ -1220,7 +1256,7 @@ function new_package_room(hotel_id, number_of_hotel){
 	package_hotels_array[number_of_hotel][1] += 1;
 
 	 $.ajax({
-      url: "http://localhost/hotel-mario/index.php/packages/new_package/0/0",
+      url: CONTROLLERS+"packages/new_package/0/0",
       global: false,
       type: "POST",
       data: ({hotel_id : hotel_id,
@@ -1248,7 +1284,7 @@ function process_package(){
 	}
 
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/packages/add_package",
+      url: CONTROLLERS+"packages/add_package",
       global: false,
       type: "POST",
       data: ({name : package_name,
@@ -1273,7 +1309,7 @@ function process_package(){
 function pq_select_categorie(){
 	var categorie = $('#categories').val();
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/quotation/pq_selected_categorie",
+      url: CONTROLLERS+"quotation/pq_selected_categorie",
       global: false,
       type: "POST",
       data: ({categorie : categorie}),
@@ -1287,7 +1323,7 @@ function pq_select_categorie(){
 
 function pq_select_package(package_id){
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/quotation/pq_selected_package",
+      url: CONTROLLERS+"quotation/pq_selected_package",
       global: false,
       type: "POST",
       data: ({package : package_id}),
@@ -1309,7 +1345,7 @@ function pq_details(pack_id, hotel_id){
 	pq_rooms = clean_array;
 
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/quotation/pq_selected_hotel/1",
+      url: CONTROLLERS+"quotation/pq_selected_hotel/1",
       global: false,
       type: "POST",
       data: ({package : pack_id,
@@ -1327,7 +1363,7 @@ function pq_add_room(){
 	pq_count += 1;
 
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/quotation/pq_selected_hotel/0",
+      url: CONTROLLERS+"quotation/pq_selected_hotel/0",
       global: false,
       type: "POST",
       data: ({package : pq_package,
@@ -1341,54 +1377,102 @@ function pq_add_room(){
 	})
 }
 
-function pq_set_price(count){
-	var pack_room = $('#room'+count).val();
+
+function pq_additional_days(check_in, check_out, emp_id){
+	employee_id = emp_id;
+	pq_check_in = check_in;
+	pq_check_out = check_out;
 	
-	pq_rooms[count] = new Array(); 
-		//[0]: rooms_per_package_id, [1]:price per adult,[2]:price per kid,[3]:cant of adults,[4]:cant of kids
-						
-	pq_rooms[count] = pack_room.split("|");
-	$('#pq_price_adult'+count).html('BsF. '+pq_rooms[count][1]);
-	$('#pq_price_kid'+count).html('BsF. '+pq_rooms[count][2]);
+	$.ajax({
+      url: CONTROLLERS+"quotation/pq_additional_nights",
+      global: false,
+      type: "POST",
+      data: ({package_id : pq_package,
+			  check_in : pq_check_in,
+			  check_out : pq_check_out}),
+      async:false,
+	  dataType:"html",
+      success: function(msg){
+		  if( parseInt(msg) > 0){
+			pq_additional_nights = parseInt(msg);
+			$("#additional_price_frame").html('<strong>C/Noche Adicional</strong>');
+			$("#additional_nights_div").html('<strong>Noche(s) adicional(es): '+msg+'</strong>');
+			$('#additional_nights_div').css("background-color","#99CCFF");
+		  }
+		  else{ 
+		  	pq_additional_nights = 0;
+		  	$("#additional_price_frame").html('');
+		  	$("#additional_nights_div").html('');
+			$('#additional_nights_div').css("background-color","#FFFFFF");
+		  }
+		  pq_calculate_totals();
+      }
+	})
 }
 
-function sum_pq_total(){
-	pq_total_numeric = 0;
-	for(i=1; i < pq_total.length; i++){
-		pq_total_numeric = pq_total_numeric + pq_total[i];
-	}
+function pq_set_price(count){
+	var pack_room = $('#room'+count).val();
+	pq_rooms[count] = new Array();  //[0]: rooms_per_package_id, [1]:price per adult,[2]:price per kid,
+									//[3]:price per additional night,[4]:cant of adults,[5]:cant of kids}
+						
+	pq_rooms[count] = pack_room.split("|");
+	pq_rooms[count][4] = '00';
+	pq_rooms[count][5] = '00';
+	
+	$('#pq_price_adult'+count).html('BsF. '+pq_rooms[count][1]);
+	$('#pq_price_kid'+count).html('BsF. '+pq_rooms[count][2]);
+	
+	if(pq_additional_nights > 0)
+		$('#pq_price_additional'+count).html('BsF. '+pq_rooms[count][3]);
+	else 
+		$('#pq_price_additional'+count).html('');
+	
+	$('#cant_persons'+count).val("00");
+	$('#cant_kids'+count).val("00");
+	pq_calculate_totals();
 }
 
 //receives two parameters, the number of the subtotal field and the id of the employee loged in to  be stored in the final quotation process
 
-function pq_set_subtotal(count, emp_id){
-	var cant_persons = $('#cant_persons'+count).val();
-	var cant_kids = $('#cant_kids'+count).val();
+function pq_set_subtotal(count){
+	var cant_persons = 00; 
+	cant_persons = $('#cant_persons'+count).val();
+	var cant_kids = 00; 
+	cant_kids = $('#cant_kids'+count).val();
 	
-	pq_rooms[count][3] = cant_persons;
-	pq_rooms[count][4] = cant_kids;
-	var subtotal = (parseFloat(pq_rooms[count][1])* parseInt(pq_rooms[count][3]))+(parseFloat(pq_rooms[count][2])* parseInt(pq_rooms[count][4]));
-	pq_total[count] = subtotal;
-	sum_pq_total();
+	pq_rooms[count][4] = cant_persons;
+	pq_rooms[count][5] = cant_kids;
 	
-	$('#pq_subtotal'+count).html('BsF. '+subtotal);
-	for(i=1; i<=count; i++){
-		$('#pq_total'+i).html('');
-	}
-	$('#pq_total'+pq_count).html('----------------- <br />BsF. '+pq_total_numeric);
-	if(pq_total_numeric > 0){
-		$('#pq_process_button').html('<a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/bagregar.jpg" onclick="pq_process(0,'+emp_id+');" /></a>');
-		
-		
-	}
+	pq_calculate_totals();
 }
 
-function pq_process(summary, emp_id){
-	sum_pq_total();
-	if(summary == 0){
-		pq_check_in = $('#check_in').val();
-		pq_check_out = $('#check_out').val();
+function pq_calculate_totals(){
+	pq_total_numeric = 0; var subtotal = 0;
+
+	for(i=1; i< pq_rooms.length; i++){
+		//alert('en la pos: '+i+', '+pq_rooms[i][1]);
+		subtotal = (parseFloat(pq_rooms[i][1])* parseInt(pq_rooms[i][4]))+(parseFloat(pq_rooms[i][2])* parseInt(pq_rooms[i][5]));
+	
+		if(pq_additional_nights > 0){
+			$('#pq_price_additional'+i).html('BsF. '+pq_rooms[i][3]);
+			subtotal += (parseFloat(pq_rooms[i][3]) * pq_additional_nights * (parseInt(pq_rooms[i][4])+parseInt(pq_rooms[i][5])));
+		}
+		else 
+			$('#pq_price_additional'+i).html('')
+			
+		$('#pq_total'+i).html('');
+		pq_total_numeric += subtotal;
+		$('#pq_subtotal'+i).html('BsF. '+subtotal);
 	}
+	$('#pq_total'+pq_count).html('----------------- <br />BsF. '+pq_total_numeric);
+	
+	if(pq_total_numeric > 0){
+		$('#pq_process_button').html('<a href="javascript:void(0);"><img src="'+IMG+'bagregar.jpg" onclick="pq_process(0);" /></a>');		
+	}
+	else $('#pq_process_button').html('');
+}
+
+function pq_process(summary){
 	var rooms = '';
 	for(i=1; i < pq_rooms.length; i++){
 		for(j=0; j < pq_rooms[i].length; j++){
@@ -1398,13 +1482,15 @@ function pq_process(summary, emp_id){
 	}
 
     $.ajax({
-      url: 'http://localhost/hotel-mario/index.php/quotation/pq_process/'+summary,
+      url: CONTROLLERS+'quotation/pq_process/'+summary,
       global: false,
       type: "POST",
       data: ({rooms : rooms,
 			   pq_total : pq_total_numeric,
 			   check_in : pq_check_in,
-			   check_out : pq_check_out}),
+			   check_out : pq_check_out,
+			   package_id : pq_package,
+			   additional_nights : pq_additional_nights}),
       async:false,
 	  dataType:"html",
       success: function(msg){
@@ -1412,7 +1498,7 @@ function pq_process(summary, emp_id){
 					alert('Paquete agregado con exito');
 					package_quote_id = msg;
 					$('#pq_process_button_summary').html(msg);
-					$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="http://localhost/hotel-mario/designed_views/imagenes/finalizar.jpg" onclick="process_quotation('+emp_id+');" align="middle" /></td></tr> </table>');
+					$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="'+IMG+'finalizar.jpg" onclick="process_quotation('+employee_id+');" align="middle" /></td></tr> </table>');
 				}
 				else{
 					$('#pq_process_button').html('');
@@ -1425,7 +1511,7 @@ function pq_process(summary, emp_id){
 function management_hotel_chosen(){
 	var hotel_chosen = $('#hotels').val();
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/hotels",
+      url: CONTROLLERS+"hotels",
       global: false,
       type: "POST",
       data: ({hotels : hotel_chosen}),
@@ -1440,7 +1526,7 @@ function management_hotel_chosen(){
 function management_price_matrix(){
 	var hotel_chosen = $('#hotels').val();
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/price_matrix/index/1",
+      url: CONTROLLERS+"price_matrix/index/1",
       global: false,
       type: "POST",
       data: ({hotels : hotel_chosen}),
@@ -1455,7 +1541,7 @@ function management_price_matrix(){
 function price_matrix_hotel(){
 	var hotel_chosen = $('#hotels').val();
 	$.ajax({
-      url: "http://localhost/hotel-mario/index.php/price_matrix/index/0",
+      url: CONTROLLERS+"price_matrix/index/0",
       global: false,
       type: "POST",
       data: ({hotels : hotel_chosen}),

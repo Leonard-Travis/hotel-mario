@@ -2,7 +2,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Hoteles.com.ve</title>
     
-    <script type="text/javascript" src="http://localhost/hotel-mario/js/hotel_js.js"></script>
+    <script type="text/javascript" src="<?php echo JSQ; ?>hotel_js.js"></script>
 <!-----------------------------------------JQUERY----------------------------------------------------------
 note: components should be included in this specific order, so that everything works properly -->
 
