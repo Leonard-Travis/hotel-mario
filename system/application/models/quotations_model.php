@@ -390,6 +390,7 @@ class Quotations_model extends Model {
 				 $rooms[$pos] = $value2;
 				 $rooms[$pos]['number_of_adults'] = $value['number_of_people'];
 				 $rooms[$pos]['number_of_kids'] = $value['number_of_kids'];
+				 $rooms[$pos]['number_of_additional_nights'] = $value['number_of_additional_nights'];
 			 }
 		}
 		/*echo('pack data<pre>');
@@ -407,7 +408,7 @@ class Quotations_model extends Model {
 		
 	}
 	
-	function pq_insert($rooms, $total, $check_in, $check_out){
+	function pq_insert($rooms, $total, $check_in, $check_out, $additional_nights){
 		$pq_id = '';
 		$data_pq = array('quote_package_id' => '', 'check_in' => $check_in, 'check_out' => $check_out, 'total' => $total);
 		$this->db->insert('_admin_quotations_package', $data_pq);
@@ -422,7 +423,7 @@ class Quotations_model extends Model {
 		foreach($rooms as $room){
 			if(count($room) > 0){
 				if($room[0] != ''){
-					$data_rp = array('QUOTE_PACKAGE_id' => $pq_id, 'ROOM_PER_PACKAGE_id' => $room[0], 'number_of_people' => $room[3], 'number_of_kids' => $room[4]);
+					$data_rp = array('QUOTE_PACKAGE_id' => $pq_id, 'ROOM_PER_PACKAGE_id' => $room[0], 'number_of_people' => $room[4], 'number_of_kids' => $room[5], 'number_of_additional_nights' => $additional_nights);
 					$this->db->insert('_admin_rooms_per_package_quote', $data_rp);
 				}
 			}

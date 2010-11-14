@@ -21,6 +21,7 @@ define('DIR_WRITE_MODE', 0777);
 
 define('IMG', "http://localhost/hotel-mario/designed_views/imagenes/");
 define('JSQ', "http://localhost/hotel-mario/js/jquery/");
+define('STYLE', "http://localhost/hotel-mario/designed_views/");
 
 
 /*

@@ -10,7 +10,7 @@
 <?php foreach ($query as $client) { ?>  
 <div id="asociar2">
     <div class="alertar">
-        <img src="http://localhost/hotel-mario/designed_views/imagenes/alerta.gif" alt="Alerta" class="valign" /><strong>Todos los campos son OBLIGATORIOS</strong>
+        <img src="<?php echo IMG; ?>alerta.gif" alt="Alerta" class="valign" /><strong>Todos los campos son OBLIGATORIOS</strong>
     </div>
     <!-- fin alerta de arriba -->
     <div class="separadorv"></div><div class="separadorv"></div>
@@ -46,7 +46,7 @@
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;
     <li class="li_tit_2"></li>
-    <img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="modify_client();" /> 
+    <img src="<?php echo IMG; ?>bprocesar.jpg" onclick="modify_client();" /> 
     </ul>
     </div>
 </div>

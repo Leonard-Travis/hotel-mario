@@ -1,4 +1,5 @@
 <?php if ($hotels) {?>
+    
 <script type="text/javascript">
 	$(function() {
 		var availableTags = new Array();
@@ -7,15 +8,15 @@
 												 value: "<?php echo($hotels[$i]['hotel_id']);?>"};
 		<?php } ?>	
 		
-		$('#tags').autocomplete({
+		$('#tags_hotel').autocomplete({
 			minLength: 0,
 			source: availableTags,
 			focus: function(event, ui) {
-				$('#tags').val(ui.item.label);
+				$('#tags_hotel').val(ui.item.label);
 				return false;
 			},
 			select: function(event, ui) {
-				$('#tags').val(ui.item.label);
+				$('#tags_hotel').val(ui.item.label);
 				$('#hotels').val(ui.item.value);				
 				return false;
 			}
@@ -23,20 +24,23 @@
 	});
 </script>
 <div class="separadorv"></div>
+<div class="separadorv_gris"></div>
 <div class="separadorv"></div>
 <h1>Hotel</h1>
     <div id="asociar_c">
     <ul>
-        <li class="li_tit_1"><img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel</li> 
+        <li class="li_tit_1"><img src="<?php echo IMG; ?>zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel</li> 
 		<li>
-            <input id="tags"/>
+            <input id="tags_hotel"/>
             <input type="hidden" id="hotels" />
         </li>
         <li>
-            <input type="image" src="http://localhost/hotel-mario/designed_views/imagenes/bseleccionar.jpg" onclick="hotel_info();"/>
+            <input type="image" src="<?php echo IMG; ?>bseleccionar.jpg" onclick="hotel_info();"/>
         </li>
     </ul>
 	</div>
+    
+    
         
 <?php }?>
 
@@ -53,15 +57,15 @@
 </script> 
 
 <?php foreach ($hotel_selected as $hotel_selected) { ?>
-    <div class="separador"></div>
-    <div class="separadorv_gris"></div>
+    <br />   <br /><br />   <br />
+    
     <h1>Detalle de la reserva</h1>
     <div id="hoteles1">
         <table>
             <tr>
                 <td><strong>Hotel:</strong></td>
                 <td class="tdazul"><?php echo($hotel_selected['name']); ?></td>
-                <td><img src="http://localhost/hotel-mario/designed_views/imagenes/cal1.jpg" alt="" /> 
+                <td><img src="<?php echo IMG; ?>cal1.jpg" alt="" /> 
                 <a href="<?php echo base_url(); ?>price_matrix/index/0" class="link_naranja" target="_blank">Var mariz de precios</a></td>
             </tr>
             <tr>
@@ -96,7 +100,7 @@
                 <td><input type="text" name="persons" id="persons" maxlength="3" size="4"/></td>
             </tr>
             <tr> <td></td> <td></td> 
-            <td><input type="image" name="procesar" id="procesar" src="http://localhost/hotel-mario/designed_views/imagenes/bseleccionar.jpg" onclick="start_hotel_quote(<?php echo($this->session->userdata('id'));?>);"/></td>
+            <td><input type="image" name="procesar" id="procesar" src="<?php echo IMG; ?>bseleccionar.jpg" onclick="start_hotel_quote(<?php echo($this->session->userdata('id'));?>);"/></td>
             </tr>
         </table>
     </div>
@@ -105,13 +109,5 @@
     	<div id="quote_details_form" name="quote_details_form" ></div>
         <div id="add_quote_button"></div>
     </div>   
-    
-<!--<script>
-	$('#date_end').click(function() {			   
-	  alert($('#date_start').val());
-	 $('#date_end').datepicker('setDate', 'c+1d');
-	});
-</script>-->
-    
-<?php } ?>
-<?php } ?>
+<?php } ?><!--end of foreach-->
+<?php } ?><!--end of if hotel selected-->

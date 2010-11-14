@@ -139,8 +139,7 @@ class Quotation extends Controller {
 				}
 			}
 		}
-		$data['PU'] = $unit_price;
-		$this->load->view('unit_price', $data);		
+		echo $unit_price;	
 	}
 	
 	
@@ -549,7 +548,21 @@ class Quotation extends Controller {
 		$data['hotel'] = $this->hotels_model->find($hotel);
 		$data['frame'] = $frame;
 		$data['pq_count'] = $_POST["pq_count"];
+		$data['package_id'] = $package;
 		$this->load->view('pq_details', $data);
+	}
+	
+	function pq_additional_nights(){
+		$check_in = $_POST["check_in"];
+		$check_out = $_POST["check_out"];
+		$package_id = $_POST["package_id"];
+		
+		$package = $this->packages_model->find($package_id);
+		$stay_days = $this->subtract_dates($this->change_date_format($check_in), $this->change_date_format($check_out));
+		$additional_nights = $stay_days - $package[0]['number_of_nights'];
+		if($additional_nights < 0) $additional_nights = 0;
+		
+		echo ($additional_nights);
 	}
 	
 	function pq_process($summary){
@@ -557,6 +570,11 @@ class Quotation extends Controller {
 		$total = $_POST["pq_total"];
 		$check_in = $_POST["check_in"];
 		$check_out = $_POST["check_out"];
+		$package_id = $_POST["package_id"];	
+		$additional_nights = $_POST["additional_nights"];
+	
+		//$additional_nights = $this->pq_additional_nights($check_in, $check_out, $package_id);
+		
 		
 		$array2 = array(); // array aux to put the 2 sticks segment.
 		$rooms_array = array(); //after the explode the rooms are stored here, but disorderly. so to order the array and avoid validation, is moved to the rooms array 2 after been cleaned
@@ -571,8 +589,9 @@ class Quotation extends Controller {
 			//	[0]: rooms_per_package_id
 			//	[1]: price per adult
 			//	[2]: price per kid
-			// 	[3]: cant of adults
-			//	[4]: cant of kids
+			//	[3]: price per additional night
+			// 	[4]: cant of adults
+			//	[5]: cant of kids
 			//[1]
 			//	...
 			
@@ -600,10 +619,11 @@ class Quotation extends Controller {
 		
 		if($summary == 1){
 			
-			$pq_id = $this->quotations_model->pq_insert($rooms_array2, $total, $check_in, $check_out);
+			$pq_id = $this->quotations_model->pq_insert($rooms_array2, $total, $check_in, $check_out, $additional_nights);
 			echo($pq_id);
 		}
 		else{
+			$data['additional_nights'] = $additional_nights;
 			$data['total'] = $total;
 			$data['package_rooms'] = $rooms_array2;
 			$data['check_in'] = $check_in;

@@ -32,12 +32,12 @@ function valida(F) {
 		<ul>
 			<li><a href="<?php echo base_url(); ?>customer/search_form">Clientes</a></li>
 			<li class="mfocus">
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/f1.png" alt="" class="floati" />
+				<img src="<?php echo IMG; ?>f1.png" alt="" class="floati" />
 				<div class="mf_texto">Gestion</div>
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/f3.png" alt="" class="floati" />
+				<img src="<?php echo IMG; ?>f3.png" alt="" class="floati" />
             </li>
 			<li><a href="<?php echo base_url(); ?>price_matrix/index/0">Matriz de Precios</a></li>
-            <li class="palito"><img src="http://localhost/hotel-mario/designed_views/imagenes/naranja3.gif" alt="" /></li>
+            <li class="palito"><img src="<?php echo IMG; ?>naranja3.gif" alt="" /></li>
             <li><a href="<?php echo base_url(); ?>quotation/new_quote/0">Cotizaciones</a></li>
 		</ul>
 	</div>
@@ -77,7 +77,7 @@ $this->load->view('global/management_bar');
                 <tr>
                 <td>Descripcion del Plan</td> 
                 <td><textarea name="description" cols="24" rows=""  maxlength="50" ></textarea></td>
-                <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td>
+                <td><img src="<?php echo IMG; ?>exclamation.png" /></td>
                 </tr>
                 <tr>
                 <td> <input name="send" type="submit" value="Aceptar" /> </td> </tr>

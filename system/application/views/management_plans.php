@@ -16,12 +16,12 @@ function confirmar(){
 		<ul>
 			<li><a href="<?php echo base_url(); ?>customer/search_form">Clientes</a></li>
 			<li class="mfocus">
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/f1.png" alt="" class="floati" />
+				<img src="<?php echo IMG; ?>f1.png" alt="" class="floati" />
 				<div class="mf_texto">Gestion</div>
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/f3.png" alt="" class="floati" />
+				<img src="<?php echo IMG; ?>f3.png" alt="" class="floati" />
             </li>
 			<li><a href="<?php echo base_url(); ?>price_matrix/index/0">Matriz de Precios</a></li>
-            <li class="palito"><img src="http://localhost/hotel-mario/designed_views/imagenes/naranja3.gif" alt="" /></li>
+            <li class="palito"><img src="<?php echo IMG; ?>naranja3.gif" alt="" /></li>
             <li><a href="<?php echo base_url(); ?>quotation/new_quote/0">Cotizaciones</a></li>
 		</ul>
 	</div>
@@ -49,8 +49,8 @@ $this->load->view('global/management_bar');
     <tr class="pthead">
     <td align="center"><strong>Nombre Español</strong></td>
     <td align="center"><strong>English Name</strong></td>
-    <td align="center" width="17px"></td>
-    <td align="center" width="17px"></td> 
+    <td align="center"></td>
+    <td align="center"></td> 
     </tr>
     </thead>
     <?php $gray_row = TRUE;?>
@@ -58,8 +58,8 @@ $this->load->view('global/management_bar');
         <tr>
         <td align="center"><?php echo ($plan['name_spanish']);?></td>
         <td align="center"><?php echo ($plan['name_english']);?></td>
-        <td align="center"> <a href="<?php echo base_url(); ?>plans/modify_plan/<?php echo ($plan['plan_id']);?>"><img src="http://localhost/hotel-mario/system/application/views/img/modificar.png" /></a></td>
-        <td align="center"> <a href="<?php echo base_url(); ?>plans/delete_plan/<?php echo ($plan['plan_id']);?>"><img src="http://localhost/hotel-mario/system/application/views/img/eliminar.png" onclick="return confirmar();" /></a></td>
+        <td align="center"> <a href="<?php echo base_url(); ?>plans/modify_plan/<?php echo ($plan['plan_id']);?>"><img src="<?php echo IMG; ?>lapiz.gif" /></a></td>
+        <td align="center"> <a href="<?php echo base_url(); ?>plans/delete_plan/<?php echo ($plan['plan_id']);?>"><img src="<?php echo IMG; ?>x.jpg" onclick="return confirmar();" /></a></td>
         </tr>
     <?php }?>
 </table>

@@ -13,21 +13,19 @@ alert('Su sesion sera desconectada');
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Hoteles.com.ve</title>
-	<link type="text/css" href="themes/redmond/ui.all.css" rel="stylesheet" />
-    <script type="text/javascript" src="http://localhost/hotel-mario/js/hotel_js.js"></script>
-	<link type="text/css" href="demos.css" rel="stylesheet" />
-	<link href="http://localhost/hotel-mario/designed_views/estilos.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="<?php echo JSQ; ?>hotel_js.js"></script>
+	<link href="<?php echo STYLE; ?>estilos.css" rel="stylesheet" type="text/css" />
 	</script>
 
-	<link type="text/css" href="http://localhost/hotel-mario/js/jquery/themes/base/jquery.ui.all.css" rel="stylesheet" />
-	<script type="text/javascript" src="http://localhost/hotel-mario/js/jquery/jquery-1.4.2.js"></script>
+	<link type="text/css" href="<?php echo JSQ; ?>themes/base/jquery.ui.all.css" rel="stylesheet" />
+	<script type="text/javascript" src="<?php echo JSQ; ?>jquery-1.4.2.js"></script>
 </head>
 
 <body>
 <div id="cintillo">
 	<div class="cuerpo">
 		<a href="#" class="logo">Hoteles.com.ve</a>
-		<div class="palito"><img src="http://localhost/hotel-mario/designed_views/imagenes/palito.gif" alt="" /></div>
+		<div class="palito"><img src="<?php echo IMG; ?>palito.gif" alt="" /></div>
 		<div class="floati">Gestion de servicios</div>
 	</div>
 </div>
@@ -39,10 +37,10 @@ alert('Su sesion sera desconectada');
 	<div class="floati">
 		<div id="tablappa1">
 			<div id="asociar">
-            <img src="http://localhost/hotel-mario/designed_views/imagenes/tabla1.jpg" alt="" class="floati valign" />
-            <img src="http://localhost/hotel-mario/designed_views/imagenes/user_orange.png" alt="Agregar Hoteles" class="valign" /> LOGIN
+            <img src="<?php echo IMG; ?>tabla1.jpg" alt="" class="floati valign" />
+            <img src="<?php echo IMG; ?>user_orange.png" alt="Agregar Hoteles" class="valign" /> LOGIN
             
-            <img src="http://localhost/hotel-mario/designed_views/imagenes/tabla3.jpg" alt=""  class="floatd valign"/>
+            <img src="<?php echo IMG; ?>tabla3.jpg" alt=""  class="floatd valign"/>
             </div>
             
             <div id="asociar2" >
@@ -59,14 +57,14 @@ alert('Su sesion sera desconectada');
                 <tr></tr><tr></tr><tr></tr>
                 <tr>
                 <td></td><td align="right">
-                	<input type="image" src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onClick="login();" id="login_img" name="login_img">
+                	<input type="image" src="<?php echo IMG; ?>bprocesar.jpg" onClick="login();" id="login_img" name="login_img">
                 </td>
                 </tr>
             </table>
             </div>
             
             <div class="separador"></div>
-			<div class="tpiec"><img src="http://localhost/hotel-mario/designed_views/imagenes/esq1.gif" alt="" /><img src="http://localhost/hotel-mario/designed_views/imagenes/esq3.gif" alt="" class="floatd" /></div>
+			<div class="tpiec"><img src="<?php echo IMG; ?>esq1.gif" alt="" /><img src="<?php echo IMG; ?>esq3.gif" alt="" class="floatd" /></div>
 			<div class="separadorv"></div>
         </div>
     </div>
