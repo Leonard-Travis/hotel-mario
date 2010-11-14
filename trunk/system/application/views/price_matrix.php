@@ -6,12 +6,12 @@ $this->load->view('global/header');
 	<div class="cuerpo">
 		<ul>
 			<li><a href="<?php echo base_url(); ?>customer/search_form">Clientes</a></li>
-			<li class="palito"><img src="http://localhost/hotel-mario/designed_views/imagenes/naranja3.gif" alt="" /></li>
+			<li class="palito"><img src="<?php echo IMG; ?>naranja3.gif" alt="" /></li>
 			<li><a href="<?php echo base_url(); ?>home/management">Gestion</a></li>
             <li class="mfocus">
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/f1.png" alt="" class="floati" />
+				<img src="<?php echo IMG; ?>f1.png" alt="" class="floati" />
 				<div class="mf_texto">Matriz de Precios</div>
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/f3.png" alt="" class="floati" />
+				<img src="<?php echo IMG; ?>f3.png" alt="" class="floati" />
             </li>
             <li><a href="<?php echo base_url(); ?>quotation/new_quote/0">Cotizaciones</a></li>
 		</ul>
@@ -26,9 +26,9 @@ $this->load->view('global/header');
 		<div id="tablappa1"> <!-- usar id="tablappa2" cuandos e quiera que ocupe toda la ventana y eliminar el <div id="calendario">
 									en todo caso el ancho completo es de 950 px-->
 			<div id="matriz">
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/tabla1.jpg" alt="" class="floati valign" />
+				<img src="<?php echo IMG; ?>tabla1.jpg" alt="" class="floati valign" />
 				Matriz de Precios
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/tabla3.jpg" alt=""  class="floatd valign"/>
+				<img src="<?php echo IMG; ?>tabla3.jpg" alt=""  class="floatd valign"/>
 			</div>
 			<div class="separador"></div>
 			<div id="matriz2">
@@ -62,13 +62,13 @@ $this->load->view('global/header');
 <div class="separadorv"></div><div class="separadorv"></div>
     <div id="asociar_c">
     <ul>
-        <li class="li_tit_1"><img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel</li> 
+        <li class="li_tit_1"><img src="<?php echo IMG; ?>zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel</li> 
 		<li>
          <input id="tags" />
          <input type="hidden" id="hotels" />	
         </li>
         <li>
-    <img src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="price_matrix_hotel();" /> 
+    <img src="<?php echo IMG; ?>bbuscar.jpg" onclick="price_matrix_hotel();" /> 
         </li>
      </ul>
      </div>
@@ -233,7 +233,7 @@ else {?> <!-- end of else $prices != 11 -->
 
 </div>
 			<div class="separador"></div>
-			<div class="tpiec"><img src="http://localhost/hotel-mario/designed_views/imagenes/esq1.gif" alt="" /><img src="http://localhost/hotel-mario/designed_views/imagenes/esq3.gif" alt="" class="floatd" /></div>
+			<div class="tpiec"><img src="<?php echo IMG; ?>esq1.gif" alt="" /><img src="<?php echo IMG; ?>esq3.gif" alt="" class="floatd" /></div>
 			<div class="separadorv"></div>
 		</div>
 	</div>

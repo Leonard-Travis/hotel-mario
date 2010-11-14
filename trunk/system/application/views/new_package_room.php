@@ -2,8 +2,8 @@
 	<table align="center" width="100%" id="np_table_hotel<?php echo($number_of_hotel);?>">
     <tr>
     <td width="30%">
-    <img src="http://localhost/hotel-mario/designed_views/imagenes/i_mas.gif" alt="Agregar" class="valign" />
-    <a href="#" class="link_naranja" onclick="new_package_room(<?php echo($hotel_id); ?>, <?php echo($number_of_hotel);?>);">Agregar Habitaci&oacute;n</a>
+    <img src="<?php echo IMG; ?>i_mas.gif" alt="Agregar" class="valign" />
+    <a href="javascript:void(0);" class="link_naranja" onclick="new_package_room(<?php echo($hotel_id); ?>, <?php echo($number_of_hotel);?>);">Agregar Habitaci&oacute;n</a>
     </td>
     </tr>
     

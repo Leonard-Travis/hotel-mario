@@ -17,12 +17,12 @@ function confirmar(){
 		<ul>
 			<li><a href="<?php echo base_url(); ?>customer/search_form">Clientes</a></li>
 			<li class="mfocus">
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/f1.png" alt="" class="floati" />
+				<img src="<?php echo IMG; ?>f1.png" alt="" class="floati" />
 				<div class="mf_texto">Gestion</div>
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/f3.png" alt="" class="floati" />
+				<img src="<?php echo IMG; ?>f3.png" alt="" class="floati" />
             </li>
 			<li><a href="<?php echo base_url(); ?>price_matrix/index/0">Matriz de Precios</a></li>
-            <li class="palito"><img src="http://localhost/hotel-mario/designed_views/imagenes/naranja3.gif" alt="" /></li>
+            <li class="palito"><img src="<?php echo IMG; ?>naranja3.gif" alt="" /></li>
             <li><a href="<?php echo base_url(); ?>quotation/new_quote/0">Cotizaciones</a></li>
 		</ul>
 	</div>
@@ -61,12 +61,12 @@ $this->load->view('global/management_bar');
 </script>
 <table align="center" width="40%">
     <tr>
-        <td align="center"> <img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel</td>
+        <td align="center"> <img src="<?php echo IMG; ?>zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel</td>
         <td align="center">           
                 <input id="tags" />
          </td> 
          <td> 
-             <img src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="management_price_matrx();" />             
+             <img src="<?php echo IMG; ?>bbuscar.jpg" onclick="management_price_matrx();" />             
              <input type="hidden" id="hotels" name="hotels" />
          </td> 
     </tr>
@@ -91,8 +91,8 @@ $this->load->view('global/management_bar');
     
 <div id="new_matrix" name="new_matrix">
     <table width="100%">
-    <tr> <td align="center"><input type="image" src="http://localhost/hotel-mario/designed_views/imagenes/bagregar.jpg" onclick="new_matrix_season(<?php echo($hotel_id);?>)"/></td>
-         <td align="center"><input type="image" src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="price_matrix_management_search(<?php echo($hotel_id);?>)"/></td>
+    <tr> <td align="center"><input type="image" src="<?php echo IMG; ?>bagregar.jpg" onclick="new_matrix_season(<?php echo($hotel_id);?>)"/></td>
+         <td align="center"><input type="image" src="<?php echo IMG; ?>bbuscar.jpg" onclick="price_matrix_management_search(<?php echo($hotel_id);?>)"/></td>
     </tr>
     </table>
 </div>

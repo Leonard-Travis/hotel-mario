@@ -50,10 +50,10 @@
 </tr>
 
 <tr>    
-<td> <img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="Agregar" class="valign" /><a href="#" onclick="client_quote(<?php echo ($ci_aux) ?>);"><strong>Agregar Cotizacion</strong></a> 
+<td> <img src="<?php echo IMG; ?>add.png" alt="Agregar" class="valign" /><a href="javascript:void(0);" onclick="client_quote(<?php echo ($ci_aux) ?>);"><strong>Agregar Cotizacion</strong></a> 
 </td>
 
-<td><img src="http://localhost/hotel-mario/designed_views/imagenes/add.png" alt="" class="valign" onclick="existing_quotation(<?php echo ($ci_aux) ?>);" /><a href="#" onclick="existing_quotation(<?php echo ($ci_aux) ?>);"><strong>Cotizacion Existente</strong></a></td>
+<td><img src="<?php echo IMG; ?>add.png" alt="" class="valign" onclick="existing_quotation(<?php echo ($ci_aux) ?>);" /><a href="javascript:void(0);" onclick="existing_quotation(<?php echo ($ci_aux) ?>);"><strong>Cotizacion Existente</strong></a></td>
 </tr>
 </table>
 

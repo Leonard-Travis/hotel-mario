@@ -22,12 +22,12 @@ function confirmar(plan_or_room){
 		<ul>
 			<li><a href="<?php echo base_url(); ?>customer/search_form">Clientes</a></li>
 			<li class="mfocus">
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/f1.png" alt="" class="floati" />
+				<img src="<?php echo IMG; ?>f1.png" alt="" class="floati" />
 				<div class="mf_texto">Gestion</div>
-				<img src="http://localhost/hotel-mario/designed_views/imagenes/f3.png" alt="" class="floati" />
+				<img src="<?php echo IMG; ?>f3.png" alt="" class="floati" />
             </li>
 			<li><a href="<?php echo base_url(); ?>price_matrix/index/0">Matriz de Precios</a></li>
-            <li class="palito"><img src="http://localhost/hotel-mario/designed_views/imagenes/naranja3.gif" alt="" /></li>
+            <li class="palito"><img src="<?php echo IMG; ?>naranja3.gif" alt="" /></li>
             <li><a href="<?php echo base_url(); ?>quotation/new_quote/0">Cotizaciones</a></li>
 		</ul>
 	</div>
@@ -66,12 +66,12 @@ $this->load->view('global/management_bar');
 </script>
 <table align="center" width="40%">
     <tr>
-        <td align="center"> <img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel</td>
+        <td align="center"> <img src="<?php echo IMG; ?>zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel</td>
         <td align="center">           
                 <input id="tags" />
          </td> 
          <td> 
-             <input type="image" src="http://localhost/hotel-mario/designed_views/imagenes/bbuscar.jpg" onclick="management_hotel_chosen();" />             
+             <input type="image" src="<?php echo IMG; ?>bbuscar.jpg" onclick="management_hotel_chosen();" />             
              <input type="hidden" id="hotels" name="hotels" />
          </td> 
     </tr>
@@ -95,7 +95,7 @@ $this->load->view('global/management_bar');
         <td>Ubicacion</td> <td><textarea name="location" cols="24" rows=""  maxlength="50" readonly="readonly"><?php echo ($hotel_selected['location']);?></textarea></td>
         <td>
         <a href="<?php echo base_url(); ?>hotels/modify_hotel/<?php echo ($hotel_selected['hotel_id']);?>" >
-        <img src="http://localhost/hotel-mario/designed_views/imagenes/bmodificar.jpg" />
+        <img src="<?php echo IMG; ?>bmodificar.jpg" />
         </a>
         </td>
         </tr>

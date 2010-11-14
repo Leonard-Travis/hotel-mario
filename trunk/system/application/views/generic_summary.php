@@ -20,7 +20,7 @@
             <td align="center"> <?php echo($generic[1]); ?> </td>
             <td align="center"> <?php echo($generic[2]); ?> </td>
             <td align="center"> <?php echo($generic[3]); ?> </td>
-            <td align="center"><a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/x.jpg" alt="" onclick="drop_generic(<?php echo($generic[4]); ?>)"/></a></td>
+            <td align="center"><a href="javascript:void(0);"><img src="<?php echo IMG; ?>x.jpg" alt="" onclick="drop_generic(<?php echo($generic[4]); ?>)"/></a></td>
         </tr>
 		<?php 	}
 			  }?>
@@ -37,7 +37,7 @@
         <tr>
    			<td class="sinborde">
             <div id="generic_process_button">
-            <img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="generic_process(<?php echo($this->session->userdata('id'));?>);" />
+            <img src="<?php echo IMG; ?>bprocesar.jpg" onclick="generic_process(<?php echo($this->session->userdata('id'));?>);" />
             </div>
             </td>
         </tr>

@@ -1,4 +1,5 @@
 <?php if ($all_categories) {?>
+    
 <script type="text/javascript">
 	$(function() {
 		var availableTags = new Array();
@@ -7,15 +8,15 @@
 												 value: "<?php echo($all_categories[$i]['categorie_id']);?>"};
 		<?php } ?>	
 		
-		$('#tags').autocomplete({
+		$('#tags_pack').autocomplete({
 			minLength: 0,
 			source: availableTags,
 			focus: function(event, ui) {
-				$('#tags').val(ui.item.label);
+				$('#tags_pack').val(ui.item.label);
 				return false;
 			},
 			select: function(event, ui) {
-				$('#tags').val(ui.item.label);
+				$('#tags_pack').val(ui.item.label);
 				$('#categories').val(ui.item.value);				
 				return false;
 			}
@@ -23,22 +24,21 @@
 	});
 </script>
 <div class="separadorv"></div>
+<div class="separadorv_gris"></div>
 <div class="separadorv"></div>
+    
 <h1>Paquete</h1>
-
     <div id="asociar_c">
-    <table>
-    	<tr>
-        <td class="li_tit_1"><img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione una Categoria</td> 
-        <td>
-            <input id="tags" />
+    <ul>
+        <li class="li_tit_1"><img src="<?php echo IMG; ?>zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione Categoria</li> 
+		<li>
+            <input id="tags_pack"/>
             <input type="hidden" id="categories" />
-        </td>
-        <td>
-            <input type="image" src="http://localhost/hotel-mario/designed_views/imagenes/bseleccionar.jpg" onclick="pq_select_categorie();"/>
-        </td>
-        </tr>
-    </table>
+        </li>
+        <li>
+            <input type="image" src="<?php echo IMG; ?>bseleccionar.jpg" onclick="pq_select_categorie();"/>
+        </li>
+    </ul>
 	</div>
         
 <?php }?>
@@ -63,7 +63,7 @@
         <td align="center"><?php echo($package['date_start']); ?></td>
         <td align="center"><?php echo($package['date_end']); ?></td>
        	<td align="center">BsF.<?php echo($package['since_price']); ?></td>
-        <td align="center"> <a href="#" onClick="pq_select_package(<?php echo($package['package_id']);?>);"><img src="http://localhost/hotel-mario/designed_views/imagenes/bir.jpg"/></a></td>
+        <td align="center"> <a href="javascript:void(0);" onClick="pq_select_package(<?php echo($package['package_id']);?>);"><img src="<?php echo IMG; ?>bir.jpg"/></a></td>
     </tr>
     <?php } ?>
     </table>

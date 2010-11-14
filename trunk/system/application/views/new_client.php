@@ -10,7 +10,7 @@
 
 <div id="asociar2">
 <div class="alertar">
-    <img src="http://localhost/hotel-mario/designed_views/imagenes/alerta.gif" alt="Alerta" class="valign" /><strong>Todos los campos son OBLIGATORIOS</strong>
+    <img src="<?php echo IMG; ?>alerta.gif" alt="Alerta" class="valign" /><strong>Todos los campos son OBLIGATORIOS</strong>
 </div>
 <!-- fin alerta de arriba -->
 <div class="separadorv"></div><div class="separadorv"></div>
@@ -43,7 +43,7 @@
     </li> 
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <li class="li_tit_2"></li>
-    <img align="right" src="http://localhost/hotel-mario/designed_views/imagenes/bagregar.jpg" onclick="new_client_data();" /> 
+    <img align="right" src="<?php echo IMG; ?>bagregar.jpg" onclick="new_client_data();" /> 
 </ul>
 </div>
 </div>

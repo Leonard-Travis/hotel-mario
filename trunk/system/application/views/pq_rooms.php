@@ -8,7 +8,7 @@
     </td>
 </tr>
 <tr>
-	<td align="center">Tarifas vigentes del <?php echo($package[0]['date_start']);?> al <?php echo($package[0]['date_end']);?>
+	<td align="center" bgcolor="#FFFF66">Tarifas vigentes del <?php echo($package[0]['date_start']);?> al <?php echo($package[0]['date_end']);?>
     </td>
 </tr>
 <tr>

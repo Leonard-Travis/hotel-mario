@@ -33,17 +33,17 @@
     
     <tr> 
     <td>Nombre: </td> <td><input type="text" name="name" id="name" /></td>
-    <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td> 
+    <td><img src="<?php echo IMG; ?>exclamation.png" /></td> 
     </tr>
     <tr> <td></td> <td></td>
     </tr>
     <tr> 
     <td>Fecha In: </td> <td><input type="text" name="date_start" id="date_start" readonly="readonly"/></td>
-    <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td> 
+    <td><img src="<?php echo IMG; ?>exclamation.png" /></td> 
     </tr>
     <tr> 
     <td>Fecha Out: </td> <td><input type="text" name="date_end" id="date_end" readonly="readonly"/></td>
-    <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td> 
+    <td><img src="<?php echo IMG; ?>exclamation.png" /></td> 
     </tr>
     <tr>
     <tr> 
@@ -53,16 +53,16 @@
     <strong>/</strong>
     <input type="text" name="nights" id="nights" size="3" maxlength="2" value="00" onclick="document.new_package_form.nights.value ='';" onblur="if(document.new_package_form.nights.value == '') document.new_package_form.nights.value = '00';"/>
     </td>
-    <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td> 
+    <td><img src="<?php echo IMG; ?>exclamation.png" /></td> 
     </tr>
     <tr>
     <td>Descripci&oacute;n:</td> <td><textarea name="description" id="description"></textarea></td>
-    <td><img src="http://localhost/hotel-mario/designed_views/imagenes/exclamation.png" /></td>
+    <td><img src="<?php echo IMG; ?>exclamation.png" /></td>
     </tr>
     <tr>
         <td colspan="3" align="right">
             
-            	<a href="#" onclick="new_package_hotels();">Agregar Hotel(es)</a>
+            	<a href="javascript:void(0);" onclick="new_package_hotels();">Agregar Hotel(es)</a>
 			
         </td>
     </tr>

@@ -147,11 +147,17 @@ class Customer extends Controller {
 			}
 			
 			if ($quote['QUOTATIONS_PACKAGE_id']){ 
+			//Get everything related to the quotation package, first get all info from _admin_quotations_package wich is [quote_package_id,check_in,check_out,total], then finds all the rooms related with the package quotation.
+
 				$package = $this->quotations_model->find_quote($quote['QUOTATIONS_PACKAGE_id'], '_admin_quotations_package', 'quote_package_id');
 				$data['package'] = $this->quotations_model->quote_package_data($package[0]['quote_package_id']);
 				$data['package']['check_in'] = $package[0]['check_in'];
 				$data['package']['check_out'] = $package[0]['check_out'];
 				$data['package']['total'] = $package[0]['total'];
+				
+				//All rooms has the same number of additional, so the following matching it's done manually. The index "rooms" is the index that the model returns, it contains all rooms related with the quotation. And the index [0] refers to the first room in the response array, it can be any room because as it's said before, all rooms has the same number of additional nights.
+				$data['package']['number_of_additional_nights'] = $data['package']['rooms'][0]['number_of_additional_nights'];
+				
 				
 				/*echo('<pre>');
 				var_dump($data['package']);

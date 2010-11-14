@@ -20,7 +20,7 @@
         <td class="centrado"><?php echo($quote_rooms["quantity"]); ?></td>
         <td class="centrado">BsF<?php echo($quote_rooms["PU"]); ?></td>
         <td class="centrado">BsF<?php echo($quote_rooms["subtotal"]); ?></td>
-        <td><a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/x.jpg" alt="" onclick="drop_element_from_quote(<?php echo($quote_rooms["rooms_hotels_id"]); ?>)"/></a></td>
+        <td><a href="javascript:void(0);"><img src="<?php echo IMG; ?>x.jpg" alt="" onclick="drop_element_from_quote(<?php echo($quote_rooms["rooms_hotels_id"]); ?>)"/></a></td>
     </tr>
     
     <?php } ?>

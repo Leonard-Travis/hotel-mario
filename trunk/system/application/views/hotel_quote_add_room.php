@@ -14,7 +14,7 @@
     </select>     
 </td>
 <td align="center">
-	<input type="text" name="quantity<?php echo($counter);?>" id="quantity<?php echo($counter);?>" maxlength="2" size="3" value="00" onblur="setting_subtotal(<?php echo($counter);?>)" onclick="document.quote_data.quantity<?php echo($counter);?>.value ='';" />
+	<input type="text" name="quantity<?php echo($counter);?>" id="quantity<?php echo($counter);?>" maxlength="2" size="3" value="00" onblur="setting_subtotal(<?php echo($counter);?>)" onclick="$('#quantity<?php echo($counter);?>').val('');" />
 </td>
 <td align="center">
     <div id="price_per_night<?php echo($counter);?>" name="price_per_night<?php echo($counter);?>"></div>

@@ -171,10 +171,13 @@
     <tr>
     	<td><strong>Fecha checkin</strong>:</td> <td> <?php echo($package['check_out']); ?></td>
     </tr>
+    <tr>
+    	<td><strong>Noche(s) Adicional(es)</strong>:</td> <td align="center" bgcolor="#99CC00"> <?php echo($package['number_of_additional_nights']); ?></td>
+    </tr>
 </table>
 
 <br />
-
+<?php $additional_night_colspan = '4' //if there are additional days the colspan is 5 instead of 4 ?>
 <table width="100%">
     <tr class="pthead">
         <td class="centrado">Tipo de Habitación</td>
@@ -182,6 +185,12 @@
         <td class="centrado">Precio p/Adulto</td>
         <td class="centrado">Infantes</td>
         <td class="centrado">Precio p/Infante</td>
+        
+        <?php if($package['number_of_additional_nights'] != '0') {?>
+        		<td class="centrado">C/Noche Adicional</td>
+        		<?php $additional_night_colspan = '5';
+		}?>
+        
         <td class="centrado">SubTotal</td>
     </tr>
     
@@ -194,6 +203,11 @@
         <td class="centrado">BsF. <?php echo($rooms["price_per_person"]); ?></td>
         <td class="centrado"><?php echo($rooms["number_of_kids"]); ?></td>
         <td class="centrado">BsF. <?php echo($rooms["price_per_kid"]); ?></td>
+        
+       	<?php if($package['number_of_additional_nights'] != '0') {?>
+        		<td class="centrado">BsF. <?php echo($rooms["additional_night"]); ?></td>
+        <?php }?>
+        
         <td class="centrado">
         BsF. <?php echo(   ((int)$rooms["number_of_adults"]*(float)$rooms["price_per_person"])+((int)$rooms["number_of_kids"]*(float)$rooms["price_per_kid"])    );?>
         
@@ -201,7 +215,7 @@
     </tr>
     <?php } }?>
     <tr>
-        <td class="numerico sinborde" colspan="4"><span class="rojo"></span></td>
+        <td class="numerico sinborde" colspan="<?php echo($additional_night_colspan);?>"><span class="rojo"></span></td>
         <td class="numerico sinborde"><span class="rojo">Total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BsF. <?php echo($package['total']); ?></span></td>
     </tr>
 </table>

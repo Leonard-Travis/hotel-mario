@@ -27,7 +27,7 @@
     <td align="center">BsF. <?php echo($package['since_price']); ?></td>
     <td align="center">
     <div id="package_arrow<?php echo($package['package_id']); ?>">
-    <a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/fazul.jpg" alt="" onclick="package_details(<?php echo($package['package_id']); ?>,0);"/></a>
+    <a href="javascript:void(0);"><img src="<?php echo IMG; ?>fazul.jpg" alt="" onclick="package_details(<?php echo($package['package_id']); ?>,0);"/></a>
     </div>
     </td>
     </tr>

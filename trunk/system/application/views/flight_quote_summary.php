@@ -21,7 +21,7 @@
 	<?php foreach($all_flights as $flight) {?>
         <tr>
         	<?php if($flight[0]['round_trip'] == '1') {?>
-            	<td align="center"><img src="http://localhost/hotel-mario/designed_views/imagenes/tick.png" /></td>
+            	<td align="center"><img src="<?php echo IMG; ?>tick.png" /></td>
             <?php } 
 				  else {?>
                 <td align="center">--</td>
@@ -47,7 +47,7 @@
             <td align="center">BsF.<?php echo($sub_total); ?></td>
             <td>
             <div id="drop_flight_div<?php echo($flight[0]['flight_id']); ?>">
-            <a href="#"><img src="http://localhost/hotel-mario/designed_views/imagenes/x.jpg" alt="" onclick="drop_flight(<?php echo($flight[0]['flight_id']); ?>)"/>
+            <a href="javascript:void(0);"><img src="<?php echo IMG; ?>x.jpg" alt="" onclick="drop_flight(<?php echo($flight[0]['flight_id']); ?>)"/>
             </a>
             </div>
             </td>
@@ -66,7 +66,7 @@
         <tr>
          	<td class="sinborde">
             <div id="flight_process_button"> 
-            	<img src="http://localhost/hotel-mario/designed_views/imagenes/bprocesar.jpg" onclick="flight_quote_process(<?php echo($this->session->userdata('id'));?>);" />
+            	<img src="<?php echo IMG; ?>bprocesar.jpg" onclick="flight_quote_process(<?php echo($this->session->userdata('id'));?>);" />
             </div> 
             </td>
         </tr>

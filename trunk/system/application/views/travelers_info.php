@@ -1,5 +1,5 @@
 <div class="separadorv"></div>
-<img src="http://localhost/hotel-mario/designed_views/imagenes/pasajeros.bmp" />
+<img src="<?php echo IMG; ?>pasajeros.bmp" />
 <div class="separadorv"></div><div class="separadorv"></div>
 <form name="travelers_info" id="travelers_info">
 <table width="100%">
@@ -13,7 +13,7 @@
         </td>
         	<td><input type="text" name="<?php echo($cont_f); ?>_adult<?php echo($i); ?>_lastname" id="<?php echo($cont_f); ?>_adult<?php echo($i); ?>_lastname" value="apellido" onclick="document.travelers_info.<?php echo($cont_f); ?>_adult<?php echo($i); ?>_lastname.value ='';" size="50" /></td>
         </tr>
-        <tr> <td>CI &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" name="<?php echo($cont_f); ?>_adult<?php echo($i); ?>_ci" id="<?php echo($cont_f); ?>_adult<?php echo($i); ?>_ci"/> <img src="http://localhost/hotel-mario/designed_views/imagenes/zoom.png" onclick="find_traveler(<?php echo($cont_f); ?>, <?php echo($i); ?>, 'adult');"/></td>
+        <tr> <td>CI &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" name="<?php echo($cont_f); ?>_adult<?php echo($i); ?>_ci" id="<?php echo($cont_f); ?>_adult<?php echo($i); ?>_ci"/> <img src="<?php echo IMG; ?>zoom.png" onclick="find_traveler(<?php echo($cont_f); ?>, <?php echo($i); ?>, 'adult');"/></td>
         </tr>
         <tr> <td>Pasaporte &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" name="<?php echo($cont_f); ?>_adult<?php echo($i); ?>_passport" id="<?php echo($cont_f); ?>_adult<?php echo($i); ?>_passport"/></td>
         </tr>
@@ -37,7 +37,7 @@
         <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
         
     <?php } ?>
-    <tr> <td></td> <td align="center"> <img src="http://localhost/hotel-mario/designed_views/imagenes/bagregar.jpg" onclick="travelers(<?php echo($cont_f); ?>);" />
+    <tr> <td></td> <td align="center"> <img src="<?php echo IMG; ?>bagregar.jpg" onclick="travelers(<?php echo($cont_f); ?>);" />
     </td> </tr>
 </table>
 </form>

@@ -4,7 +4,7 @@
 <div class="separadorv"></div>
 <div class="separadorv"></div>
 	<tr>
-    <td><img src="http://localhost/hotel-mario/designed_views/imagenes/i_mas.gif" alt="Agregar" class="valign" /><a href="#" class="link_naranja" onclick="new_matrix_add_room();">Agregar Habitación</a></td>
+    <td><img src="<?php echo IMG; ?>i_mas.gif" alt="Agregar" class="valign" /><a href="javascript:void(0);" class="link_naranja" onclick="new_matrix_add_room();">Agregar Habitación</a></td>
     </tr>
 <table class="tmatriz" id="new_matrix_table" name="new_matrix_table">
     <tr>

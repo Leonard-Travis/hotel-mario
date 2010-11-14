@@ -53,7 +53,7 @@
             <td>
             <input type="text" name="go_date<?php echo($cont_f); ?>" id="go_date<?php echo($cont_f); ?>" value="yyyy-mm-dd" width="11" maxlength="10" readonly="readonly"/>
             
-            <input type="text" name="go_time<?php echo($cont_f); ?>" id="go_time<?php echo($cont_f); ?>" value="hh:mm" onclick="document.fboletos.go_time<?php echo($cont_f); ?>.value ='';" width="6%" maxlength="5"/>
+            <input type="text" name="go_time<?php echo($cont_f); ?>" id="go_time<?php echo($cont_f); ?>" value="hh:mm" onclick="$('#go_time<?php echo($cont_f); ?>').val('');" width="6%" maxlength="5"/>
             </td>
             </tr> 
             
@@ -72,7 +72,7 @@
             <td>
             <div id="back_data<?php echo($cont_f); ?>">
             <input type="text" name="back_date<?php echo($cont_f); ?>" id="back_date<?php echo($cont_f); ?>" value="yyyy-mm-dd" width="11" maxlength="10" readonly="readonly"/>
-            <input type="text" name="back_time<?php echo($cont_f); ?>" id="back_time<?php echo($cont_f); ?>" value="hh:mm" width="6%" maxlength="5" onclick="document.fboletos.back_time<?php echo($cont_f); ?>.value ='';"/>
+            <input type="text" name="back_time<?php echo($cont_f); ?>" id="back_time<?php echo($cont_f); ?>" value="hh:mm" width="6%" maxlength="5" onclick="$('#back_time<?php echo($cont_f); ?>').val('');"/>
             </div>
             </td>
             
@@ -99,13 +99,15 @@
             
             <tr>
             <td><strong>Adultos:</strong></td>
-            <td><input type="text" name="cant_adults<?php echo($cont_f); ?>" id="cant_adults<?php echo($cont_f); ?>" size="5" maxlength="2" value="00" onclick="document.fboletos.cant_adults<?php echo($cont_f); ?>.value ='';" onblur="if(document.fboletos.cant_adults<?php echo($cont_f); ?>.value =='') document.fboletos.cant_adults<?php echo($cont_f); ?>.value = '00';"/>
-            	<input type="text" name="price_per_adult<?php echo($cont_f); ?>" id="price_per_adult<?php echo($cont_f); ?>" size="12" maxlength="10" value="00" onclick="document.fboletos.price_per_adult<?php echo($cont_f); ?>.value ='';" onblur="if(document.fboletos.price_per_adult<?php echo($cont_f); ?>.value =='') document.fboletos.price_per_adult<?php echo($cont_f); ?>.value = '00';"/>BsF.c/u
+            <td><input type="text" name="cant_adults<?php echo($cont_f); ?>" id="cant_adults<?php echo($cont_f); ?>" size="5" maxlength="2" value="00" onclick="document.fboletos.cant_adults<?php echo($cont_f); ?>.value ='';" onblur="if( $('#cant_adults<?php echo($cont_f); ?>').val() =='') $('#cant_adults<?php echo($cont_f); ?>').val('00')"/>
+            
+            	<input type="text" name="price_per_adult<?php echo($cont_f); ?>" id="price_per_adult<?php echo($cont_f); ?>" size="12" maxlength="10" value="00" onclick="document.fboletos.price_per_adult<?php echo($cont_f); ?>.value ='';" onblur="if( $('#price_per_adult<?php echo($cont_f); ?>').val() =='') $('#price_per_adult<?php echo($cont_f); ?>').val('00')"/>BsF.c/u
             </td>
             
             <td><strong>Ni&ntilde;os:</strong></td>
-            <td><input type="text" name="cant_kids<?php echo($cont_f); ?>" id="cant_kids<?php echo($cont_f); ?>"  size="5" maxlength="2" value="00" onclick="document.fboletos.cant_kids<?php echo($cont_f); ?>.value ='';" onblur="if(document.fboletos.cant_kids<?php echo($cont_f); ?>.value =='') document.fboletos.cant_kids<?php echo($cont_f); ?>.value = '00';"/>
-            	<input type="text" name="price_per_kid<?php echo($cont_f); ?>" id="price_per_kid<?php echo($cont_f); ?>" size="12" maxlength="10" value="00" onclick="document.fboletos.price_per_kid<?php echo($cont_f); ?>.value ='';" onblur="if(document.fboletos.price_per_kid<?php echo($cont_f); ?>.value =='') document.fboletos.price_per_kid<?php echo($cont_f); ?>.value = '00';"/>BsF.c/u
+            <td><input type="text" name="cant_kids<?php echo($cont_f); ?>" id="cant_kids<?php echo($cont_f); ?>"  size="5" maxlength="2" value="00" onclick="document.fboletos.cant_kids<?php echo($cont_f); ?>.value ='';" onblur="if( $('#cant_kids<?php echo($cont_f); ?>').val() =='') $('#cant_kids<?php echo($cont_f); ?>').val('00')"/>
+            
+            	<input type="text" name="price_per_kid<?php echo($cont_f); ?>" id="price_per_kid<?php echo($cont_f); ?>" size="12" maxlength="10" value="00" onclick="document.fboletos.price_per_kid<?php echo($cont_f); ?>.value ='';" onblur="if( $('#price_per_kid<?php echo($cont_f); ?>').val() =='') $('#price_per_kid<?php echo($cont_f); ?>').val('00')"/>BsF.c/u
             </td>
             </tr>
             <tr><td></td></tr><tr><td></td></tr>
