@@ -68,7 +68,7 @@ $this->load->view('global/header');
          <input type="hidden" id="hotels" />	
         </li>
         <li>
-    <img src="<?php echo IMG; ?>bbuscar.jpg" onclick="price_matrix_hotel();" /> 
+    <a href="javascript:void(0);"><img src="<?php echo IMG; ?>bbuscar.jpg" onclick="price_matrix_hotel();" /></a>
         </li>
      </ul>
      </div>
