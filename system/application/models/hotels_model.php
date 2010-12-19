@@ -7,38 +7,59 @@ class Hotels_model extends Model {
 	
 	function all_hotels()
 	{
-		$query =  $this->db->get('_admin_hotels');
+		$this->db->select('h.hotel_id, h.hotel_name AS name, c.city_name AS location');
+		$this->db->from('hotels h');
+		$this->db->join('cities c', 'c.city_id = h.city_id');
+		$this->db->where('preferred', '1');
+		
+		$query = $this->db->get();
 		return $query->result_array();
 	}
 
 	function find($hotel_id)
 	{
+		$this->db->select('h.hotel_id, h.city_id, h.address, h.preferred, h.phone, h.hotel_name AS name, c.city_name AS location');
+		$this->db->from('hotels h');
+		$this->db->join('cities c', 'c.city_id = h.city_id');
 		$this->db->where('hotel_id', $hotel_id);
-		$query =  $this->db->get('_admin_hotels');
+		$query = $this->db->get();
 		return $query->result_array();
+	}
+	
+	function all_cities(){
+		$this->db->select('city_id, city_name');
+		$query = $this->db->get('cities');
+		return $query->result_array();
+	}
+	
+	function all_hotels_from_city($city_id){
+		$this->db->select('hotel_id, hotel_name AS name');
+		$this->db->where('city_id', $city_id);
+		$query = $this->db->get('hotels');
+		return $query->result_array();
+	}
+	
+	function update_preferred($hotel_id, $preferred_status){
+		$data = array('preferred' => $preferred_status);
+		
+		$this->db->where('hotel_id', $hotel_id);
+		$this->db->update('hotels', $data);
 	}
 	
 	function update_info($info)
 	{
 		$data = array(
                'hotel_id' => $info['hotel_id'] ,
-               'name' => $info['name'] ,
-               'location' => $info['location'] );
+               'hotel_name' => $info['name'] ,
+               'city_id' => $info['location'] );
 
 		$this->db->where('hotel_id', $info['hotel_id']);
-		$this->db->update('_admin_hotels', $data);  
+		$this->db->update('hotels', $data);  
 	}
 	
 	function all_rooms($hotel_id)
 	{
 		//it search for all the rooms related to the hotel specified
-		
-		
-		/*$this->db->select('_admin_rooms.room_id, _admin_rooms.name');
-		$this->db->where('_admin_rooms.room_id','_admin_rooms_hotels.ROOMS_id');
-		$this->db->where('HOTELS_id', $hotel_id);
-		$this->db->from('_admin_rooms_hotels');
-		$this->db->from('_admin_rooms');*/
 		
 		$this->db->select('r.room_id, r.name_spanish, r.name_english, rh.description, rh.capacity, rh.commissionable, rh.rooms_hotels_id 
 						   FROM _admin_rooms_hotels rh , _admin_rooms r 
@@ -98,7 +119,7 @@ class Hotels_model extends Model {
 		
 	}
 
-//------------------------- SIN USO POR LOS MOMENTOS------------------------
+//------------------------- unused for the moment------------------------
 	function room_in_quote($room_id, $hotel_id)
 	{
 		//search if the room specified is in a quotation

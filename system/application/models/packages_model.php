@@ -27,13 +27,13 @@ class Packages_model extends Model {
 	}
 	
 	function package_rooms($pack_id){		
-	  $this->db->select('r.name_spanish, r.name_english, rp.*, h.name, h.hotel_id 
-						 FROM _admin_rooms_per_package rp, _admin_rooms r, _admin_rooms_hotels rh, _admin_hotels h
+	  $this->db->select('r.name_spanish, r.name_english, rp.*, h.hotel_name AS name, h.hotel_id 
+						 FROM _admin_rooms_per_package rp, _admin_rooms r, _admin_rooms_hotels rh, hotels h
 						 WHERE rp.PACKAGE_id ='.$pack_id.'
 						 AND rp.ROOMS_HOTELS_id = rh.rooms_hotels_id
 						 AND rh.ROOMS_id = r.room_id
 						 AND rh.HOTELS_id = h.hotel_id
-						 ORDER BY h.name');
+						 ORDER BY h.hotel_name');
 		$query =  $this->db->get();
 		return $query->result_array();
 	}

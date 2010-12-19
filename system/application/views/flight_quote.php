@@ -37,7 +37,13 @@
 	
 	
 	$(document).ready(function() {
-		$("#go_date<?php echo($cont_f); ?>").datepicker({dateFormat: 'yy-mm-dd'});
+		$("#go_date<?php echo($cont_f); ?>").datepicker({
+												dateFormat: 'yy-mm-dd',
+												minDate: '<?php echo date('Y-m-d');?>',
+												onSelect: function(date) {
+													$("#back_date<?php echo($cont_f); ?>").val( $(this).val() );
+												}
+											 });
 		$("#back_date<?php echo($cont_f); ?>").datepicker({dateFormat: 'yy-mm-dd'});
 	});
 </script>

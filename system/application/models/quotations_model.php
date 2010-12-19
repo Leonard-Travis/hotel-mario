@@ -216,6 +216,10 @@ class Quotations_model extends Model {
 		return $query->result_array();
 	}
 	
+	
+	
+	
+	
 	function insert_quotation($data){
 		$total = 0;
 		if($data['QUOTATIONS_HOTELS_id'] == 'null') $data['QUOTATIONS_HOTELS_id'] = NULL;	
@@ -253,7 +257,24 @@ class Quotations_model extends Model {
 		$data['total'] = $total;
 		
 		$this->db->insert('_admin_quotations', $data);
+		
+//The code below is to get the quotations id just inserted
+		$quotation_id = 0;
+		$this->db->select_max('quote_id');
+		$query = $this->db->get('_admin_quotations');
+		
+		foreach ($query->result_array() as $value)
+			foreach ($value as $value)
+				$quotation_id = $value;
+		
+		return $quotation_id;
 	}
+	
+	
+	
+	
+	
+	
 	
 	function quote_hotel_data($quotation){
 		$hotel_data = array('hotel_name' => '', 'hotel_location' => '', 'check_in' => '', 'check_out' => '', 'plan' => '', 'persons' => '', 'total' => '', 'rooms' => array() );
@@ -264,27 +285,24 @@ class Quotations_model extends Model {
 			$hotel_data['persons'] = $quotation['persons'];
 			$hotel_data['total'] = $quotation['total'];
 			
-			$this->db->select ('h.name, h.location');
-			$this->db->from ('_admin_hotels h, _admin_rooms_hotels rh, _admin_rooms_per_quote rq');
+			$this->db->select ('h.hotel_name AS name, c.city_name AS location, hp.description, p.name_english, p.name_spanish');
+			$this->db->from ('hotels h, _admin_rooms_hotels rh, _admin_rooms_per_quote rq, _admin_hotels_plans hp, _admin_plans p, cities c');
 			$this->db->where ( "rq.QUOTATIONS_HOTELS_id =".$quotation['quote_hotel_id']."
 								AND rq.ROOMS_HOTELS_id = rh.rooms_hotels_id
-								AND rh.HOTELS_id = h.hotel_id");
+								AND rh.HOTELS_id = h.hotel_id
+								AND h.city_id = c.city_id
+								AND h.hotel_id = hp.HOTELS_id
+								AND hp.PLANS_id =".$quotation['PLAN_id']."
+								AND hp.PLANS_id = p.plan_id");
 			$query = $this->db->get();
-			
-			
 			
 			foreach ($query->result_array() as $value){
 				$hotel_data['hotel_name'] = $value['name'];
 				$hotel_data['hotel_location'] = $value['location'];
+				$hotel_data['plan'] = $value['name_spanish'].'/'.$value['name_english'];
+				$hotel_data['plan_description'] = $value['description'];
 			
 			}
-			
-			
-			$this->db->where('plan_id', $quotation['PLAN_id']);
-			$query = $this->db->get('_admin_plans');
-			
-			foreach ($query->result_array() as $value)
-				$hotel_data['plan'] = $value['name_spanish'].'/'.$value['name_english'];
 			
 			
 			$this->db->select ('r.name_spanish, r.special, rq.*');
@@ -334,6 +352,9 @@ class Quotations_model extends Model {
 				$flight_data[$pos]['price_per_kid'] = $value['price_per_kid'];
 				$flight_data[$pos]['date'] = $value['go_date'];
 				$flight_data[$pos]['time'] = $value['go_time'];
+				$flight_data[$pos]['back_date'] = $value['back_date'];
+				$flight_data[$pos]['back_time'] = $value['back_time'];
+				$flight_data[$pos]['round_trip'] = $value['round_trip'];
 				
 				$this->db->select('t.*');
 				$this->db->from('_admin_travelers t, _admin_travelers_per_flight tf');
@@ -362,7 +383,7 @@ class Quotations_model extends Model {
 	function quote_package_data($quotation){
 		$pack_data = array();
 		$rooms = array();
-		 $this->db->select('p.*, h.name AS hotel FROM _admin_rooms_per_package_quote rpq, _admin_rooms_per_package rp, _admin_rooms_hotels rh, _admin_packages p, _admin_hotels h
+		 $this->db->select('p.*, h.hotel_name AS hotel FROM _admin_rooms_per_package_quote rpq, _admin_rooms_per_package rp, _admin_rooms_hotels rh, _admin_packages p, hotels h
 						   WHERE rpq.QUOTE_PACKAGE_id ='.$quotation.'
 						   AND rpq.ROOM_PER_PACKAGE_id = rp.room_per_package_id
 						   AND rp.PACKAGE_id = p.package_id

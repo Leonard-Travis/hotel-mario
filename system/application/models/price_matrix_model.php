@@ -48,7 +48,7 @@ class Price_matrix_model extends Model {
 							AND rh.ROOMS_id = r.room_id
 							AND rh.rooms_hotels_id = p.ROOMS_HOTELS_id
 							AND p.SEASON_id = s.season_id
-							AND P.PLAN_id = pl.plan_id
+							AND p.PLAN_id = pl.plan_id
 							ORDER BY  `pl`.`name_spanish` ASC ');	
  		$query = $this->db->get();
 		return $query->result_array();

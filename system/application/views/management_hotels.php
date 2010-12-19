@@ -39,6 +39,34 @@ function confirmar(plan_or_room){
 <?php
 $this->load->view('global/management_bar');
 ?>
+
+<?php if($cities){?>
+	<br  />
+    <h1>Agregar/Eliminar Hoteles</h1>
+	<table align="center" width="50%">
+    	<tr>
+        	<td align="center">Escoger Ciudad</td>
+            <td align="center">
+            	<select id="cities" name="cities" onchange="city_chosen();">
+                <option value="-" selected="selected">------------------------------------------</option>
+                	<?php foreach($cities as $city){?>
+                    	<option value="<?php echo $city['city_id'];?>"><?php echo $city['city_name'];?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+        	<td align="center"><div id="select_hotel_preferred"></div></td>
+        	<td align="center"><div id="preferred_hotel"></div></td>
+        </tr>
+    </table>
+	<div id="hotel_info"></div>
+
+<?php }
+else { ?><!--end of if cities-->
+		<a href="<?php echo base_url(); ?>hotels/all_cities" >Agregar/Eliminar Hoteles</a>
+<?php } ?>
+
           	
 <?php if ($query) {?>
 <script type="text/javascript">
@@ -64,6 +92,7 @@ $this->load->view('global/management_bar');
 		});
 	});
 </script>
+
 <table align="center" width="40%">
     <tr>
         <td align="center"> <img src="<?php echo IMG; ?>zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel</td>
@@ -71,11 +100,20 @@ $this->load->view('global/management_bar');
                 <input id="tags" />
          </td> 
          <td> 
-             <input type="image" src="<?php echo IMG; ?>bbuscar.jpg" onclick="management_hotel_chosen();" />             
              <input type="hidden" id="hotels" name="hotels" />
+             <input type="image" src="<?php echo IMG; ?>bbuscar.jpg" onclick="middle_pass();" /> 
+                         
+             
          </td> 
     </tr>
-</table>
+</table> 
+
+<script type="text/javascript">
+	function middle_pass(){
+		var hotel = $("#hotels").val();
+		management_hotel_chosen(hotel);
+	}
+</script>
  
 <?php }?>
     
@@ -83,7 +121,7 @@ $this->load->view('global/management_bar');
     
 <?php if ($hotel_selected) {?>
 	<?php $hotel_id_aux = 111;?>
-        <br  />
+        <br  /><br  /><br  />
         <h1>Datos del Hotel</h1>
         
         <table  align="center" width="60%">
@@ -137,7 +175,7 @@ $this->load->view('global/management_bar');
                               else {?>
                                 <td align="center">NO</td>
                         <?php }?>
-                        <td align="center"> <a href="<?php echo base_url(); ?>hotels/disassociate_room/<?php echo ($room['room_id']);?>/<?php echo ($hotel_selected['hotel_id']);?>"><img src="http://localhost/hotel-mario/system/application/views/img/eliminar.png" onclick="return confirmar('room');" /></a></td>
+                        <td align="center"> <a href="<?php echo base_url(); ?>hotels/disassociate_room/<?php echo ($room['room_id']);?>/<?php echo ($hotel_selected['hotel_id']);?>"><img src="<?php echo IMG;?>x.jpg" onclick="return confirmar('room');" /></a></td>
                         </tr>
                     <?php }?> <!-- end of foreach $room -->
                 </table> 
@@ -163,7 +201,7 @@ $this->load->view('global/management_bar');
                     <td align="center"> <?php echo ($plan['name_spanish']);?> </td>
                     <td align="center"> <?php echo ($plan['name_english']);?> </td>
                     <td align="center"> <?php echo ($plan['description']);?> </td>
-                    <td align="center"> <a href="<?php echo base_url(); ?>hotels/disassociate_plan/<?php echo ($plan['plan_id']);?>/<?php echo ($hotel_selected['hotel_id']);?>"><img src="http://localhost/hotel-mario/system/application/views/img/eliminar.png" onclick="return confirmar('plan');"/></a></td>
+                    <td align="center"> <a href="<?php echo base_url(); ?>hotels/disassociate_plan/<?php echo ($plan['plan_id']);?>/<?php echo ($hotel_selected['hotel_id']);?>"><img src="<?php echo IMG;?>x.jpg" onclick="return confirmar('plan');"/></a></td>
                    </tr>
                 <?php }?> <!-- end of foreach $plans -->
                 </table> 

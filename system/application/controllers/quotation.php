@@ -481,17 +481,12 @@ class Quotation extends Controller {
 		}
 		
 		$generic_quote_id = $this->quotations_model->insert_generic_quote($generic, $total);
-		echo($generic_quote_id);
+		echo $generic_quote_id;
 	}
 	
 	function process_quotation(){
-		echo($_POST["employees_id"]);
 		$employees = $this->seller_model->find($_POST["employees_id"], "employees_id");
-		/*$str = $this->db->last_query();
-		echo($str);
-		echo('<pre>');
-		var_dump($employees);
-		echo('</pre>');*/
+		//FIND function in seller_model serves for several searches, therefore it needs the id field in wich the search is perfomed and the id to compare
 		
 		$data['quote_id'] = '';
 		$data['CUSTOMERS_ci_id'] = $_POST["customer_id"];
@@ -503,7 +498,8 @@ class Quotation extends Controller {
 		
 		$data['quote_date'] = date('Y-m-d');
 		
-		$this->quotations_model->insert_quotation($data);
+		$quotation_id = $this->quotations_model->insert_quotation($data);
+		$this->send_email($quotation_id);
 	}
 	
 	//'pq' stands fo Package Quote
@@ -544,6 +540,7 @@ class Quotation extends Controller {
 	function pq_selected_hotel($frame){
 		$package = $_POST["package"];
 		$hotel = $_POST["hotel"];
+		$data['package'] = $this->packages_model->find($package);
 		$data['rooms'] = $this->packages_model->package_hotel_rooms($package, $hotel);
 		$data['hotel'] = $this->hotels_model->find($hotel);
 		$data['frame'] = $frame;
@@ -630,7 +627,70 @@ class Quotation extends Controller {
 			$data['check_out'] = $check_out;
 			$this->load->view('package_summary', $data);	
 		}
+	}
+	
+	function send_email($quote_id){
+		$quote = $this->quotations_model->find_quote($quote_id, '_admin_quotations', 'quote_id');
+		$data = array ('quotation_id' => $quote_id,
+					   'emp' => $quote[0]['EMPLOYEES_id'], 
+					   'total' => $quote[0]['total'],
+					   'quote_date' => $quote[0]['quote_date'],
+					   'current_date' => date('d/m/Y'),
+					   'customer' => $this->client_model->find($quote[0]['CUSTOMERS_ci_id']),
+					   'hotel' => NULL, 'flight' => NULL, 'generic' => NULL, 'package' => NULL);
 		
+		
+		foreach($quote as $quote){
+			if ($quote['QUOTATIONS_HOTELS_id']) {
+				$data['hotel'] = $this->quotations_model->find_quote($quote['QUOTATIONS_HOTELS_id'], '_admin_quotations_hotels', 'quote_hotel_id');
+				$data['hotel'] = $this->quotations_model->quote_hotel_data($data['hotel']);
+			}
+			
+			
+			if ($quote['QUOTATIONS_FLIGHTS_id']) {
+				$data['flight'] = $this->quotations_model->find_quote($quote['QUOTATIONS_FLIGHTS_id'], '_admin_quotations_flights', 'quote_flight_id');
+				$data['flight'] = $this->quotations_model->quote_flight_data($data['flight']);
+				
+			}
+			
+			if ($quote['QUOTATIONS_GENERIC_id']){ 
+				$data['generic'] = $this->quotations_model->find_quote($quote['QUOTATIONS_GENERIC_id'], '_admin_quotations_generic', 'quotes_generic_id');
+				$data['generic'] = $this->quotations_model->quote_generic_data($data['generic']);
+			}
+			
+			if ($quote['QUOTATIONS_PACKAGE_id']){ 
+			//Get everything related to the quotation package, first get all info from _admin_quotations_package wich is [quote_package_id,check_in,check_out,total], then finds all the rooms related with the package quotation.
+
+				$package = $this->quotations_model->find_quote($quote['QUOTATIONS_PACKAGE_id'], '_admin_quotations_package', 'quote_package_id');
+				$data['package'] = $this->quotations_model->quote_package_data($package[0]['quote_package_id']);
+				$data['package']['check_in'] = $package[0]['check_in'];
+				$data['package']['check_out'] = $package[0]['check_out'];
+				$data['package']['total'] = $package[0]['total'];
+				
+				//All rooms has the same number of additional, so the following matching it's done manually. The index "rooms" is the index that the model returns, it contains all rooms related with the quotation. And the index [0] refers to the first room in the response array, it can be any room because as it's said before, all rooms has the same number of additional nights.
+				$data['package']['number_of_additional_nights'] = $data['package']['rooms'][0]['number_of_additional_nights'];
+				
+			}
+		}
+		/*echo('<pre>');
+		var_dump($data);
+		echo('</pre>');*/
+		
+		$config['mailtype'] = 'html';
+		$this->email->initialize($config);
+		
+		$msg = $this->load->view('email', $data, TRUE);
+
+		$this->email->from('mariomunera89@gmail.com', 'Hoteles.com.ve');
+		$this->email->to($data['customer'][0]["email"]); 
+		$this->email->bcc('mariomunera89@gmail.com');  
+		
+		$this->email->subject('Cotizacion Hoteles.com.ve');
+		$this->email->message($msg);	
+		
+		$this->email->send();
+		
+		//echo $this->email->print_debugger();
 	}
 }
 

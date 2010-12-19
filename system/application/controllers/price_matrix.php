@@ -123,6 +123,7 @@ class Price_matrix extends Controller {
 			$data['query'] = $this->hotels_model->all_hotels();
 			$data['plans'] = $this->hotels_model->all_plans($hotel_selected_id);
 			$data['hotel_selected'] = $this->hotels_model->find($hotel_selected_id);
+			
 			if ($management_flag == 1){
 				$data['all_matrices'] = $this->matrices($hotel_selected_id);	
 				$this->load->view('management_price_matrix',$data);	

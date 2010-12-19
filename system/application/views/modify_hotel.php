@@ -56,9 +56,24 @@ $this->load->view('global/management_bar');
     <td><img src="<?php echo IMG; ?>exclamation.png" /></td>
         </tr> 
         <tr>
-        <td>Ubicacion</td> <td><textarea name="location" cols="24" rows=""  maxlength="50"><?php echo ($hotel_selected['location']);?></textarea></td>
-    <td><img src="<?php echo IMG; ?>exclamation.png" /></td>
+        <td>Ubicacion</td> 
+        
+        <td>
+        <select id="location" name="location">
+        	<?php foreach($locations as $location){
+            		if($location['city_id'] == $hotel_selected['city_id']){?>
+                    	<option value="<?php echo($location['city_id']);?>" selected="selected"><?php echo($location['city_name']);?></option>
+                    <?php } 
+					else{?>
+            		<option value="<?php echo($location['city_id']);?>"><?php echo($location['city_name']);?></option>
+			  		<?php }
+			}?>
+        </select>
+        </td>
+        
+    	<td><img src="<?php echo IMG; ?>exclamation.png" /></td>
         </tr> 
+        
         <tr>        
         <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo ($hotel_selected['hotel_id']);?>"  />
         <?php $hotel_id_aux = $hotel_selected['hotel_id'];?>

@@ -20,7 +20,7 @@ note: components should be included in this specific order, so that everything w
 <!--------------------------------------------------------------------------------------------------------->    
 
     
-    <link href="<?php echo STYLE; ?>estilos.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo STYLE; ?>estilos3.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -29,13 +29,19 @@ note: components should be included in this specific order, so that everything w
 		<a href="#" class="logo">Hoteles.com.ve</a>
 		<div class="palito"><img src="<?php echo IMG; ?>palito.gif" alt="" /></div>
 		<div class="floati">Gestion de servicios</div>
+        
         <?php if($this->session->userdata('type')){ ?>
         <div class="cintillod">
 			<img src="<?php echo IMG; ?>user_orange.png" alt="Usuario" class="valign" />            
             Bienvenido, <a href="#"><?php echo($this->session->userdata('name').' '.$this->session->userdata('lastname')); ?></a>
+            
+            <img src="<?php echo IMG; ?>cog_edit.png" alt="Opciones" class="valign" />
+			<a href="<?php echo base_url(); ?>seller/options"> Opciones </a>
+            
 			<img src="<?php echo IMG; ?>lock.png" alt="Desconectar" class="valign" />
 			<a href="<?php echo base_url(); ?>home">Desconectar</a>
 		</div>
         <?php } ?>
+        
 	</div>
 </div>

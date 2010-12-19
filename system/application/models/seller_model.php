@@ -34,5 +34,10 @@ class Seller_model extends Model {
 		$this->db->where('employees_id', $employees_id);
 		$this->db->update('_admin_employees', $data);
 	}
+	
+	function update($info){
+		$this->db->where('employees_id', $info['employees_id']);
+		$this->db->update('_admin_employees', $info);
+	}
 }
 ?>
