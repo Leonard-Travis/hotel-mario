@@ -17,6 +17,7 @@ class Seller extends Controller {
 	function login(){
 		$user_id = $_POST["user_id"];
 		$user_password = $_POST["user_password"];
+
 		$user = $this->seller_model->login($user_password, $user_id);
 
 		if ($user){
@@ -71,6 +72,32 @@ class Seller extends Controller {
 	function delete_seller($employees_id){
 		$this->seller_model->update_status($employees_id, "inactive");
 		$this->management();
+	}
+	
+	function options(){
+		$data['emp'] = $this->seller_model->find($this->session->userdata('id'), "employees_id");
+		$data['modify'] = 'not';
+		$this->load->view('seller_options', $data);
+		
+	}
+	
+	function modify(){
+		$emp_id = $_POST["emp_id"];
+		$process = $_POST["process"];
+		$data['modify'] = 'yes';
+		
+		if($process == '0'){
+			$data['emp'] = $this->seller_model->find($emp_id, "employees_id");
+			$this->load->view('seller_options', $data);
+		}
+		else{
+			$updated_info = array(	"employees_id" => $emp_id,
+								  	"name" => $_POST["name"],
+									"lastname" => $_POST["lastname"],
+									"email" => $_POST["email"],
+									"nick_name" => $_POST["nick_name"] );
+			$this->seller_model->update($updated_info);	
+		}
 	}
 }
 

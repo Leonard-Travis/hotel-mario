@@ -45,13 +45,13 @@
             <td class="numerico sinborde"><span class="rojo">BsF <?php echo($total); ?></span></td>
         </tr>    
         <tr>
-        <td colspan="6" align="right">
-        <div id="pq_process_button_summary">
-        <a href="javascript:void(0);">
-        <img src="<?php echo IMG; ?>bprocesar.jpg" onclick="pq_process(1, <?php echo($this->session->userdata('id'));?>);" />
-        </a>
-        </td>
-        </div>
+            <td colspan="6" align="right">
+                <div id="pq_process_button_summary">
+                    <a href="javascript:void(0);" onclick="pq_process(1);">
+                    	<img src="<?php echo IMG; ?>bprocesar.jpg" onclick="pq_process(1);" />
+                    </a>
+                </div>
+        	</td>
         </tr>
         </table>
 </div>

@@ -48,8 +48,17 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#date_start").datepicker({dateFormat: 'yy-mm-dd'});
-		$("#date_end").datepicker({dateFormat: 'yy-mm-dd'});
+		$("#date_start").datepicker({
+				dateFormat: 'yy-mm-dd',
+				minDate: '<?php echo date('Y-m-d');?>',
+				onSelect: function(date) {
+					$("#date_end").val( $(this).val() );
+				}
+		});
+		$("#date_end").datepicker({
+				dateFormat: 'yy-mm-dd',
+				minDate : $("#date_end").val()
+		});
 		
 		//$("#date_end").datepicker({dateFormat: 'yy-mm-dd'});
 	});

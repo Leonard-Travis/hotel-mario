@@ -363,7 +363,7 @@ function save_hotel_quote(emp_id){
 		 $('#add_quote_button').html('');
 			hotel_quote_id = msg;
 			alert('Cotizacion de hotel agregada con exito: '+hotel_quote_id);
-			$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="'+IMG+'finalizar.jpg" onclick="process_quotation('+emp_id+');" align="middle" /></td></tr> </table>'); 
+			$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="'+IMG+'finalizar.JPG" onclick="process_quotation('+emp_id+');" align="middle" /></td></tr> </table>'); 
       }
 	})
 }
@@ -399,6 +399,23 @@ function new_matrix_season(hotel_selected_id){
       }
 	})
 }
+
+
+function management_price_matrix(){
+	var hotel_chosen = $('#hotels').val();
+	$.ajax({
+      url: CONTROLLERS+"price_matrix/index/1",
+      global: false,
+      type: "POST",
+      data: ({hotels : hotel_chosen}),
+      async:false,
+	  dataType:"html",
+      success: function(msg){
+			$("#management_price_matrix_div").html(msg);
+      }
+	})
+}
+
 
 function validate_dates(){
 	date_start = $('#date_ini').val();
@@ -482,7 +499,7 @@ function process_new_matrix(){
 				  async:false,
 				  dataType:"html",
 				  success: function(msg){
-					$('#management_price_matrix').html(msg);
+					$('#management_price_matrix_div').html(msg);
 				  }
 				})
       }
@@ -638,7 +655,7 @@ function flight_quote_process(emp_id){
 					
 			alert('Cotizacion de vuelo agregada con exito: '+flight_quote_id);
 			
-			$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="'+IMG+'finalizar.jpg" onclick="process_quotation('+emp_id+');" align="middle" /></td></tr> </table>');
+			$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="'+IMG+'finalizar.JPG" onclick="process_quotation('+emp_id+');" align="middle" /></td></tr> </table>');
       }
 	})
 }
@@ -743,7 +760,7 @@ function generic_process(emp_id){
 				generic_quote_id = msg;
 				alert('Cotizacion generica agregada con exito: '+generic_quote_id);
 				
-				$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="'+IMG+'finalizar.jpg" onclick="process_quotation('+emp_id+');" align="middle" /></td></tr> </table>');
+				$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="'+IMG+'finalizar.JPG" onclick="process_quotation('+emp_id+');" align="middle" /></td></tr> </table>');
 				
       }
 	})
@@ -1113,7 +1130,6 @@ function categorie_packages(){
 }
 
 function package_details(pack_id, close_div){
-	var ruta = "<?php echo('fazul_abajo.jpg');?>";
 	if(close_div == '1'){
 		$('#package'+pack_id).html('');
 		$('#package_arrow'+pack_id).html('<a href="javascript:void(0);"><img src="'+IMG+'fazul.jpg" alt="" onclick="package_details('+pack_id+',0);" /></a>');
@@ -1128,7 +1144,7 @@ function package_details(pack_id, close_div){
 			  dataType:"html",
 			  success: function(msg){
 					$('#package'+pack_id).html(msg);
-					$('#package_arrow'+pack_id).html('<a href="javascript:void(0);"><img src="'+IMG+''+ruta+'" alt="" onclick="package_details('+pack_id+',1);" /></a>');
+					$('#package_arrow'+pack_id).html('<a href="javascript:void(0);"><img src="'+IMG+'fazul_abajo.jpg" alt="" onclick="package_details('+pack_id+',1);" /></a>');
 			  }
 			})
 	}
@@ -1497,8 +1513,9 @@ function pq_process(summary){
 				if(summary == 1){
 					alert('Paquete agregado con exito');
 					package_quote_id = msg;
-					$('#pq_process_button_summary').html(msg);
-					$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="'+IMG+'finalizar.jpg" onclick="process_quotation('+employee_id+');" align="middle" /></td></tr> </table>');
+					$('#pq_process_button_summary').html('');
+					$('#close_quotation').html('<div class="separador"></div> <div class="separadorv_gris"></div> <table align="center"> <tr><td align="center"> <img src="'+IMG+'finalizar.JPG" onclick="process_quotation('+employee_id+');" align="middle" /></td></tr> </table>');
+					
 				}
 				else{
 					$('#pq_process_button').html('');
@@ -1508,13 +1525,12 @@ function pq_process(summary){
 	})
 }
 
-function management_hotel_chosen(){
-	var hotel_chosen = $('#hotels').val();
+function management_hotel_chosen(hotel_chosen_id){
 	$.ajax({
       url: CONTROLLERS+"hotels",
       global: false,
       type: "POST",
-      data: ({hotels : hotel_chosen}),
+      data: ({hotels : hotel_chosen_id}),
       async:false,
 	  dataType:"html",
       success: function(msg){
@@ -1523,17 +1539,74 @@ function management_hotel_chosen(){
 	})
 }
 
-function management_price_matrix(){
-	var hotel_chosen = $('#hotels').val();
+function city_chosen(){
+	var city_id = $('#cities').val();
+	if(city_id != '-'){
+		$.ajax({
+		  url: CONTROLLERS+"hotels/all_hotels_from_city",
+		  global: false,
+		  type: "POST",
+		  data: ({city_id : city_id}),
+		  async:false,
+		  dataType:"html",
+		  success: function(msg){
+				$("#select_hotel_preferred").html('<img src="'+IMG+'zoom.png" alt="Buscador de Cliente" class="valign" />Seleccione un Hotel');
+				$("#preferred_hotel").html(msg);
+		  }
+		})
+	}
+	else{
+		$("#select_hotel_preferred").html('');
+		$("#preferred_hotel").html('');
+		$("#hotel_info").html('');
+	}
+}
+
+function preferred_chosen(){
+	var hotel_id = $('#hotels').val();
 	$.ajax({
-      url: CONTROLLERS+"price_matrix/index/1",
+      url: CONTROLLERS+"hotels/find_hotel",
       global: false,
       type: "POST",
-      data: ({hotels : hotel_chosen}),
+      data: ({hotel_id : hotel_id}),
       async:false,
 	  dataType:"html",
       success: function(msg){
-			$("#management_price_matrix_div").html(msg);
+			$("#hotel_info").html(msg);
+      }
+	})
+}
+
+function preferred_update(preferred_status){
+	var hotel_id = $('#hotel_id').val();
+	$.ajax({
+      url: CONTROLLERS+"hotels/update_preferred",
+      global: false,
+      type: "POST",
+      data: ({hotel_id : hotel_id,
+			  preferred_status : preferred_status}),
+      async:false,
+	  dataType:"html",
+      success: function(msg){
+		  	if(preferred_status == '1'){
+				alert('Hotel agregado con exito');
+				management_hotel_chosen(hotel_id);
+			}
+			else {
+				alert('Hotel eliminado con exito');
+				
+				$.ajax({
+				  url: CONTROLLERS+"hotels",
+				  global: false,
+				  type: "POST",
+				  data: ({hotel_id : hotel_id}),
+				  async:false,
+				  dataType:"html",
+				  success: function(msg){
+						$("#management_hotels_div").html(msg);
+				  }
+				})
+			}
       }
 	})
 }
@@ -1551,4 +1624,54 @@ function price_matrix_hotel(){
 			$("#price_matrix_div").html(msg);
       }
 	})
+}
+
+function seller_modify(emp_id){
+	$.ajax({
+      url: CONTROLLERS+"seller/modify",
+      global: false,
+      type: "POST",
+      data: ({emp_id : emp_id,
+			  process : 0}),
+      async:false,
+	  dataType:"html",
+      success: function(msg){
+			$("#seller_options").html(msg);
+      }
+	})
+}
+
+function seller_process(emp_id){	
+	if(($('#name').val() != '') && ($('#lastname').val() != '') && ($('#nick_name').val() != '') && ($('#email').val() != '')){
+		
+		$.ajax({
+		  url: CONTROLLERS+"seller/modify",
+		  global: false,
+		  type: "POST",
+		  data: ({emp_id : emp_id,
+				  process : 1,
+				  name : $('#name').val(),
+				  lastname : $('#lastname').val(),
+				  nick_name : $('#nick_name').val(),
+				  email : $('#email').val()
+				  }),
+		  async:false,
+		  dataType:"html",
+		  success: function(msg){
+				alert('Informacion actualizada con exito');
+					$.ajax({
+					  url: CONTROLLERS+"seller/options",
+					  global: false,
+					  type: "POST",
+					  data: ({}),
+					  async:false,
+					  dataType:"html",
+					  success: function(msg){
+							$("#seller_options").html(msg);
+					  }
+					})
+		  }
+		})
+	}
+	else alert('Dejo uno o mas campos obligatorios vacios');
 }

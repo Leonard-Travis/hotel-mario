@@ -10,12 +10,21 @@ class Hotels extends Controller {
 		$this->load->model(array('hotels_model','plans_model','rooms_model'));
 	}
 	
+	//Note: the view management_hotels recieves the following parameters:
+		//cities => use to add/remove hotel.
+		//query  => to allow the user to pick a hotel with jquery autocomplete.
+		//hotel_selected => after choosing a hotel, prints all information about this hotel.
+	//Therefore, when this view is invoked, needs this three parameters (even in NULL), or will drop an ERROR
+	
+	
 	//First of all the user must choose a hotel and then it will be displayed all the attributes of this (including all the rooms and plans related with the hotel)
     function index()
     { 
 		$rules['hotels']	= "required";
 		$this->validation->set_rules($rules);
 		$data['hotel_selected'] = NULL;
+		$data['cities'] = NULL; //check note above
+		
 
 		if ($this->validation->run() == FALSE)
 		{
@@ -32,6 +41,33 @@ class Hotels extends Controller {
 			$this->load->view('management_hotels',$data);			
 			
 		}
+	}
+	
+	function all_cities(){		
+		$data['hotel_selected'] = NULL; //check note at top of the page
+		$data['query'] = NULL;
+		$data['cities'] = $this->hotels_model->all_cities();
+		$this->load->view('management_hotels',$data);
+	}
+	
+	function all_hotels_from_city(){
+		$city_id = $_POST["city_id"];
+		$data['hotel_selected'] = NULL;
+		$data['hotels'] = $this->hotels_model->all_hotels_from_city($city_id);
+		$this->load->view('preferred_hotel', $data);
+	}
+	
+	function find_hotel(){
+		$hotel_id = $_POST["hotel_id"];
+		$data['hotels'] = NULL;
+		$data['hotel_selected'] = $this->hotels_model->find($hotel_id);
+		$this->load->view('preferred_hotel', $data);
+	}
+	
+	function update_preferred(){
+		$hotel_id = $_POST["hotel_id"];
+		$preferred_status = $_POST["preferred_status"];
+		$this->hotels_model->update_preferred($hotel_id, $preferred_status);
 	}
 	
 	function associate_plan()
@@ -78,6 +114,7 @@ class Hotels extends Controller {
 			$data['hotel_selected'] = $this->hotels_model->find($data2['hotel_id']);
 			$data['rooms'] = $this->hotels_model->all_rooms($data2['hotel_id']);
 			$data['plans'] = $this->hotels_model->all_plans($data2['hotel_id']);
+			$data['cities'] = NULL;  //check note at top of the page
 			$data['query'] = NULL;
 			$this->load->view('management_hotels',$data);	
 		}
@@ -132,7 +169,9 @@ class Hotels extends Controller {
 			$data['hotel_selected'] = $this->hotels_model->find($data2['hotel_id']);
 			$data['rooms'] = $this->hotels_model->all_rooms($data2['hotel_id']);
 			$data['plans'] = $this->hotels_model->all_plans($data2['hotel_id']);
-			$data['query'] = NULL;
+			
+			$data['query'] = NULL; $data['cities'] = NULL; //check note at top of the page
+			
 			$this->load->view('management_hotels',$data);	
 		}
 	}
@@ -148,6 +187,7 @@ class Hotels extends Controller {
 		if ($this->validation->run() == FALSE)
 		{
 			$data['query'] = $this->hotels_model->find($hotel_selected_id);
+			$data['locations'] = $this->hotels_model->all_cities();
 			$this->load->view('modify_hotel',$data);
 		}
 		else
@@ -160,17 +200,13 @@ class Hotels extends Controller {
 			$data2['hotel_selected'] = $this->hotels_model->find($data['hotel_id']);
 			$data2['rooms'] = $this->hotels_model->all_rooms($data['hotel_id']);
 			$data2['plans'] = $this->hotels_model->all_plans($data['hotel_id']);
-			$data2['query'] = NULL;
+			$data2['query'] = NULL; $data['cities'] = NULL; //check note at top of the page
 			$this->load->view('management_hotels',$data2);
 			
 		}
 	}
 	
 	function disassociate_room ($room_id, $hotel_id){
-		/*$data['hotel'] = $this->hotels_model->find($hotel_id);
-		$data['room'] = $this->rooms_model->find($room_id);
-		$data['message_index'] = 'disassociate_room';
-		$this->load->view('several_messages',$data);*/
 		
 		$rooms_hotels_id = $this->hotels_model->find_rooms_hotels ($hotel_id, $room_id);
 		foreach ($rooms_hotels_id as $rooms_hotels_id)
@@ -178,7 +214,9 @@ class Hotels extends Controller {
 		$data2['hotel_selected'] = $this->hotels_model->find($hotel_id);
 		$data2['rooms'] = $this->hotels_model->all_rooms($hotel_id);
 		$data2['plans'] = $this->hotels_model->all_plans($hotel_id);
-		$data2['query'] = NULL;
+		
+		$data2['query'] = NULL; $data['cities'] = NULL; //check note at top of the page
+		
 		$this->load->view('management_hotels',$data2);
 	}
 	
@@ -192,7 +230,9 @@ class Hotels extends Controller {
 		$data2['hotel_selected'] = $this->hotels_model->find($hotel_id);
 		$data2['rooms'] = $this->hotels_model->all_rooms($hotel_id);
 		$data2['plans'] = $this->hotels_model->all_plans($hotel_id);
-		$data2['query'] = NULL;
+		
+		$data2['query'] = NULL; $data['cities'] = NULL; //check note at top of the page
+		
 		$this->load->view('management_hotels',$data2);
 	}
 }

@@ -12,7 +12,7 @@
     	<td><strong>Fecha checkin</strong>:</td> <td> <?php echo($hotel['check_in'])?></td>
     </tr>
     <tr>
-    	<td><strong>Fecha checkin</strong>:</td> <td> <?php echo($hotel['check_out']); ?></td>
+    	<td><strong>Fecha checkout</strong>:</td> <td> <?php echo($hotel['check_out']); ?></td>
     </tr>
     <tr>
     	<td><strong>Plan</strong>:</td> <td> <?php echo($hotel['plan']); ?></td>
@@ -37,7 +37,7 @@
     <tr>
         <td class="centrado"><?php echo($rooms["name"]); ?></td>
         <td class="centrado"><?php echo($rooms["quantity"]); ?></td>
-        <td class="centrado">BsF. <?php echo($rooms["unit_price"]); ?></td>
+        <td class="centrado"><?php echo($rooms["unit_price"]); ?></td>
         <td class="centrado">BsF. <?php echo($rooms["subtotal"]); ?></td>
     </tr>
     
@@ -57,6 +57,9 @@
 <table>
     <tr>
         <td><span class="naranja">Boletos</span></td>
+    </tr>
+    <tr>
+        <td><img src="<?php echo IMG?>icon_roundtrip.gif" /> = Ida Y Vuelta.</td>
     </tr>
 </table>
 
@@ -85,9 +88,20 @@
 			$total += $subtotal;
 			?>
     <tr>
-        <td class="centrado"><?php echo($flight['origin'].'-'.$flight['destination']); ?></td>
+        <td align="center">
+				<?php echo($flight['origin'].'-'.$flight['destination']); 
+							if($flight['round_trip'] == '1'){ ?>
+									<img src="<?php echo IMG?>icon_roundtrip.gif" />
+							<?php } ?>
+                
+        </td>
         <td class="centrado"><?php echo($flight['number'].', '.$flight['airline']); ?></td>
-        <td class="centrado"><?php echo($flight['date'].', '.$flight['time']); ?></td>
+        <td align="center">
+				<?php echo($flight['date'].', '.$flight['time']); 
+							if($flight['round_trip'] == '1'){ 
+								echo('<br />'.$flight['back_date'].', '.$flight['back_time']);
+							 } ?>
+        </td>
         <td class="centrado"><?php echo($cant_adults); ?></td>
         <td class="centrado"><?php echo($cant_kids); ?></td>
         <td class="centrado">BsF. <?php echo($flight['price_per_adult']); ?></td>

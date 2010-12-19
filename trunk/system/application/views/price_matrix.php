@@ -82,7 +82,13 @@ $this->load->view('global/header');
 <?php if ($hotel_selected) {?>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#date_ini").datepicker({dateFormat: 'yy-mm-dd'});
+		$("#date_ini").datepicker({
+							dateFormat: 'yy-mm-dd',
+							minDate: '<?php echo date('Y-m-d');?>',
+							onSelect: function(date) {
+								$("#date_end").val( $(this).val() );
+							}
+						});
 		$("#date_end").datepicker({dateFormat: 'yy-mm-dd'});
 	});
 </script>
@@ -135,7 +141,8 @@ $this->load->view('global/header');
                             </script>
                   <?php }?>
 
-
+<!--if there is no plan, the description table below will not be shown-->
+<?php if(count($plan_selected) > 0){?>
 <table class="resumen">
         <tr>
         <td><strong>Plan:</strong></td><td bgcolor="#33CCFF" align="center"><?php echo($plan_selected[0]['name_spanish']);?></td>
@@ -145,9 +152,14 @@ $this->load->view('global/header');
         </tr>
   
 </table>
+<?php } ?>
+<!---------------------------------------------------------------------->
+
+
 </td>
 </tr>
 </table>
+
 
 <?php if ($prices == 11) {?>
 		<strong>No existen referencias de precios con dichas condiciones en sistema</strong>

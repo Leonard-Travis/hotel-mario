@@ -66,7 +66,9 @@ $this->load->view('global/management_bar');
                 <input id="tags" />
          </td> 
          <td> 
-             <img src="<?php echo IMG; ?>bbuscar.jpg" onclick="management_price_matrx();" />             
+             <a href="javascript:void(0);" onclick="management_price_matrx();">
+             	<img src="<?php echo IMG; ?>bbuscar.jpg" onclick="management_price_matrix();" />             
+             </a>
              <input type="hidden" id="hotels" name="hotels" />
          </td> 
     </tr>

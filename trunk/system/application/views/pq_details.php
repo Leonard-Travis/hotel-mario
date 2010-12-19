@@ -1,14 +1,26 @@
 <?php if($frame == '1'){ ?>
 <script>
 $(document).ready(function() {
-		$("#check_in").datepicker({dateFormat: 'yy-mm-dd'});
+		var minDate2 = '<?php echo($package[0]['date_start']);?>';
 		
-		$(function() {
-			$('#check_out').datepicker({dateFormat: 'yy-mm-dd', onSelect: function(date) {
+		$("#check_in").datepicker({
+			dateFormat: 'yy-mm-dd',
+			minDate : '<?php echo($package[0]['date_start']);?>',
+			maxDate : '<?php echo($package[0]['date_end']);?>',
+			onSelect: function(date) {
+				minDate2 = $(this).datepicker("getDate");
+			}
+		});
+		
+		$('#check_out').datepicker({
+			dateFormat: 'yy-mm-dd', 
+			minDate : minDate2,
+			maxDate : '<?php echo($package[0]['date_end']);?>',
+			onSelect: function(date) {
 				var check_in = $("#check_in").val();
 				var check_out = $(this).val();
 				pq_additional_days(check_in, check_out, <?php echo($this->session->userdata('id'));?>);
-			}});
+			}
 		});
 	});
 </script>
@@ -56,7 +68,6 @@ $(document).ready(function() {
         </thead>
     
 </form>
-
 <?php } ?>
 <!------------------------------------------add room------------------------------------------------->
 
