@@ -106,16 +106,31 @@ $this->load->view('global/management_bar');
 			  $plan = '';
               foreach ($all_matrices as $value) { ?>
 			  	<?php $prices_id = "";?>
-              	<table width="40%">
-                <br /><br />
-                <?php if($value['plan_name'] != $plan) {?>
-                <div class="separadorv_gris"></div>
-                <tr> <td><span class="naranja">Plan:</span></td> <td bgcolor="#00FF33"><?php echo($value['plan_name']); ?></td> </tr>
-                <?php $plan = $value['plan_name'];
-				      } ?>
-                <tr> <td><strong>Desde:</strong></td> <td bgcolor="#CCFF66"> <?php echo($value['date_start']); ?></td> 
-                     <td><strong>Hasta:</strong></td> <td bgcolor="#CCFF66"> <?php echo($value['date_end']); ?></td> 
-                </tr>
+              	<br /><br />
+                
+              	<table width="50%">
+					<?php if($value['plan_name'] != $plan) {?>
+                        <div class="separadorv_gris"></div>
+                        <tr> 
+                            <td><span class="naranja">Plan:</span></td> 
+                            <td bgcolor="#00FF33" colspan="5"><?php echo($value['plan_name']); ?></td> 
+                        </tr>
+                        <?php $plan = $value['plan_name'];
+                    } ?>
+                    
+                    <tr> 
+                        <td align="right"><strong>Desde:</strong></td> 
+                        <td bgcolor="#CCFF66"> <?php echo($value['date_start']); ?></td> 
+                        
+                        <td align="right"><strong>Hasta:</strong></td> 
+                        <td bgcolor="#CCFF66"> <?php echo($value['date_end']); ?></td>
+                        
+                       	<td align="right"><strong>Temporada:</strong></td> 
+                        <td bgcolor="#FFCC33"> <?php echo($value['season_name']); ?></td>
+                       
+                    </tr>
+              	</table>
+              
                 <?php $gray_row = TRUE; ?>
                 <table class="resumen" width="100%">
                     <thead>
@@ -139,6 +154,7 @@ $this->load->view('global/management_bar');
 						<?php $prices_id = $prices_id.$price['price_id'].'|'?> 
                     <?php } ?>				
                 </table> 
+                
         <form method="post" action="<?php echo base_url(); ?>price_matrix/delete_matrix">
         <input type="hidden" name="prices_id" id="prices_id" value="<?php echo($prices_id); ?>"  />
         <input type="hidden" name="season_id" id="season_id" value="<?php echo($value['season_id']); ?>"  />

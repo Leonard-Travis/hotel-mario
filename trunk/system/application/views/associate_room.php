@@ -62,36 +62,60 @@ $this->load->view('global/management_bar');
 ?>
 	
 <?php if ($query) {?>
+
+<script type="text/javascript">
+	$(function() {
+		var availableTags = new Array();
+		<?php for($i=0; $i <  count($rooms) ; $i++){?>
+			availableTags[<?php echo($i); ?>] = {label: "<?php echo($rooms[$i]['name_spanish']);?>",
+												 value: "<?php echo($rooms[$i]['room_id']);?>"};
+		<?php } ?>	
+		
+		$('#tags').autocomplete({
+			minLength: 0,
+			source: availableTags,
+			focus: function(event, ui) {
+				$('#tags').val(ui.item.label);
+				return false;
+			},
+			select: function(event, ui) {
+				$('#tags').val(ui.item.label);
+				$('#rooms').val(ui.item.value);				
+				return false;
+			}
+		});
+	});
+</script>
+
 <div id="asociar2">
 	<div class="separadorv"></div><div class="separadorv"></div>
 	<h1><strong>Asociacion Hotel con Habitacion</strong></h1>
     
 
 <?php foreach ($query as $hotel) { ?>
-    <table>
+    <table align="center" width="70%">
         <tr>
             <td>Nombre</td>
-            <td><input type="text" name="name" readonly="readonly" size="40" value="<?php echo($hotel['name']); ?>"/></td>
+            <td><span class="rojo"><?php echo($hotel['name']); ?></span></td>
         </tr>
         <tr>  
-            <td>Habitaciones (seleccione la que desea asociar al hotel)</td>
+            <td>Habitacion a <strong>asociar</strong></td>
             
      <form method="post" action="<?php echo base_url(); ?>hotels/associate_room" onSubmit="return valida(this);">
-            <td><select name="rooms" id="rooms">
-            <?php foreach ($rooms as $room) { ?>
-            <option value="<?php echo ($room['room_id']);?>"><?php echo ($room['name_spanish']);?></option> 
-            <?php }?>
-            </select></td>
+            <td>
+            	<input id="tags" />
+                <input type="hidden" id="rooms" name="rooms" />
+            </td>
         </tr>
         <tr>
             <td>Descripcion de la Habitacion</td> 
-            <td><textarea name="description" cols="24" rows=""  maxlength="50" ></textarea></td>
-            <td><img src="<?php echo IMG; ?>exclamation.png" /></td>
+            <td><textarea name="description" cols="24" rows=""  maxlength="50" ></textarea>
+            <img src="<?php echo IMG; ?>exclamation.png" /></td>
         </tr>
         <tr>
             <td>Capacidad de la Habitacion</td> 
-            <td><input type="text" name="capacity" maxlength="2" size="3"/></td>
-            <td><img src="<?php echo IMG; ?>exclamation.png" /></td>
+            <td><input type="text" name="capacity" maxlength="2" size="3"/>
+            <img src="<?php echo IMG; ?>exclamation.png" /></td>
         </tr>
         <tr>
         <td>Es comisionable para el hotel?</td>        

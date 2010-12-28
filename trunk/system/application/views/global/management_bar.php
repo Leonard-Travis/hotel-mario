@@ -25,5 +25,8 @@
                 
 				<img src="<?php echo IMG; ?>tabla3.jpg" alt=""  class="floatd valign"/>
 			</div>
+    
+
 			<div class="separador"></div>
+
 <div id="asociar2">

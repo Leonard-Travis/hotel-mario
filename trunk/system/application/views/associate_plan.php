@@ -59,12 +59,12 @@ $this->load->view('global/management_bar');
 	<ul>
 	<?php foreach ($query as $hotel) { ?>
         
-        <table>
+        <table align="center" width="60%">
         <tr>
         <td>Nombre</td>
-        <td><input type="text" name="name" readonly="readonly" size="40" value="<?php echo($hotel['name']); ?>" /></td>
+        <td><span class="rojo"><?php echo($hotel['name']); ?></span></td>
         <tr>
-                <td>Planes (seleccione el que desea asociar al hotel)</td> 
+                <td>Plan a <strong>asociar</strong></td> 
                 <td>		
             <form method="post" action="<?php echo base_url(); ?>hotels/associate_plan" onSubmit="return valida(this);">
                 <select name="plans" id="plans">
@@ -76,8 +76,8 @@ $this->load->view('global/management_bar');
                 </tr>
                 <tr>
                 <td>Descripcion del Plan</td> 
-                <td><textarea name="description" cols="24" rows=""  maxlength="50" ></textarea></td>
-                <td><img src="<?php echo IMG; ?>exclamation.png" /></td>
+                <td><textarea name="description" cols="24" rows=""  maxlength="50" ></textarea>
+                	<img src="<?php echo IMG; ?>exclamation.png" /></td>
                 </tr>
                 <tr>
                 <td> <input name="send" type="submit" value="Aceptar" /> </td> </tr>

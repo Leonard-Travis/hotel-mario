@@ -70,12 +70,15 @@
     
     <h1>Detalle de la reserva</h1>
     <div id="hoteles1">
-        <table>
+        <table width="100%" align="left">
             <tr>
                 <td><strong>Hotel:</strong></td>
                 <td class="tdazul"><?php echo($hotel_selected['name']); ?></td>
                 <td><img src="<?php echo IMG; ?>cal1.jpg" alt="" /> 
-                <a href="<?php echo base_url(); ?>price_matrix/index/0" class="link_naranja" target="_blank">Var mariz de precios</a></td>
+                    <a href="<?php echo base_url(); ?>price_matrix/price_matrix_hotel_selected/<?php echo($hotel_selected['hotel_id']); ?>/0" class="link_naranja" target="_blank">
+                        Ver mariz de precios
+                    </a>
+                </td>
             </tr>
             <tr>
                 <td><strong>Fecha In:</strong></td>

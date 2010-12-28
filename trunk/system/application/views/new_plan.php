@@ -62,11 +62,11 @@ $this->load->view('global/management_bar');
         <table align="center" width="50%">
         <tr> <td colspan="3" align="center"><strong>Plan Nuevo</strong></td></tr>
         <tr> 
-        <td>Nombre Español:</td> <td><input type="text" name="name" maxlength="30" size="40" /></td>
+        <td>Nombre Español:</td> <td><input type="text" name="name" size="40" /></td>
     <td><img src="<?php echo IMG; ?>exclamation.png" /></td> 
         </tr>
         <tr> 
-        <td>English Name:</td> <td><input type="text" name="name_english" maxlength="30" size="40" /></td>
+        <td>English Name:</td> <td><input type="text" name="name_english" size="40" /></td>
     <td><img src="<?php echo IMG; ?>exclamation.png" /></td> 
         </tr>
         <td> <input name="enviar" type="submit" value="Agregar Plan" /> </td>

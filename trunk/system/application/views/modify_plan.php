@@ -62,14 +62,18 @@ $this->load->view('global/management_bar');
      <?php foreach ($plan_to_change as $plan_to_change) { ?>
      	<tr> <td colspan="3" align="center"><strong>Datos del Plan</strong></td> </tr>
         <tr>
-        <td>Nombre Español</td> <td><input type="text" name="name" id="name" value="<?php echo ($plan_to_change['name_spanish']);?>" maxlength="30" size="40" /></td>
-    <td><img src="<?php echo IMG; ?>exclamation.png" /></td> 
+            <td>Nombre Español</td> 
+            <td><input type="text" name="name" id="name" 
+            						value="<?php echo ($plan_to_change['name_spanish']);?>" size="40" /></td>
+    		<td><img src="<?php echo IMG; ?>exclamation.png" /></td> 
         </tr> 
-        <tr>
-        <td>English Name</td> <td><input type="text" name="name_english" id="name_english" value="<?php echo ($plan_to_change['name_english']);?>" maxlength="30" size="40" /></td>
-    <td><img src="<?php echo IMG; ?>exclamation.png" /></td> 
+            <tr>
+            <td>English Name</td> 
+            <td><input type="text" name="name_english" id="name_english" 
+            						value="<?php echo ($plan_to_change['name_english']);?>" size="40" /></td>
+        	<td><img src="<?php echo IMG; ?>exclamation.png" /></td> 
         </tr>         
-      <input type="hidden" name="plan_id" id="plan_id" value="<?php echo ($plan_to_change['plan_id']);?>"  />
+     <input type="hidden" name="plan_id" id="plan_id" value="<?php echo ($plan_to_change['plan_id']);?>"  />
      <?php }?>
      <tr> <td><input type="submit" value="Procesar"  /></td> </tr>
      </table>

@@ -18,13 +18,15 @@ class Price_matrix_model extends Model {
 	}
 	
 	function get_prices ($hotel_id, $season_id, $plan_id){		
-		 $this->db->select('p.*, r.*, s.*
-							FROM _admin_price p, _admin_rooms_hotels h, _admin_rooms r, _admin_season s
+		 $this->db->select('p.*, r.*,sh.season_name, s.*
+							FROM _admin_price p, _admin_rooms_hotels h, _admin_rooms r, _admin_season s, _admin_seasons_per_hotel sh
 							WHERE p.ROOMS_HOTELS_id = h.rooms_hotels_id
 							AND h.HOTELS_id ='.$hotel_id.'
 							AND p.PLAN_id ='.$plan_id.'
 							AND p.SEASON_id ='.$season_id.'
 							AND s.season_id ='.$season_id.'
+							AND sh.SEASON_id = '.$season_id.'
+							AND sh.HOTEL_id = '.$hotel_id.'
 							AND h.ROOMS_id = r.room_id');		
 		$query = $this->db->get();
 		return $query->result_array();
@@ -42,12 +44,14 @@ class Price_matrix_model extends Model {
 	}
 	
 	function all_matrices ($hotel_id){
-		$this->db->select(' p.price_per_night, p.price_id, p.SEASON_id, pl.name_spanish AS plan_name, s.date_start, s.date_end, r.name_spanish AS room_name
-							FROM _admin_price p, _admin_plans pl, _admin_season s, _admin_rooms_hotels rh, _admin_rooms r
+		$this->db->select('p.price_per_night, p.price_id, p.SEASON_id, pl.name_spanish AS plan_name, sh.season_name, s.date_start, s.date_end, r.name_spanish AS room_name
+							FROM _admin_price p, _admin_plans pl, _admin_season s, _admin_rooms_hotels rh, _admin_rooms r, _admin_seasons_per_hotel sh
 							WHERE rh.HOTELS_id ='.$hotel_id.'
 							AND rh.ROOMS_id = r.room_id
 							AND rh.rooms_hotels_id = p.ROOMS_HOTELS_id
 							AND p.SEASON_id = s.season_id
+							AND sh.SEASON_id = p.SEASON_id
+							AND sh.HOTEL_id ='.$hotel_id.'
 							AND p.PLAN_id = pl.plan_id
 							ORDER BY  `pl`.`name_spanish` ASC ');	
  		$query = $this->db->get();
@@ -103,6 +107,37 @@ class Price_matrix_model extends Model {
 		foreach($new_matrix as $new_matrix){
 			$this->db->insert('_admin_price', $new_matrix);
 		}
+	}
+	
+	function find_prices_in_season($hotel, $plan, $date_start, $date_end, $date_field){
+		$this->db->select("p . * 
+							FROM _admin_season s, _admin_price p, _admin_rooms_hotels rh
+							WHERE p.ROOMS_HOTELS_id = rh.rooms_hotels_id
+							AND rh.HOTELS_id =".$hotel."
+							AND p.PLAN_id =".$plan."
+							AND p.SEASON_id = s.season_id
+							AND (s.".$date_field." BETWEEN  '".$date_start."' AND  '".$date_end."')");
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+	
+	function find_prices_in_dates($hotel, $plan, $date){
+		$this->db->select("p . * 
+							FROM _admin_season s, _admin_price p, _admin_rooms_hotels rh
+							WHERE p.ROOMS_HOTELS_id = rh.rooms_hotels_id
+							AND rh.HOTELS_id =".$hotel."
+							AND p.PLAN_id =".$plan."
+							AND p.SEASON_id = s.season_id
+							AND ('".$date."' BETWEEN  s.date_start AND s.date_end)");
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+	
+	function season_related_to_hotel($season, $hotel){
+		$this->db->where('SEASON_id', $season);
+		$this->db->where('HOTEL_id', $hotel);
+		$query = $this->db->get('_admin_seasons_per_hotel');
+		return $query->result_array();
 	}
 	
 }

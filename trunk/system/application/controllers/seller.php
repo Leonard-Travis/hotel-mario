@@ -27,6 +27,7 @@ class Seller extends Controller {
 				   'name' => $user[0]['name'],
 				   'lastname' => $user[0]['lastname'],
 				   'nick_name' => $user[0]['nick_name'],
+				   'password' => $user[0]['password'],
                    'logged_in' => TRUE
                );
 			$this->session->set_userdata($newdata);
@@ -81,9 +82,10 @@ class Seller extends Controller {
 		
 	}
 	
+	//this function updates the information of an employee. The seller_options view works to print the information of the employee on a read only manner and on a modify manner (reused), that's why recieves the parameter 'modify' in 'yes' or 'not', and in the view there are several 'if' condition wheter or not 'modify' is on. 
 	function modify(){
 		$emp_id = $_POST["emp_id"];
-		$process = $_POST["process"];
+		$process = $_POST["process"];//if it's 0 the modified process has begun, if it's 1 the process is endeed.
 		$data['modify'] = 'yes';
 		
 		if($process == '0'){
@@ -96,6 +98,19 @@ class Seller extends Controller {
 									"lastname" => $_POST["lastname"],
 									"email" => $_POST["email"],
 									"nick_name" => $_POST["nick_name"] );
+			$this->seller_model->update($updated_info);	
+		}
+	}
+	
+	function change_password(){
+		$process = $_POST["process"]; //Idem as modify function.
+		
+		if($process == 0){
+			$this->load->view('seller_change_password');
+		}
+		else{
+			$updated_info = array(	"employees_id" => $this->session->userdata('id'),
+								  	"password" => $_POST["new_password"]);
 			$this->seller_model->update($updated_info);	
 		}
 	}

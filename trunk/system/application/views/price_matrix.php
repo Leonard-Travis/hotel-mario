@@ -100,27 +100,32 @@ $this->load->view('global/header');
         <table width="40%" class="resumen">
         <?php foreach ($hotel_selected as $hotel_selected) { ?>
         <tr>
-        <td><strong>Hotel:</strong></td> <td bgcolor="#99FF00" align="center"><strong><?php echo ($hotel_selected['name']);?></strong></td>
+            <td><strong>Hotel:</strong></td> 
+            <td align="center" colspan="3">
+            	<span class="rojo"><?php echo ($hotel_selected['name']);?></span>
+            </td>
         </tr>        
-        <tr>
-        <td><strong>Plan:</strong></td>
-        <td>
-        <?php if (count ($plans) == 0){?>
-                <strong>No hay planes relacionados</strong> </td> </tr>
-                <input type="hidden" name="plan" id="plan" value="no_plan"  />
-        <?php }
-              else { ?>
-                <select name="plan" id="plan" >
-                <?php foreach ($plans as $plan) { ?>
-					<option value="<?php echo ($plan['plan_id']); ?>"> <?php echo ($plan['name_spanish']); ?> </option>
-                <?php }?> <!-- end of foreach $plans --> 
-                </select>
-        <?php }?> <!-- end of else -->
-        </td>
+            <tr>
+            <td><strong>Plan:</strong></td>
+            <td colspan="3">
+            <?php if (count ($plans) == 0){?>
+                    <strong>No hay planes relacionados</strong> </td> </tr>
+                    <input type="hidden" name="plan" id="plan" value="no_plan"  />
+            <?php }
+                  else { ?>
+                    <select name="plan" id="plan" >
+                    <?php foreach ($plans as $plan) { ?>
+                        <option value="<?php echo ($plan['plan_id']); ?>"> <?php echo ($plan['name_spanish']); ?> </option>
+                    <?php }?> <!-- end of foreach $plans --> 
+                    </select>
+            <?php }?> <!-- end of else -->
+            </td>
         </tr>
         <tr> 
-        <td><strong>Desde:</strong></td> <td><input type="text" name="date_ini" id="date_ini" readonly="readonly" /></td>
-        <td><strong>Hasta:</strong></td> <td><input type="text" name="date_end" id="date_end" readonly="readonly" /></td>
+            <td><strong>Desde:</strong></td> 
+            <td><input type="text" name="date_ini" id="date_ini" readonly="readonly" /></td>
+            <td><strong>Hasta:</strong></td> 
+            <td><input type="text" name="date_end" id="date_end" readonly="readonly" /></td>
         </tr>
         <input type="hidden" name="hotel_id" id="hotel_id" value="<?php echo ($hotel_selected['hotel_id']);?>"  />
         <?php }?> <!-- end of foreach $hotel_selected -->
@@ -134,12 +139,12 @@ $this->load->view('global/header');
 
 <td width="50%">
 <?php if ($prices){ 
-						if(count($no_price) > 0){ ?>
-                            <script>
-								
-                            	alert('Hay rangos de fechas correspondientes a las introducidas sin precios asignados como: '+'<?php echo($no_price[0][0]['date_start'].' al '.$no_price[0][0]['date_end']);?>');
-                            </script>
-                  <?php }?>
+
+if(count($no_price) > 0){ ?>
+	<script>
+        alert('Hay rangos de fechas correspondientes a las introducidas sin precios asignados como: '+'<?php echo($no_price[0][0]['date_start'].' al '.$no_price[0][0]['date_end']);?>');
+    </script>
+<?php }?>
 
 <!--if there is no plan, the description table below will not be shown-->
 <?php if(count($plan_selected) > 0){?>
@@ -174,6 +179,7 @@ else { ?>
     <tr> 
     <td width="14.7%" align="center" class="primera"><strong>Habitacion</strong></td>
     <td align="center"><strong>Precio</strong></td>  
+    <td align="center"><strong>Temporada</strong></td>
     <td align="center"><strong>Validez de Tarifas</strong></td>  
   
 	<?php if ($weekdays == 0){?>
@@ -184,6 +190,7 @@ else { ?>
 					<tr>
 					<td align="center" bgcolor="#FFCC99"><?php echo ($price['name_spanish']); ?></td>
 					<td align="center" bgcolor="#FFFFCC">BsF. <?php echo ($price['price_per_night']); ?></td>
+                    <td align="center" bgcolor="#CCFF66"><?php echo ($price['season_name']); ?></td>
                     <td align="center" bgcolor="#FF99CC"><?php echo ($price['date_start'].' al '.$price['date_end']); ?></td> 
 					</tr>             
 				<?php } ?>
@@ -205,6 +212,7 @@ else { ?>
             	<tr>
 				<td align="center" bgcolor="#FFCC99"><?php echo ($price['name_spanish']); ?></td>
                 <td align="center" bgcolor="#FFFFCC">BsF. <?php echo ($price['price_per_night']); ?></td>
+                <td align="center" bgcolor="#CCFF66"><?php echo ($price['season_name']); ?></td>
                 <td align="center" bgcolor="#FF99CC"><?php echo ($price['date_start'].' al '.$price['date_end']); ?></td> 
                 <?php
 				if ($price['has_weekdays'] == 0){ ?>
