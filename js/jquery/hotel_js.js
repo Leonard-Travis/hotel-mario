@@ -57,6 +57,9 @@ var pq_additional_nights = 0;
 var current_quotes = [];
 var employee_id = '';
 
+var seller_password = false; //Used to change password of a user seller, to check that is the right user.
+var password_idem = false;	// Idem, to check that the new password is entered correctly.	
+
 
 function test(){
 	if (confirm('TEST!!!!!!')){
@@ -230,9 +233,9 @@ function setting_PU(countaux){
       async:false,
 	  dataType:"html",
       success: function(msg){
-		$('#price_per_night'+countaux).html(msg);
-		rooms_selected[countaux]['PU'] = msg;
-		$('#subtotal'+countaux).html('');
+				$('#price_per_night'+countaux).html(msg);
+				rooms_selected[countaux]['PU'] = msg;
+				$('#subtotal'+countaux).html('');
       }
 	})
 }
@@ -429,8 +432,9 @@ function validate_dates(){
       global: false,
       type: "POST",
       data: ({hotel_id : hotel_id,
-			   date_ini : date_start,
-			   date_end : date_end}),
+			  date_ini : date_start,
+			  date_end : date_end,
+			  plan_id : plan_id}),
       async:false,
 	  dataType:"html",
       success: function(msg){
@@ -1040,7 +1044,6 @@ function login(){
 }
 
 function add_seller(){
-	var re=/^([0-9])*$/;
 	var name = $('#seller_name').val();
 	var lastname = $('#seller_lastname').val();
 	var id = $('#seller_id').val();
@@ -1056,8 +1059,8 @@ function add_seller(){
 	if((name == "")||(lastname == "")||(id == "")||(email == "")||(nick_name == "")||(password == "")){
 		alert("Dejo uno o mas campos obligatorios vacios");
 	}
-	else if(re.exec(password)){
-		if((password.length > 5) && (password.length < 16)){
+	else{
+		if((password.length >= 5) && (password.length <= 16)){
 				 $.ajax({
 				  url: CONTROLLERS+"seller/add_seller",
 				  global: false,
@@ -1091,10 +1094,6 @@ function add_seller(){
 			$('#pass_div').css("background-color","#FFFF33");
 			alert("La clave debe tener minimo 5 caracteres y maximo 16");
 		}
-	}
-	else{
-		$('#pass_div').css("background-color","#FFFF33");
-		alert("La clave debe ser numerica");
 	}
 }
 
@@ -1191,7 +1190,7 @@ function new_categorie(cont){
 }
 
 function new_package_hotels(){
-	if ( ($('#name') != '') && ($('#number_of_categories') != 0) && ($('#date_start') != '')&& ($('#date_end') != '') && ($('#description') != '')&& ($('#days') != '00')&& ($('#nights') != '00') ){
+	if ( ($('#name').val() != '') && ($('#number_of_categories').val() != '0') && ($('#date_start').val() != '')&& ($('#date_end').val() != '') && ($('#description').val() != '')&& ($('#days').val() != '00')&& ($('#nights').val() != '00') ){
 	
 		package_name = $('#name').val();
 		package_number_of_categories = $('#number_of_categories').val();
@@ -1626,6 +1625,9 @@ function price_matrix_hotel(){
 	})
 }
 
+
+//Employee Options---------------------------------------...
+
 function seller_modify(emp_id){
 	$.ajax({
       url: CONTROLLERS+"seller/modify",
@@ -1658,20 +1660,99 @@ function seller_process(emp_id){
 		  async:false,
 		  dataType:"html",
 		  success: function(msg){
-				alert('Informacion actualizada con exito');
-					$.ajax({
-					  url: CONTROLLERS+"seller/options",
-					  global: false,
-					  type: "POST",
-					  data: ({}),
-					  async:false,
-					  dataType:"html",
-					  success: function(msg){
-							$("#seller_options").html(msg);
-					  }
-					})
+					seller_options_after_update();
 		  }
 		})
 	}
 	else alert('Dejo uno o mas campos obligatorios vacios');
 }
+
+function seller_options_after_update(){
+	alert('Informacion actualizada con exito');
+		$.ajax({
+		  url: CONTROLLERS+"seller/options",
+		  global: false,
+		  type: "POST",
+		  data: ({}),
+		  async:false,
+		  dataType:"html",
+		  success: function(msg){
+				$("#seller_options").html(msg);
+		  }
+		})
+}
+
+function change_password(process){
+	if(process == '0'){
+		$.ajax({
+		  url: CONTROLLERS+"seller/change_password",
+		  global: false,
+		  type: "POST",
+		  data: ({process : process}),
+		  async:false,
+		  dataType:"html",
+		  success: function(msg){
+				$("#change_password").html(msg);
+		  }
+		})
+	}
+	else{
+		if((seller_password == true) && (password_idem == true)){
+			$.ajax({
+			  url: CONTROLLERS+"seller/change_password",
+			  global: false,
+			  type: "POST",
+			  data: ({process : process,
+					  new_password : $("#new_password2").val()  }),
+			  async:false,
+			  dataType:"html",
+			  success: function(msg){
+					seller_options_after_update();
+			  }
+			})
+		}
+		else{
+			var msg = "";
+			if(!seller_password) msg+=" Contrasena erronea. ";
+			if(!password_idem) msg+=" Contrasena nueva introducida de manera incorrecta. ";
+			alert('Error: '+msg);
+		}
+	}
+}
+
+function check_seller_password(current_password){
+	var password_entered = 	$("#current_password").val();						 
+
+	if(password_entered == current_password){
+		seller_password = true;
+		$("#check_password_div").html('<img src="'+IMG+'f3.gif" />');
+	}
+	else{
+		seller_password = false;
+		$("#check_password_div").html('<img src="'+IMG+'exclamation.png" />');
+	}
+}
+
+function check_password_idem(){
+	var password = $("#new_password").val();
+	var password2 = $("#new_password2").val();
+	
+	if(password == password2){
+		if((password.length > 5) && (password.length < 16)){
+			password_idem = true;
+			$("#check_new_password2_div").html('<img src="'+IMG+'f3.gif" />');
+		}
+		else alert('La contrasena debe tener minimo 5 y maximo 16 caracteres');
+	}
+	else {
+		password_idem = false;
+		$("#check_new_password2_div").html('<img src="'+IMG+'exclamation.png" />');
+	}
+}
+
+
+
+
+
+
+

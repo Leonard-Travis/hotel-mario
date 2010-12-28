@@ -1,4 +1,5 @@
 <div id="seller">
+
 <?php
 $this->load->view('global/header');
 ?>
@@ -29,46 +30,65 @@ $this->load->view('global/management_bar');
 <div class="separadorv"></div>
 <div class="separadorv_gris"></div>
 <div class="separadorv"></div>
-<h1>Nuevo Vendedor</h1>
+
 <div id="datos">
-    <table id="new_seller" align="center" width="50%">
+<div id="asociar_c">
+	<h1>
+    	Nuevo Vendedor
+    </h1>
+    <table width="50%" align="center">
+    
         <tr>
-            <td width="30%"><strong>Nombre:</strong> </td> 
-            <td width="50%"><input type="text" id="seller_name" name="seller_name" maxlength="25"></td>
+            <td><strong>Nombre:</strong></td> 
+            <td><input type="text" id="seller_name" name="seller_name" maxlength="25"></td>
         </tr>
+            
         <tr>
-            <td><strong>Apellido:</strong> </td> 
+            <td><strong>Apellido:</strong></td> 
             <td><input type="text" id="seller_lastname" name="seller_lastname" maxlength="25"></td>
         </tr>
+        
         <tr>
-            <td bgcolor=""><div id="user_id_div"><strong>Cedula:</strong></div> </td> 
+            <td><div id="user_id_div"><strong>Cedula:</strong></div></td>
             <td><input type="text" id="seller_id" name="seller_id" maxlength="25"></td>
         </tr>
+        
         <tr>
             <td><strong>Correo Electr&oacute;nico: </strong></td> 
             <td><input type="text" id="email" maxlength="100"></td>
         </tr>
+        
         <tr>
-            <td><div id="user_name_div"><strong>Nombre de Usuario:</strong> </div></td> 
+            <td><div id="user_name_div"><strong>Nombre de Usuario:</strong></div></td>
             <td><input type="text" id="nick_name" maxlength="100"></td>
-        </tr>
         <tr>
-        <td><strong>Tipo:</strong> </td> <td><select id="seller_type">
-                            <option value="seller">Vendedor</option>
-                            <option value="manager">Administrador&nbsp;&nbsp;&nbsp;</option>
-                            </select></td>
-        </tr>
+        
         <tr>
-            <td><div id="pass_div"><strong>Password:</strong></div></td> 
-            <td><input type="text" id="password" name="password" maxlength="16"></td>
+            <td><strong>Tipo:</strong></td> 
+            <td>	<select id="seller_type">
+                        <option value="seller">Vendedor</option>
+                        <option value="manager">Administrador&nbsp;&nbsp;&nbsp;</option>
+                    </select>
+            </td>
         </tr>
         
-        <tr></tr><tr></tr>
         <tr>
-        <td></td> <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo IMG; ?>bprocesar.jpg" onClick="add_seller();"></td>
+            <td><div id="pass_div"><strong>Password:</strong></div></td>
+            <td><input type="password" id="password" name="password" maxlength="16"></td>
+        </tr>
+        
+        <tr>
+        	<td></td>
+            <td>
+                <a href="javascript:void(0);">
+                    <img src="<?php echo IMG; ?>bprocesar.jpg" onClick="add_seller();">
+                </a>
+            </td>
         </tr>
     </table>
-</div>
+    
+</div><!--asociar_c-->
+</div><!--datos-->
 
 
 <?php

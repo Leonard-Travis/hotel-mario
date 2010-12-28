@@ -22,9 +22,12 @@ class Quotations_model extends Model {
 	}
 	
 	function get_prices_with_room ($room_hotel_id, $season_id, $plan_id){
-		$this->db->select ('p.*, s.date_start, s.date_end');
-		$this->db->from ('_admin_price p, _admin_season s');
+		$this->db->select ('p.*, sh.season_name, s.date_start, s.date_end');
+		$this->db->from ('_admin_price p, _admin_season s, _admin_seasons_per_hotel sh, _admin_rooms_hotels rh');
 		$this->db->where ("p.ROOMS_HOTELS_id =".$room_hotel_id."
+						   AND rh.rooms_hotels_id = ".$room_hotel_id."
+						   AND sh.HOTEL_id = rh.HOTELS_id
+						   AND sh.SEASON_id = ".$season_id."
 						   AND p.PLAN_id =".$plan_id."
 						   AND p.SEASON_id =".$season_id."
 						   AND s.season_id = p.SEASON_id");

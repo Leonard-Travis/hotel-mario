@@ -52,7 +52,7 @@ alert('Su sesion sera desconectada');
                 </tr>
                 <tr> 
                 <td>Password:</td>
-                <td><input type="password" id="user_password" name="user_password" maxlength="6"></td>
+                <td><input type="password" id="user_password" name="user_password" maxlength="16"></td>
                 </tr>
                 <tr></tr><tr></tr><tr></tr>
                 <tr>

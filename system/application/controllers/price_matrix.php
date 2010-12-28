@@ -11,7 +11,7 @@ class Price_matrix extends Controller {
 		$this->load->model(array('hotels_model','plans_model','price_matrix_model'));
 	}
 	
-//this function gets all the price matrices that belongs to an specific given hotel. Sorted by plan and dates.
+//This function gets all rooms with prices stored in the system belonging to the hotel given. Sort by plan and date. 
 	function matrices ($hotel_selected_id)
 	{
 		$query = $this->price_matrix_model->all_matrices ($hotel_selected_id);
@@ -23,23 +23,19 @@ class Price_matrix extends Controller {
 				if ($query[$i]['SEASON_id'] != "0"){
 					$j=0; $k=0; $room_price = array();
 					$matrix = array();
-					$plan = $query[$i]['plan_name']; 
-					$season = $query[$i]['SEASON_id'];
+					
+					$plan = $query[$i]['plan_name'];  //This two parameters have to stay static, while the
+					$season = $query[$i]['SEASON_id'];//loop is running. That's why this variables are created.
 					
 					$matrix['plan_name'] = $query[$i]['plan_name']; 
 					$matrix['date_start'] = $query[$i]['date_start']; 
 					$matrix['date_end'] = $query[$i]['date_end']; 
 					$matrix['season_id'] = $query[$i]['SEASON_id'];
-					
-					$room_price[$k]['room_name'] = $query[$i]['room_name'];
-					$room_price[$k]['price_per_night'] = $query[$i]['price_per_night'];
-					$room_price[$k]['price_id'] = $query[$i]['price_id'];
-					$k = $k + 1;
-					
-					$query[$i]['SEASON_id'] = "0";
+					$matrix['season_name'] = $query[$i]['season_name'];
 					
 					for($h=0; $h<count($query); $h++){
-						if (($query[$h]['plan_name'] == $plan)&&($query[$h]['SEASON_id'] == $season)){
+						
+						if (($query[$h]['plan_name'] == $plan)&& ($query[$h]['SEASON_id'] == $season)){
 							$room_price[$k]['room_name'] = $query[$h]['room_name'];
 							$room_price[$k]['price_per_night'] = $query[$h]['price_per_night'];
 							$room_price[$k]['price_id'] = $query[$h]['price_id'];
@@ -120,17 +116,22 @@ class Price_matrix extends Controller {
 		else
 		{
 			$hotel_selected_id = $_POST["hotels"];
-			$data['query'] = $this->hotels_model->all_hotels();
-			$data['plans'] = $this->hotels_model->all_plans($hotel_selected_id);
-			$data['hotel_selected'] = $this->hotels_model->find($hotel_selected_id);
-			
-			if ($management_flag == 1){
-				$data['all_matrices'] = $this->matrices($hotel_selected_id);	
-				$this->load->view('management_price_matrix',$data);	
-			}
-			else
-			$this->load->view('price_matrix',$data);				
+			$this->price_matrix_hotel_selected($hotel_selected_id, $management_flag);				
 		}
+	}
+	
+	function price_matrix_hotel_selected($hotel_selected_id, $management_flag){
+		$data['prices'] = NULL;
+		$data['query'] = $this->hotels_model->all_hotels();
+		$data['plans'] = $this->hotels_model->all_plans($hotel_selected_id);
+		$data['hotel_selected'] = $this->hotels_model->find($hotel_selected_id);
+		
+		if ($management_flag == 1){
+			$data['all_matrices'] = $this->matrices($hotel_selected_id);	
+			$this->load->view('management_price_matrix',$data);	
+		}
+		else
+		$this->load->view('price_matrix',$data);
 	}
 		
 
@@ -220,39 +221,37 @@ class Price_matrix extends Controller {
 	
 	function validate_dates(){
 		$hotel_selected_id = $_POST["hotel_id"];
-		$date_end = $_POST["date_end"];
-		$date_ini = $_POST["date_ini"];
-		$overlapping_dates = false;
+		$date_end = $_POST["date_end"]; //Date start for the new matrix.
+		$date_start = $_POST["date_ini"]; //Date end for the new matrix.
+		$plan_id = $_POST["plan_id"]; //Plan selected.
 		
-		$hotel_seasons = $this->hotels_model->all_seasons_hotel($hotel_selected_id);
-		
-		$date_ini=strtotime($date_ini);
-		$date_end=strtotime($date_end);
-		
-		foreach ($hotel_seasons as $season){
-			$season_date_ini=strtotime($season['date_start']);
-			$season_date_end=strtotime($season['date_end']);
-			
-			if ($overlapping_dates == false){
-				for($i=$season_date_ini; $i<=$season_date_end; $i+=86400){
-					
-					if (($i == $date_ini) || ($i == $date_end)){
-						$overlapping_dates = true; $i = $season_date_end;
-					}
-				}
-			}
-			
-			if ($overlapping_dates == false){
-				for($i=$date_ini; $i<=$date_end; $i+=86400){
-					if (($i == $season_date_ini) || ($i == $season_date_end)){
-						$overlapping_dates = true; $i = $date_end;
+	//the following block compare if the new matrix's dates match to records in the price matrix, with the exact plan and all seasons of the same hotel that have stored prices, ie, if the hotel have seasons that don't have a price stored at the price matrix, will not count because the search is performed directly in the price matrix. 
+	
+	//the first "if" search the start date of seasons related to the hotel between the given dates.
+	//the second "if" search the end date of seasons related to the hotel between the given dates.
+	//the third "if" search the start date given between the season dates.
+	//the fourth "if" search the end date given between the season dates.
+	
+	//the "if" conditions are nested to minimize the work.
+	
+		$accurate_record_price = $this->price_matrix_model->find_prices_in_season($hotel_selected_id, $plan_id, $date_start, $date_end, 'date_start');
+		if(count($accurate_record_price)) echo('');
+		else{
+			$accurate_record_price = $this->price_matrix_model->find_prices_in_season($hotel_selected_id, $plan_id, $date_start, $date_end, 'date_end');
+			if(count($accurate_record_price)) echo('');
+			else{
+				$accurate_record_price = $this->price_matrix_model->find_prices_in_dates($hotel_selected_id, $plan_id, $date_start);
+				if(count($accurate_record_price)) echo('');
+				else{
+					$accurate_record_price = $this->price_matrix_model->find_prices_in_dates($hotel_selected_id, $plan_id, $date_end);
+					if(count($accurate_record_price)) echo('');
+					else{
+						$this->load->view('new_matrix_frame');
 					}
 				}
 			}
 		}
 		
-		if ($overlapping_dates == true)		echo('');
-		else	$this->load->view('new_matrix_frame');
 	}
 	
 	function new_matrix_add_room(){
@@ -272,14 +271,24 @@ class Price_matrix extends Controller {
 		$new_matrix_str = $_POST['new_matrix'];
 		$new_matrix = array();
 		
+		//This function adds the new season if it doesn't exist, and also added to _admin_seasons_per_hotel the season with the hotel.
+		
+		$season_hotel; //Used only if the new season already exist in the system. Stores if the existing season is related to the hotel given.
 		$possible_season = $this->price_matrix_model->find_season($date_start, $date_end);
+		
+		
 		if (empty($possible_season)){
 			$possible_season = $this->price_matrix_model->new_season($date_start, $date_end);
+			$this->price_matrix_model->add_hotel_season($hotel_id,$possible_season[0]['season_id'],$season_name);
 		}
-		foreach($possible_season as $possible_season){
-			$this->price_matrix_model->add_hotel_season($hotel_id, $possible_season['season_id'], $season_name);
-			$new_matrix = $this->new_matrix_str_to_array($new_matrix_str, $plan_id, $possible_season['season_id']);
-		}
+		else{
+			$season_hotel = $this->price_matrix_model->season_related_to_hotel($possible_season[0]['season_id'], $hotel_id);
+			if(empty($season_hotel))
+				$this->price_matrix_model->add_hotel_season($hotel_id,$possible_season[0]['season_id'],$season_name);
+		}		
+		
+		
+		$new_matrix=$this->new_matrix_str_to_array($new_matrix_str,$plan_id,$possible_season[0]['season_id']);
 		$this->price_matrix_model->new_matrix($new_matrix);
 	}
 	

@@ -128,18 +128,18 @@ class Quotation extends Controller {
 		$plan = $_POST["plan"];
 		
 		$seasons = $this->price_matrix_model->get_seasons($date_start, $date_end);
-		$unit_price = '';
+		$return = '';
 		
 		foreach ($seasons as $value){
 			$prices = $this->quotations_model->get_prices_with_room($room_hotel, $value['season_id'], $plan);
 			
 			if (!empty($prices)){
 				foreach($prices as $price){
-					$unit_price = ($unit_price.$price['price_per_night'].'BsF. (desde '.$price['date_start'].' hasta '.$price['date_end'].').<br />');
+					$return = ($return.$price['price_per_night'].'BsF. (<span class="rojo">'.$price['season_name'].':</span>desde '.$price['date_start'].' hasta '.$price['date_end'].').<br />');
 				}
 			}
 		}
-		echo $unit_price;	
+		echo $return;	
 	}
 	
 	

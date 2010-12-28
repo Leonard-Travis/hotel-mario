@@ -17,11 +17,8 @@
 
 	<tr>
         <td class="primera" align="center">
-        <select id="rooms<?php echo($counter.'_'.$number_of_hotel);?>">
-        <?php foreach($rooms as $room) { ?>
-                <option value="<?php echo($room['rooms_hotels_id']);?>"><?php echo($room['name_spanish']); ?></option> 
-        <?php }?>
-        </select>
+        	<input type="hidden" id="rooms<?php echo($counter.'_'.$number_of_hotel);?>" />
+            <input id="tags<?php echo($counter.'_'.$number_of_hotel);?>"/>
         </td>
         <td align="center">
             <div class="cantidades">BsF. <input type="text" id="price_adult<?php echo($counter.'_'.$number_of_hotel);?>" size="12" maxlength="10" />
@@ -36,4 +33,30 @@
             </div>
         </td>
     </tr>
+    
+    
+ 
+<script type="text/javascript">
+	$(function() {
+		var availableTags = new Array();
+		<?php for($i=0; $i <  count($rooms) ; $i++){?>
+			availableTags[<?php echo($i); ?>] = {label: "<?php echo($rooms[$i]['name_spanish']);?>",
+												 value: "<?php echo($rooms[$i]['rooms_hotels_id']);?>"};
+		<?php } ?>	
+		
+		$('#tags<?php echo($counter.'_'.$number_of_hotel);?>').autocomplete({
+			minLength: 0,
+			source: availableTags,
+			focus: function(event, ui) {
+				$('#tags<?php echo($counter.'_'.$number_of_hotel);?>').val(ui.item.label);
+				return false;
+			},
+			select: function(event, ui) {
+				$('#tags<?php echo($counter.'_'.$number_of_hotel);?>').val(ui.item.label);
+				$('#rooms<?php echo($counter.'_'.$number_of_hotel);?>').val(ui.item.value);				
+				return false;
+			}
+		});
+	});
+</script>
     

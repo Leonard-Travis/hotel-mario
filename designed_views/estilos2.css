@@ -120,7 +120,12 @@ h1{font-size:18px; color:#006699; margin:0; padding:0}
 #asociar2{border-left: 1px solid #C0D7E7; border-right: 1px solid #C0D7E7;}
 #asociar2 .alertar{background:#F3D5D5; height:45px; border-bottom: 1px solid #E6A9AE; line-height:45px; color:#CF0211; text-align:center;}
 #asociar2 .alertar2{background:#FBEB89; height:45px; border-bottom: 1px solid #DFD58D; border-top: 1px solid #DFD58D; line-height:45px; color:#006699; text-align:center;}
-#asociar2 h1{margin:2 2 30px 10px}
+#asociar2 h1{margin:0 0 30px 10px}
+
+#asociar2 .ul_tit_2{width:500px}
+#asociar2 li{float:left}
+#asociar2 .li_tit_2{width:177px; padding-left:100px; font-size:12px; height:34px;}
+#asociar2 .cajat{width:170px; height:21px; background-image:url(imagenes/texto3.gif); float:left}
 
 #asociar_c{margin-left:118px; font-size:14px; color:#666666;}
 #asociar_c h1{margin:0 0 30px 10px}
